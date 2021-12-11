@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'my-nuxt',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'zh-CN'
     },
     meta: [
       { charset: 'utf-8' },
@@ -52,6 +52,10 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  build: {},
+
+  // server
+  server: {
+    host: '127.0.0.1'
   }
 }
