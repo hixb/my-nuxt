@@ -1,12 +1,17 @@
 <template>
   <main>
-    main
+    <button>
+      11
+    </button>
   </main>
 </template>
 
 <script>
 export default {
-  name: 'Main'
+  name: 'Main',
+  data () {
+    return {}
+  }
 }
 </script>
 

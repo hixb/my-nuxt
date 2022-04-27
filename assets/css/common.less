@@ -10,7 +10,7 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: var(--my-defult-theme-color);
+  background-color: var(--my-default-theme-light-color);
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -27,7 +27,7 @@ body {
   width: 100%;
   min-width: 1200px;
   font-size: 14px;
-  color: var(--my-defult-theme-color);
+  color: var(--my-default-theme-light-color);
   font-family: "auto";
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -48,12 +48,11 @@ a {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  opacity: var(--my-feat-opacity);
-  color: var(--my-defult-theme-color);
-  transition: var(--my-feat-transtion);
+  .text-transition-gradient;
+  color: var(--my-default-theme-light-color);
 
   &:hover {
-    opacity: 1;
+    opacity: var(--my-feat-opacity-hover);
   }
 }
 
@@ -81,7 +80,6 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
-  background-color: transparent;
 }
 
 em {

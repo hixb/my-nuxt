@@ -104,7 +104,7 @@ header {
     }
   }
 
-  /deep/.vs-navbar-content {
+  /deep/ .vs-navbar-content {
     border-bottom: 1px solid var(--my-disabled-theme-color);
 
     .vs-navbar__group__items {
