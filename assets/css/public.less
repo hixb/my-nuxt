@@ -9,3 +9,73 @@
   width: @w;
   height: @h;
 }
+
+// 宽
+.area-w(@w) {
+  width: @w;
+}
+
+// 高
+.area-h(@h) {
+  height: @h;
+}
+
+// 弹性布局
+.flex {
+  display: flex;
+}
+
+// 弹性布局-垂直居中
+.flex-ali-center {
+  align-items: center;
+}
+
+// 弹性布局-左右间隔
+.flex-jus-spa-bet {
+  justify-content: space-between;
+}
+
+// 右偏移值
+.mr(@r) {
+  margin-right: @r;
+}
+
+// 左偏移值
+.ml(@l) {
+  margin-left: @l;
+}
+
+// 背景颜色
+.bgc(@c) {
+  background-color: @c;
+}
+
+// 颜色
+.color(@colors) {
+  color: @colors;
+}
+
+// 文字大小
+.fz(@z) {
+  font-size: @z;
+}
+
+// 内边距取值-一个值
+.pad-1(@any) {
+  padding: @any;
+}
+
+// 内边距取值-两个值
+.pad-2(@l, @t) {
+  padding: @l @t;
+}
+
+// 内边距取值-三个值
+.pad-3(@l, @t, @r) {
+  padding: @l @t @r;
+}
+
+// 内边距取值-四个值
+.pad-4(@t, @r, @b, @l) {
+  padding: @t @r @b @l;
+}
