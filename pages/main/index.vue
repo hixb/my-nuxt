@@ -1,7 +1,7 @@
 <template>
   <main>
     <button>
-      1122222
+      11222222
     </button>
   </main>
 </template>
