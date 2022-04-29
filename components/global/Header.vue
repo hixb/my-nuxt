@@ -8,7 +8,7 @@
     </nuxt-link>
     <div class="links">
       <div class="color-picker">
-        <i class="iconfont reco-color" @click="isShowPicker = !isShowPicker"></i>
+        <i class="iconfont ice-color" @click="isShowPicker = !isShowPicker"></i>
         <div :class="['color-picker-menu', !isShowPicker ? 'hide-picker' : 'show-picker']">
           <span class="title">选择颜色</span>
           <ul>
@@ -21,10 +21,11 @@
         </div>
       </div>
       <div class="search">
-        <vs-input
-          v-model="keyword"
-          type="search"
-        />
+        <i class="iconfont ice-search"></i>
+        <input
+          v-model="keyword" v-focus="focusState" type="text" :class="{focused: focusState}"
+          @click="focusState = true" @blur="focusState = false" @keypress="enterSearch"
+        >
       </div>
       <!--      <div class="nav-links"></div>-->
     </div>
@@ -39,9 +40,19 @@ const light = ['rgba(255, 255, 255)', 'rgba(44, 62, 80)']
 
 export default {
   name: 'Header',
+  directives: {
+    focus: {
+      update: function (el, { value }) {
+        if (value) {
+          el.focus()
+        }
+      }
+    }
+  },
   data () {
     return {
       keyword: '',
+      oldKeyword: '',
       colorPickerSelect: [
         {
           id: 0,
@@ -57,7 +68,15 @@ export default {
         },
       ],
       defaultTheme: 1,
-      isShowPicker: false
+      isShowPicker: false,
+      focusState: false
+    }
+  },
+  watch: {
+    keyword (newVal) {
+      if (newVal === '' && this.oldKeyword !== '') {
+        this.oldKeyword = ''
+      }
     }
   },
   mounted () {
@@ -112,6 +131,18 @@ export default {
     currentTheme (curThemeBgc, curThemeColor) {
       document.documentElement.style.setProperty('--my-cur-default-theme-bgc', curThemeBgc)
       document.documentElement.style.setProperty('--my-cur-default-theme-color', curThemeColor)
+    },
+    enterSearch (e) {
+      if (e.keyCode === 13) {
+        if (this.keyword === '' && this.oldKeyword === '') {
+          console.log(1)
+          return
+        }
+        if (this.keyword !== '') {
+          this.oldKeyword = this.keyword
+        }
+        console.log(this.keyword)
+      }
     }
   }
 }

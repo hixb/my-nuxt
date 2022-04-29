@@ -35,6 +35,11 @@ header {
       .cursor(pointer);
       .por;
 
+      i {
+        .color(var(--my-bright-active-theme-color));
+        .fz(23px);
+      }
+
       .color-picker-menu {
         .pos;
         left: 50%;
@@ -81,12 +86,36 @@ header {
         transform: translate(-50%, 10px);
         opacity: 1;
         visibility: visible;
+        .show-opa-vis;
       }
 
       .hide-picker {
         transform: translate(-50%, 20px);
-        opacity: 0;
-        visibility: hidden;
+        .hide-opa-vis;
+      }
+    }
+
+    .search {
+      .por;
+
+      i {
+        .pos;
+        left: 7px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      input {
+        .area(202px, 34px);
+        .bd(1px, solid, #eaecef);
+        .bdr(5px);
+        .pad-4(3px, 3px, 3px, 35px);
+        .trans;
+      }
+
+      .focused {
+        .trans;
+        border-color: var(--my-bright-theme-color);
       }
     }
   }

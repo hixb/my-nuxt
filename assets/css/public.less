@@ -222,6 +222,40 @@
   position: fixed;
 }
 
+// 盒子阴影
 .box-s(@v) {
   box-shadow: @v;
+}
+
+// 过渡
+.trans {
+  transition: var(--my-feat-transtion);
+
+  & {
+    transition: var(--my-feat-transtion);
+  }
+}
+
+// 不透明度
+.opa(@v) {
+  opacity: @v;
+}
+
+// 可见度
+.vis(@v) {
+  visibility: @v;
+}
+
+// 显示元素
+.show-opa-vis {
+  .opa(1);
+  .vis(visible);
+  .trans;
+}
+
+// 隐藏元素
+.hide-opa-vis {
+  .opa(0);
+  .vis(hidden);
+  .trans;
 }
