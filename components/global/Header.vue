@@ -8,7 +8,7 @@
     </nuxt-link>
     <div class="links">
       <div class="color-picker">
-        <i class="iconfont ice-color" @click="isShowPicker = !isShowPicker"></i>
+        <i class="iconfont ice-color" @click="isShowPicker = !isShowPicker" />
         <div :class="['color-picker-menu', !isShowPicker ? 'hide-picker' : 'show-picker']">
           <span class="title">选择颜色</span>
           <ul>
@@ -21,13 +21,31 @@
         </div>
       </div>
       <div class="search">
-        <i class="iconfont ice-search"></i>
+        <i class="iconfont ice-search" />
         <input
           v-model="keyword" v-focus="focusState" type="text" :class="{focused: focusState}"
           @click="focusState = true" @blur="focusState = false" @keypress="enterSearch"
         >
       </div>
-      <!--      <div class="nav-links"></div>-->
+      <div class="nav-links">
+        <div v-for="(item, index) in navLink" :key="index"
+             :class="['nav-item', item.children.length > 0 ? 'drop-down' : '']"
+        >
+          <nuxt-link :to="item.link" class="link">
+            <i :class="['iconfont', item.icon]" />
+            <span>{{ item.title }}</span>
+            <i v-if="item.children.length > 0" class="arrow" />
+          </nuxt-link>
+          <ul v-if="item.children.length > 0">
+            <li v-for="(nav, i) in item.children" :key="i">
+              <nuxt-link :to="nav.link">
+                <i :class="['iconfont', nav.icon]" />
+                <span>{{ nav.name }}</span>
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -69,7 +87,61 @@ export default {
       ],
       defaultTheme: 1,
       isShowPicker: false,
-      focusState: false
+      focusState: false,
+      navLink: [
+        {
+          title: '首页',
+          icon: 'ice-home',
+          link: '',
+          children: []
+        },
+        {
+          title: '分类',
+          icon: 'ice-category',
+          link: '',
+          children: [
+            {
+              name: 'vue',
+              link: '',
+              icon: ''
+            },
+            {
+              name: 'js',
+              link: '',
+              icon: ''
+            }
+          ]
+        },
+        {
+          title: '标签',
+          icon: 'ice-tag',
+          link: '',
+          children: []
+        },
+        {
+          title: '时间线',
+          icon: 'ice-date',
+          link: '',
+          children: []
+        },
+        {
+          title: '联系',
+          icon: 'ice-message',
+          link: '',
+          children: [
+            {
+              name: 'GITHUB',
+              link: '',
+              icon: ''
+            },
+            {
+              name: 'GITEE',
+              link: '',
+              icon: ''
+            }
+          ]
+        }
+      ]
     }
   },
   watch: {

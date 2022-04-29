@@ -29,9 +29,10 @@ header {
     .flex;
     .flex-ali-center;
     .por;
+    .area-h(100%);
 
     .color-picker {
-      .mr(5px);
+      .mr(10px);
       .cursor(pointer);
       .por;
 
@@ -97,6 +98,7 @@ header {
 
     .search {
       .por;
+      .mr(10px);
 
       i {
         .pos;
@@ -107,15 +109,90 @@ header {
 
       input {
         .area(202px, 34px);
-        .bd(1px, solid, #eaecef);
+        .bd(1px, solid, var(--my-cur-default-theme-color));
         .bdr(5px);
         .pad-4(3px, 3px, 3px, 35px);
         .trans;
+        .bgc(var(--my-cur-default-theme-bgc));
+        .color(var(--my-cur-default-theme-color));
       }
 
       .focused {
         .trans;
         border-color: var(--my-bright-theme-color);
+      }
+    }
+
+    .nav-links {
+      .flex;
+
+      .nav-item {
+        .por;
+        .flex;
+        .flex-ali-center;
+        .pad-2(0, 7px);
+        .area-h(60px);
+
+        .link {
+          .por;
+
+          .arrow {
+            .pos;
+            top: 50%;
+            right: -13px;
+            transform: translateY(-50%);
+            .bd-l(4px, solid, transparent);
+            .bd-r(4px, solid, transparent);
+            .bd-t(6px, solid, var(--my-cur-default-theme-color));
+            border-bottom: 0;
+          }
+        }
+
+        &:hover {
+          ul {
+            .show-opa-vis;
+            transform: translate(-50%, 0);
+          }
+        }
+
+        ul {
+          .pos;
+          left: 50%;
+          top: 60px;
+          transform: translateX(-50%);
+          .area-w(105px);
+          .bgc(var(--my-cur-default-theme-bgc));
+          .pad-2(10px, 0);
+          .bdr(6px);
+          .hide-opa-vis;
+          transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s;
+          transform: translate(-50%, 20px);
+
+          li {
+            .color(var(--my-cur-default-theme-color));
+            .area-h(30px);
+            .pad-2(0, 10px);
+
+            a {
+              display: block;
+              .area(100%, 100%);
+              .flex;
+              .flex-ali-center;
+            }
+
+            &:hover {
+              a {
+                span, i {
+                  .color(var(--my-bright-active-theme-color));
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .drop-down {
+        .pr(17px);
       }
     }
   }
