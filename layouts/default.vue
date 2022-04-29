@@ -17,9 +17,4 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-  .main {
-    width: 1500px;
-    margin: 0 auto;
-  }
-</style>
+<style scoped lang="less"></style>

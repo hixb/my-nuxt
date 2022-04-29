@@ -10,6 +10,10 @@
   --my-default-theme-dark-bgc: rgba(24, 24, 24);
   // 默认禁用文字颜色
   --my-disabled-theme-color: rgba(220, 222, 226);
+  // 基础颜色
+  --my-bright-theme-color: rgba(107, 204, 138);
+  // 基础活跃颜色
+  --my-bright-active-theme-color: rgba(68, 175, 127);
 }
 
 /** FEAT */
@@ -23,4 +27,20 @@
 :root {
   --my-element-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
   --my-element-box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);;
+}
+
+/** LIGHT MODE */
+@media (prefers-color-scheme: light) {
+  body {
+    .color(var(--my-default-theme-light-color));
+    .bgc(var(--my-default-theme-light-bgc));
+  }
+}
+
+/** DARK MODE */
+@media (prefers-color-scheme: dark) {
+  body {
+    .color(var(--my-default-theme-dark-color));
+    .bgc(var(--my-default-theme-dark-bgc));
+  }
 }

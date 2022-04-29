@@ -35,16 +35,6 @@
   justify-content: space-between;
 }
 
-// 右偏移值
-.mr(@r) {
-  margin-right: @r;
-}
-
-// 左偏移值
-.ml(@l) {
-  margin-left: @l;
-}
-
 // 背景颜色
 .bgc(@c) {
   background-color: @c;
@@ -58,6 +48,66 @@
 // 文字大小
 .fz(@z) {
   font-size: @z;
+}
+
+// 右偏移值
+.mr(@r) {
+  margin-right: @r;
+}
+
+// 左偏移值
+.ml(@l) {
+  margin-left: @l;
+}
+
+// 下偏移值
+.mb(@b) {
+  margin-bottom: @b;
+}
+
+// 上偏移值
+.mt(@t) {
+  margin-top: @t;
+}
+
+// 偏移值-一个值
+.mar-1(@any) {
+  margin: @any;
+}
+
+// 偏移值-两个值
+.mar-2(@l, @t) {
+  margin: @l @t;
+}
+
+// 偏移值-三个值
+.mar-3(@l, @t, @r) {
+  margin: @l @t @r;
+}
+
+// 偏移值
+.mar-4(@t, @r, @b, @l) {
+  margin: @t @r @b @l;
+}
+
+// 内右距
+.pr(@r) {
+  padding-right: @r;
+}
+
+// 内左距
+.pl(@l) {
+  padding-left: @l;
+}
+
+// 内下距
+.pb(@b) {
+  padding-bottom: @b;
+}
+
+// 内下距
+.pt(@t) {
+  padding-top: @t;
 }
 
 // 内边距取值-一个值
@@ -78,4 +128,100 @@
 // 内边距取值-四个值
 .pad-4(@t, @r, @b, @l) {
   padding: @t @r @b @l;
+}
+
+// 鼠标指针
+.cursor(@v) {
+  cursor: @v;
+}
+
+// 行高
+.lh(@v) {
+  line-height: @v;
+}
+
+// 边框
+.bd(@px, @mode, @c) {
+  border: @px @mode @c;
+}
+
+// 左边框
+.bd-l(@px, @mode, @c) {
+  border-left: @px @mode @c;
+}
+
+// 右边框
+.bd-r(@px, @mode, @c) {
+  border-right: @px @mode @c;
+}
+
+// 上边框
+.bd-t(@px, @mode, @c) {
+  border-top: @px @mode @c;
+}
+
+// 下边框
+.bd-t(@px, @mode, @c) {
+  border-bottom: @px @mode @c;
+}
+
+// 清除边框
+.cle-bd {
+  border: none;
+}
+
+// 最大宽
+.max-w(@w) {
+  max-width: @w;
+}
+
+// 最大高
+.max-h(@h) {
+  max-height: @h;
+}
+
+// 最小宽
+.min-w(@w) {
+  min-width: @w;
+}
+
+// 最小高
+.min-h(@h) {
+  min-height: @h;
+}
+
+// 最大宽高
+.max-wh(@w, @h) {
+  .max-w(@w);
+  .max-h(@h);
+}
+
+// 最小宽高
+.min-wh(@w, @h) {
+  .min-w(@w);
+  .min-h(@h)
+}
+
+// 圆角边框
+.bdr(@v) {
+  border-radius: @v;
+}
+
+// 相对定位
+.por {
+  position: relative;
+}
+
+// 绝对定位
+.pos {
+  position: absolute;
+}
+
+// 固定定位
+.pof {
+  position: fixed;
+}
+
+.box-s(@v) {
+  box-shadow: @v;
 }

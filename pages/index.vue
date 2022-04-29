@@ -1,13 +1,15 @@
 <template>
   <div>
-    1
+    <Banner />
   </div>
 </template>
 
 <script>
+import Banner from '@/components/common/Banner'
 
 export default {
   name: 'Home',
+  components: { Banner },
   layout: 'default',
   data () {
     return {}

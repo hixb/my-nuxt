@@ -1,33 +1,29 @@
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  .area(8px, 8px);
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  .area(5px, 5px);
+
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: var(--my-default-theme-light-color);
+  .bdr(8px);
+  .bgc(var(--my-bright-active-theme-color));
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: #ffffff;
-  border-radius: 6px;
-}
-
-::selection {
-  background-color: #d6e1f9;
+  .bgc(var(--my-default-theme-dark-bgc));
+  .bdr(6px);
 }
 
 html,
 body {
-  width: 100%;
-  min-width: 1200px;
-  font-size: 14px;
-  color: var(--my-default-theme-light-color);
+  .area-w(100%);
+  .min-w(1200px);
+  .fz(14px);
+  .color(var(--my-default-theme-dark-color));
+  .bgc(var(--my-default-theme-dark-bgc));
   font-family: "auto";
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -40,16 +36,16 @@ body {
 *:before,
 *:after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  .mar-1(0);
+  .pad-1(0);
 }
 
 a {
   display: inline-block;
   text-decoration: none;
-  cursor: pointer;
+  .cursor(pointer);
   .text-transition-gradient;
-  color: var(--my-default-theme-light-color);
+  color: var(--my-default-theme-dark-color);
 
   &:hover {
     opacity: var(--my-feat-opacity-hover);
@@ -57,16 +53,16 @@ a {
 }
 
 i {
-  font-style: normal;
+  .fz(normal);
 }
 
 img {
-  max-width: 100%;
+  .max-w(100%);
 }
 
 input,
 textarea {
-  border: none;
+  .cle-bd;
   outline: none;
   font-family: "Microsoft YaHei";
 }
@@ -77,8 +73,8 @@ input:-webkit-autofill {
 }
 
 button {
-  cursor: pointer;
-  border: none;
+  .cursor(pointer);
+  .cle-bd;
   outline: none;
 }
 
@@ -104,4 +100,11 @@ a,
 em,
 i {
   line-height: 1;
+  .lh(1);
+}
+
+i {
+  .color(var(--my-bright-active-theme-color));
+  .pad-1(3px);
+  .fz(23px);
 }
