@@ -8,8 +8,8 @@
     </nuxt-link>
     <div class="links">
       <div class="color-picker">
-        <i class="iconfont reco-color"></i>
-        <div class="color-picker-menu">
+        <i class="iconfont reco-color" @click="isShowPicker = !isShowPicker"></i>
+        <div :class="['color-picker-menu', !isShowPicker ? 'hide-picker' : 'show-picker']">
           <span class="title">选择颜色</span>
           <ul>
             <li v-for="(item, index) in colorPickerSelect" :key="item.id" :class="{active: defaultTheme === index}"
@@ -32,6 +32,11 @@
 </template>
 
 <script>
+import { getLocalStorage, setLocalStorage } from '@/plugins/utils'
+
+const dark = ['rgba(24, 24, 24)', 'rgba(255, 255, 255, 0.8)']
+const light = ['rgba(255, 255, 255)', 'rgba(44, 62, 80)']
+
 export default {
   name: 'Header',
   data () {
@@ -51,61 +56,45 @@ export default {
           name: 'light'
         },
       ],
-      defaultTheme: 1
+      defaultTheme: 1,
+      isShowPicker: false
     }
   },
   mounted () {
-    let prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (prefersDarkMode) {
-      const curTheme = this.themeIf()
-      document.documentElement.style.setProperty('--my-default-theme-dark-bgc', curTheme[0])
-      document.documentElement.style.setProperty('--my-default-theme-dark-color', curTheme[1])
-      document.documentElement.style.setProperty('--my-default-theme-light-bgc', '')
-      document.documentElement.style.setProperty('--my-default-theme-light-color', '')
+    document.addEventListener('click', e => {
+      if (!this.$el.contains(e.target)) {
+        this.isShowPicker = false
+      }
+    })
+    const localTheme = JSON.parse(getLocalStorage('my_theme'))
+    if (localTheme && localTheme.length > 0) {
+      this.currentTheme(localTheme[0], localTheme[1])
+    } else {
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? this.currentTheme(dark[0], dark[1])
+        : this.currentTheme(light[0], light[1])
     }
   },
   methods: {
     toggleTheme (index) {
       this.defaultTheme = index
-      const curTheme = this.themeIf()
-
-      if (index === 0) {
-        document.documentElement.style.setProperty('--my-default-theme-light-bgc', curTheme[0])
-        document.documentElement.style.setProperty('--my-default-theme-light-color', curTheme[1])
-
-        document.documentElement.style.setProperty('--my-default-theme-dark-bgc', '')
-        document.documentElement.style.setProperty('--my-default-theme-dark-color', '')
-      } else if (index === 1) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.style.setProperty('--my-default-theme-dark-bgc', curTheme[0])
-          document.documentElement.style.setProperty('--my-default-theme-dark-color', curTheme[1])
-          document.documentElement.style.setProperty('--my-default-theme-light-bgc', '')
-          document.documentElement.style.setProperty('--my-default-theme-light-color', '')
-        } else {
-          document.documentElement.style.setProperty('--my-default-theme-light-bgc', curTheme[0])
-          document.documentElement.style.setProperty('--my-default-theme-light-color', curTheme[1])
-          document.documentElement.style.setProperty('--my-default-theme-dark-bgc', '')
-          document.documentElement.style.setProperty('--my-default-theme-dark-color', '')
-        }
-      } else if (index === 2) {
-        document.documentElement.style.setProperty('--my-default-theme-dark-bgc', curTheme[0])
-        document.documentElement.style.setProperty('--my-default-theme-dark-color', curTheme[1])
-
-        document.documentElement.style.setProperty('--my-default-theme-light-bgc', '')
-        document.documentElement.style.setProperty('--my-default-theme-light-color', '')
+      const curTheme = this.themeIf(index)
+      switch (index) {
+        case 0:
+        case 2:
+          this.currentTheme(curTheme[0], curTheme[1])
+          break
+        case 1:
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? this.currentTheme(curTheme[0], curTheme[1])
+            : this.currentTheme(curTheme[0], curTheme[1])
+          break
       }
+      setLocalStorage('my_theme', JSON.stringify(curTheme))
     },
-    themeIf () {
-      const dark = [
-        'rgba(24, 24, 24)',
-        'rgba(255, 255, 255, 0.8)'
-      ]
-      const light = [
-        'rgba(255, 255, 255)',
-        'rgba(44, 62, 80)'
-      ]
+    themeIf (index) {
       let themeBgColor, themeTextColor
-      switch (this.defaultTheme) {
+      switch (index) {
         case 0:
           themeBgColor = dark[0]
           themeTextColor = dark[1]
@@ -120,6 +109,10 @@ export default {
           break
       }
       return [themeBgColor, themeTextColor]
+    },
+    currentTheme (curThemeBgc, curThemeColor) {
+      document.documentElement.style.setProperty('--my-cur-default-theme-bgc', curThemeBgc)
+      document.documentElement.style.setProperty('--my-cur-default-theme-color', curThemeColor)
     }
   }
 }

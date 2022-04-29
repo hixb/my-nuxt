@@ -9,11 +9,11 @@
 
 ::-webkit-scrollbar-thumb {
   .bdr(8px);
-  .bgc(var(--my-bright-active-theme-color));
+  .bgc(var(--my-cur-default-theme-bgc));
 }
 
 ::-webkit-scrollbar-track-piece {
-  .bgc(var(--my-default-theme-dark-bgc));
+  .bgc(var(--my-cur-default-theme-bgc));
   .bdr(6px);
 }
 
@@ -22,8 +22,8 @@ body {
   .area-w(100%);
   .min-w(1200px);
   .fz(14px);
-  .color(var(--my-default-theme-dark-color));
-  .bgc(var(--my-default-theme-dark-bgc));
+  .color(var(--my-cur-default-theme-color));
+  .bgc(var(--my-cur-default-theme-bgc));
   font-family: "auto";
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -45,7 +45,7 @@ a {
   text-decoration: none;
   .cursor(pointer);
   .text-transition-gradient;
-  color: var(--my-default-theme-dark-color);
+  color: var(--my-cur-default-theme-color);
 
   &:hover {
     opacity: var(--my-feat-opacity-hover);

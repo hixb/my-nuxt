@@ -1,10 +1,10 @@
 header {
   .area(100%, 60px);
-  .bgc(var(--my-default-theme-dark-bgc));
+  .bgc(var(--my-cur-default-theme-bgc));
   .flex;
   .flex-ali-center;
   .flex-jus-spa-bet;
-  .color(var(--my-default-theme-dark-color));
+  .color(var(--my-cur-default-theme-color));
   .pad-2(0, 24px);
   .pof;
   top: 0;
@@ -21,7 +21,7 @@ header {
     span {
       .fz(20px);
       .ml(5px);
-      .color(var(--my-default-theme-dark-color));
+      .color(var(--my-cur-default-theme-color));
     }
   }
 
@@ -40,13 +40,10 @@ header {
         left: 50%;
         .area(170px, 100px);
         .pad-1(20px);
-        .color(var(--my-default-theme-dark-color));
-        .bgc(var(--my-default-theme-dark-bgc));
+        .color(var(--my-cur-default-theme-color));
+        .bgc(var(--my-cur-default-theme-bgc));
         .box-s(var(--my-element-box-shadow-hover));
         .bdr(5px);
-        transition: transform 0.25s ease-in-out 0s, opacity 0.25s ease-in-out 0s;
-        transform: translate(-50%, -3px);
-        opacity: 1;
         .flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -57,7 +54,7 @@ header {
 
         ul {
           .flex;
-          .bd(1px, solid, var(--my-default-theme-dark-color));
+          .bd(1px, solid, var(--my-cur-default-theme-color));
           .bdr(4px);
           .area-w(125px);
 
@@ -65,8 +62,8 @@ header {
             .pad-2(4px, 6px);
 
             &:nth-of-type(2) {
-              .bd-l(1px, solid, var(--my-default-theme-dark-color));
-              .bd-r(1px, solid, var(--my-default-theme-dark-color));
+              .bd-l(1px, solid, var(--my-cur-default-theme-color));
+              .bd-r(1px, solid, var(--my-cur-default-theme-color));
             }
           }
 
@@ -74,6 +71,22 @@ header {
             .bgc(var(--my-bright-theme-color));
           }
         }
+      }
+
+      .show-picker, .hide-picker {
+        transition: transform 0.25s ease-in-out 0s, opacity 0.25s ease-in-out 0s;
+      }
+
+      .show-picker {
+        transform: translate(-50%, 10px);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hide-picker {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        visibility: hidden;
       }
     }
   }
