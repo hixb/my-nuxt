@@ -67,13 +67,12 @@ export default {
       }
     })
     const localTheme = JSON.parse(getLocalStorage('my_theme'))
-    if (localTheme && localTheme.length > 0) {
-      this.currentTheme(localTheme[0], localTheme[1])
-    } else {
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    localTheme && localTheme.length > 0
+      ? this.currentTheme(localTheme[0], localTheme[1])
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
         ? this.currentTheme(dark[0], dark[1])
         : this.currentTheme(light[0], light[1])
-    }
   },
   methods: {
     toggleTheme (index) {
