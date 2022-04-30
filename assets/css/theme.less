@@ -1,3 +1,13 @@
+/** CURRENT THEME */
+:root {
+  --my-cur-default-theme-bgc: rgba(24, 24, 24);
+  --my-cur-default-theme-color: rgba(255, 255, 255, 0.8);
+  --my-cur-default-theme-oter: rgba(17, 17, 17);
+  --my-cur-default-theme-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+  --my-cur-default-theme-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.7);
+  --my-cur-default-theme-bor-color: rgba(234, 236, 239);
+}
+
 /** THEME */
 :root {
   // 默认白色主题文字颜色
@@ -10,6 +20,12 @@
   --my-default-theme-dark-bgc: rgba(24, 24, 24);
   // 默认禁用文字颜色
   --my-disabled-theme-color: rgba(220, 222, 226);
+  // 基础颜色
+  --my-bright-theme-color: rgba(107, 204, 138);
+  // 基础活跃颜色
+  --my-bright-active-theme-color: rgba(68, 175, 127);
+  // 字体图标颜色
+  --my-iconfont-theme-color: rgba(127, 127, 127);
 }
 
 /** FEAT */
@@ -21,6 +37,22 @@
 
 /** ELEMENT */
 :root {
-  --my-element-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
-  --my-element-box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);;
+  --my-element-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+  --my-element-box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.7);
+}
+
+/** LIGHT MODE */
+@media (prefers-color-scheme: light) {
+  //body {
+  //  .color(var(--my-default-theme-light-color));
+  //  .bgc(var(--my-default-theme-light-bgc));
+  //}
+}
+
+/** DARK MODE */
+@media (prefers-color-scheme: dark) {
+  //body {
+  //  .color(var(--my-default-theme-dark-color));
+  //  .bgc(var(--my-default-theme-dark-bgc));
+  //}
 }

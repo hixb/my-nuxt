@@ -1,37 +1,15 @@
+const { head } = require("./nuxt_config/head");
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'my-nuxt',
-    htmlAttrs: {
-      lang: 'zh-CN'
-    },
-    meta: [
-      { charset: 'utf-8' },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: ''
-      },
-      {
-        name: 'format-detection',
-        content: 'telephone=no'
-      }
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+    ...head
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/icon/iconfont.css',
     'vuesax/dist/vuesax.css',
     '@/assets/css/theme.less'
   ],
