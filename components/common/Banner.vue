@@ -1,5 +1,5 @@
 <template>
-  <div class="banner">
+  <div ref="eleHeight" class="banner">
     <h2>{{ $store.state.APP_PROJECT_NAME }}</h2>
     <p>{{ $store.state.APP_PROJECT_DESC }}</p>
   </div>
@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  name: 'Banner'
+  name: 'Banner',
+  mounted() {
+    this.$emit("bannerHeight", this.$refs.eleHeight.clientHeight)
+  }
 }
 </script>
 

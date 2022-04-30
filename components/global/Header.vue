@@ -59,7 +59,7 @@ const light = ['rgba(255, 255, 255)', 'rgba(44, 62, 80)']
 const otherDark = ['rgba(17, 17, 17)']
 const otherLight = ['rgba(243, 244, 244)']
 const darkShadow = ['0 1px 8px 0 rgba(0, 0, 0, 0.6)', '0 2px 16px 0 rgba(0, 0, 0, 0.7)']
-const lightShadow = ['0 1px 8px 0 rgba(0, 0, 0, 0.2)', '0 2px 16px 0 rgba(0, 0, 0, 0.5)']
+const lightShadow = ['0 1px 8px 0 rgba(0, 0, 0, 0.2)', '0 2px 16px 0 rgba(0, 0, 0, 0.2)']
 const darkBorColor = ['rgba(0, 0, 0, 0.3)']
 const lightBorColor = ['rgba(234, 236, 239)']
 

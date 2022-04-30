@@ -9,6 +9,8 @@ header {
   .pof;
   top: 0;
   left: 0;
+  .z-i(50);
+  .box-s(var(--my-cur-default-theme-shadow));
 
   .schedule {
     .pof;
@@ -160,6 +162,7 @@ header {
           ul {
             .show-opa-vis;
             transform: translate(-50%, 0);
+            .box-s(var(--my-cur-default-theme-shadow-hover));
           }
         }
 
@@ -175,6 +178,7 @@ header {
           .hide-opa-vis;
           transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s;
           transform: translate(-50%, 20px);
+          .box-s(var(--my-cur-default-theme-shadow));
 
           li {
             .color(var(--my-cur-default-theme-color));

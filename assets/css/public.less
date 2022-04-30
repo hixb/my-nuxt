@@ -35,10 +35,16 @@
   justify-content: space-between;
 }
 
-// 弹性布局-水平居中
+// 弹性布局-justify-content: space-around;
 .flex-jus-spa-aro {
   justify-content: space-around;
 }
+
+// 弹性布局-元素靠近
+.flex-jus-con-cen {
+  justify-content: center;
+}
+
 
 // 背景颜色
 .bgc(@c) {
@@ -263,4 +269,9 @@
   .opa(0);
   .vis(hidden);
   .trans;
+}
+
+// z-index
+.z-i(@i) {
+  z-index: @i;
 }
