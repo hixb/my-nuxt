@@ -2,6 +2,7 @@
 :root {
   --my-cur-default-theme-bgc: rgba(24, 24, 24);
   --my-cur-default-theme-color: rgba(255, 255, 255, 0.8);
+  --my-cur-default-theme-oter: rgba(17, 17, 17);
 }
 
 /** THEME */
@@ -33,22 +34,22 @@
 
 /** ELEMENT */
 :root {
-  --my-element-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
-  --my-element-box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);;
+  --my-element-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+  --my-element-box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.7);;
 }
 
 /** LIGHT MODE */
 @media (prefers-color-scheme: light) {
-  body {
-    .color(var(--my-default-theme-light-color));
-    .bgc(var(--my-default-theme-light-bgc));
-  }
+  //body {
+  //  .color(var(--my-default-theme-light-color));
+  //  .bgc(var(--my-default-theme-light-bgc));
+  //}
 }
 
 /** DARK MODE */
 @media (prefers-color-scheme: dark) {
-  body {
-    .color(var(--my-default-theme-dark-color));
-    .bgc(var(--my-default-theme-dark-bgc));
-  }
+  //body {
+  //  .color(var(--my-default-theme-dark-color));
+  //  .bgc(var(--my-default-theme-dark-bgc));
+  //}
 }

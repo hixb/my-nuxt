@@ -1,5 +1,6 @@
 <template>
   <header>
+    <div ref="scheduleBar" class="schedule"></div>
     <nuxt-link to="/">
       <h1>
         <img src="~/assets/images/logo.png" alt="logo">
@@ -55,6 +56,8 @@ import { getLocalStorage, setLocalStorage } from '@/plugins/utils'
 
 const dark = ['rgba(24, 24, 24)', 'rgba(255, 255, 255, 0.8)']
 const light = ['rgba(255, 255, 255)', 'rgba(44, 62, 80)']
+const otherDark = ['rgba(17, 17, 17)']
+const otherLight = ['rgba(243, 244, 244)']
 
 export default {
   name: 'Header',
@@ -152,62 +155,86 @@ export default {
     }
   },
   mounted () {
+    /** 点击任意元素关闭颜色选择器 */
     document.addEventListener('click', e => {
       if (!this.$el.contains(e.target)) {
         this.isShowPicker = false
       }
     })
-    const localTheme = JSON.parse(getLocalStorage('my_theme'))
 
+    /** 添加顶部滚动进度条 */
+    const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight
+    const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+    const scrollAvail = pageHeight - windowHeight
+    window.onscroll = () => {
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      this.$refs.scheduleBar.style.width = (scrollTop / scrollAvail) * 100 + '%'
+    }
+
+    /** 设置系统主题 */
+    const localTheme = JSON.parse(getLocalStorage('my_theme'))
     localTheme && localTheme.length > 0
-      ? this.currentTheme(localTheme[0], localTheme[1])
+      ? this.currentTheme(localTheme[0], localTheme[1], localTheme[2])
       : window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? this.currentTheme(dark[0], dark[1])
-        : this.currentTheme(light[0], light[1])
+        ? this.currentTheme(dark[0], dark[1], otherDark[0])
+        : this.currentTheme(light[0], light[1], otherLight[0])
   },
   methods: {
+    /** 切换主题 */
     toggleTheme (index) {
       this.defaultTheme = index
       const curTheme = this.themeIf(index)
       switch (index) {
         case 0:
         case 2:
-          this.currentTheme(curTheme[0], curTheme[1])
+          this.currentTheme(curTheme[0], curTheme[1], curTheme[2])
           break
         case 1:
           window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? this.currentTheme(curTheme[0], curTheme[1])
-            : this.currentTheme(curTheme[0], curTheme[1])
+            ? this.currentTheme(curTheme[0], curTheme[1], curTheme[2])
+            : this.currentTheme(curTheme[0], curTheme[1], curTheme[2])
           break
       }
       setLocalStorage('my_theme', JSON.stringify(curTheme))
     },
+    /** 主题判断换 */
     themeIf (index) {
-      let themeBgColor, themeTextColor
+      let themeBgColor, themeTextColor, themeOterBgc
       switch (index) {
         case 0:
           themeBgColor = dark[0]
           themeTextColor = dark[1]
+          themeOterBgc = otherDark[0]
           break
         case 2:
           themeBgColor = light[0]
           themeTextColor = light[1]
+          themeOterBgc = otherLight[0]
           break
         default:
           themeBgColor = dark[0]
           themeTextColor = dark[1]
+          themeOterBgc = otherDark[0]
           break
       }
-      return [themeBgColor, themeTextColor]
+      return [themeBgColor, themeTextColor, themeOterBgc]
     },
-    currentTheme (curThemeBgc, curThemeColor) {
+    /** 设置当前主题为 */
+    currentTheme (curThemeBgc, curThemeColor, curOterBgc) {
       document.documentElement.style.setProperty('--my-cur-default-theme-bgc', curThemeBgc)
       document.documentElement.style.setProperty('--my-cur-default-theme-color', curThemeColor)
+      document.documentElement.style.setProperty('--my-cur-default-theme-oter', curOterBgc)
     },
+    /** 搜索 */
     enterSearch (e) {
       if (e.keyCode === 13) {
         if (this.keyword === '' && this.oldKeyword === '') {
-          console.log(1)
+          this.$vs.notification({
+            color: 'warn',
+            position: 'top-right',
+            title: '提示',
+            text: '输入内容为空'
+          })
           return
         }
         if (this.keyword !== '') {
