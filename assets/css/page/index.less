@@ -7,7 +7,7 @@
 
     .abstract-item {
       .area-w(810px);
-      .box-s(var(--my-element-box-shadow));
+      .box-s(var(--my-cur-default-theme-shadow));
       .pad-2(20px, 35px);
       .bdr(10px);
       .trans;
@@ -15,13 +15,13 @@
 
       &:hover {
         .trans;
-        .box-s(var(--my-element-box-shadow-hover));
+        .box-s(var(--my-cur-default-theme-shadow-hover));
       }
     }
 
     .title {
-      .area-h(46px);
-      .lh(46px);
+      .area-h(40px);
+      .lh(40px);
     }
 
     .description {
@@ -33,18 +33,12 @@
     }
 
     .info {
-      .mt(20px);
+      .mt(25px);
 
       ul {
         .flex;
 
         li {
-          .add-color {
-            &:hover * {
-              .color(var(--my-bright-theme-color));
-            }
-          }
-
           .flex;
           .flex-ali-center;
           .mr(15px);
@@ -55,6 +49,12 @@
 
           span {
             .ml(3px);
+          }
+        }
+
+        .add-color {
+          &:hover * {
+            .color(var(--my-bright-theme-color));
           }
         }
       }

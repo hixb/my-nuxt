@@ -13,18 +13,18 @@
             </div>
             <div class="info">
               <ul>
-                <li v-for="(info, i) in item.info" :key="i">
-                  <nuxt-link :to="info.link ? info.link : 'javascript:;'" :class="info.link ? 'add-color' : ''">
-                    <i :class="['iconfont', `ice-${info.icon}`]" />
-                    <span>{{ info.name }}</span>
-                  </nuxt-link>
+                <li v-for="(info, i) in item.info" :key="i" :class="info.link ? 'add-color' : ''"
+                    @click.prevent="$router.push(info.link)"
+                >
+                  <i :class="['iconfont', `ice-${info.icon}`]" />
+                  <span>{{ info.name }}</span>
                 </li>
               </ul>
             </div>
           </nuxt-link>
         </li>
       </ul>
-      <div class="user-info"></div>
+      <!--      <div class="user-info"></div>-->
     </main>
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
           link: 'qq.com',
           info: [
             {
-              name: 'dawnIceZhu',
+              name: this.$store.state.MY_NAME,
               icon: 'account'
             },
             {

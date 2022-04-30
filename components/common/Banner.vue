@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
-    <h2>dawnIceZhu's Notes</h2>
-    <p>People can skip meals for twelve days, But programming can’t stop writing for a day.</p>
+    <h2>{{ $store.state.APP_PROJECT_NAME }}</h2>
+    <p>{{ $store.state.APP_PROJECT_DESC }}</p>
   </div>
 </template>
 
