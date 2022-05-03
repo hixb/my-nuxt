@@ -1,4 +1,4 @@
-const { head } = require("./nuxt_config/head");
+const { head } = require('./nuxt_config/head')
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -24,7 +24,17 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/vuesax'
+    '@/middleware/auth',
+    '@/plugins/index',
+    {
+      src: '@/plugins/gPlugins',
+      mode: 'client'
+    },
+    {
+      src: '@/plugins/utils',
+      mode: 'client'
+    },
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,7 +57,21 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+    proxyHeaders: true,
+    prefix: '/api',
+    credentials: true
+  },
+
+  proxy: {
+    '/api': {
+      target: 'http://localhost:2521',
+      pathRewrite: {
+        changeOrigin: true
+      }
+    }
+  },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
