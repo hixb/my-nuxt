@@ -46,6 +46,21 @@
             </li>
           </ul>
         </div>
+        <vs-button v-if="!isLogin" success flat class="login-btn" :active="active === 1" @click="showLoginModel">
+          <i class="iconfont ice-lock"></i>
+          登录
+        </vs-button>
+        <div v-else class="avatar">
+          <vs-avatar badge badge-color="success" class="user-avatar">
+            <img src="https://vuesax.com/avatars/avatar-6.png" alt="">
+          </vs-avatar>
+          <ul class="info-list">
+            <li>个人中心</li>
+            <li @click="outLogin">
+              退出登录
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -78,6 +93,8 @@ export default {
     return {
       keyword: '',
       oldKeyword: '',
+      active: -1,
+      isLogin: false,
       colorPickerSelect: [
         {
           id: 0,
@@ -159,6 +176,9 @@ export default {
     }
   },
   mounted () {
+    /** 判断是否登录 */
+    this.isLogin = this.$utils.isLogin()
+
     /** 点击任意元素关闭颜色选择器 */
     document.addEventListener('click', e => {
       if (!this.$el.contains(e.target)) {
@@ -261,6 +281,19 @@ export default {
           this.oldKeyword = this.keyword
         }
         console.log(this.keyword)
+      }
+    },
+    showLoginModel () {
+      this.active = 1
+      this.$loginModel.show()
+    },
+    outLogin () {
+      this.$cookies.remove('is_login')
+      if (!this.$cookies.get('is_login')) {
+        this.$utils.toast('success', '登出成功')
+        setTimeout(()=> {
+          location.reload()
+        }, 2000)
       }
     }
   }

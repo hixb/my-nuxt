@@ -56,20 +56,22 @@
         </div>
       </menu>
       <article :class="isFixed ? 'offset-val' : ''">
-        <nuxt-link v-for="(item, index) in articleList" :key="index" :to="item.link" class="article-link">
+        <nuxt-link v-for="(item, index) in listData" :key="index" :to="'/article/' + item.id" class="article-link">
           <h2 class="title">
             {{ item.title }}
           </h2>
-          <div v-if="item.description !== ''" class="description">
+          <div v-if="item.description && item.description !== ''" class="description">
             {{ item.description }}
           </div>
           <div class="info">
             <ul>
-              <li v-for="(info, i) in item.info" :key="i" :class="info.link ? 'add-color' : ''"
-                  @click.prevent="$router.push(info.link)"
-              >
-                <i :class="['iconfont', `ice-${info.icon}`]" />
-                <span>{{ info.name }}</span>
+              <li>
+                <i class="iconfont ice-account" />
+                <span>{{ item.author }}</span>
+              </li>
+              <li>
+                <i class="iconfont ice-date" />
+                <span>{{ timestampToTime(item.createtime) }}</span>
               </li>
             </ul>
           </div>
@@ -86,146 +88,28 @@ export default {
   name: 'Home',
   components: { Banner },
   layout: 'default',
+  async asyncData ({
+    app,
+    $axios,
+    store,
+    error
+  }) {
+    try {
+      const res = await Promise.all([
+        $axios.get('/blog/list')
+      ])
+      const listData = res[0].data.data
+      return {
+        listData
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  },
   data () {
     return {
       getClientHei: 0,
       isFixed: false,
-      articleList: [
-        {
-          title: 'Vue press',
-          description: '快速搭建',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-        {
-          title: '嘿嘿嘿',
-          description: '',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-        {
-          title: 'Vue press',
-          description: '快速搭建',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-        {
-          title: 'Vue press',
-          description: '快速搭建',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-        {
-          title: 'Vue press',
-          description: '快速搭建',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-        {
-          title: 'Vue press',
-          description: '快速搭建',
-          link: 'qq.com',
-          info: [
-            {
-              name: this.$store.state.MY_NAME,
-              icon: 'account'
-            },
-            {
-              name: '2022/1/21',
-              icon: 'date'
-            },
-            {
-              name: 'js',
-              icon: 'tag',
-              link: 'baidu.com'
-            }
-          ]
-        },
-      ],
-      categoryList: [
-        {
-          name: '随笔',
-          count: 7,
-          link: '',
-          bgc: '#df5865'
-        },
-        {
-          name: 'vpn',
-          count: 7,
-          link: '',
-          bgc: '#6bcc8a'
-        }
-      ],
       menuList: [
         {
           ident: 'category',
@@ -298,6 +182,16 @@ export default {
   methods: {
     bannerHeight (val) {
       this.getClientHei = val
+    },
+    timestampToTime (timestamp) {
+      const date = new Date(timestamp)
+      const Y = date.getFullYear() + '-'
+      const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+      const D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' '
+      const h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
+      const m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
+      const s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
+      return Y + M + D + h + m + s
     }
   }
 }

@@ -5,3 +5,9 @@ import Vue from 'vue'
  */
 import Vuesax from 'vuesax'
 Vue.use(Vuesax)
+
+/**
+ * Cookies
+ */
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
