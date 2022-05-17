@@ -13,23 +13,23 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: "Footer",
   data () {
     return {
       footerData: [
         {
-          name: '粤ICP备2021110925号',
-          icon: 'beian',
-          link: 'https://icp.chinaz.com/home/info?host=vueice.com'
+          name: "粤ICP备2021110925号",
+          icon: "beian",
+          link: "https://icp.chinaz.com/home/info?host=vueice.com"
         },
         {
           name: this.$store.state.MY_NAME,
-          icon: 'copyright'
+          icon: "copyright"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

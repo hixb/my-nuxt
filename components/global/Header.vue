@@ -67,46 +67,46 @@
 </template>
 
 <script>
-import { getLocalStorage, setLocalStorage } from '@/plugins/utils'
+import { getLocalStorage, setLocalStorage } from "@/plugins/utils";
 
-const dark = ['rgba(24, 24, 24)', 'rgba(255, 255, 255, 0.8)']
-const light = ['rgba(255, 255, 255)', 'rgba(44, 62, 80)']
-const otherDark = ['rgba(17, 17, 17)']
-const otherLight = ['rgba(243, 244, 244)']
-const darkShadow = ['0 1px 8px 0 rgba(0, 0, 0, 0.6)', '0 2px 16px 0 rgba(0, 0, 0, 0.7)']
-const lightShadow = ['0 1px 8px 0 rgba(0, 0, 0, 0.2)', '0 2px 16px 0 rgba(0, 0, 0, 0.2)']
-const darkBorColor = ['rgba(0, 0, 0, 0.3)']
-const lightBorColor = ['rgba(234, 236, 239)']
+const dark = [ "rgba(24, 24, 24)", "rgba(255, 255, 255, 0.8)" ];
+const light = [ "rgba(255, 255, 255)", "rgba(44, 62, 80)" ];
+const otherDark = [ "rgba(17, 17, 17)" ];
+const otherLight = [ "rgba(243, 244, 244)" ];
+const darkShadow = [ "0 1px 8px 0 rgba(0, 0, 0, 0.6)", "0 2px 16px 0 rgba(0, 0, 0, 0.7)" ];
+const lightShadow = [ "0 1px 8px 0 rgba(0, 0, 0, 0.2)", "0 2px 16px 0 rgba(0, 0, 0, 0.2)" ];
+const darkBorColor = [ "rgba(0, 0, 0, 0.3)" ];
+const lightBorColor = [ "rgba(234, 236, 239)" ];
 
 export default {
-  name: 'Header',
+  name: "Header",
   directives: {
     focus: {
       update: function (el, { value }) {
         if (value) {
-          el.focus()
+          el.focus();
         }
       }
     }
   },
   data () {
     return {
-      keyword: '',
-      oldKeyword: '',
+      keyword: "",
+      oldKeyword: "",
       active: -1,
       isLogin: false,
       colorPickerSelect: [
         {
           id: 0,
-          name: 'dark'
+          name: "dark"
         },
         {
           id: 1,
-          name: 'auto'
+          name: "auto"
         },
         {
           id: 2,
-          name: 'light'
+          name: "light"
         },
       ],
       defaultTheme: 1,
@@ -114,190 +114,190 @@ export default {
       focusState: false,
       navLink: [
         {
-          title: '首页',
-          icon: 'ice-home',
-          link: '',
+          title: "首页",
+          icon: "ice-home",
+          link: "",
           children: []
         },
         {
-          title: '分类',
-          icon: 'ice-category',
-          link: '',
+          title: "分类",
+          icon: "ice-category",
+          link: "",
           children: [
             {
-              name: 'vue',
-              link: '',
-              icon: ''
+              name: "vue",
+              link: "",
+              icon: ""
             },
             {
-              name: 'js',
-              link: '',
-              icon: ''
+              name: "js",
+              link: "",
+              icon: ""
             }
           ]
         },
         {
-          title: '标签',
-          icon: 'ice-tag',
-          link: '',
+          title: "标签",
+          icon: "ice-tag",
+          link: "",
           children: []
         },
         {
-          title: '时间线',
-          icon: 'ice-date',
-          link: '',
+          title: "时间线",
+          icon: "ice-date",
+          link: "",
           children: []
         },
         {
-          title: '联系',
-          icon: 'ice-message',
-          link: '',
+          title: "联系",
+          icon: "ice-message",
+          link: "",
           children: [
             {
-              name: 'GITHUB',
-              link: '',
-              icon: ''
+              name: "GITHUB",
+              link: "",
+              icon: ""
             },
             {
-              name: 'GITEE',
-              link: '',
-              icon: ''
+              name: "GITEE",
+              link: "",
+              icon: ""
             }
           ]
         }
       ]
-    }
+    };
   },
   watch: {
     keyword (newVal) {
-      if (newVal === '' && this.oldKeyword !== '') {
-        this.oldKeyword = ''
+      if (newVal === "" && this.oldKeyword !== "") {
+        this.oldKeyword = "";
       }
     }
   },
   mounted () {
     /** 判断是否登录 */
-    this.isLogin = this.$utils.isLogin()
+    this.isLogin = this.$utils.isLogin();
 
     /** 点击任意元素关闭颜色选择器 */
-    document.addEventListener('click', e => {
+    document.addEventListener("click", e => {
       if (!this.$el.contains(e.target)) {
-        this.isShowPicker = false
+        this.isShowPicker = false;
       }
-    })
+    });
 
     /** 添加顶部滚动进度条 */
-    const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight
-    const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
-    const scrollAvail = pageHeight - windowHeight
+    const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
+    const windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    const scrollAvail = pageHeight - windowHeight;
     window.onscroll = () => {
-      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      this.$refs.scheduleBar.style.width = (scrollTop / scrollAvail) * 100 + '%'
-    }
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      this.$refs.scheduleBar.style.width = (scrollTop / scrollAvail) * 100 + "%";
+    };
 
     /** 设置系统主题 */
-    const localTheme = JSON.parse(getLocalStorage('my_theme'))
+    const localTheme = JSON.parse(getLocalStorage("my_theme"));
     if (localTheme && localTheme.length > 0) {
-      this.defaultTheme = localTheme.find(item => item.id + 1).id
-      this.currentTheme(localTheme[0], localTheme[1], localTheme[2], localTheme[3], localTheme[4], localTheme[5])
+      this.defaultTheme = localTheme.find(item => item.id + 1).id;
+      this.currentTheme(localTheme[0], localTheme[1], localTheme[2], localTheme[3], localTheme[4], localTheme[5]);
     } else {
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches
         ? this.currentTheme(dark[0], dark[1], otherDark[0], darkShadow[0], darkShadow[1], darkBorColor[0])
-        : this.currentTheme(light[0], light[1], otherLight[0], lightShadow[0], lightShadow[1], lightBorColor[0])
+        : this.currentTheme(light[0], light[1], otherLight[0], lightShadow[0], lightShadow[1], lightBorColor[0]);
     }
   },
   methods: {
     /** 切换主题 */
     toggleTheme (index) {
-      this.defaultTheme = index
-      const curTheme = this.themeIf(index)
+      this.defaultTheme = index;
+      const curTheme = this.themeIf(index);
       switch (index) {
         case 0:
         case 2:
-          this.currentTheme(curTheme[0], curTheme[1], curTheme[2], curTheme[3], curTheme[4], curTheme[5])
-          break
+          this.currentTheme(curTheme[0], curTheme[1], curTheme[2], curTheme[3], curTheme[4], curTheme[5]);
+          break;
         case 1:
-          window.matchMedia('(prefers-color-scheme: dark)').matches
+          window.matchMedia("(prefers-color-scheme: dark)").matches
             ? this.currentTheme(curTheme[0], curTheme[1], curTheme[2], curTheme[3], curTheme[4], curTheme[5])
-            : this.currentTheme(curTheme[0], curTheme[1], curTheme[2], curTheme[3], curTheme[4], curTheme[5])
-          break
+            : this.currentTheme(curTheme[0], curTheme[1], curTheme[2], curTheme[3], curTheme[4], curTheme[5]);
+          break;
       }
-      curTheme.push({ id: index })
-      setLocalStorage('my_theme', JSON.stringify(curTheme))
+      curTheme.push({ id: index });
+      setLocalStorage("my_theme", JSON.stringify(curTheme));
     },
     /** 主题判断换 */
     themeIf (index) {
-      let themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor
+      let themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor;
       switch (index) {
         case 0:
-          themeBgColor = dark[0]
-          themeTextColor = dark[1]
-          themeOterBgc = otherDark[0]
-          curShadow = darkShadow[0]
-          curShadowHov = darkShadow[1]
-          curBorColor = darkBorColor[0]
-          break
+          themeBgColor = dark[0];
+          themeTextColor = dark[1];
+          themeOterBgc = otherDark[0];
+          curShadow = darkShadow[0];
+          curShadowHov = darkShadow[1];
+          curBorColor = darkBorColor[0];
+          break;
         case 2:
-          themeBgColor = light[0]
-          themeTextColor = light[1]
-          themeOterBgc = otherLight[0]
-          curShadow = lightShadow[0]
-          curShadowHov = lightShadow[1]
-          curBorColor = lightBorColor[0]
-          break
+          themeBgColor = light[0];
+          themeTextColor = light[1];
+          themeOterBgc = otherLight[0];
+          curShadow = lightShadow[0];
+          curShadowHov = lightShadow[1];
+          curBorColor = lightBorColor[0];
+          break;
         default:
-          themeBgColor = dark[0]
-          themeTextColor = dark[1]
-          themeOterBgc = otherDark[0]
-          curShadow = darkShadow[0]
-          curShadowHov = darkShadow[1]
-          curBorColor = darkBorColor[0]
-          break
+          themeBgColor = dark[0];
+          themeTextColor = dark[1];
+          themeOterBgc = otherDark[0];
+          curShadow = darkShadow[0];
+          curShadowHov = darkShadow[1];
+          curBorColor = darkBorColor[0];
+          break;
       }
-      return [themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor]
+      return [ themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor ];
     },
     /** 设置当前主题为 */
     currentTheme (curThemeBgc, curThemeColor, curOterBgc, curShadow, curShadowHov, curBorColor) {
-      document.documentElement.style.setProperty('--my-cur-default-theme-bgc', curThemeBgc)
-      document.documentElement.style.setProperty('--my-cur-default-theme-color', curThemeColor)
-      document.documentElement.style.setProperty('--my-cur-default-theme-oter', curOterBgc)
-      document.documentElement.style.setProperty('--my-cur-default-theme-shadow', curShadow)
-      document.documentElement.style.setProperty('--my-cur-default-theme-shadow-hover', curShadowHov)
-      document.documentElement.style.setProperty('--my-cur-default-theme-bor-color', curBorColor)
+      document.documentElement.style.setProperty("--my-cur-default-theme-bgc", curThemeBgc);
+      document.documentElement.style.setProperty("--my-cur-default-theme-color", curThemeColor);
+      document.documentElement.style.setProperty("--my-cur-default-theme-oter", curOterBgc);
+      document.documentElement.style.setProperty("--my-cur-default-theme-shadow", curShadow);
+      document.documentElement.style.setProperty("--my-cur-default-theme-shadow-hover", curShadowHov);
+      document.documentElement.style.setProperty("--my-cur-default-theme-bor-color", curBorColor);
     },
     /** 搜索 */
     enterSearch (e) {
       if (e.keyCode === 13) {
-        if (this.keyword === '' && this.oldKeyword === '') {
+        if (this.keyword === "" && this.oldKeyword === "") {
           this.$vs.notification({
-            color: 'warn',
-            position: 'top-right',
-            title: '提示',
-            text: '输入内容为空'
-          })
-          return
+            color: "warn",
+            position: "top-right",
+            title: "提示",
+            text: "输入内容为空"
+          });
+          return;
         }
-        if (this.keyword !== '') {
-          this.oldKeyword = this.keyword
+        if (this.keyword !== "") {
+          this.oldKeyword = this.keyword;
         }
-        console.log(this.keyword)
+        console.log(this.keyword);
       }
     },
     showLoginModel () {
-      this.active = 1
-      this.$loginModel.show()
+      this.active = 1;
+      this.$loginModel.show();
     },
     outLogin () {
-      this.$cookies.remove('is_login')
-      if (!this.$cookies.get('is_login')) {
-        this.$utils.toast('success', '登出成功')
+      this.$cookies.remove("is_login");
+      if (!this.$cookies.get("is_login")) {
+        this.$utils.toast("success", "登出成功");
         setTimeout(()=> {
-          location.reload()
-        }, 2000)
+          location.reload();
+        }, 2000);
       }
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

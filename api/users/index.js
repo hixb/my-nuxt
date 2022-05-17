@@ -1,4 +1,4 @@
-import server from '../request'
+import server from "../request";
 
 const FetchData = {
   /**
@@ -8,11 +8,11 @@ const FetchData = {
    */
   login (data) {
     return server({
-      url: '/user/login',
-      method: 'post',
+      url: "/user/login",
+      method: "post",
       data
-    })
+    });
   }
-}
+};
 
-export default FetchData
+export default FetchData;

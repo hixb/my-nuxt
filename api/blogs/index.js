@@ -1,4 +1,4 @@
-import server from '../request'
+import server from "../request";
 
 const FetchData = {
   /**
@@ -7,9 +7,9 @@ const FetchData = {
    */
   getBlogList () {
     return server({
-      url: '/blog/list',
-      method: 'get'
-    })
+      url: "/blog/list",
+      method: "get"
+    });
   },
   /**
    * 获取博客详情
@@ -18,11 +18,11 @@ const FetchData = {
    */
   getBlogDetail (params) {
     return server({
-      url: '/blog/detail',
-      method: 'get',
+      url: "/blog/detail",
+      method: "get",
       params
-    })
+    });
   }
-}
+};
 
-export default FetchData
+export default FetchData;

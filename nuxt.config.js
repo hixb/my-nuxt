@@ -1,40 +1,39 @@
-const { head } = require('./nuxt_config/head')
+const { head } = require("./nuxt_config/head");
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'my-nuxt',
+    title: "my-nuxt",
     ...head
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/icon/iconfont.css',
-    'vuesax/dist/vuesax.css',
-    '@/assets/css/theme.less'
+    "@/assets/css/icon/iconfont.css",
+    "vuesax/dist/vuesax.css",
+    "@/assets/css/theme.less"
   ],
 
   // Global less
   styleResources: {
     less: [
-      '@/assets/css/common.less',
-      '@/assets/css/public.less'
+      "@/assets/css/common.less",
+      "@/assets/css/public.less"
     ]
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/middleware/auth',
-    '@/plugins/index',
+    "@/middleware/auth",
+    "@/plugins/index",
     {
-      src: '@/plugins/gPlugins',
-      mode: 'client'
+      src: "@/plugins/gPlugins",
+      mode: "client"
     },
     {
-      src: '@/plugins/utils',
-      mode: 'client'
-    },
-
+      src: "@/plugins/utils",
+      mode: "client"
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,30 +42,30 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    "@nuxtjs/eslint-module"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    "@nuxtjs/axios",
     // https://go.nuxtjs.dev/content
-    '@nuxt/content',
+    "@nuxt/content",
     // style-resources
-    '@nuxtjs/style-resources'
+    "@nuxtjs/style-resources"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
     proxyHeaders: true,
-    prefix: '/api',
+    prefix: "/api",
     credentials: true
   },
 
   proxy: {
-    '/api': {
-      target: 'http://localhost:2521',
+    "/api": {
+      target: "http://localhost:2521",
       pathRewrite: {
         changeOrigin: true
       }
@@ -81,6 +80,6 @@ export default {
 
   // server
   server: {
-    host: '127.0.0.1'
+    host: "127.0.0.1"
   }
-}
+};

@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  layout: 'member'
-}
+  layout: "member"
+};
 </script>
 
 <style scoped>

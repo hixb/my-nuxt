@@ -31,31 +31,31 @@ export default {
     try {
       const res = await Promise.all([
         $axios.get(`/blog/detail?id=${params.id}`)
-      ])
-      const listData = res[0].data.data
+      ]);
+      const listData = res[0].data.data;
       return {
         listData
-      }
+      };
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
   data () {
-    return {}
+    return {};
   },
   methods: {
     timestampToTime (timestamp) {
-      const date = new Date(timestamp)
-      const Y = date.getFullYear() + '-'
-      const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      const D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' '
-      const h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
-      const m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
-      const s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
-      return Y + M + D + h + m + s
+      const date = new Date(timestamp);
+      const Y = date.getFullYear() + "-";
+      const M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-";
+      const D = (date.getDate() < 10 ? "0" + (date.getDate()) : date.getDate()) + " ";
+      const h = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
+      const m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
+      const s = (date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds());
+      return Y + M + D + h + m + s;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">
