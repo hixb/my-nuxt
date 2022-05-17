@@ -29,6 +29,7 @@
           <ul>
             <li v-for="(list, i) in item.list" :key="i"
                 :style="item.ident === 'tag' ? `background-color: ${list.bgc};` : ''"
+                class="gradient-border"
             >
               <nuxt-link :to="item.ident !== 'friend' ? list.link : ''">
                 <i v-if="item.ident === 'friend'" :style="{backgroundColor: list.bgc}" />
@@ -56,7 +57,10 @@
         </div>
       </menu>
       <article :class="isFixed ? 'offset-val' : ''">
-        <nuxt-link v-for="(item, index) in listData" :key="index" :to="'/article/' + item.id" class="article-link">
+        <nuxt-link
+          v-for="(item, index) in listData" :key="index" :to="'/article/' + item.id"
+          class="article-link gradient-border"
+        >
           <h2 class="title">
             {{ item.title }}
           </h2>
