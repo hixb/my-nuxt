@@ -275,3 +275,48 @@
 .z-i(@i) {
   z-index: @i;
 }
+
+// 背景位置
+.bgp(@x, @y) {
+  background-position: @x @y;
+}
+
+// 背景大小
+.bgs(@v1, @v2) {
+  background-size: @v1, @v2;
+}
+
+.gradient-border {
+  backdrop-filter: blur(10px);
+  .bdr(.5rem);
+  .por;
+
+  &:before {
+    .bgp(0, 0) !important;
+    .bgs(400%, auto) !important;
+    .bdr(.5rem);
+    bottom: 0;
+    content: "";
+    left: 0;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    .opa(.5);
+    .pad-1(2px);
+    .pos;
+    right: 0;
+    top: 0;
+    transition: background-position .3s ease-in-out, opacity .2s ease-in-out;
+    .area-w(100%);
+  }
+
+  &:hover:before {
+    .bgp(-50%, 0) !important;
+    .opa(1) !important;
+  }
+
+  &:before {
+    background: linear-gradient(90deg, transparent, transparent 25%, #00dc82 50%, #36e4da 75%, #0047e1);
+  }
+}
+
+
