@@ -10,6 +10,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/css/icon/iconfont.css",
+    "@/assets/css/icon/vueasx_icon.css",
     "vuesax/dist/vuesax.css",
     "@/assets/css/theme.less"
   ],

@@ -55,7 +55,9 @@
             <img src="https://vuesax.com/avatars/avatar-6.png" alt="">
           </vs-avatar>
           <ul class="info-list">
-            <li>个人中心</li>
+            <li @click="$router.push('/member')">
+              个人中心
+            </li>
             <li @click="outLogin">
               退出登录
             </li>
