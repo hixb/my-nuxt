@@ -271,12 +271,7 @@ export default {
     enterSearch (e) {
       if (e.keyCode === 13) {
         if (this.keyword === "" && this.oldKeyword === "") {
-          this.$vs.notification({
-            color: "warn",
-            position: "top-right",
-            title: "提示",
-            text: "输入内容为空"
-          });
+          this.$utils.toast("warn", "输入内容为空");
           return;
         }
         if (this.keyword !== "") {
