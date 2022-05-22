@@ -1,0 +1,40 @@
+/** ======================= vs-dialog start =======================**/
+
+/deep/ .vs-dialog {
+  .pad-1(20px);
+  .bgc(var(--my-cur-default-theme-bgc));
+  .color(var(--my-cur-default-theme-color));
+  .box-s(var(--my-cur-default-theme-shadow));
+
+  .vs-dialog__close {
+    .box-s(var(--my-cur-default-theme-shadow));
+  }
+
+  .vs-dialog__footer {
+    .flex;
+    .flex-jus-end;
+    .pt(10px);
+
+    button {
+      .box-s(var(--my-cur-default-theme-shadow));
+      .color(var(--my-cur-default-theme-color));
+
+      &:last-child {
+        .ml(10px);
+      }
+    }
+  }
+}
+
+/** ======================= vs-dialog end =======================**/
+
+
+/** ======================= vs-button start =======================**/
+
+/deep/ .vs-button {
+  .bgc(var(--my-bright-theme-color));
+  .box-s(var(--my-cur-default-theme-shadow));
+  .color(var(--my-cur-default-theme-color));
+}
+
+/** ======================= vs-button end =======================**/

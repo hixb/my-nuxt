@@ -13,9 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="content">
-      {{ listData.content }}
-    </div>
+    <div class="content" v-html="listData.content" />
   </div>
 </template>
 

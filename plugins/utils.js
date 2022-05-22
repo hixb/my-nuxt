@@ -62,7 +62,7 @@ const utils = {
   toast (type = "danger", message) {
     Vue.prototype.$vs.notification({
       border: type,
-      position: "top-center",
+      position: "top-right",
       title: "提示",
       text: message
     });

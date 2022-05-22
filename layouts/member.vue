@@ -1,15 +1,15 @@
 <template>
   <div>
     <Header />
+    <Sidebar />
     <main class="main">
-      <Sidebar />
       <Nuxt />
     </main>
   </div>
 </template>
 
 <script>
-import Header from "~/components/global/Header";
+import Header from "@/components/common/Header";
 import Sidebar from "~/components/member/common/Sidebar";
 export default {
   name: "Member",
@@ -19,7 +19,8 @@ export default {
 
 <style scoped lang="less">
 .main {
-  .area-w(1500px);
+  .area-w(1200px);
   .mar-2(0, auto);
+  .mt(120px);
 }
 </style>

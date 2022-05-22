@@ -22,6 +22,18 @@ const FetchData = {
       method: "get",
       params
     });
+  },
+  /**
+   * 发布新文章
+   * @param data
+   * @returns {*}
+   */
+  pushBlogArticle(data) {
+    return server({
+      url: "/blog/new",
+      method: "post",
+      data
+    });
   }
 };
 

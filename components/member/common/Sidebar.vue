@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="hidden">
-      <vs-sidebar v-model="active" absolute hover-expand reduce open>
+      <vs-sidebar v-model="active" absolute open>
         <template #logo>
           <img src="~/assets/images/logo.png" alt="logo">
         </template>
@@ -11,19 +11,6 @@
           </template>
           {{ item.name }}
         </vs-sidebar-item>
-        <template #footer>
-          <vs-row justify="space-between">
-            <vs-avatar badge-color="danger" badge-position="top-right">
-              <i class="isax isax-message-notif" />
-              <template #badge>
-                28
-              </template>
-            </vs-avatar>
-            <vs-avatar>
-              <img src="https://vuesax.com/avatars/avatar-5.png" alt="">
-            </vs-avatar>
-          </vs-row>
-        </template>
       </vs-sidebar>
     </div>
   </div>
@@ -41,6 +28,30 @@ export default {
           icon: "isax-home-hashtag",
           name: "首页",
           link: "/member"
+        },
+        {
+          id: "release",
+          icon: "isax-sagittarius",
+          name: "文章发布",
+          link: "/member/releases"
+        },
+        {
+          id: "articleList",
+          icon: "isax-music-playlist",
+          name: "文章管理",
+          link: "/member/articleList"
+        },
+        {
+          id: "userInfo",
+          icon: "isax-user-add",
+          name: "用户管理",
+          link: "/member/userInfo"
+        },
+        {
+          id: "settings",
+          icon: "isax-settings",
+          name: "用户设置",
+          link: "/member/settings"
         }
       ]
     };
@@ -69,6 +80,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     .box-s(var(--my-cur-default-theme-shadow));
+    .pb(40px);
 
     .vs-sidebar__item__text {
       .color(var(--my-cur-default-theme-color));

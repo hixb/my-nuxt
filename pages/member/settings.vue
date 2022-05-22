@@ -1,9 +1,10 @@
 <template>
-  <div>111</div>
+  <div>设置</div>
 </template>
 
 <script>
 export default {
+  name: "Settings",
   layout: "member"
 };
 </script>

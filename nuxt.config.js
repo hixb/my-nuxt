@@ -18,6 +18,7 @@ export default {
   // Global less
   styleResources: {
     less: [
+      "@/assets/css/global.less",
       "@/assets/css/common.less",
       "@/assets/css/public.less"
     ]
@@ -25,6 +26,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "@/plugins/components",
     "@/middleware/auth",
     "@/plugins/index",
     {
