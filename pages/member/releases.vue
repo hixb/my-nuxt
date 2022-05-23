@@ -51,7 +51,7 @@ import api from "@/api/blogs/index";
 export default {
   name: "Releases",
   layout: "member",
-  data () {
+  data() {
     return {
       from: {
         title: "",
@@ -90,7 +90,7 @@ export default {
       }
     };
   },
-  mounted () {
+  mounted() {
     let dom = this.$el.querySelector(".editor");
     this.quill = new Quill(dom, this.options);
     this.quill.setContents(this.from.richTextVal);
@@ -99,7 +99,7 @@ export default {
     });
   },
   methods: {
-    submitData () {
+    submitData() {
       if (!this.anExaminationForm()) {
         return;
       }
@@ -114,7 +114,7 @@ export default {
         }
       });
     },
-    anExaminationForm () {
+    anExaminationForm() {
       if (!this.from.title) {
         this.$utils.toast("danger", "请输入标题");
         return false;

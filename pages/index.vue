@@ -92,7 +92,7 @@ export default {
   name: "Home",
   components: { Banner },
   layout: "default",
-  async asyncData ({
+  async asyncData({
     app,
     $axios,
     store,
@@ -110,7 +110,7 @@ export default {
       console.log(err);
     }
   },
-  data () {
+  data() {
     return {
       getClientHei: 0,
       isFixed: false,
@@ -178,16 +178,16 @@ export default {
       ]
     };
   },
-  mounted () {
+  mounted() {
     window.addEventListener("scroll", () => {
       this.isFixed = window.scrollY >= (this.getClientHei - 60);
     });
   },
   methods: {
-    bannerHeight (val) {
+    bannerHeight(val) {
       this.getClientHei = val;
     },
-    timestampToTime (timestamp) {
+    timestampToTime(timestamp) {
       const date = new Date(timestamp);
       const Y = date.getFullYear() + "-";
       const M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-";

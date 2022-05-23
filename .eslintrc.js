@@ -67,6 +67,11 @@ module.exports = {
     ],
     "array-bracket-spacing": [ "error", "always" ],
     "object-curly-spacing": [ "error", "always" ],
-    "quotes": [ 1, "double" ]
+    "quotes": [ 1, "double" ],
+    "space-before-function-paren": [ "error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "never"
+    } ],
   }
 };

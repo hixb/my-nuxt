@@ -34,7 +34,7 @@ import FetchData from "@/api/users";
 
 export default {
   name: "Login",
-  data () {
+  data() {
     return {
       showLogin: false,
       loginForm: {
@@ -44,13 +44,13 @@ export default {
     };
   },
   methods: {
-    show () {
+    show() {
       this.showLogin = true;
     },
-    hide () {
+    hide() {
       this.showLogin = false;
     },
-    login () {
+    login() {
       if (!this.loginForm.username || !this.loginForm.password) {
         this.$utils.toast("warn", "请输入用户名和密码");
         return;

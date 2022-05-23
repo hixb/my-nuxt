@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  async asyncData ({
+  async asyncData({
     app,
     $axios,
     store,
@@ -38,11 +38,11 @@ export default {
       console.log(err);
     }
   },
-  data () {
+  data() {
     return {};
   },
   methods: {
-    timestampToTime (timestamp) {
+    timestampToTime(timestamp) {
       const date = new Date(timestamp);
       const Y = date.getFullYear() + "-";
       const M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-";

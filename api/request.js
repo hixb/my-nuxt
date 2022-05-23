@@ -6,7 +6,7 @@ const service = axios.create({
   headers: { "X-Requested-With": "XMLHttpRequest" },
 });
 service.interceptors.request.use(
-  async (config) => {
+  async(config) => {
     return config;
   },
   (error) => {

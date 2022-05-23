@@ -6,7 +6,7 @@ const FetchData = {
    * @param data
    * @returns {*}
    */
-  login (data) {
+  login(data) {
     return server({
       url: "/user/login",
       method: "post",

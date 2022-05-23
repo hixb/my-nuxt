@@ -56,10 +56,10 @@ const utils = {
    * 是否登录判断规则 ==> *_当月时间÷5000_当天时间到0点的时间戳÷5000_zxb
    * @returns {string}
    */
-  isLogin () {
+  isLogin() {
     return getCookie("is_login") == `*_${mGetDate() / 5000}_${new Date(new Date().toLocaleDateString()).getTime() / 5000}_zxb`;
   },
-  toast (type = "danger", message) {
+  toast(type = "danger", message) {
     Vue.prototype.$vs.notification({
       border: type,
       position: "top-right",

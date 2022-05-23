@@ -2,14 +2,14 @@ const limitRoutes = [
   "member"
 ];
 
-function checkRoute (routeName) {
+function checkRoute(routeName) {
   let isLimit = limitRoutes.findIndex(item => routeName.includes(item));
   if (isLimit > -1) {
     throw new Error("Stop");
   }
 }
 
-export default function ({
+export default function({
   route,
   store,
   redirect,

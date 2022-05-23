@@ -3,7 +3,7 @@ import Login from "~/components/common/Login";
 
 // 登录框
 const LoginPlugin = {};
-LoginPlugin.install = function (_vue) {
+LoginPlugin.install = function(_vue) {
   const loginConstrustor = _vue.extend(Login);
   const loginModel = new loginConstrustor();
   loginModel.$mount(window.document.createElement("div"));

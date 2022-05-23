@@ -19,7 +19,7 @@
 <script>
 export default {
   name: "Sidebar",
-  data () {
+  data() {
     return {
       active: "member",
       sidebarList: [
@@ -56,11 +56,11 @@ export default {
       ]
     };
   },
-  mounted () {
+  mounted() {
     this.active = this.$route.path.replace("/", "");
   },
   methods: {
-    jump (item) {
+    jump(item) {
       this.$router.push(item.link);
     }
   }

@@ -5,7 +5,7 @@ const FetchData = {
    * 获取博客列表
    * @returns {*}
    */
-  getBlogList () {
+  getBlogList() {
     return server({
       url: "/blog/list",
       method: "get"
@@ -16,7 +16,7 @@ const FetchData = {
    * @param params
    * @returns {*}
    */
-  getBlogDetail (params) {
+  getBlogDetail(params) {
     return server({
       url: "/blog/detail",
       method: "get",

@@ -84,14 +84,14 @@ export default {
   name: "Header",
   directives: {
     focus: {
-      update: function (el, { value }) {
+      update: function(el, { value }) {
         if (value) {
           el.focus();
         }
       }
     }
   },
-  data () {
+  data() {
     return {
       keyword: "",
       oldKeyword: "",
@@ -171,13 +171,13 @@ export default {
     };
   },
   watch: {
-    keyword (newVal) {
+    keyword(newVal) {
       if (newVal === "" && this.oldKeyword !== "") {
         this.oldKeyword = "";
       }
     }
   },
-  mounted () {
+  mounted() {
     /** 判断是否登录 */
     this.isLogin = this.$utils.isLogin();
 
@@ -210,7 +210,7 @@ export default {
   },
   methods: {
     /** 切换主题 */
-    toggleTheme (index) {
+    toggleTheme(index) {
       this.defaultTheme = index;
       const curTheme = this.themeIf(index);
       switch (index) {
@@ -228,7 +228,7 @@ export default {
       setLocalStorage("my_theme", JSON.stringify(curTheme));
     },
     /** 主题判断换 */
-    themeIf (index) {
+    themeIf(index) {
       let themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor;
       switch (index) {
         case 0:
@@ -259,7 +259,7 @@ export default {
       return [ themeBgColor, themeTextColor, themeOterBgc, curShadow, curShadowHov, curBorColor ];
     },
     /** 设置当前主题为 */
-    currentTheme (curThemeBgc, curThemeColor, curOterBgc, curShadow, curShadowHov, curBorColor) {
+    currentTheme(curThemeBgc, curThemeColor, curOterBgc, curShadow, curShadowHov, curBorColor) {
       document.documentElement.style.setProperty("--my-cur-default-theme-bgc", curThemeBgc);
       document.documentElement.style.setProperty("--my-cur-default-theme-color", curThemeColor);
       document.documentElement.style.setProperty("--my-cur-default-theme-oter", curOterBgc);
@@ -268,7 +268,7 @@ export default {
       document.documentElement.style.setProperty("--my-cur-default-theme-bor-color", curBorColor);
     },
     /** 搜索 */
-    enterSearch (e) {
+    enterSearch(e) {
       if (e.keyCode === 13) {
         if (this.keyword === "" && this.oldKeyword === "") {
           this.$utils.toast("warn", "输入内容为空");
@@ -280,15 +280,15 @@ export default {
         console.log(this.keyword);
       }
     },
-    showLoginModel () {
+    showLoginModel() {
       this.active = 1;
       this.$loginModel.show();
     },
-    outLogin () {
+    outLogin() {
       this.$cookies.remove("is_login");
       if (!this.$cookies.get("is_login")) {
         this.$utils.toast("success", "登出成功");
-        setTimeout(()=> {
+        setTimeout(() => {
           location.reload();
         }, 2000);
       }
