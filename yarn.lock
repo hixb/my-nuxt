@@ -5897,14 +5897,12 @@ launch-editor@^2.2.1:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
 
-less-loader@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmmirror.com/less-loader/download/less-loader-5.0.0.tgz"
-  integrity sha1-SY3eOmxsT4h0WO6e0/CGoSrRtGY=
+less-loader@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-11.0.0.tgz#a31b2bc5cdfb62f1c7de9b2d01cd944c22b1a024"
+  integrity sha512-9+LOWWjuoectIEx3zrfN83NAGxSUB5pWEabbbidVQVgZhN+wN68pOvuyirVlH1IK4VT1f3TmlyvAnCXh8O5KEw==
   dependencies:
-    clone "^2.1.1"
-    loader-utils "^1.1.0"
-    pify "^4.0.1"
+    klona "^2.0.4"
 
 less@^3.10.3:
   version "3.13.1"
