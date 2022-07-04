@@ -61,11 +61,9 @@
           v-for="(item, index) in listData" :key="index" :to="'/article/' + item.id"
           class="article-link gradient-border"
         >
-          <h2 class="title">
-            {{ item.title }}
-          </h2>
-          <div v-if="item.description && item.description !== ''" class="description">
-            {{ item.description }}
+          <h2 class="title" v-html="item.title"></h2>
+          <div v-if="item.content && item.content !== ''" class="description">
+            {{ String(item.content).length > 300 ? item.content.slice(0, 300) + '...' : item.content }}
           </div>
           <div class="info">
             <ul>
@@ -100,7 +98,7 @@ export default {
   }) {
     try {
       const res = await Promise.all([
-        $axios.get("/blog/list")
+        $axios.get("/article/list")
       ]);
       const listData = res[0].data.data;
       return {

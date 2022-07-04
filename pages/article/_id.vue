@@ -28,7 +28,7 @@ export default {
   }) {
     try {
       const res = await Promise.all([
-        $axios.get(`/blog/detail?id=${params.id}`)
+        $axios.get(`/article/detail?id=${params.id}`)
       ]);
       const listData = res[0].data.data;
       return {

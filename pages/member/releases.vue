@@ -46,7 +46,7 @@
 <script>
 const Quill = process.server ? "" : require("quill");
 import "quill/dist/quill.snow.css";
-import api from "@/api/blogs/index";
+import api from "@/api/article/index";
 
 export default {
   name: "Releases",
@@ -103,9 +103,7 @@ export default {
       if (!this.anExaminationForm()) {
         return;
       }
-      this.from.content = this.quill.container.firstChild.innerHTML;
 
-      console.log(this.from);
       api.pushBlogArticle(this.from).then(res => {
         if (res.status === 0) {
           this.$utils.toast("success", "发布成功");
@@ -115,11 +113,14 @@ export default {
       });
     },
     anExaminationForm() {
-      if (!this.from.title) {
+      this.from.content = this.quill.container.firstChild.innerHTML;
+
+      if (this.from.title == "") {
+        console.log(11);
         this.$utils.toast("danger", "请输入标题");
         return false;
-      } else if (!this.from.content) {
-        this.$utils.toast("danger", "请输入标题");
+      } else if (this.from.content == "") {
+        this.$utils.toast("danger", "请输入内容");
         return false;
       }
       return true;
