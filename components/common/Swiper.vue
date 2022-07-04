@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: 'Swiper'
-}
+  name: "Swiper"
+};
 </script>
 
 <style lang="less" scoped>

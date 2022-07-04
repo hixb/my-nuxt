@@ -30,50 +30,50 @@
 </template>
 
 <script>
-import FetchData from '@/api/users'
+import FetchData from "@/api/users";
 
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
       showLogin: false,
       loginForm: {
-        username: '',
-        password: '',
+        username: "",
+        password: "",
       }
-    }
+    };
   },
   methods: {
-    show () {
-      this.showLogin = true
+    show() {
+      this.showLogin = true;
     },
-    hide () {
-      this.showLogin = false
+    hide() {
+      this.showLogin = false;
     },
-    login () {
+    login() {
       if (!this.loginForm.username || !this.loginForm.password) {
-        this.$utils.toast('warn', '请输入用户名和密码')
-        return
+        this.$utils.toast("warn", "请输入用户名和密码");
+        return;
       }
 
       const req = {
         username: this.loginForm.username,
         password: this.loginForm.password
-      }
+      };
       FetchData.login(req).then(res => {
         if (res.status === 0) {
-          this.$utils.toast('success', '登录成功')
-          this.hide()
+          this.$utils.toast("success", "登录成功");
+          this.hide();
           setTimeout(() => {
-            location.reload()
-          }, 2000)
+            location.reload();
+          }, 2000);
         } else {
-          this.$utils.toast('danger', res.message)
+          this.$utils.toast("danger", res.message);
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

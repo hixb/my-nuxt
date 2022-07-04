@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  layout: 'member'
-}
+  layout: "member"
+};
 </script>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

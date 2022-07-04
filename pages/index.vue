@@ -61,11 +61,9 @@
           v-for="(item, index) in listData" :key="index" :to="'/article/' + item.id"
           class="article-link gradient-border"
         >
-          <h2 class="title">
-            {{ item.title }}
-          </h2>
-          <div v-if="item.description && item.description !== ''" class="description">
-            {{ item.description }}
+          <h2 class="title" v-html="item.title"></h2>
+          <div v-if="item.content && item.content !== ''" class="description">
+            {{ String(item.content).length > 300 ? item.content.slice(0, 300) + '...' : item.content }}
           </div>
           <div class="info">
             <ul>
@@ -75,7 +73,7 @@
               </li>
               <li>
                 <i class="iconfont ice-date" />
-                <span>{{ timestampToTime(item.createtime) }}</span>
+                <span>{{ $utils.timestampToTime(item.createtime) }}</span>
               </li>
             </ul>
           </div>
@@ -86,13 +84,13 @@
 </template>
 
 <script>
-import Banner from '@/components/common/Banner'
+import Banner from "@/components/common/Banner";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: { Banner },
-  layout: 'default',
-  async asyncData ({
+  layout: "default",
+  async asyncData({
     app,
     $axios,
     store,
@@ -100,105 +98,95 @@ export default {
   }) {
     try {
       const res = await Promise.all([
-        $axios.get('/blog/list')
-      ])
-      const listData = res[0].data.data
+        $axios.get("/article/list")
+      ]);
+      const listData = res[0].data.data;
       return {
         listData
-      }
+      };
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
-  data () {
+  data() {
     return {
       getClientHei: 0,
       isFixed: false,
       menuList: [
         {
-          ident: 'category',
-          title: '分类',
-          icon: 'category',
-          className: 'category',
+          ident: "category",
+          title: "分类",
+          icon: "category",
+          className: "category",
           list: [
             {
-              name: '随笔',
+              name: "随笔",
               count: 7,
-              link: '',
-              bgc: '#df5865'
+              link: "",
+              bgc: "#df5865"
             },
             {
-              name: 'vpn',
+              name: "vpn",
               count: 7,
-              link: '',
-              bgc: '#6bcc8a'
+              link: "",
+              bgc: "#6bcc8a"
             }
           ]
         },
         {
-          ident: 'tag',
-          title: '标签',
-          icon: 'tag',
-          className: 'tag',
+          ident: "tag",
+          title: "标签",
+          icon: "tag",
+          className: "tag",
           list: [
             {
-              name: 'all',
-              link: '',
-              bgc: '#df5865'
+              name: "all",
+              link: "",
+              bgc: "#df5865"
             },
             {
-              name: '随笔',
-              link: '',
-              bgc: '#6bcc8a'
+              name: "随笔",
+              link: "",
+              bgc: "#6bcc8a"
             }
           ]
         },
         {
-          ident: 'friend',
-          title: '友链',
-          icon: 'friend',
-          className: 'friend',
+          ident: "friend",
+          title: "友链",
+          icon: "friend",
+          className: "friend",
           list: [
             {
-              name: '午后南杂',
-              link: '',
-              bgc: '#df5865',
-              avatar: 'https://1.gravatar.com/avatar/96c4520adcd6c7233dd9886bef10d862?s=50&amp;d=mm&amp;r=x',
-              desc: 'Enjoy when you can, and endure when you must.'
+              name: "午后南杂",
+              link: "",
+              bgc: "#df5865",
+              avatar: "https://1.gravatar.com/avatar/96c4520adcd6c7233dd9886bef10d862?s=50&amp;d=mm&amp;r=x",
+              desc: "Enjoy when you can, and endure when you must."
             },
             {
-              name: 'vuepress-theme-reco',
-              link: '',
-              bgc: '#6bcc8a',
-              avatar: 'https://1.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=50&amp;d=mm&amp;r=x',
-              desc: 'A simple and beautiful vuepress Blog & Doc theme.'
+              name: "vuepress-theme-reco",
+              link: "",
+              bgc: "#6bcc8a",
+              avatar: "https://1.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=50&amp;d=mm&amp;r=x",
+              desc: "A simple and beautiful vuepress Blog & Doc theme."
             }
           ]
         }
       ]
-    }
+    };
   },
-  mounted () {
-    window.addEventListener('scroll', () => {
-      this.isFixed = window.scrollY >= (this.getClientHei - 60)
-    })
+  mounted() {
+    window.addEventListener("scroll", () => {
+      this.isFixed = window.scrollY >= (this.getClientHei - 60);
+    });
   },
   methods: {
-    bannerHeight (val) {
-      this.getClientHei = val
-    },
-    timestampToTime (timestamp) {
-      const date = new Date(timestamp)
-      const Y = date.getFullYear() + '-'
-      const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      const D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' '
-      const h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
-      const m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
-      const s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
-      return Y + M + D + h + m + s
+    bannerHeight(val) {
+      this.getClientHei = val;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

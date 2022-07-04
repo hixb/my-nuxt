@@ -9,12 +9,15 @@
 </template>
 
 <script>
-import Header from '@/components/global/Header'
-import Footer from '@/components/global/Footer'
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 export default {
-  components: { Header, Footer }
-}
+  components: {
+    Header,
+    Footer
+  }
+};
 </script>
 
 <style scoped lang="less"></style>

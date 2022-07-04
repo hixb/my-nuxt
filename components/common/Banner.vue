@@ -7,11 +7,11 @@
 
 <script>
 export default {
-  name: 'Banner',
+  name: "Banner",
   mounted() {
-    this.$emit("bannerHeight", this.$refs.eleHeight.clientHeight)
+    this.$emit("bannerHeight", this.$refs.eleHeight.clientHeight);
   }
-}
+};
 </script>
 
 <style scoped lang="less">

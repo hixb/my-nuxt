@@ -1,8 +1,8 @@
 const links = [
   {
-    rel: 'icon',
-    type: 'image/x-icon',
-    href: '/favicon.ico'
+    rel: "icon",
+    type: "image/x-icon",
+    href: "/favicon.ico"
   }
 ];
 
@@ -12,7 +12,7 @@ const scripts = [];
 module.exports = {
   head: {
     htmlAttrs: {
-      lang: 'zh-CN'
+      lang: "zh-CN"
     },
     meta: [
       {
