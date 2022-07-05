@@ -50,6 +50,32 @@ const mGetDate = () => {
   return d.getDate();
 };
 
+/**
+ * 移动缓出
+ * @param A
+ * @param B
+ * @param rate
+ * @param callback
+ */
+Math.easeout = function(A, B, rate, callback) {
+  if (A == B || typeof A != "number") {
+    return;
+  }
+  B = B || 0;
+  rate = rate || 2;
+
+  let step = function() {
+    A = A + (B - A) / rate;
+    if (Math.abs(A - B) < 1) {
+      callback(B, true);
+      return;
+    }
+    callback(A, false);
+    requestAnimationFrame(step);
+  };
+  step();
+};
+
 const utils = {
   /**
    * 获取指定cookie
@@ -86,7 +112,17 @@ const utils = {
     const m = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
     const s = (date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds());
     return Y + M + D + h + m + s;
-  }
+  },
+  /**
+   * 减速滚动
+   * @param height
+   */
+  scrollEaseOut(height) {
+    let doc = document.body.scrollTop ? document.body : document.documentElement;
+    Math.easeout(doc.scrollTop, height, 10, function(value) {
+      doc.scrollTop = value;
+    });
+  },
 };
 
 export {
