@@ -43,6 +43,13 @@ export default {
       }
     };
   },
+  watch: {
+    showLogin(newVal) {
+      if (!newVal) {
+        this.resetForm();
+      }
+    }
+  },
   methods: {
     show() {
       this.showLogin = true;
@@ -50,7 +57,7 @@ export default {
     hide() {
       this.showLogin = false;
     },
-    login() {
+    async login() {
       if (!this.loginForm.username || !this.loginForm.password) {
         this.$utils.toast("warn", "请输入用户名和密码");
         return;
@@ -60,7 +67,7 @@ export default {
         username: this.loginForm.username,
         password: this.loginForm.password
       };
-      FetchData.login(req).then(res => {
+      await FetchData.login(req).then(res => {
         if (res.status === 0) {
           this.$utils.toast("success", "登录成功");
           this.hide();
@@ -70,7 +77,16 @@ export default {
         } else {
           this.$utils.toast("danger", res.message);
         }
+      }).catch(err => {
+        console.log(err);
+        this.$utils.toast("danger", JSON.stringify(err));
       });
+    },
+    resetForm() {
+      this.loginForm = {
+        username: "",
+        password: "",
+      };
     }
   }
 };

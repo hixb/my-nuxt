@@ -65,11 +65,13 @@
         </div>
       </div>
     </div>
+    <ExpandSearch />
   </header>
 </template>
 
 <script>
 import { getLocalStorage, setLocalStorage } from "@/plugins/utils";
+import ExpandSearch from "@/components/common/ExpandSearch";
 
 const dark = [ "rgba(24, 24, 24)", "rgba(255, 255, 255, 0.8)" ];
 const light = [ "rgba(255, 255, 255)", "rgba(44, 62, 80)" ];
@@ -82,6 +84,7 @@ const lightBorColor = [ "rgba(234, 236, 239)" ];
 
 export default {
   name: "Header",
+  components: { ExpandSearch },
   directives: {
     focus: {
       update: function(el, { value }) {

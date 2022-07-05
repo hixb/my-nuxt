@@ -41,3 +41,11 @@
 .isax-settings:before {
   content: "\ebe2";
 }
+
+.isax-sidebar-top:before {
+  content: "\ebf5";
+}
+
+.isax-airplane:before {
+  content: "\e90d";
+}
