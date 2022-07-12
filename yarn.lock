@@ -3787,12 +3787,12 @@ dom-serializer@^1.0.1:
     domhandler "^4.2.0"
     entities "^2.0.0"
 
-dom7@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.npmmirror.com/dom7/download/dom7-2.1.5.tgz"
-  integrity sha1-p5QRAXgAsx2EAAcM2uu/ySwfY3c=
+dom7@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-4.0.4.tgz#8b68c5d8e5e2ed0fddb1cb93e433bc9060c8f3fb"
+  integrity sha512-DSSgBzQ4rJWQp1u6o+3FVwMNnT5bzQbMb+o31TjYYeRi05uAcpF8koxdfzeoe5ElzPmua7W7N28YJhF7iEKqIw==
   dependencies:
-    ssr-window "^2.0.0"
+    ssr-window "^4.0.0"
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -9028,10 +9028,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.nlark.com/sprintf-js/download/sprintf-js-1.0.3.tgz"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
-ssr-window@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmmirror.com/ssr-window/download/ssr-window-2.0.0.tgz"
-  integrity sha1-mMMBrvmVIzF/jWlhjwAQeRCW78Q=
+ssr-window@^4.0.0, ssr-window@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-4.0.2.tgz#dc6b3ee37be86ac0e3ddc60030f7b3bc9b8553be"
+  integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
 
 ssri@^6.0.1:
   version "6.0.2"
@@ -9280,13 +9280,13 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@5.x:
-  version "5.4.5"
-  resolved "https://registry.npmmirror.com/swiper/download/swiper-5.4.5.tgz"
-  integrity sha1-o1D2VL9oQm27ZReTgkklUS0iPA8=
+swiper@8.x:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-8.3.0.tgz#3ed7498d978c03fdcebc77e1780c5f17829c6857"
+  integrity sha512-pdrENUco8MVyJ/cTZMQ5c9AqZDRYGJChd+5lcDsoGpKhgOloSzS7hMvgH+ipvTVCaNOCTlSaf5ZYm1Jz5TqKDQ==
   dependencies:
-    dom7 "^2.1.5"
-    ssr-window "^2.0.0"
+    dom7 "^4.0.4"
+    ssr-window "^4.0.2"
 
 table@^6.0.9:
   version "6.7.5"
