@@ -31,7 +31,7 @@ export default {
 .go-back {
   .pof;
   bottom: 100px;
-  right: 100px;
+  right: 80px;
   .area(40px, 40px);
   .flex;
   .flex-ali-center;

@@ -30,7 +30,7 @@
 
 /** FEAT */
 :root {
-  --my-feat-opacity: .7;
+  --my-feat-opacity: .8;
   --my-feat-opacity-hover: 1;
   --my-feat-transtion: all .3s;
 }
@@ -55,4 +55,62 @@
   //  .color(var(--my-default-theme-dark-color));
   //  .bgc(var(--my-default-theme-dark-bgc));
   //}
+}
+
+
+/**  */
+
+:root {
+  // 主题背景色
+  --my-theme-bg-color: rgba(16, 18, 27, 0.4);
+  --my-theme-border-color: rgba(113, 119, 144, 0.25);
+  --my-theme-color: #f9fafb;
+  --my-theme-inactive-color: rgba(113, 119, 144, 0.78);
+  --my-theme-body-font: "Poppins", sans-serif;
+  --my-theme-hover-menu-bg: rgba(12, 15, 25, 0.3);
+  --my-theme-content-title-color: #999ba5;
+  --my-theme-content-bg: rgba(146, 151, 179, 0.13);
+  --my-theme-button-inactive: rgba(249, 250, 251, 0.55);
+  --my-theme-dropdown-bg: #21242d;
+  --my-theme-dropdown-hover: rgba(42, 46, 60);
+  --my-theme-popup-bg: rgba(22, 25, 37);
+  --my-theme-search-bg: #14162b;
+  --my-theme-overlay-bg: rgba(36, 39, 59, 0.3);
+  --my-theme-scrollbar-bg: rgba(1, 2, 3, 0.4);
+}
+
+.light-mode {
+  --my-theme-bg-color: rgba(255, 255, 255, 0.31);
+  --my-theme-color: #3c3a3a;
+  --my-theme-inactive-color: #333333;
+  --my-theme-button-inactive: #3c3a3a;
+  --my-theme-search-bg: rgba(255, 255, 255, 0.31);
+  --my-theme-dropdown-bg: #f7f7f7;
+  --my-theme-overlay-bg: rgba(255, 255, 255, 0.3);
+  --my-theme-dropdown-hover: rgba(236 236 236);
+  --my-theme-border-color: rgba(255, 255, 255, 0.35);
+  --my-theme-popup-bg: rgba(255 255 255);
+  --my-theme-hover-menu-bg: rgba(255, 255, 255, 0.35);
+  --my-theme-scrollbar-bg: rgba(255, 253, 253, 0.57);
+  --my-theme-content-title-color: --theme-color;
+}
+
+body.light-mode:before, body.light-mode .video-bg:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.45) 100%);
+  backdrop-filter: saturate(3);
+}
+
+.light-mode {
+  .theme-toggle {
+    > svg {
+      fill: transparent !important;
+      stroke: var(--my-theme-color) !important;
+    }
+  }
 }
