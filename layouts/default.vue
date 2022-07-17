@@ -41,6 +41,10 @@ export default {
 <style scoped lang="less">
 
 .app {
+  * {
+    .trans;
+  }
+
   .app-box {
     .bgc(var(--my-theme-bg-color));
     .area(90%, 90vh);
@@ -51,6 +55,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    .trans;
 
     .main {
       padding-right: 30px;
