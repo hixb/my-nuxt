@@ -44,16 +44,19 @@
         <source src="https://assets.codepen.io/3364143/7btrrd.mp4">
       </video>
     </div>
+    <Cookie />
   </div>
 </template>
 
 <script>
 import Header from "@/components/common/Header";
+import Cookie from "@/components/common/Cookie";
 // import Footer from "@/components/common/Footer";
 // import GoBack from "@/components/common/GoBack";
 
 export default {
   components: {
+    Cookie,
     Header
   },
   data() {
