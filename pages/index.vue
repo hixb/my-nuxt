@@ -72,30 +72,35 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "Home",
   layout: "default",
+  async asyncData({
+    app,
+    $axios,
+    store,
+    error
+  }) {
+    try {
+      const res = await Promise.all([
+        $axios.get("/article/list")
+      ]);
+      const listData = res[0].data.data;
+      return {
+        listData
+      };
+    } catch (err) {
+      console.log(err);
+    }
+  },
   data() {
     return {
-      sidebarMenu: [
+      getClientHei: 0,
+      isFixed: false,
+      menuList: [
         {
-          title: "应用",
-          child: [
-            {
-              link: "/",
-              icon: "iconfont ice-home",
-              name: "首页"
-            },
-            {
-              link: "/",
-              icon: "iconfont ice-home",
-              name: "更新内容"
-            }
-          ]
-        },
-        {
+          ident: "category",
           title: "分类",
           child: [
             {
@@ -169,7 +174,16 @@ export default {
       ]
     };
   },
-  methods: {}
+  mounted() {
+    window.addEventListener("scroll", () => {
+      this.isFixed = window.scrollY >= (this.getClientHei - 60);
+    });
+  },
+  methods: {
+    bannerHeight(val) {
+      this.getClientHei = val;
+    }
+  }
 };
 </script>
 
