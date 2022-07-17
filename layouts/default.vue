@@ -33,7 +33,6 @@ export default {
   methods: {
     themeToggle(val) {
       this.currentTheme = val ? "light-mode" : "";
-      console.log(val);
     }
   }
 };
@@ -55,6 +54,7 @@ export default {
 
     .main {
       padding: 0 30px;
+      height: 94%;
     }
   }
 }
