@@ -31,6 +31,30 @@
         </div>
       </div>
     </div>
+    <div class="content-r">
+      <div class="article-list">
+        <div class="container">
+          <div v-for="(item, index) in articleList" :key="index" class="box">
+            <span></span>
+            <div class="content">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.description }}</p>
+              <div class="article-info">
+                <div>
+                  <i class="iconfont ice-account"></i>
+                  {{ item.author }}
+                </div>
+                <div>
+                  <i class="iconfont ice-date"></i>
+                  {{ item.time }}
+                </div>
+              </div>
+              <a :href="item.link">前往</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,6 +100,36 @@ export default {
               name: "javascript"
             }
           ]
+        }
+      ],
+      articleList: [
+        {
+          title: "你好啊",
+          description: "电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭电饭锅当返回电饭",
+          link: "/",
+          author: "hixb",
+          time: "2022-01-01",
+        },
+        {
+          title: "你好啊",
+          description: "健康是福那就肯定发你个健康是福那就肯定发你个",
+          link: "/",
+          author: "hixb",
+          time: "2022-01-01",
+        },
+        {
+          title: "你好啊",
+          description: "健康是福那就肯定发你个",
+          link: "/",
+          author: "hixb",
+          time: "2022-01-01",
+        },
+        {
+          title: "你好啊",
+          description: "健康是福那就肯定发你个",
+          link: "/",
+          author: "hixb",
+          time: "2022-01-01",
         }
       ]
     };
