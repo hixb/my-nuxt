@@ -53,7 +53,7 @@ export default {
     z-index: 2;
 
     .main {
-      padding: 0 30px;
+      padding-right: 30px;
       height: 94%;
     }
   }
