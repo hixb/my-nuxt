@@ -62,6 +62,7 @@ export default {
     transform: translate(-50%, -50%);
     z-index: 2;
     .trans;
+    overflow: hidden;
 
     .main {
       padding-right: 30px;
