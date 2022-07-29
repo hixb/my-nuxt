@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "my-nuxt",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
