@@ -1,5 +1,5 @@
 FROM node:13.11.0
-MAINTAINER hixb
+MAINTAINER wanna
 ENV NODE_ENV=production
 ENV HOST 0.0.0.0
 RUN mkdir -p /app
