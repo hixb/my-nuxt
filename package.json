@@ -8,12 +8,17 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@intlify/nuxt3": "^0.2.3",
+    "@pinia/nuxt": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",
     "eslint-plugin-vue": "^9.3.0",
     "nuxt": "3.0.0-rc.6",
-    "sass": "^1.54.0"
+    "sass": "^1.54.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@intlify/nuxt3": "^0.2.3",
+    "pinia": "^2.0.17"
   }
 }

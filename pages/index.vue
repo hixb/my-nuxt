@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useLocal } from "~/composables/locale";
+import { useUserStore } from "~/store/user";
+import { watchEffect } from "#imports";
 
 const { setLocale, locale } = useLocal();
+const user = useUserStore();
+
+watchEffect(() => {
+  user.setNewName("zhuxb");
+});
 </script>
 <template>
   <div>

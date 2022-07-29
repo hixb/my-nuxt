@@ -20,4 +20,5 @@ export default defineNuxtConfig({
     localeDir: "locales", // set the `locales` directory at source directory of your Nuxt application
     vueI18n: {},
   },
+  buildModules: [ "@pinia/nuxt" ]
 });
