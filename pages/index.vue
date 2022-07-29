@@ -1,12 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLocal } from "~/composables/locale";
 
+const { setLocale, locale } = useLocal();
+</script>
 <template>
-  <div class="home">
-    <span>hello</span>
-    <p>哈哈</p>
+  <div>
+    <button @click="setLocale(locale === 'en' ? 'zh-CN' : 'en')">
+      切换语言
+    </button>
+    <span>{{ $t('hixb') }}</span>
   </div>
 </template>
-
 <style scoped lang="scss">
 .home {
   > span {

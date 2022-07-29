@@ -8,6 +8,7 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@intlify/nuxt3": "^0.2.3",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",
