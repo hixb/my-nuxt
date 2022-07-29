@@ -1,0 +1,342 @@
+// 文字透明度和过渡
+.text-transition-gradient {
+  opacity: var(--my-feat-opacity);
+  transition: var(--my-feat-transtion);
+}
+
+// 宽高
+.area(@w, @h) {
+  width: @w;
+  height: @h;
+}
+
+// 宽
+.area-w(@w) {
+  width: @w;
+}
+
+// 高
+.area-h(@h) {
+  height: @h;
+}
+
+// 弹性布局
+.flex {
+  display: flex;
+}
+
+// 弹性布局-垂直居中
+.flex-ali-center {
+  align-items: center;
+}
+
+// 弹性布局-左右间隔
+.flex-jus-spa-bet {
+  justify-content: space-between;
+}
+
+// 弹性布局-justify-content: space-around;
+.flex-jus-spa-aro {
+  justify-content: space-around;
+}
+
+// 弹性布局-居中
+.flex-jus-spa-eve {
+  justify-content: space-evenly;
+}
+
+// 弹性布局-元素靠近
+.flex-jus-con-cen {
+  justify-content: center;
+}
+
+// 弹性布局-居右
+.flex-jus-end {
+  justify-content: flex-end;
+}
+
+// 弹性布局-居左
+.flex-jus-start {
+  justify-content: flex-start;
+}
+
+
+// 背景颜色
+.bgc(@c) {
+  background-color: @c;
+}
+
+// 颜色
+.color(@colors) {
+  color: @colors;
+}
+
+// 文字大小
+.fz(@z) {
+  font-size: @z;
+}
+
+// 右偏移值
+.mr(@r) {
+  margin-right: @r;
+}
+
+// 左偏移值
+.ml(@l) {
+  margin-left: @l;
+}
+
+// 下偏移值
+.mb(@b) {
+  margin-bottom: @b;
+}
+
+// 上偏移值
+.mt(@t) {
+  margin-top: @t;
+}
+
+// 偏移值-一个值
+.mar-1(@any) {
+  margin: @any;
+}
+
+// 偏移值-两个值
+.mar-2(@l, @t) {
+  margin: @l @t;
+}
+
+// 偏移值-三个值
+.mar-3(@l, @t, @r) {
+  margin: @l @t @r;
+}
+
+// 偏移值
+.mar-4(@t, @r, @b, @l) {
+  margin: @t @r @b @l;
+}
+
+// 内右距
+.pr(@r) {
+  padding-right: @r;
+}
+
+// 内左距
+.pl(@l) {
+  padding-left: @l;
+}
+
+// 内下距
+.pb(@b) {
+  padding-bottom: @b;
+}
+
+// 内下距
+.pt(@t) {
+  padding-top: @t;
+}
+
+// 内边距取值-一个值
+.pad-1(@any) {
+  padding: @any;
+}
+
+// 内边距取值-两个值
+.pad-2(@l, @t) {
+  padding: @l @t;
+}
+
+// 内边距取值-三个值
+.pad-3(@l, @t, @r) {
+  padding: @l @t @r;
+}
+
+// 内边距取值-四个值
+.pad-4(@t, @r, @b, @l) {
+  padding: @t @r @b @l;
+}
+
+// 鼠标指针
+.cursor(@v) {
+  cursor: @v;
+}
+
+// 行高
+.lh(@v) {
+  line-height: @v;
+}
+
+// 边框
+.bd(@px, @mode, @c) {
+  border: @px @mode @c;
+}
+
+// 左边框
+.bd-l(@px, @mode, @c) {
+  border-left: @px @mode @c;
+}
+
+// 右边框
+.bd-r(@px, @mode, @c) {
+  border-right: @px @mode @c;
+}
+
+// 上边框
+.bd-t(@px, @mode, @c) {
+  border-top: @px @mode @c;
+}
+
+// 下边框
+.bd-b(@px, @mode, @c) {
+  border-bottom: @px @mode @c;
+}
+
+// 清除边框
+.cle-bd {
+  border: none;
+}
+
+// 最大宽
+.max-w(@w) {
+  max-width: @w;
+}
+
+// 最大高
+.max-h(@h) {
+  max-height: @h;
+}
+
+// 最小宽
+.min-w(@w) {
+  min-width: @w;
+}
+
+// 最小高
+.min-h(@h) {
+  min-height: @h;
+}
+
+// 最大宽高
+.max-wh(@w, @h) {
+  .max-w(@w);
+  .max-h(@h);
+}
+
+// 最小宽高
+.min-wh(@w, @h) {
+  .min-w(@w);
+  .min-h(@h)
+}
+
+// 圆角边框
+.bdr(@v) {
+  border-radius: @v;
+}
+
+// 相对定位
+.por {
+  position: relative;
+}
+
+// 绝对定位
+.pos {
+  position: absolute;
+}
+
+// 固定定位
+.pof {
+  position: fixed;
+}
+
+// 盒子阴影
+.box-s(@v) {
+  box-shadow: @v;
+}
+
+// 过渡
+.trans {
+  transition: var(--my-feat-transtion);
+
+  & {
+    transition: var(--my-feat-transtion);
+  }
+}
+
+// 不透明度
+.opa(@v) {
+  opacity: @v;
+}
+
+// 可见度
+.vis(@v) {
+  visibility: @v;
+}
+
+// 显示元素
+.show-opa-vis {
+  .opa(1);
+  .vis(visible);
+  .trans;
+}
+
+// 隐藏元素
+.hide-opa-vis {
+  .opa(0);
+  .vis(hidden);
+  .trans;
+}
+
+// z-index
+.z-i(@i) {
+  z-index: @i;
+}
+
+// 背景位置
+.bgp(@x, @y) {
+  background-position: @x @y;
+}
+
+// 背景大小
+.bgs(@v1, @v2) {
+  background-size: @v1, @v2;
+}
+
+// 字体粗细
+.fw(@v) {
+  font-weight: @v;
+}
+
+.gradient-border {
+  backdrop-filter: blur(10px);
+  .bdr(.5rem);
+  .por;
+
+  &:before {
+    .bgp(0, 0) !important;
+    .bgs(400%, auto) !important;
+    .bdr(.5rem);
+    bottom: 0;
+    content: "";
+    left: 0;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    .opa(.5);
+    .pad-1(2px);
+    .pos;
+    right: 0;
+    top: 0;
+    transition: background-position .3s ease-in-out, opacity .2s ease-in-out;
+    .area-w(100%);
+  }
+
+  &:hover:before {
+    .bgp(-50%, 0) !important;
+    .opa(1) !important;
+  }
+
+  &:before {
+    background: linear-gradient(90deg, transparent, transparent 25%, #00dc82 50%, #36e4da 75%, #0047e1);
+  }
+}
+
+

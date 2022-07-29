@@ -1,24 +1,35 @@
 {
-  "private": true,
   "name": "my-nuxt",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
+    "dev": "nuxt",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "start": "nuxt start",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
-  },
-  "devDependencies": {
-    "@pinia/nuxt": "^0.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "nuxt": "3.0.0-rc.6",
-    "sass": "^1.54.0",
-    "typescript": "^4.7.4"
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint": "yarn lint:js"
   },
   "dependencies": {
-    "@intlify/nuxt3": "^0.2.3",
-    "pinia": "^2.0.17"
+    "@nuxt/content": "^1.14.0",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/style-resources": "^1.2.1",
+    "core-js": "^3.15.1",
+    "nuxt": "^2.15.7",
+    "quill": "1.3.4",
+    "swiper": "5.x",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-cookies": "^1.8.1",
+    "vuesax": "^4.0.1-alpha.25"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.14.7",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "eslint": "^7.29.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-vue": "^7.12.1",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0"
   }
 }

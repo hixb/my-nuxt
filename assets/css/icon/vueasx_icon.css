@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'iconsax';
+  src: url('assets/fonts/iconsax.eot?yjegnn');
+  src: url('assets/fonts/iconsax.eot?yjegnn#iefix') format('embedded-opentype'),
+  url('assets/fonts/iconsax.ttf?yjegnn') format('truetype'),
+  url('assets/fonts/iconsax.woff?yjegnn') format('woff'),
+  url('assets/fonts/iconsax.svg?yjegnn#iconsax') format('svg');
+}
+
+.isax {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconsax' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.isax-home-hashtag:before {
+  content: "\eab3";
+}
+
+.isax-sagittarius:before {
+  content: "\ebbc";
+}
+
+.isax-music-playlist:before {
+  content: "\eb46";
+}
+
+.isax-user-add:before {
+  content: "\ec53";
+}
+
+.isax-settings:before {
+  content: "\ebe2";
+}
+
+.isax-sidebar-top:before {
+  content: "\ebf5";
+}
+
+.isax-airplane:before {
+  content: "\e90d";
+}
