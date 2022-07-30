@@ -1,0 +1,93 @@
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--my-theme-scrollbar-bg);
+  border-radius: 8px;
+}
+
+html,
+body {
+  width: 100%;
+  font-size: 14px;
+  color: var(--my-theme-color);
+  background-color: var(--my-theme-bg-color);
+  font-family: var(--my-theme-fontH);
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+
+i {
+  font-size: normal;
+}
+
+img {
+  width: 100%;
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+  font-family: var(--my-theme-fontH);
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+  box-shadow: inset 0 0 0 1000px #fff !important;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+em {
+  font-style: normal;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a,
+em,
+i {
+  line-height: 1;
+}
+
+i {
+  font-size: 6px;
+}
