@@ -2,6 +2,7 @@
 import { useLocal } from "~/composables/locale";
 import { useUserStore } from "~/store/user";
 import { watchEffect } from "#imports";
+import { fetchRoomList } from "~/server/api";
 
 const { setLocale, locale } = useLocal();
 const user = useUserStore();
@@ -9,6 +10,12 @@ const user = useUserStore();
 watchEffect(() => {
   user.setNewName("zhuxb");
 });
+
+function getData() {
+  fetchRoomList();
+}
+
+getData();
 </script>
 <template>
   <div>
