@@ -1,1 +1,18 @@
-$red: red;
+// 圆角
+.round {
+  border-radius: 50%;
+}
+
+// 半圆角
+.semicircle {
+  border-radius: 15px;
+}
+
+// 设置 svg stroke
+.set-svg-stroke {
+  stroke: var(--my-theme-special-color);
+}
+
+html body svg * {
+  stroke: var(--my-theme-svg-color);
+}

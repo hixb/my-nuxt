@@ -1,1 +1,42 @@
-$blue: blue;
+:root {
+  --my-theme-fontH: Google Sans Text, Arial, Helvetica, sans-serif;
+  --my-theme-fontB: Google Sans Text, Arial, Helvetica, sans-serif;
+  --my-theme-fontBa: Google Sans Text, Arial, Helvetica, sans-serif;
+}
+
+:root, .light-mode {
+  --my-theme-bg-color: #fffdfc;
+  --my-theme-color: #343435;
+  --my-theme-special-color: #482dff;
+  --my-theme-disable-color: #7b7a7a;
+  --my-theme-scrollbar-bg: #d7d7d9;
+  --my-theme-svg-color: #292d32;
+  --my-theme-mobile-bg-color: #fffdfc;
+
+  --my-theme-darkBs: #252526;
+  --my-theme-darkT: rgba(0, 0, 0, .03);
+  --my-theme-transB: rgba(0, 0, 0, .05);
+  --my-theme-trans1: all .1s ease;
+  --my-theme-trans2: all .2s ease;
+  --my-theme-trans3: all .3s ease;
+  --my-theme-trans4: all .4s ease;
+}
+
+:root, .dark-mode {
+  --my-theme-bg-color: #1e1e1e;
+  --my-theme-color: #fffdfc;
+  --my-theme-special-color: #41B375;
+  --my-theme-disable-color: #5c5c5c;
+  --my-theme-scrollbar-bg: #141414;
+  --my-theme-svg-color: #d5d3d3;
+  --my-theme-mobile-bg-color: #2d2d30;
+
+  --my-theme-darkBs: #252526;
+  --my-theme-darkT: #252526;
+  --my-theme-transB: #2d2d30;
+  --my-theme-trans1: all .1s ease;
+  --my-theme-trans2: all .2s ease;
+  --my-theme-trans3: all .3s ease;
+  --my-theme-trans4: all .4s ease;
+}
+

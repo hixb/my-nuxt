@@ -1,6 +1,9 @@
 import { useI18n } from "vue-i18n";
 import { useNuxtApp } from "#app";
 
+/**
+ * i18n
+ */
 export function useLocal() {
   const { locale } = useI18n();
 
@@ -12,13 +15,12 @@ export function useLocal() {
   const setLocale = (l: string) => {
     currentLocale.value = l;
     locale.value = l;
-  }
+  };
 
   const setPreferredLanguage = () => {
-    console.log(currentLocale.value)
     if (!currentLocale.value) {
       if (process.server) {
-        const nuxtApp = useNuxtApp()
+        const nuxtApp = useNuxtApp();
         if (nuxtApp.ssrContext?.req?.headers) {
           const acceptLanguage = nuxtApp.ssrContext.req.headers["accept-language"] || "zh-CN";
           const preferredLanguage = acceptLanguage.split(",")[0];
@@ -28,11 +30,11 @@ export function useLocal() {
     } else {
       setLocale(currentLocale.value);
     }
-  }
+  };
 
   return {
     setPreferredLanguage,
     setLocale,
     locale
-  }
+  };
 }

@@ -8,30 +8,27 @@ module.exports = {
   },
   parser: "vue-eslint-parser",
   parserOptions: {
-    ecmaVersion: 2020,
     sourceType: "module",
     ecmaFeatures: {
       // 添加ES特性支持，使之能够识别ES6语法
       legacyDecorators: true,
       jsx: true,
-      // modules: true,
     },
+    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
   },
   extends: [
     "eslint:recommended",
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    "plugin:vue/recommended"
+    "plugin:vue/recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
-  // 校验 .vue 文件
   plugins: [
     "vue",
-    // "prettier"
+    "@typescript-eslint"
   ],
-  // 自定义规则
   rules: {
-    semi: [ 2 ],
-    "no-console": "off",
+    semi: [2],
     "no-useless-escape": 0,
     "no-empty": 0,
     "vue/max-attributes-per-line": "off",
@@ -65,13 +62,17 @@ module.exports = {
         math: "always",
       }
     ],
-    "array-bracket-spacing": [ "error", "always" ],
-    "object-curly-spacing": [ "error", "always" ],
-    "quotes": [ 1, "double" ],
-    "space-before-function-paren": [ "error", {
+    "object-curly-spacing": ["error", "always"],
+    "quotes": [1, "double"],
+    "space-before-function-paren": ["error", {
       "anonymous": "never",
       "named": "never",
       "asyncArrow": "never"
-    } ],
+    }],
+    "vue/multi-word-component-names": 0, //关闭vue文件和组件命名校验
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/multiline-html-element-content-newline": "off",
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "warn",
   }
 };
