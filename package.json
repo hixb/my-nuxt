@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@intlify/nuxt3": "^0.2.3",
+    "axios": "^0.27.2",
     "pinia": "^2.0.17"
   }
 }
