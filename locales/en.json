@@ -1,6 +1,13 @@
 {
   "============================================ 通用": "============================================",
-  "my-name": "Xiaobing Zhu",
+  "my-name": "Xiaoice's Blog",
   "============================================ 头部": "============================================",
-  "header-input-text": "search..."
+  "header-input-text": "search...",
+  "============================================ 侧边栏": "============================================",
+  "sidebar-home-text": "home",
+  "sidebar-article-text": "article",
+  "sidebar-about-text": "about",
+  "sidebar-sitemap-text": "sitemap",
+  "sidebar-disclaimer-text": "disclaimer",
+  "sidebar-privacy-text": "privacy"
 }

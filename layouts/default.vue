@@ -6,8 +6,11 @@ const { currentTheme } = useTheme();
 
 <template>
   <div :class="['app', currentTheme]">
-    <CommonHeader>11</CommonHeader>
-    <slot />
+    <CommonHeader />
+    <main>
+      <CommonSidebar />
+      <slot />
+    </main>
   </div>
 </template>
 
