@@ -1,44 +1,61 @@
 <script setup lang="ts">
 import { useTheme } from "~/composables";
 import { useLocal } from "~/composables/locale";
-import SvgPic from "~/components/common/SvgPic.vue";
-import Search from "~/components/common/Search.vue";
+import { useCommonStore } from "~/stores";
+import { ref, watch } from "#imports";
 
+const curSidebarShowStatus = ref<any>(true);
 const { currentTheme, setTheme } = useTheme();
 const { setLocale, locale } = useLocal();
+const commonStores = useCommonStore();
+
+watch(commonStores, (newVal) => {
+  if (newVal) {
+    curSidebarShowStatus.value = newVal.isShowSidebar;
+  }
+}, { immediate: true });
 
 /** 设置主题 */
 const setThemeMode = () => {
   setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
+};
+
+/** 侧边栏切换 */
+const sidebarToggle = () => {
+  const sidebarStatus = commonStores.isShowSidebar;
+  commonStores.setIsShowSidebar(!sidebarStatus);
 };
 </script>
 
 <template>
   <header>
     <div class="pc">
-      <!--    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-      <!--      <path d="M14.9998 19.9181L8.47984 13.3981C7.70984 12.6281 7.70984 11.3681 8.47984 10.5981L14.9998 4.07812" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />-->
-      <!--    </svg>-->
-      <!--    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-      <!--      <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" />-->
-      <!--      <path opacity="0.34" d="M3 12H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" />-->
-      <!--      <path d="M3 17H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" />-->
-      <!--    </svg>-->
       <div class="head-l">
-        <SvgPic>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 3 18 H 14 M 10 6 H 21" stroke="#292D32" />
-            <line class="set-svg-stroke" x1="3" x2="21" y1="12" y2="12" stroke="#292D32" />
-          </svg>
-        </SvgPic>
+        <CommonSvgPic @click="sidebarToggle">
+          <template v-if="curSidebarShowStatus">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 3 18 H 14 M 10 6 H 21" stroke="#292D32" />
+              <line class="set-svg-stroke" x1="3" x2="21" y1="12" y2="12" stroke="#292D32" />
+            </svg>
+          </template>
+          <template v-else>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.91016 19.9181L15.4302 13.3981C16.2002 12.6281 16.2002 11.3681 15.4302 10.5981L8.91016 4.07812"
+                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </template>
+        </CommonSvgPic>
         <h1>{{ $t('my-name') }}</h1>
       </div>
       <div class="head-r">
         <div class="area-search">
-          <Search width="360px" height="40px" />
+          <CommonSearch width="360px" height="40px" />
         </div>
         <div class="area-func">
-          <SvgPic>
+          <CommonSvgPic>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 class="set-svg-stroke" d="M9.25 9.05078C11.03 9.70078 12.97 9.70078 14.75 9.05078" stroke="#292D32"
@@ -53,8 +70,8 @@ const setThemeMode = () => {
                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
               />
             </svg>
-          </SvgPic>
-          <SvgPic @click="setLocale(locale === 'en' ? 'zh-CN' : 'en')">
+          </CommonSvgPic>
+          <CommonSvgPic @click="setLocale(locale === 'en' ? 'zh-CN' : 'en')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M19.0612 18.6684L16.9212 14.3984L14.7812 18.6684" stroke="#292D32" stroke-width="1.5"
@@ -97,8 +114,8 @@ const setThemeMode = () => {
                 stroke-linecap="round" stroke-linejoin="round"
               />
             </svg>
-          </SvgPic>
-          <SvgPic @click="setThemeMode">
+          </CommonSvgPic>
+          <CommonSvgPic @click="setThemeMode">
             <svg
               v-show="currentTheme == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +139,7 @@ const setThemeMode = () => {
                 stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
               />
             </svg>
-          </SvgPic>
+          </CommonSvgPic>
         </div>
       </div>
     </div>
@@ -136,16 +153,16 @@ const setThemeMode = () => {
       <!--      <path d="M3 17H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" />-->
       <!--    </svg>-->
       <div class="head-l">
-        <SvgPic>
+        <CommonSvgPic>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M 3 18 H 14 M 10 6 H 21" stroke="#292D32" />
             <line class="set-svg-stroke" x1="3" x2="21" y1="12" y2="12" stroke="#292D32" />
           </svg>
-        </SvgPic>
+        </CommonSvgPic>
         <h1>{{ $t('my-name') }}</h1>
       </div>
       <div class="head-r">
-        <SvgPic>
+        <CommonSvgPic>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
@@ -156,8 +173,8 @@ const setThemeMode = () => {
               stroke-linejoin="round"
             />
           </svg>
-        </SvgPic>
-        <SvgPic>
+        </CommonSvgPic>
+        <CommonSvgPic>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               class="set-svg-stroke" d="M9.25 9.05078C11.03 9.70078 12.97 9.70078 14.75 9.05078" stroke="#292D32"
@@ -172,8 +189,8 @@ const setThemeMode = () => {
               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             />
           </svg>
-        </SvgPic>
-        <SvgPic @click="setLocale(locale === 'en' ? 'zh-CN' : 'en')">
+        </CommonSvgPic>
+        <CommonSvgPic @click="setLocale(locale === 'en' ? 'zh-CN' : 'en')">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M19.0612 18.6684L16.9212 14.3984L14.7812 18.6684" stroke="#292D32" stroke-width="1.5"
@@ -216,8 +233,8 @@ const setThemeMode = () => {
               stroke-linecap="round" stroke-linejoin="round"
             />
           </svg>
-        </SvgPic>
-        <SvgPic @click="setThemeMode">
+        </CommonSvgPic>
+        <CommonSvgPic @click="setThemeMode">
           <svg
             v-show="currentTheme == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +258,7 @@ const setThemeMode = () => {
               stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             />
           </svg>
-        </SvgPic>
+        </CommonSvgPic>
       </div>
     </div>
   </header>

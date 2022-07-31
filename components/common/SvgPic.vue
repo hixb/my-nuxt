@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const { borderRadius, isOpenHover } = withDefaults(defineProps<{
+type SvgProps = {
   borderRadius?: string
   isOpenHover?: boolean
-}>(), {
+}
+withDefaults(defineProps<SvgProps>(), {
   borderRadius: "round",
   isOpenHover: true
 });
