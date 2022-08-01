@@ -15,10 +15,9 @@ function getData() {
 
 getData();
 </script>
-<template>
-  <NuxtLayout>
-  </NuxtLayout>
-</template>
-<style scoped lang="scss">
 
-</style>
+<template lang="pug">
+NuxtLayout
+</template>
+
+<style scoped lang="scss"></style>
