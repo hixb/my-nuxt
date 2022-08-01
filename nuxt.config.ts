@@ -14,11 +14,11 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: [ "@intlify/nuxt3" ],
+  modules: ["@intlify/nuxt3"],
   // config for `@intlify/nuxt3`
   intlify: {
     localeDir: "locales", // set the `locales` directory at source directory of your Nuxt application
     vueI18n: {},
   },
-  buildModules: [ "@pinia/nuxt" ]
+  buildModules: ["@pinia/nuxt"]
 });
