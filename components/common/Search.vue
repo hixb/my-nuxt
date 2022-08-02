@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from "#imports";
-import SvgPic from "~/components/common/SvgPic.vue";
 
 /** 更新关键字 */
 type updateKeywordProps = {
