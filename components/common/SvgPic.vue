@@ -9,10 +9,9 @@ withDefaults(defineProps<SvgProps>(), {
 });
 </script>
 
-<template>
-  <div :class="['svg-pic', borderRadius, {'open-hover': isOpenHover}]">
-    <slot />
-  </div>
+<template lang="pug">
+div.svg-pic(:class="[borderRadius, {'open-hover': isOpenHover}]")
+  slot/
 </template>
 
 <style lang="scss">

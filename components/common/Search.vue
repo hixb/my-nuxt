@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from "#imports";
-import SvgPic from "~/components/common/SvgPic.vue";
 
 /** 更新关键字 */
 type updateKeywordProps = {
@@ -63,38 +62,25 @@ const enterSearch = (e: any) => {
 };
 </script>
 
-<template>
-  <div class="search-wrap-ipt" :style="{width: width, height: height}">
-    <div class="search-btn" @click="findModel">
-      <SvgPic :is-open-hover="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-            stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-          />
-          <path
-            class="set-svg-stroke" d="M22 22L20 20" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </SvgPic>
-    </div>
-    <input v-model.trim="keyword" type="text" :placeholder="$t('header-input-text')" @keypress="enterSearch" />
-    <div v-if="keyword.length > 0 && clearBtnStatus" class="btn-clear" @click="clearInput">
-      <SvgPic :is-open-hover="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </SvgPic>
-    </div>
-  </div>
+<template lang="pug">
+div.search-wrap-ipt(:style="{width: width, height: height}")
+  div.search-btn(@click="findModel")
+    CommonSvgPic(:is-open-hover="false")
+      svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+        path(d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+          stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
+        path.set-svg-stroke(d="M22 22L20 20" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round")
+
+  input(v-model.trim="keyword" type="text" :placeholder="$t('header-input-text')" @keypress="enterSearch")
+
+  div.btn-clear(v-if="keyword.length > 0 && clearBtnStatus" @click="clearInput")
+    CommonSvgPic(:is-open-hover="false")
+      svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+        path(d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round")
+        path(d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round")
 </template>
 
 <style lang="scss">
