@@ -4,14 +4,12 @@ import { useTheme } from "~/composables";
 const { currentTheme } = useTheme();
 </script>
 
-<template>
-  <div :class="['app', currentTheme]">
-    <CommonHeader />
-    <main>
-      <CommonSidebar />
-      <slot />
-    </main>
-  </div>
+<template lang="pug">
+div.app(:class="[currentTheme]")
+  CommonHeader
+  main
+    CommonSidebar
+    slot/
 </template>
 
 <style scoped lang="scss"></style>
