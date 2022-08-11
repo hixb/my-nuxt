@@ -16,7 +16,7 @@
     "nuxt": "3.0.0-rc.6",
     "pub": "^0.2.0",
     "pug-html-loader": "^1.1.5",
-    "sass": "^1.54.0",
+    "sass": "^1.54.4",
     "typescript": "^4.7.4",
     "vite-plugin-pug": "^0.3.1"
   },
