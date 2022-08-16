@@ -20,6 +20,10 @@ watch(commonStores, (newVal) => {
   }
 }, { immediate: true });
 
+/**
+ * 设置侧边栏
+ * @param equipment 设备
+ */
 const setSidebarToggle = (equipment: string) => {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
   const obj: ISidebarData = {
