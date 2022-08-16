@@ -12,7 +12,6 @@ interface ISidebarData {
 const { currentTheme, setTheme } = useTheme();
 const { setLocale, locale } = useLocal();
 const commonStores = useCommonStore();
-
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
@@ -35,6 +34,10 @@ const setThemeMode = () => {
   (document.querySelector("body") as any).className = currentTheme.value;
 };
 
+/**
+ * 设置侧边栏
+ * @param equipment 设备
+ */
 const setSidebarToggle = (equipment: string) => {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
   const obj: ISidebarData = {
