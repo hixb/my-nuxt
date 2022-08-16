@@ -45,7 +45,7 @@ div.app(:class="[currentTheme]")
   .app {
     main {
       .coon {
-        width: calc(100vw) !important;
+        width: calc(100vw - 5%) !important;
         margin: 0 auto;
       }
     }
