@@ -29,12 +29,23 @@ div.app(:class="[currentTheme]")
 
     .coon {
       position: relative;
-      transition: var(--my-theme-trans3);
       background-color: var(--my-theme-bg-color);
       padding-top: 30px;
 
       .inner {
         width: 1230px;
+        height: calc(100vh - 105px);
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 896px) {
+  .app {
+    main {
+      .coon {
+        width: calc(100vw) !important;
         margin: 0 auto;
       }
     }

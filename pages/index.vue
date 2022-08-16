@@ -23,12 +23,8 @@ getData();
 
 <template lang="pug">
 NuxtLayout
-  div.default(@click="showDialog") hello
+  OftenButton(@click="showDialog" type="grb") hello
   OftenDialog(v-model:visible="isShowDialog")
 </template>
 
-<style scoped lang="scss">
-.default {
-  color: var(--my-theme-color);
-}
-</style>
+<style scoped lang="scss"></style>

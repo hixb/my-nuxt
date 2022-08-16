@@ -4,10 +4,12 @@ import { ref, watch } from "#imports";
 
 const commonStores = useCommonStore();
 const curSidebarShowStatus = ref<any>(true);
+const curMobileSidebarShowStatus = ref<boolean>(false);
 
 watch(commonStores, (newVal) => {
   if (newVal) {
     curSidebarShowStatus.value = newVal.isShowSidebar;
+    curMobileSidebarShowStatus.value = newVal.isShowMobileSidebar;
   }
 }, { immediate: true });
 
@@ -16,10 +18,16 @@ const sidebarToggle = () => {
   const sidebarStatus = commonStores.isShowSidebar;
   commonStores.setIsShowSidebar(!sidebarStatus);
 };
+
+/** 关闭手机端侧边栏切换 */
+const closeMobileAside = () => {
+  const sidebarStatus = commonStores.isShowMobileSidebar;
+  commonStores.setIsShowMobile(!sidebarStatus);
+};
 </script>
 
 <template lang="pug">
-aside(:style="{ width: curSidebarShowStatus ? '14%' : ''}")
+aside.pc-aside(:style="{ width: curSidebarShowStatus ? '14%' : ''}")
   div.pc(:class="[{'zoom-sidebar': !curSidebarShowStatus}]")
     .avatar
       .avatar-bg
@@ -113,6 +121,15 @@ aside(:style="{ width: curSidebarShowStatus ? '14%' : ''}")
             path.set-svg-stroke(d="M6 12H18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round")
             path(d="M12 18V6" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
+Transition(name="slide-fade")
+  aside.mask-bg(v-show="curMobileSidebarShowStatus")
+    div.mobile-aside
+      div.title
+        CommonSvgPic(@click="closeMobileAside")
+          svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+            g
+              path(d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
+              path(d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
 </template>
 
 <style scoped lang="scss">

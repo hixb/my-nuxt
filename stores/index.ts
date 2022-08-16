@@ -4,6 +4,7 @@ export const useCommonStore = defineStore({
   id: "common",
   state: () => ({
     isShowSidebar: true,
+    isShowMobileSidebar: false
   }),
   getters: {},
   actions: {
@@ -13,6 +14,14 @@ export const useCommonStore = defineStore({
      */
     setIsShowSidebar(show: boolean) {
       this.isShowSidebar = show;
+    },
+
+    /**
+     * 设置是否显示移动端侧边栏
+     * @param show
+     */
+    setIsShowMobile(show: boolean) {
+      this.isShowMobileSidebar = show;
     }
   }
 });
