@@ -2,28 +2,48 @@
 import { useTheme } from "~/composables";
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
-import { ref, watch } from "#imports";
+import { onMounted, reactive, watch } from "#imports";
 
-const curSidebarShowStatus = ref<any>(true);
+interface ISidebarData {
+  equipment: string
+  isShowSidebar: boolean
+}
+
 const { currentTheme, setTheme } = useTheme();
 const { setLocale, locale } = useLocal();
 const commonStores = useCommonStore();
 
+const sidebarData = reactive<ISidebarData>({
+  equipment: "pc",
+  isShowSidebar: false
+});
+
+onMounted(() => {
+  setThemeMode();
+});
+
 watch(commonStores, (newVal) => {
   if (newVal) {
-    curSidebarShowStatus.value = newVal.isShowSidebar;
+    sidebarData.equipment = newVal.sidebarData.equipment;
+    sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
   }
 }, { immediate: true });
 
 /** 设置主题 */
 const setThemeMode = () => {
   setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
+  (document.querySelector("body") as any).className = currentTheme.value;
 };
 
-/** 侧边栏切换 */
-const sidebarToggle = () => {
-  const sidebarStatus = commonStores.isShowSidebar;
-  commonStores.setIsShowSidebar(!sidebarStatus);
+const setSidebarToggle = (equipment: string) => {
+  const sidebarStatus = commonStores.sidebarData.isShowSidebar;
+  const obj: ISidebarData = {
+    equipment,
+    isShowSidebar: !sidebarStatus
+  };
+  sidebarData.equipment = obj.equipment;
+  sidebarData.isShowSidebar = obj.isShowSidebar;
+  commonStores.setSidebarData(obj);
 };
 </script>
 
@@ -31,8 +51,8 @@ const sidebarToggle = () => {
 header
   div.pc
     div.head-l
-      CommonSvgPic(@click="sidebarToggle")
-        template(v-if="curSidebarShowStatus")
+      CommonSvgPic(@click="setSidebarToggle('pc')")
+        template(v-if="sidebarData.isShowSidebar")
           svg(viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
             path(d="M 3 18 H 14 M 10 6 H 21" stroke="#292D32")
             line.set-svg-stroke(x1="3" x2="21" y1="12" y2="12" stroke="#292D32")
@@ -91,7 +111,7 @@ header
               stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
   div.mobile
     div.head-l
-      CommonSvgPic
+      CommonSvgPic(@click="setSidebarToggle('mobile')")
         svg(iewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
           path(d="M 3 18 H 14 M 10 6 H 21" stroke="#292D32")
           line.set-svg-stroke(x1="3" x2="21" y1="12" y2="12" stroke="#292D32")

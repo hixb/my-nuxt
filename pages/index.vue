@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { useUserStore } from "~/stores/user";
-import { watchEffect } from "#imports";
+import { ref, watchEffect } from "#imports";
 import { fetchRoomList } from "~/server/api";
 
 const user = useUserStore();
+const isShowDialog = ref<boolean>(false);
 
 watchEffect(() => {
   user.setNewName("zhuxb");
 });
+
+const showDialog = () => {
+  isShowDialog.value = true;
+};
 
 function getData() {
   fetchRoomList();
@@ -18,8 +23,8 @@ getData();
 
 <template lang="pug">
 NuxtLayout
+  OftenButton(@click="showDialog" type="grb") hello
+  OftenDialog(v-model:visible="isShowDialog")
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

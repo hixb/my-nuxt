@@ -1,33 +1,47 @@
 <script setup lang="ts">
 import { useCommonStore } from "~/stores";
-import { ref, watch } from "#imports";
+import { reactive, watch } from "#imports";
+
+interface ISidebarData {
+  equipment: string
+  isShowSidebar: boolean
+}
 
 const commonStores = useCommonStore();
-const curSidebarShowStatus = ref<any>(true);
+const sidebarData = reactive<ISidebarData>({
+  equipment: "pc",
+  isShowSidebar: false
+});
 
 watch(commonStores, (newVal) => {
   if (newVal) {
-    curSidebarShowStatus.value = newVal.isShowSidebar;
+    sidebarData.equipment = newVal.sidebarData.equipment;
+    sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
   }
 }, { immediate: true });
 
-/** 侧边栏切换 */
-const sidebarToggle = () => {
-  const sidebarStatus = commonStores.isShowSidebar;
-  commonStores.setIsShowSidebar(!sidebarStatus);
+const setSidebarToggle = (equipment: string) => {
+  const sidebarStatus = commonStores.sidebarData.isShowSidebar;
+  const obj: ISidebarData = {
+    equipment,
+    isShowSidebar: !sidebarStatus
+  };
+  sidebarData.equipment = obj.equipment;
+  sidebarData.isShowSidebar = obj.isShowSidebar;
+  commonStores.setSidebarData(obj);
 };
 </script>
 
 <template lang="pug">
-aside
-  div.pc(:class="[{'zoom-sidebar': !curSidebarShowStatus}]")
+aside.pc-aside(:style="{ width: sidebarData.isShowSidebar ? '14%' : ''}")
+  div.pc(:class="[{'zoom-sidebar': !sidebarData.isShowSidebar}]")
     .avatar
       .avatar-bg
     ul
       li
         nuxt-link(to="/")
-          CommonSvgPic(:is-open-hover="!curSidebarShowStatus"
-            :border-radius="!curSidebarShowStatus ? 'semicircle' : 'round'")
+          CommonSvgPic(:is-open-hover="!sidebarData.isShowSidebar"
+            :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'")
             svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
               path(d="M10.0693 2.81984L3.13929 8.36983C2.35929 8.98983 1.85929 10.2999 2.02929 11.2799L3.35929 19.2398C3.59929 20.6598 4.95928 21.8098 6.39928 21.8098H17.5993C19.0293 21.8098 20.3993 20.6498 20.6393 19.2398L21.9693 11.2799C22.1293 10.2999 21.6293 8.98983 20.8593 8.36983L13.9293 2.82985C12.8593 1.96985 11.1293 1.96984 10.0693 2.81984Z"
                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
@@ -37,8 +51,8 @@ aside
           p {{ $t('sidebar-home-text') }}
       li
         nuxt-link(to="/")
-          CommonSvgPic(:is-open-hover="!curSidebarShowStatus"
-            :border-radius="!curSidebarShowStatus ? 'semicircle' : 'round'")
+          CommonSvgPic(:is-open-hover="!sidebarData.isShowSidebar"
+            :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'")
             svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
               path(d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32"
                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
@@ -54,8 +68,8 @@ aside
           p {{ $t('sidebar-article-text') }}
       li
         nuxt-link(to="/")
-          CommonSvgPic(:is-open-hover="!curSidebarShowStatus"
-            :border-radius="!curSidebarShowStatus ? 'semicircle' : 'round'")
+          CommonSvgPic(:is-open-hover="!sidebarData.isShowSidebar"
+            :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'")
             svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
               path(d="M9.15859 10.87C9.05859 10.86 8.93859 10.86 8.82859 10.87C6.44859 10.79 4.55859 8.84 4.55859 6.44C4.55859 3.99 6.53859 2 8.99859 2C11.4486 2 13.4386 3.99 13.4386 6.44C13.4286 8.84 11.5386 10.79 9.15859 10.87Z"
                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
@@ -68,7 +82,7 @@ aside
           span {{ $t('sidebar-about-text') }}
           p {{ $t('sidebar-about-text') }}
     nav
-      template(v-if="curSidebarShowStatus")
+      template(v-if="sidebarData.isShowSidebar")
         div.menu
           ul
             li
@@ -108,11 +122,20 @@ aside
                       stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                       stroke-linejoin="round")
       temptate(v-else)
-        CommonSvgPic(@click="sidebarToggle")
+        CommonSvgPic(@click="setSidebarToggle")
           svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
             path.set-svg-stroke(d="M6 12H18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round")
             path(d="M12 18V6" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
+Transition(name="slide-fade")
+  aside.mask-bg(v-show="sidebarData.isShowSidebar && sidebarData.equipment === 'mobile'")
+    div.mobile-aside
+      div.title
+        CommonSvgPic(@click="setSidebarToggle('mobile')")
+          svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
+            g
+              path(d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
+              path(d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
 </template>
 
 <style scoped lang="scss">
