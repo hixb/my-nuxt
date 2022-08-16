@@ -19,7 +19,7 @@ const sidebarToggle = () => {
 </script>
 
 <template lang="pug">
-aside
+aside(:style="{ width: curSidebarShowStatus ? '14%' : ''}")
   div.pc(:class="[{'zoom-sidebar': !curSidebarShowStatus}]")
     .avatar
       .avatar-bg
