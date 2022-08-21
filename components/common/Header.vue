@@ -3,6 +3,7 @@ import { useTheme } from "~/composables";
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
 import { onMounted, reactive, watch } from "#imports";
+import { saveLanguageApi, fetchLanguageApi } from "~/server/localApi";
 
 interface ISidebarData {
   equipment: string
@@ -18,7 +19,8 @@ const sidebarData = reactive<ISidebarData>({
 });
 
 onMounted(() => {
-  setThemeMode();
+  setRootMode();
+  getLocaleData();
 });
 
 watch(commonStores, (newVal) => {
@@ -29,10 +31,17 @@ watch(commonStores, (newVal) => {
 }, { immediate: true });
 
 /**
- * 设置根模式
+ * 设置主题
  */
 const setThemeMode = () => {
   setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
+  setRootMode();
+};
+
+/**
+ * 设置根模式
+ */
+const setRootMode = () => {
   (document.querySelector("body") as any).className = currentTheme.value;
 };
 
@@ -49,6 +58,33 @@ const setSidebarToggle = (equipment: string) => {
   sidebarData.equipment = obj.equipment;
   sidebarData.isShowSidebar = obj.isShowSidebar;
   commonStores.setSidebarData(obj);
+};
+
+/**
+ * 获取语言
+ */
+const getLocaleData = () => {
+  fetchLanguageApi().then(res => {
+    if (res.code === 200) {
+      if (res.result) {
+        const { name } = res.result;
+        setLocale(name);
+      } else {
+        setLocaleData(navigator.language == "zh" ? "zh-CN" : "en")
+      }
+    }
+  });
+};
+
+/**
+ * 设置首语言
+ * @param language 语种
+ */
+const setLocaleData = (language: string) => {
+  setLocale(language);
+  saveLanguageApi(language).then(res => {
+    console.log(res);
+  });
 };
 </script>
 
@@ -79,7 +115,7 @@ header
               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
             path(d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2Z"
               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-        CommonSvgPic(@click="setLocale(locale === 'en' ? 'zh-CN' : 'en')")
+        CommonSvgPic(@click="setLocaleData(locale === 'en' ? 'zh-CN' : 'en')")
           svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
             path(d="M19.0612 18.6684L16.9212 14.3984L14.7812 18.6684" stroke="#292D32" stroke-width="1.5"
               stroke-linecap="round" stroke-linejoin="round")
@@ -136,7 +172,7 @@ header
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
           path(d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2Z"
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-      CommonSvgPic(@click="setLocale(locale === 'en' ? 'zh-CN' : 'en')")
+      CommonSvgPic(@click="setLocaleData(locale === 'en' ? 'zh-CN' : 'en')")
         svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
           path(d="M19.0612 18.6684L16.9212 14.3984L14.7812 18.6684" stroke="#292D32" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round")
