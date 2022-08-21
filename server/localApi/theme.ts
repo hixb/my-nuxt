@@ -10,23 +10,25 @@ interface IResultOr {
 }
 
 /**
- * 保存国际化语言
+ * 保存主题
  * @param lang
  */
-export async function saveLanguageApi(lang: any) {
-  await airbnbDB.openStore("language", "id", ["name"]);
-  const resultOr: IResultOr = await airbnbDB.getItem("language", 1).then((res: any) => {
+export async function saveThemeApi(theme: any) {
+  await airbnbDB.openStore(null);
+  const resultOr: IResultOr = await airbnbDB.getItem("theme", 1).then((res: any) => {
     return {
       code: 200,
       message: "success",
       result: res || null,
       success: true
     };
+  }).catch(err => {
+    console.log(err);
   });
 
   const { success } = resultOr;
-  const obj = success ? { name: lang, id: 1 } : { name: lang };
-  const result: IResultOr = await airbnbDB.updateItem("language", obj).then((res: any) => {
+  const obj = success ? { name: theme, id: 1 } : { name: theme };
+  const result: IResultOr = await airbnbDB.updateItem("theme", obj).then((res: any) => {
     return {
       code: 200,
       message: "success",
@@ -38,11 +40,11 @@ export async function saveLanguageApi(lang: any) {
 }
 
 /**
- * 获取当前语言
+ * 获取单当前主题
  */
-export async function fetchLanguageApi() {
-  await airbnbDB.openStore("language", "id", ["name"]);
-  const result: IResultOr = await airbnbDB.getItem("language", 1).then((res: any) => {
+export async function fetchThemeApi() {
+  await airbnbDB.openStore(null);
+  const result: IResultOr = await airbnbDB.getItem("theme", 1).then((res: any) => {
     return {
       code: 200,
       message: "success",

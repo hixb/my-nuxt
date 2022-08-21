@@ -1,15 +1,37 @@
 <script setup lang="ts">
 import { useTheme } from "~/composables";
 import { useCommonStore } from "~/stores";
-import { ref, watch } from "#imports";
+import { onMounted, ref, watch } from "#imports";
 
 const commonStores = useCommonStore();
 const { currentTheme } = useTheme();
 const curSidebarShowStatus = ref<any>(true);
+const isShowLoading = ref<boolean>(false);
 
 watch(commonStores, (newVal) => {
   curSidebarShowStatus.value = newVal.isShowSidebar;
 }, { immediate: true });
+
+onMounted(() => {
+  showLoading();
+  setTimeout(() => {
+    closeLoading();
+  }, 1000);
+});
+
+/**
+ * 显示loading
+ */
+const showLoading = () => {
+  isShowLoading.value = true;
+};
+
+/**
+ * 关闭loading
+ */
+const closeLoading = () => {
+  isShowLoading.value = false;
+};
 </script>
 
 <template lang="pug">
@@ -20,6 +42,7 @@ div.app(:class="[currentTheme]")
     div.coon(:style="{width: `calc(100vw${ curSidebarShowStatus ? ' - 14%' : ''})`}")
       div.inner
         slot/
+  GlobalLoading(v-model:visible="isShowLoading")
 </template>
 
 <style scoped lang="scss">

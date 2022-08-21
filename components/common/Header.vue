@@ -3,7 +3,8 @@ import { useTheme } from "~/composables";
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
 import { onMounted, reactive, watch } from "#imports";
-import { saveLanguageApi, fetchLanguageApi } from "~/server/localApi";
+import { saveLanguageApi, fetchLanguageApi } from "~/server/localApi/language";
+import { saveThemeApi, fetchThemeApi } from "~/server/localApi/theme";
 
 interface ISidebarData {
   equipment: string
@@ -21,6 +22,7 @@ const sidebarData = reactive<ISidebarData>({
 onMounted(() => {
   setRootMode();
   getLocaleData();
+  getThemeMode();
 });
 
 watch(commonStores, (newVal) => {
@@ -31,10 +33,30 @@ watch(commonStores, (newVal) => {
 }, { immediate: true });
 
 /**
+ * 获取主题
+ */
+const getThemeMode = () => {
+  fetchThemeApi().then(res => {
+    if (res.code === 200) {
+      if (res.result) {
+        const { name } = res.result;
+        setTheme(name);
+      } else {
+        setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
+      }
+      setRootMode();
+    }
+  });
+};
+
+/**
  * 设置主题
  */
 const setThemeMode = () => {
   setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
+  saveThemeApi(currentTheme.value).then(res => {
+    console.log(res);
+  });
   setRootMode();
 };
 
@@ -70,7 +92,7 @@ const getLocaleData = () => {
         const { name } = res.result;
         setLocale(name);
       } else {
-        setLocaleData(navigator.language == "zh" ? "zh-CN" : "en")
+        setLocaleData(navigator.language == "zh" ? "zh-CN" : "en");
       }
     }
   });
@@ -83,7 +105,7 @@ const getLocaleData = () => {
 const setLocaleData = (language: string) => {
   setLocale(language);
   saveLanguageApi(language).then(res => {
-    console.log(res);
+    console.log();
   });
 };
 </script>
