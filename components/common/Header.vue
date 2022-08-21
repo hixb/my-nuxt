@@ -28,7 +28,9 @@ watch(commonStores, (newVal) => {
   }
 }, { immediate: true });
 
-/** 设置主题 */
+/**
+ * 设置根模式
+ */
 const setThemeMode = () => {
   setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
   (document.querySelector("body") as any).className = currentTheme.value;
