@@ -1,8 +1,10 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  visible: boolean
+  visible: boolean,
+  text: string | number
 }>(), {
-  visible: false
+  visible: false,
+  text: "loading..."
 });
 </script>
 
@@ -18,6 +20,7 @@ Transition
         linearGradient(id="gradient" x1="0%" y1="0%" x2="0%" y2="100%")
           stop(offset="0%" style="stop-color: #FF56A1; stop-opacity: 1;")
           stop(offset="100%" style="stop-color: #FF9350; stop-opacity: 1;")
+    span {{ text }}
 </template>
 
 <style scoped lang="scss">
@@ -38,8 +41,7 @@ $path-length: 157.5px;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -50px;
-    margin-top: -50px;
+    transform: translate(-50%, -50%);
     overflow: visible;
     width: 100px;
     height: 150px;
@@ -67,6 +69,16 @@ $path-length: 157.5px;
       stroke-dashoffset: 0;
       animation: escalade $transition-duration cubic-bezier(0.8, 0, 0.2, 1) infinite;
     }
+  }
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translateX(-50%);
+    overflow: visible;
+    color: var(--my-theme-special-color);
+    font-size: 18px;
   }
 }
 
