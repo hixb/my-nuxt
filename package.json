@@ -13,7 +13,7 @@
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",
     "eslint-plugin-vue": "^9.3.0",
-    "nuxt": "3.0.0-rc.6",
+    "nuxt": "3.0.0-rc.11",
     "pub": "^0.2.0",
     "pug-html-loader": "^1.1.5",
     "sass": "^1.54.0",
