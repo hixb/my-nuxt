@@ -1,28 +1,25 @@
 <script setup lang="ts">
-import { useTheme } from "~/composables";
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
-import { onMounted, reactive, watch } from "#imports";
+import { onMounted, reactive, watch, ref } from "#imports";
 import { saveLanguageApi, fetchLanguageApi } from "~/server/localApi/language";
-import { saveThemeApi, fetchThemeApi } from "~/server/localApi/theme";
 
 interface ISidebarData {
   equipment: string
   isShowSidebar: boolean
 }
 
-const { currentTheme, setTheme } = useTheme();
-const { setLocale, locale } = useLocal();
+const { setLocale } = useLocal();
 const commonStores = useCommonStore();
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
+const defaultThemeMode = ref<string>("dark-mode");
 
 onMounted(() => {
-  setRootMode();
   getLocaleData();
-  getThemeMode();
+  setRootMode();
 });
 
 watch(commonStores, (newVal) => {
@@ -33,38 +30,27 @@ watch(commonStores, (newVal) => {
 }, { immediate: true });
 
 /**
- * 获取主题
- */
-const getThemeMode = () => {
-  fetchThemeApi().then(res => {
-    if (res.code === 200) {
-      if (res.result) {
-        const { name } = res.result;
-        setTheme(name);
-      } else {
-        setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
-      }
-      setRootMode();
-    }
-  });
-};
-
-/**
  * 设置主题
  */
 const setThemeMode = () => {
-  setTheme(currentTheme.value == "light-mode" ? "dark-mode" : "light-mode");
-  saveThemeApi(currentTheme.value).then(res => {
-    console.log(res);
-  });
+  const curTheme = getLocalTheme() == "dark-mode" ? "light-mode" : "dark-mode";
+  defaultThemeMode.value = curTheme;
+  localStorage.setItem("theme", curTheme);
   setRootMode();
+};
+
+/**
+ * 获取主题
+ */
+const getLocalTheme = () => {
+  return localStorage.getItem("theme") || "dark-mode";
 };
 
 /**
  * 设置根模式
  */
 const setRootMode = () => {
-  (document.querySelector("body") as any).className = currentTheme.value;
+  if (process.client) (document.querySelector("body") as any).className = getLocalTheme();
 };
 
 /**
@@ -162,11 +148,11 @@ header
             path.set-svg-stroke(d="M22 9C22 5.13 18.87 2 15 2L16.05 3.75" stroke="#292D32" stroke-width="1.5"
               stroke-linecap="round" stroke-linejoin="round")
         CommonSvgPic(@click="setThemeMode")
-          svg(v-show="currentTheme == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          svg(v-show="defaultThemeMode == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg")
             path(d="M2.03107 12.4209C2.39107 17.5709 6.76107 21.7609 11.9911 21.9909C15.6811 22.1509 18.9811 20.4309 20.9611 17.7209C21.7811 16.6109 21.3411 15.8709 19.9711 16.1209C19.3011 16.2409 18.6111 16.2909 17.8911 16.2609C13.0011 16.0609 9.00107 11.9709 8.98107 7.14094C8.97107 5.84094 9.24107 4.61094 9.73107 3.49094C10.2711 2.25094 9.62107 1.66094 8.37107 2.19094C4.41107 3.86094 1.70107 7.85094 2.03107 12.4209Z"
               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-          svg(v-show="currentTheme == 'dark-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          svg(v-show="defaultThemeMode == 'dark-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg")
             path(d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z"
               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
@@ -219,11 +205,11 @@ header
           path.set-svg-stroke(d="M22 9C22 5.13 18.87 2 15 2L16.05 3.75" stroke="#292D32" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round")
       CommonSvgPic(@click="setThemeMode")
-        svg(v-show="currentTheme == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        svg(v-show="defaultThemeMode == 'light-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
           xmlns="http://www.w3.org/2000/svg")
           path(d="M2.03107 12.4209C2.39107 17.5709 6.76107 21.7609 11.9911 21.9909C15.6811 22.1509 18.9811 20.4309 20.9611 17.7209C21.7811 16.6109 21.3411 15.8709 19.9711 16.1209C19.3011 16.2409 18.6111 16.2909 17.8911 16.2609C13.0011 16.0609 9.00107 11.9709 8.98107 7.14094C8.97107 5.84094 9.24107 4.61094 9.73107 3.49094C10.2711 2.25094 9.62107 1.66094 8.37107 2.19094C4.41107 3.86094 1.70107 7.85094 2.03107 12.4209Z"
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-        svg(v-show="currentTheme == 'dark-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        svg(v-show="defaultThemeMode == 'dark-mode'" width="24" height="24" viewBox="0 0 24 24" fill="none"
           xmlns="http://www.w3.org/2000/svg")
           path(d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z"
             stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
