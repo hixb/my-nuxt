@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { onDeactivated, reactive, ref } from "#imports";
 
+type buttonType = "primary" | "success" | "warning" | "danger" | "grb";
+type buttonShape = "plain" | "circle" | "round" | "square";
+
 const { speed, opacity, type, shape } = withDefaults(defineProps<{
   // 速度
   speed?: number
   // 透明度
   opacity?: number
-  // 类型 [primary, success, warning, danger, grb]
-  type?: string
-  // 形状 [plain: 带有圆角, circle: 圆的, round: 半圆, square: 正方形]
-  shape?: string
+  // 类型
+  type?: buttonType
+  // 形状
+  shape?: buttonShape
 }>(), {
   speed: 4,
   opacity: 0.4,

@@ -3,7 +3,7 @@ import { ref, watch } from "#imports";
 
 /** 更新关键字 */
 type updateKeywordProps = {
-  (e: "updateKeyword", val: any): void
+  (e: "updateKeyword", val: string | number): void
 }
 
 // TODO: 解构`props`会导致值失去反应性
