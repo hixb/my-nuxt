@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onDeactivated, reactive, ref } from "#imports";
 
 type buttonType = "primary" | "success" | "warning" | "danger" | "grb";
@@ -128,13 +128,14 @@ const getStyleNumber = (el: any, attr: any, pseudoClass: any = null) => {
 
 </script>
 
-<template lang="pug">
-button.my-btn(:class="[shape, type]")
-  canvas.ripple(@click="ripple")
-  slot/
+<template>
+  <button :class="['my-btn', shape, type]">
+    <canvas class="ripple" @click="ripple" />
+    <slot />
+  </button>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .my-btn {
   overflow: hidden;
   position: relative;

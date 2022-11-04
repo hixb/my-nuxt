@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useUserStore } from "~/stores/user";
 import { ref, watchEffect } from "#imports";
 import { fetchRoomList } from "~/server/api";
@@ -21,10 +21,13 @@ function getData() {
 getData();
 </script>
 
-<template lang="pug">
-NuxtLayout
-  OftenButton(@click="showDialog" type="grb") hello
-  OftenDialog(v-model:visible="isShowDialog")
+<template>
+  <NuxtLayout>
+    <OftenButton type="grb" @click="showDialog">
+      hello
+    </OftenButton>
+    <OftenDialog :visible="isShowDialog" />
+  </NuxtLayout>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
