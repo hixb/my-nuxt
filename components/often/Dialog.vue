@@ -1,33 +1,18 @@
 <script lang="ts" setup>
-withDefaults(defineProps<{
+defineProps({
   // 是否可见
-  visible: boolean
+  visible: { type: Boolean, default: false },
   // 自定义内类名
-  className?: string
+  className: { type: String, default: "" },
   // 宽度
-  width?: string
+  width: { type: String, default: "" },
   // 高度
-  height?: string
+  height: { type: String, default: "" },
   // 是否显示标题
-  isShowTitle: boolean
-}>(), {
-  visible: false,
-  className: "",
-  width: "",
-  height: "",
-  isShowTitle: true
+  isShowTitle: { type: Boolean, default: true }
 });
 
-const emit = defineEmits<{
-  (e: "visible", visible: boolean): void
-}>();
-
-/**
- * 关闭弹窗
- */
-const closeDialog = () => {
-  emit("update:visible", false);
-};
+const emit = defineEmits(["close"]);
 </script>
 
 <template>
@@ -35,7 +20,7 @@ const closeDialog = () => {
     <div v-show="visible" :class="className" :style="{ width, height }" class="my-dialog">
       <Transition name="bounce">
         <div v-show="visible" class="dialog-body">
-          <div class="close-btn" @click="closeDialog">
+          <div class="close-btn" @click="emit('close', false)">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
               <g>
                 <path

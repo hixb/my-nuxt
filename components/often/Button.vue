@@ -1,23 +1,22 @@
 <script lang="ts" setup>
 import { onDeactivated, reactive, ref } from "#imports";
+import type { PropType } from "vue";
 
-type buttonType = "primary" | "success" | "warning" | "danger" | "grb";
-type buttonShape = "plain" | "circle" | "round" | "square";
-
-const { speed, opacity, type, shape } = withDefaults(defineProps<{
+const props = defineProps({
   // 速度
-  speed?: number
+  speed: { type: Number, default: 4 },
   // 透明度
-  opacity?: number
+  opacity: { type: Number, default: .4 },
   // 类型
-  type?: buttonType
+  type: {
+    type: String as PropType<"primary" | "success" | "warning" | "danger" | "grb">,
+    default: "primary"
+  },
   // 形状
-  shape?: buttonShape
-}>(), {
-  speed: 4,
-  opacity: 0.4,
-  type: "primary",
-  shape: "plain"
+  shape: {
+    type: String as PropType<"plain" | "circle" | "round" | "square">,
+    default: "plain"
+  }
 });
 
 const color = ref<string>("");
@@ -48,7 +47,7 @@ const init = (el: any) => {
   color.value = getStyle(el.parentElement, "color");
   const w: any = getStyleNumber(oBtn, "width");
   // 透明度的速度
-  speedOpacity.value = (speed / w) * opacity;
+  speedOpacity.value = (props.speed / w) * props.opacity;
   // canvas 宽和高
   el.width = w;
   el.height = getStyleNumber(oBtn, "height");
@@ -75,7 +74,7 @@ const ripple = (event: any) => {
   origin.x = event.offsetX;
   origin.y = event.offsetY;
   context.value.clearRect(0, 0, el.value.width, el.value.height);
-  el.value.style.opacity = opacity;
+  el.value.style.opacity = props.opacity;
   draw();
 };
 
@@ -89,7 +88,7 @@ const draw = () => {
   context.value.fillStyle = color.value;
   context.value.fill();
   // 定义下次的绘制半径和透明度
-  radius.value += speed;
+  radius.value += props.speed;
   el.value.style.opacity -= speedOpacity.value;
   // 通过判断半径小于元素宽度或者还有透明度, 不断绘制圆形
   if (radius.value < el.width || el.value.style.opacity > 0) {

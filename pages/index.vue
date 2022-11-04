@@ -26,7 +26,7 @@ getData();
     <OftenButton type="grb" @click="showDialog">
       hello
     </OftenButton>
-    <OftenDialog :visible="isShowDialog" />
+    <OftenDialog :visible="isShowDialog" @close="isShowDialog = false" />
   </NuxtLayout>
 </template>
 

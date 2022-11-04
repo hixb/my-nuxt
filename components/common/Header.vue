@@ -9,7 +9,7 @@ interface ISidebarData {
   isShowSidebar: boolean;
 }
 
-const { setLocale } = useLocal();
+const { setLocale, locale } = useLocal();
 const commonStores = useCommonStore();
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
