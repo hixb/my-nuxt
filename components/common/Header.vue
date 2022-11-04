@@ -5,8 +5,8 @@ import { onMounted, reactive, watch, ref } from "#imports";
 import { saveLanguageApi, fetchLanguageApi } from "~/server/localApi/language";
 
 interface ISidebarData {
-  equipment: string
-  isShowSidebar: boolean
+  equipment: string;
+  isShowSidebar: boolean;
 }
 
 const { setLocale } = useLocal();
@@ -15,7 +15,7 @@ const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
-const defaultThemeMode = ref<string>("dark-mode");
+const defaultThemeMode = ref<string>(commonStores.curTheme);
 
 onMounted(() => {
   getLocaleData();
@@ -33,24 +33,18 @@ watch(commonStores, (newVal) => {
  * 设置主题
  */
 const setThemeMode = () => {
-  const curTheme = getLocalTheme() == "dark-mode" ? "light-mode" : "dark-mode";
+  const curTheme = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
   defaultThemeMode.value = curTheme;
   localStorage.setItem("theme", curTheme);
   setRootMode();
-};
-
-/**
- * 获取主题
- */
-const getLocalTheme = () => {
-  return localStorage.getItem("theme") || "dark-mode";
+  commonStores.setTheme(curTheme);
 };
 
 /**
  * 设置根模式
  */
 const setRootMode = () => {
-  if (process.client) (document.querySelector("body") as any).className = getLocalTheme();
+  if (process.client) (document.querySelector("body") as any).className = defaultThemeMode.value;
 };
 
 /**
