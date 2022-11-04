@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 withDefaults(defineProps<{
   // 是否可见
   visible: boolean
@@ -30,23 +30,38 @@ const closeDialog = () => {
 };
 </script>
 
-<template lang="pug">
-Transition
-  div.my-dialog(v-show="visible" :class="className" :style="{ width, height }")
-    Transition(name="bounce")
-      div.dialog-body( v-show="visible")
-        div.close-btn(@click="closeDialog")
-          svg(width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg")
-            g
-              path(d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-              path(d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round")
-        h4.title(v-if="isShowTitle")
-          slot(name="title")/
-        div.content
-          slot(name="content")/
+<template>
+  <Transition>
+    <div v-show="visible" :class="className" :style="{ width, height }" class="my-dialog">
+      <Transition name="bounce">
+        <div v-show="visible" class="dialog-body">
+          <div class="close-btn" @click="closeDialog">
+            <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path
+                  d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </g>
+            </svg>
+          </div>
+          <div v-if="isShowTitle" class="title">
+            <slot name="title" />
+          </div>
+          <div class="content">
+            <slot name="content" />
+          </div>
+        </div>
+      </Transition>
+    </div>
+  </Transition>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 .bounce-enter-active {
   animation: bounce-in 0.3s;

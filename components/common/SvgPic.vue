@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 type SvgProps = {
   borderRadius?: string
   isOpenHover?: boolean
@@ -9,9 +9,10 @@ withDefaults(defineProps<SvgProps>(), {
 });
 </script>
 
-<template lang="pug">
-div.svg-pic(:class="[borderRadius, {'open-hover': isOpenHover}]")
-  slot/
+<template>
+  <div :class="[borderRadius, {'open-hover': isOpenHover}]" class="svg-pic">
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">

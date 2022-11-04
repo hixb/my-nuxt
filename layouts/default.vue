@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useCommonStore } from "~/stores";
 import { onMounted, ref, watch } from "#imports";
 
@@ -33,18 +33,22 @@ const closeLoading = () => {
 showLoading();
 </script>
 
-<template lang="pug">
-div.app
-  CommonHeader
-  main
-    CommonSidebar
-    div.coon(:style="{ width: `calc(100vw${ curSidebarShowStatus ? ' - 14%' : ''})` }")
-      div.inner
-        slot/
-  Loading(v-model:visible="isShowLoading")
+<template>
+  <div class="app">
+    <CommonHeader />
+    <main>
+      <CommonSidebar />
+      <div :style="{ width: `calc(100vw${ curSidebarShowStatus ? ' - 14%' : ''})` }" class="coon">
+        <div class="inner">
+          <slot />
+        </div>
+      </div>
+    </main>
+    <Loading :visible="isShowLoading"></Loading>
+  </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .app {
   main {
     display: flex;
