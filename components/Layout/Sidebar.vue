@@ -12,6 +12,21 @@ const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
+const sidebarList = reactive([
+  { router: "/", icon: "essetional/home", text: "sidebar-home-text" },
+  { router: "/", icon: "audio/subtitle", text: "sidebar-article-text" },
+  { router: "/", icon: "users/profile-2user", text: "sidebar-about-text" },
+]);
+const footerRule = reactive([
+  { router: "/", text: "sidebar-sitemap-text" },
+  { router: "/", text: "sidebar-disclaimer-text" },
+  { router: "/", text: "sidebar-privacy-text" },
+]);
+const footerConnect = reactive([
+  { router: "/", icon: "crypto-company/facebook" },
+  { router: "/", icon: "crypto-company/huobi-token-(ht)" },
+  { router: "/", icon: "crypto-company/js" },
+]);
 
 watch(commonStores, (newVal) => {
   if (newVal) {
@@ -43,37 +58,15 @@ const setSidebarToggle = (equipment: string) => {
         <div class="avatar-bg"></div>
       </div>
       <ul>
-        <li>
-          <NuxtLink to="/">
+        <li v-for="item in sidebarList" :key="item.icon">
+          <NuxtLink :to="item.router">
             <SvgIcon
               :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
+              :icon="item.icon"
               :is-open-hover="!sidebarData.isShowSidebar"
-              icon="essetional/home"
             />
-            <span>{{ $t("sidebar-home-text") }}</span>
-            <p>{{ $t("sidebar-home-text") }}</p>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/">
-            <SvgIcon
-              :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
-              :is-open-hover="!sidebarData.isShowSidebar"
-              icon="audio/subtitle"
-            />
-            <span>{{ $t("sidebar-article-text") }}</span>
-            <p>{{ $t("sidebar-article-text") }}</p>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/">
-            <SvgIcon
-              :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
-              :is-open-hover="!sidebarData.isShowSidebar"
-              icon="users/profile-2user"
-            />
-            <span>{{ $t("sidebar-about-text") }}</span>
-            <p>{{ $t("sidebar-about-text") }}</p>
+            <span>{{ $t(item.text) }}</span>
+            <p>{{ $t(item.text) }}</p>
           </NuxtLink>
         </li>
       </ul>
@@ -81,49 +74,21 @@ const setSidebarToggle = (equipment: string) => {
         <template v-if="sidebarData.isShowSidebar">
           <div class="menu">
             <ul>
-              <li>
-                <NuxtLink to="/">
-                  {{ $t("sidebar-sitemap-text") }}
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/">
-                  {{ $t("sidebar-disclaimer-text") }}
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/">
-                  {{ $t("sidebar-privacy-text") }}
+              <li v-for="item in footerRule" :key="item.text">
+                <NuxtLink :to="item.router">
+                  {{ $t(item.text) }}
                 </NuxtLink>
               </li>
             </ul>
           </div>
           <div class="link">
             <ul>
-              <li>
-                <NuxtLink to="/">
+              <li v-for="item in footerConnect" :key="item.icon">
+                <NuxtLink :to="item.router">
                   <SvgIcon
                     :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
+                    :icon="item.icon"
                     :is-open-hover="!sidebarData.isShowSidebar"
-                    icon="crypto-company/facebook"
-                  />
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/">
-                  <SvgIcon
-                    :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
-                    :is-open-hover="!sidebarData.isShowSidebar"
-                    icon="crypto-company/huobi-token-(ht)"
-                  />
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink to="/">
-                  <SvgIcon
-                    :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
-                    :is-open-hover="!sidebarData.isShowSidebar"
-                    icon="crypto-company/js"
                   />
                 </NuxtLink>
               </li>

@@ -16,6 +16,26 @@ const sidebarData = reactive<ISidebarData>({
   isShowSidebar: false
 });
 const defaultThemeMode = ref<string>(commonStores.curTheme);
+// 菜单列表
+const menuList = reactive([
+  {
+    equipment: "pc",
+    list: [
+      { indent: "collect", icon: ["archive/frame"] },
+      { indent: "translate", icon: ["paragraph/translate"] },
+      { indent: "theme", icon: ["weather/moon", "weather/sun"] }
+    ]
+  },
+  {
+    equipment: "mobile",
+    list: [
+      { indent: "search", icon: ["search/search"] },
+      { indent: "collect", icon: ["archive/frame"] },
+      { indent: "translate", icon: ["paragraph/translate"] },
+      { indent: "theme", icon: ["weather/moon", "weather/sun"] }
+    ]
+  }
+]);
 
 onMounted(() => {
   getLocaleData();
@@ -84,15 +104,28 @@ const getLocaleData = () => {
  */
 const setLocaleData = (language: string) => {
   setLocale(language);
-  saveLanguageApi(language).then(res => {
-    console.log();
-  });
+  saveLanguageApi(language);
+};
+
+/**
+ * 相关操作
+ * @param indent 标识
+ */
+const relatedOperations = (indent: string) => {
+  switch (indent) {
+    case "translate":
+      setLocaleData(locale.value === "en" ? "zh-CN" : "en");
+      break;
+    case "theme":
+      setThemeMode();
+      break;
+  }
 };
 </script>
 
 <template>
   <header>
-    <div class="pc">
+    <div v-for="item in menuList" :key="item.equipment" :class="item.equipment">
       <div class="head-l">
         <SvgIcon
           :icon="sidebarData.isShowSidebar ? 'essetional/line' : 'arrow/arrow-right'"
@@ -101,28 +134,21 @@ const setLocaleData = (language: string) => {
         <h1>{{ $t("my-name") }}</h1>
       </div>
       <div class="head-r">
-        <div class="area-search">
+        <div v-if="item.equipment == 'mobile'" class="area-search">
           <DataEntrySearch height="40px" width="360px" />
         </div>
         <div class="area-func">
-          <SvgIcon icon="archive/frame" />
-          <SvgIcon icon="paragraph/translate" @click="setLocaleData(locale === 'en' ? 'zh-CN' : 'en')" />
-          <SvgIcon :icon="defaultThemeMode == 'light-mode' ? 'weather/moon' : 'weather/sun'" @click="setThemeMode" />
+          <SvgIcon
+            v-for="list in item.list"
+            :key="list.indent"
+            :icon="list.indent == 'theme'
+              ? defaultThemeMode == 'light-mode'
+                ? list.icon[0]
+                : list.icon[1]
+              : list.icon[0]"
+            @click="relatedOperations(list.indent)"
+          />
         </div>
-      </div>
-    </div>
-    <div class="mobile">
-      <div class="head-l">
-        <SvgIcon
-          :icon="sidebarData.isShowSidebar ? 'essetional/line' : 'arrow/arrow-right'"
-          @click="setSidebarToggle('mobile')"
-        />
-      </div>
-      <div class="head-r">
-        <SvgIcon icon="search/search" />
-        <SvgIcon icon="archive/frame" />
-        <SvgIcon icon="paragraph/translate" @click="setLocaleData(locale === 'en' ? 'zh-CN' : 'en')" />
-        <SvgIcon :icon="defaultThemeMode == 'light-mode' ? 'weather/moon' : 'weather/sun'" @click="setThemeMode" />
       </div>
     </div>
   </header>
