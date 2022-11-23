@@ -30,17 +30,17 @@ header {
       width: calc(100% + 15px);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-
-      .area-func {
-        display: flex;
-        align-items: center;
-      }
+      justify-content: flex-end;
     }
   }
 
   .mobile {
     display: none;
+  }
+
+  .area-func {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -88,6 +88,10 @@ header {
       .head-r {
         display: flex;
         align-items: center;
+
+        .area-search {
+          display: none;
+        }
       }
     }
   }
