@@ -21,18 +21,7 @@ const emit = defineEmits(["close"]);
       <Transition name="bounce">
         <div v-show="visible" class="dialog-body">
           <div class="close-btn" @click="emit('close', false)">
-            <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <g>
-                <path
-                  d="M9.16992 14.8319L14.8299 9.17188" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="1.5"
-                />
-                <path
-                  d="M14.8299 14.8319L9.16992 9.17188" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="1.5"
-                />
-              </g>
-            </svg>
+            <SvgIcon :is-open-hover="false" icon="essetional/close-square" />
           </div>
           <div v-if="isShowTitle" class="title">
             <slot name="title" />
@@ -146,7 +135,7 @@ const emit = defineEmits(["close"]);
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, .5);
   }
 
-  > svg {
+  :deep(svg) {
     width: 34px;
     height: 34px;
   }

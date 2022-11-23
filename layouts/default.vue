@@ -12,7 +12,7 @@ watch(commonStores, (newVal) => {
 
 onMounted(() => {
   setTimeout(() => {
-    closeLoading();
+    // closeLoading();
   }, 1000);
 });
 
@@ -30,7 +30,7 @@ const closeLoading = () => {
   isShowLoading.value = false;
 };
 
-showLoading();
+// showLoading();
 </script>
 
 <template>
