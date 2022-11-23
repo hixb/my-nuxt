@@ -102,7 +102,7 @@ const setLocaleData = (language: string) => {
       </div>
       <div class="head-r">
         <div class="area-search">
-          <CommonSearch height="40px" width="360px" />
+          <DataEntrySearch height="40px" width="360px" />
         </div>
         <div class="area-func">
           <SvgIcon icon="archive/frame" />

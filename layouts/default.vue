@@ -35,16 +35,16 @@ const closeLoading = () => {
 
 <template>
   <div class="app">
-    <CommonHeader />
+    <LayoutHeader />
     <main>
-      <CommonSidebar />
+      <LayoutSidebar />
       <div :style="{ width: `calc(100vw${ curSidebarShowStatus ? ' - 14%' : ''})` }" class="coon">
         <div class="inner">
           <slot />
         </div>
       </div>
     </main>
-    <Loading :visible="isShowLoading"></Loading>
+    <FeedbackLoading :visible="isShowLoading"></FeedbackLoading>
   </div>
 </template>
 
