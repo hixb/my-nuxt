@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 withDefaults(defineProps<{
   visible: boolean,
-  text: string | number
+  text?: string | number
 }>(), {
   visible: false,
   text: "loading..."

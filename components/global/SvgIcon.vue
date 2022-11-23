@@ -1,0 +1,68 @@
+<script lang="ts" setup>
+import { ref, watch } from "#imports";
+
+type SvgProps = {
+  borderRadius?: string
+  isOpenHover?: boolean
+  icon: string
+  filled?: boolean
+}
+
+const props = withDefaults(defineProps<SvgProps>(), {
+  // 半径
+  borderRadius: "round",
+  // 是否打开悬停
+  isOpenHover: true,
+  // 图标
+  icon: "",
+  // svg填充
+  filled: false
+});
+
+const iconsImport = import.meta.glob("assets/icons/**/**.svg", { as: "raw", eager: false });
+const rawIcon = ref(await iconsImport[`/assets/icons/${props.icon}.svg`]());
+
+watch(() => props.icon, async newVal => {
+  newVal && (rawIcon.value = await iconsImport[`/assets/icons/${newVal}.svg`]());
+}, {
+  immediate: true
+});
+
+if (!rawIcon.value) {
+  console.error(`[SvgIcon] Icon '${props.icon}' doesn't exist in 'assets/icons'`);
+}
+</script>
+
+<template>
+  <div :class="[borderRadius, { 'open-hover': isOpenHover }]" class="svg-pic">
+    <span :class="{ 'nuxt-icon--fill': !filled }" class="nuxt-icon" v-html="rawIcon" />
+  </div>
+</template>
+
+<style lang="scss">
+.svg-pic {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--my-theme-trans2);
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.open-hover {
+  &:hover {
+    transition: var(--my-theme-trans2);
+    background-color: var(--my-theme-transB);
+
+    svg * {
+      stroke: var(--my-theme-special-color);
+    }
+  }
+}
+</style>
