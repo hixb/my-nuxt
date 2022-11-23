@@ -5,22 +5,23 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@pinia/nuxt": "^0.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
+    "@pinia/nuxt": "^0.4.5",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
     "eslint-plugin-vue": "^9.3.0",
-    "nuxt": "3.0.0-rc.12",
-    "sass": "^1.54.0",
-    "typescript": "^4.7.4"
+    "nuxt": "^3.0.0",
+    "sass": "^1.56.1",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@intlify/nuxt3": "^0.2.3",
-    "axios": "^0.27.2",
-    "pinia": "^2.0.17",
-    "pinia-plugin-persistedstate": "^2.3.0"
+    "@intlify/nuxt3": "^0.2.4",
+    "axios": "^1.2.0",
+    "pinia": "^2.0.25",
+    "pinia-plugin-persistedstate": "^2.4.0"
   }
 }
