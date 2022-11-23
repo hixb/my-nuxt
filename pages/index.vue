@@ -23,10 +23,10 @@ getData();
 
 <template>
   <NuxtLayout>
-    <OftenButton type="grb" @click="showDialog">
+    <GeneralButton type="grb" @click="showDialog">
       hello
-    </OftenButton>
-    <OftenDialog :visible="isShowDialog" @close="isShowDialog = false" />
+    </GeneralButton>
+    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />
   </NuxtLayout>
 </template>
 
