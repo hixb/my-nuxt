@@ -4035,6 +4035,13 @@ nuxi@3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+nuxt-icons@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nuxt-icons/-/nuxt-icons-3.0.0.tgz#82e8902917b2c0e94cb4d2355dc882045bef0ee7"
+  integrity sha512-7F9/uug7T23d2IGsmz0Jyi4gw86HRZeuzfxC1+e5vsAfQ4MhUMRaANki+uDgiUWub1y5TsclxptG06EH1e3bRQ==
+  dependencies:
+    "@nuxt/kit" "^3.0.0"
+
 nuxt@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.0.0.tgz#0909e6566d79805f3a4ed6229573817cbde12e89"
