@@ -1,19 +1,26 @@
 <script lang="ts" setup>
 import { useCommonStore } from "~/stores";
-import { onMounted, ref, watch } from "#imports";
+import { onDeactivated, onMounted, ref, watch } from "#imports";
 
 const commonStores = useCommonStore();
 const curSidebarShowStatus = ref<any>(true);
 const isShowLoading = ref<boolean>(false);
+const loadingAnimation = ref<boolean>(false);
+const loadTimer = ref<any>(null);
 
 watch(commonStores, (newVal) => {
   curSidebarShowStatus.value = newVal.isShowSidebar;
 }, { immediate: true });
 
 onMounted(() => {
-  setTimeout(() => {
+  loadingAnimation.value = true;
+  loadTimer.value = setTimeout(() => {
     // closeLoading();
   }, 1000);
+});
+
+onDeactivated(() => {
+  clearInterval(loadTimer);
 });
 
 /**
@@ -35,15 +42,19 @@ const closeLoading = () => {
 
 <template>
   <div class="app">
-    <LayoutHeader />
-    <main>
-      <LayoutSidebar />
-      <div class="content">
-        <div class="inner">
-          <slot />
-        </div>
+    <Transition>
+      <div v-if="loadingAnimation">
+        <LayoutHeader />
+        <main>
+          <LayoutSidebar />
+          <div class="content">
+            <div class="inner">
+              <slot />
+            </div>
+          </div>
+        </main>
       </div>
-    </main>
+    </Transition>
     <FeedbackLoading :visible="isShowLoading"></FeedbackLoading>
     <OtherBackTop></OtherBackTop>
   </div>
@@ -53,6 +64,7 @@ const closeLoading = () => {
 .app {
   main {
     display: flex;
+    margin-top: var(--my-header-height);
 
     .content {
       width: calc(100% - var(--my-nav-width));
@@ -81,5 +93,15 @@ const closeLoading = () => {
       }
     }
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

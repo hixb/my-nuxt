@@ -6,8 +6,8 @@ header {
   z-index: 2;
 
   .pc {
-    width: var(--my-header-height);
-    height: 60px;
+    width: 100%;
+    height: var(--my-header-height);
     box-shadow: 0 0 15px rgba(0, 0, 0, .07);
     padding: 0 20px;
     display: flex;
