@@ -38,7 +38,7 @@ const closeLoading = () => {
     <LayoutHeader />
     <main>
       <LayoutSidebar />
-      <div class="coon">
+      <div class="content">
         <div class="inner">
           <slot />
         </div>
@@ -54,18 +54,16 @@ const closeLoading = () => {
   main {
     display: flex;
 
-    .coon {
-      width: 100%;
-      position: relative;
-      background-color: var(--my-theme-bg-color);
+    .content {
+      width: calc(100% - var(--my-nav-width));
+      height: 1000px;
       padding-top: 30px;
 
       .inner {
-        width: 1230px;
-        min-height: calc(100vh - var(--my-header-height));
+        padding-left: 25px;
+        padding-right: 25px;
         margin: 0 auto;
-        margin-top: var(--my-header-height);
-        padding-top: 30px;
+        max-width: 1280px;
       }
     }
   }
@@ -74,9 +72,12 @@ const closeLoading = () => {
 @media screen and (max-width: 896px) {
   .app {
     main {
-      .coon {
-        width: calc(100vw - 5%) !important;
+      margin-top: 0;
+
+      .content {
+        width: calc(100vw - 30px);
         margin: 0 auto;
+        padding-top: 95px;
       }
     }
   }

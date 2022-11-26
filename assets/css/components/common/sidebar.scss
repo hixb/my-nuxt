@@ -9,12 +9,11 @@ aside {
 }
 
 .pc-aside-no-active {
-  width: 75px;
+  width: 80px;
 }
 
 .pc-aside {
-  position: fixed;
-  height: 100vh;
+  position: sticky;
   z-index: 1;
   transition: var(--my-theme-trans3);
   top: var(--my-header-height);

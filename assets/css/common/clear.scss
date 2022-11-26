@@ -1,16 +1,16 @@
 ::-webkit-scrollbar {
   width: 8px;
   height: 6px;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  background-color: var(--my-theme-scrollbar-color);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--my-theme-scrollbar-bg);
   border-radius: 8px;
+
+  &:hover {
+    background-color: var(--my-theme-scrollbar-bg-hover);
+  }
 }
 
 html,
@@ -25,7 +25,6 @@ body {
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 *,
