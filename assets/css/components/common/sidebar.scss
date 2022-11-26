@@ -1,3 +1,9 @@
+aside {
+  .mobile-aside {
+    display: none;
+  }
+}
+
 .pc-aside-active {
   width: var(--my-nav-width);
 }
@@ -9,6 +15,7 @@
 .pc-aside {
   position: fixed;
   height: 100vh;
+  z-index: 1;
   transition: var(--my-theme-trans3);
   top: var(--my-header-height);
 
@@ -89,66 +96,6 @@
         }
       }
     }
-
-    nav {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      border-top: 1px solid var(--my-theme-border);
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background-color: var(--my-theme-bg-color);
-
-      .menu {
-        ul {
-          display: flex;
-          align-items: center;
-
-          li {
-            a {
-              color: var(--my-theme-color);
-
-              &:after {
-                content: '\00B7';
-                font-size: 90%;
-                opacity: .6;
-                padding: 0 2px;
-              }
-            }
-
-            &:hover {
-              text-decoration: underline;
-            }
-
-            &:last-of-type {
-              a {
-                &:after {
-                  content: "";
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .link {
-        margin-top: 10px;
-
-        ul {
-          display: flex;
-          align-items: center;
-
-          .svg-pic {
-            width: 35px;
-            height: 35px;
-          }
-        }
-      }
-    }
   }
 
   .zoom-sidebar {
@@ -214,6 +161,133 @@
       padding: 0 15px;
       display: flex;
       align-items: center;
+    }
+  }
+}
+
+.mobile-aside {
+  position: fixed;
+  z-index: 12;
+
+  .mask {
+    backdrop-filter: saturate(180%) blur(10px);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .2);
+  }
+
+  .mobile {
+    .aside-list {
+      width: calc(100vw - 20%);
+      height: calc(100vh - 40px);
+      background-color: var(--my-theme-darkBs);
+      margin-top: 20px;
+      margin-left: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 30px 0 rgba(0, 0, 0, .05);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 11;
+      padding: 0 15px;
+      min-width: 230px;
+      max-width: 400px;
+
+      .title {
+        height: 48px;
+        display: flex;
+        align-items: center;
+
+        :deep(svg) {
+          width: 34px;
+          height: 34px;
+        }
+      }
+
+      .each-list {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          > a {
+            display: flex;
+            align-items: center;
+
+            span {
+              font-size: 14px;
+              font-weight: 100;
+            }
+          }
+        }
+      }
+
+      nav {
+        border-radius: 0 0 20px 20px;
+      }
+    }
+  }
+}
+
+nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--my-theme-border);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--my-theme-bg-color);
+
+  .menu {
+    ul {
+      display: flex;
+      align-items: center;
+
+      li {
+        a {
+          color: var(--my-theme-color);
+
+          &:after {
+            content: '\00B7';
+            font-size: 90%;
+            opacity: .6;
+            padding: 0 2px;
+          }
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &:last-of-type {
+          a {
+            &:after {
+              content: "";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .link {
+    margin-top: 10px;
+
+    ul {
+      display: flex;
+      align-items: center;
+
+      .svg-pic {
+        width: 35px;
+        height: 35px;
+      }
     }
   }
 }
@@ -321,8 +395,14 @@
 }
 
 @media screen and (max-width: 896px) {
-  .pc-aside {
-    display: none;
+  aside {
+    .pc-aside {
+      display: none;
+    }
+
+    .mobile-aside {
+      display: block;
+    }
   }
 }
 

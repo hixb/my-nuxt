@@ -63,7 +63,8 @@ header {
 
     .mobile {
       width: 95%;
-      height: 60px;
+      min-width: 385px;
+      height: var(--my-header-height);
       box-shadow: 0 0 15px rgba(0, 0, 0, .07);
       padding: 0 20px;
       display: flex;
