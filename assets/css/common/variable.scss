@@ -16,3 +16,9 @@
 html body svg * {
   stroke: var(--my-theme-svg-color);
 }
+
+.t-over {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -52,54 +52,104 @@ const setSidebarToggle = (equipment: string) => {
 </script>
 
 <template>
-  <aside :style="{ width: sidebarData.isShowSidebar ? '14%' : ''}" class="pc-aside">
-    <div :class="[{'zoom-sidebar': !sidebarData.isShowSidebar}]" class="pc">
-      <div class="avatar">
-        <div class="avatar-bg"></div>
+  <aside>
+    <div :class="['pc-aside', sidebarData.isShowSidebar ? 'pc-aside-active' : 'pc-aside-no-active']">
+      <div :class="['pc', {'zoom-sidebar': !sidebarData.isShowSidebar}]">
+        <div class="avatar">
+          <div class="avatar-bg"></div>
+        </div>
+        <ul>
+          <li v-for="item in sidebarList" :key="item.icon">
+            <NuxtLink :to="item.router">
+              <SvgIcon
+                :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
+                :icon="item.icon"
+                :is-open-hover="!sidebarData.isShowSidebar"
+              />
+              <span>{{ $t(item.text) }}</span>
+              <p>{{ $t(item.text) }}</p>
+            </NuxtLink>
+          </li>
+        </ul>
+        <nav>
+          <template v-if="sidebarData.isShowSidebar">
+            <div class="menu">
+              <ul>
+                <li v-for="item in footerRule" :key="item.text">
+                  <NuxtLink :to="item.router">
+                    {{ $t(item.text) }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+            <div class="link">
+              <ul>
+                <li v-for="item in footerConnect" :key="item.icon">
+                  <NuxtLink :to="item.router">
+                    <SvgIcon
+                      :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
+                      :icon="item.icon"
+                      :is-open-hover="!sidebarData.isShowSidebar"
+                    />
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+          </template>
+          <template v-else>
+            <SvgIcon icon="essetional/add" @click="setSidebarToggle" />
+          </template>
+        </nav>
       </div>
-      <ul>
-        <li v-for="item in sidebarList" :key="item.icon">
-          <NuxtLink :to="item.router">
-            <SvgIcon
-              :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
-              :icon="item.icon"
-              :is-open-hover="!sidebarData.isShowSidebar"
-            />
-            <span>{{ $t(item.text) }}</span>
-            <p>{{ $t(item.text) }}</p>
-          </NuxtLink>
-        </li>
-      </ul>
-      <nav>
-        <template v-if="sidebarData.isShowSidebar">
-          <div class="menu">
-            <ul>
-              <li v-for="item in footerRule" :key="item.text">
-                <NuxtLink :to="item.router">
-                  {{ $t(item.text) }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
-          <div class="link">
-            <ul>
-              <li v-for="item in footerConnect" :key="item.icon">
+    </div>
+    <Transition name="slide-fade">
+      <div v-if="sidebarData.isShowSidebar" class="mobile-aside">
+        <div :class="['mobile']">
+          <div class="mask" @click="setSidebarToggle"></div>
+          <div class="aside-list">
+            <div class="title">
+              <SvgIcon icon="essetional/close-square" @click="setSidebarToggle" />
+            </div>
+            <ul class="each-list">
+              <li v-for="item in sidebarList" :key="item.icon">
                 <NuxtLink :to="item.router">
                   <SvgIcon
                     :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                     :icon="item.icon"
                     :is-open-hover="!sidebarData.isShowSidebar"
                   />
+                  <span>{{ $t(item.text) }}</span>
                 </NuxtLink>
               </li>
             </ul>
+            <nav>
+              <div class="menu">
+                <ul>
+                  <li v-for="item in footerRule" :key="item.text">
+                    <NuxtLink :to="item.router">
+                      {{ $t(item.text) }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+              <div class="link">
+                <ul>
+                  <li v-for="item in footerConnect" :key="item.icon">
+                    <NuxtLink :to="item.router">
+                      <SvgIcon
+                        :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
+                        :icon="item.icon"
+                        :is-open-hover="!sidebarData.isShowSidebar"
+                      />
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+            </nav>
           </div>
-        </template>
-        <template v-else>
-          <SvgIcon icon="essetional/add" @click="setSidebarToggle" />
-        </template>
-      </nav>
-    </div>
+        </div>
+      </div>
+    </Transition>
   </aside>
 </template>
 

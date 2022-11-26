@@ -26,6 +26,9 @@ getData();
     <GeneralButton type="grb" @click="showDialog">
       hello
     </GeneralButton>
+    <GeneralButton>
+      hello
+    </GeneralButton>
     <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />
   </NuxtLayout>
 </template>
