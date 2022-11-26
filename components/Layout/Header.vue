@@ -134,7 +134,7 @@ const relatedOperations = (indent: string) => {
         <h1>{{ $t("my-name") }}</h1>
       </div>
       <div class="head-r">
-        <div v-if="item.equipment == 'mobile'" class="area-search">
+        <div v-if="item.equipment == 'pc'" class="area-search">
           <DataEntrySearch height="40px" width="360px" />
         </div>
         <div class="area-func">

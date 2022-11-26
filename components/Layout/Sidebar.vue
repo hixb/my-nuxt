@@ -52,7 +52,7 @@ const setSidebarToggle = (equipment: string) => {
 </script>
 
 <template>
-  <aside :style="{ width: sidebarData.isShowSidebar ? '14%' : ''}" class="pc-aside">
+  <aside :class="['pc-aside', sidebarData.isShowSidebar ? 'pc-aside-active' : 'pc-aside-no-active']">
     <div :class="[{'zoom-sidebar': !sidebarData.isShowSidebar}]" class="pc">
       <div class="avatar">
         <div class="avatar-bg"></div>

@@ -2,6 +2,9 @@
   --my-theme-fontH: Google Sans Text, Arial, Helvetica, sans-serif;
   --my-theme-fontB: Google Sans Text, Arial, Helvetica, sans-serif;
   --my-theme-fontBa: Google Sans Text, Arial, Helvetica, sans-serif;
+
+  --my-nav-width: 230px;
+  --my-header-height: 60px;
 }
 
 :root, .light-mode {
@@ -15,7 +18,7 @@
   --my-theme-content: #fffdfc;
   --my-theme-border: #e6e6e6;
 
-  --my-theme-darkBs: #252526;
+  --my-theme-darkBs: #fffdfc;
   --my-theme-darkT: rgba(0, 0, 0, .03);
   --my-theme-transB: rgba(0, 0, 0, .05);
   --my-theme-trans1: all .1s ease;

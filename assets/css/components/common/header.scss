@@ -1,9 +1,11 @@
 header {
-  position: relative;
+  width: 100vw;
+  position: fixed;
+  left: 0;
   z-index: 2;
 
   .pc {
-    width: 100%;
+    width: var(--my-header-height);
     height: 60px;
     box-shadow: 0 0 15px rgba(0, 0, 0, .07);
     padding: 0 20px;
@@ -30,7 +32,7 @@ header {
       width: calc(100% + 15px);
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
   }
 

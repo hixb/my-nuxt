@@ -38,13 +38,14 @@ const closeLoading = () => {
     <LayoutHeader />
     <main>
       <LayoutSidebar />
-      <div :style="{ width: `calc(100vw${ curSidebarShowStatus ? ' - 14%' : ''})` }" class="coon">
+      <div class="coon">
         <div class="inner">
           <slot />
         </div>
       </div>
     </main>
     <FeedbackLoading :visible="isShowLoading"></FeedbackLoading>
+    <OtherBackTop></OtherBackTop>
   </div>
 </template>
 
@@ -54,14 +55,17 @@ const closeLoading = () => {
     display: flex;
 
     .coon {
+      width: 100%;
       position: relative;
       background-color: var(--my-theme-bg-color);
       padding-top: 30px;
 
       .inner {
         width: 1230px;
-        height: calc(100vh - 105px);
+        min-height: calc(100vh - var(--my-header-height));
         margin: 0 auto;
+        margin-top: var(--my-header-height);
+        padding-top: 30px;
       }
     }
   }

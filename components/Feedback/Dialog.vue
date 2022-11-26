@@ -117,7 +117,7 @@ const emit = defineEmits(["close"]);
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: var(--my-theme-bg-color);
+  background-color: var(--my-theme-darkBs);
   width: 34px;
   height: 34px;
   overflow: hidden;

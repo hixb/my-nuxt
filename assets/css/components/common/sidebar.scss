@@ -1,7 +1,16 @@
+.pc-aside-active {
+  width: var(--my-nav-width);
+}
+
+.pc-aside-no-active {
+  width: 75px;
+}
+
 .pc-aside {
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  height: 100vh;
   transition: var(--my-theme-trans3);
+  top: var(--my-header-height);
 
   .pc {
     width: 100%;
@@ -92,6 +101,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      background-color: var(--my-theme-bg-color);
 
       .menu {
         ul {
