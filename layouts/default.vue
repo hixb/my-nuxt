@@ -68,8 +68,9 @@ const closeLoading = () => {
 
     .content {
       width: calc(100% - var(--my-nav-width));
-      height: 1000px;
+      height: 100vh;
       padding-top: 30px;
+
 
       .inner {
         padding-left: 25px;
