@@ -9,13 +9,23 @@ const props = defineProps({
   opacity: { type: Number, default: .4 },
   // 类型
   type: {
-    type: String as PropType<"primary" | "success" | "warning" | "danger" | "grb">,
+    type: String as PropType<"primary" | "success" | "warning" | "danger" | "grb" | "ordinary">,
     default: "primary"
   },
   // 形状
   shape: {
-    type: String as PropType<"plain" | "circle" | "round" | "square">,
+    type: String as PropType<"plain" | "circle" | "round" | "square" | "semicircle">,
     default: "plain"
+  },
+  // 自定义类名
+  customizeClass: {
+    type: String,
+    default: ""
+  },
+  // 跳转路由
+  href: {
+    type: String,
+    default: ""
   }
 });
 
@@ -125,10 +135,16 @@ const getStyleNumber = (el: any, attr: any, pseudoClass: any = null) => {
   }
 };
 
+/**
+ * 跳转路由
+ */
+const jump = () => {
+  props.href && window.open(props.href);
+};
 </script>
 
 <template>
-  <button :class="['my-btn', shape, type]">
+  <button :class="['my-btn', shape, type, customizeClass]" @click="jump">
     <canvas class="ripple" @click="ripple" />
     <slot />
   </button>
@@ -164,6 +180,11 @@ const getStyleNumber = (el: any, attr: any, pseudoClass: any = null) => {
 .round {
   padding: 8px 12px;
   border-radius: 4px;
+}
+
+.semicircle {
+  padding: 8px 12px;
+  border-radius: 100px;
 }
 
 .square {
@@ -216,6 +237,16 @@ const getStyleNumber = (el: any, attr: any, pseudoClass: any = null) => {
 
   &:hover {
     box-shadow: 0 10px 20px -10px rgba(59, 222, 200, .7);
+  }
+}
+
+.ordinary {
+  background-color: var(--my-theme-ordinary-bgc);
+  transition: var(--my-theme-trans3);
+
+  &:hover {
+    transition: var(--my-theme-trans3);
+    opacity: .9;
   }
 }
 </style>
