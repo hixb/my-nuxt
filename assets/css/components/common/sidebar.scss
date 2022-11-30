@@ -171,7 +171,7 @@ aside {
   .mask {
     backdrop-filter: saturate(180%) blur(10px);
     position: fixed;
-    width: 100vw;
+    width: 10000px;
     height: 100vh;
     top: 0;
     left: 0;
@@ -219,6 +219,7 @@ aside {
             span {
               font-size: 14px;
               font-weight: 100;
+              color: var(--my-theme-color);
             }
           }
         }
