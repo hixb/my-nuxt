@@ -55,8 +55,9 @@ const closeLoading = () => {
         </main>
       </div>
     </Transition>
-    <FeedbackLoading :visible="isShowLoading"></FeedbackLoading>
-    <OtherBackTop></OtherBackTop>
+    <FeedbackLoading :visible="isShowLoading" />
+    <OtherBackTop />
+    <CookieHint />
   </div>
 </template>
 

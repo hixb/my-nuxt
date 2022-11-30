@@ -6,6 +6,7 @@ type SvgProps = {
   isOpenHover?: boolean
   icon: string
   filled?: boolean
+  customizeClass?: string
 }
 
 const props = withDefaults(defineProps<SvgProps>(), {
@@ -16,7 +17,9 @@ const props = withDefaults(defineProps<SvgProps>(), {
   // 图标
   icon: "",
   // svg填充
-  filled: false
+  filled: false,
+  // 自定义类名
+  customizeClass: ""
 });
 
 const iconsImport = import.meta.glob("assets/icons/**/**.svg", { as: "raw", eager: false });
@@ -34,7 +37,7 @@ if (!rawIcon.value) {
 </script>
 
 <template>
-  <div :class="[borderRadius, { 'open-hover': isOpenHover }]" class="svg-pic">
+  <div :class="['svg-pic', borderRadius, customizeClass, { 'open-hover': isOpenHover }]">
     <span :class="{ 'nuxt-icon--fill': !filled }" class="nuxt-icon" v-html="rawIcon" />
   </div>
 </template>
@@ -48,6 +51,10 @@ if (!rawIcon.value) {
   justify-content: center;
   transition: var(--my-theme-trans2);
   cursor: pointer;
+
+  .nuxt-icon {
+    display: contents;
+  }
 
   svg {
     width: 20px;

@@ -2,7 +2,6 @@
 import { useUserStore } from "~/stores/user";
 import { ref, watchEffect } from "#imports";
 import { fetchRoomList } from "~/server/api";
-import CookieHint from "~/components/Other/CookieHint.vue";
 
 const user = useUserStore();
 const isShowDialog = ref<boolean>(false);
@@ -24,14 +23,14 @@ getData();
 
 <template>
   <NuxtLayout>
-    <GeneralButton type="grb" @click="showDialog">
-      hello
-    </GeneralButton>
-    <GeneralButton>
-      hello
-    </GeneralButton>
-    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />
-    <CookieHint />
+    <!--    <GeneralButton type="grb" @click="showDialog">-->
+    <!--      hello-->
+    <!--    </GeneralButton>-->
+    <!--    <GeneralButton>-->
+    <!--      hello-->
+    <!--    </GeneralButton>-->
+    <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
+    <DataEntryList />
   </NuxtLayout>
 </template>
 
