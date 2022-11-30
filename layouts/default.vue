@@ -55,8 +55,9 @@ const closeLoading = () => {
         </main>
       </div>
     </Transition>
-    <FeedbackLoading :visible="isShowLoading"></FeedbackLoading>
-    <OtherBackTop></OtherBackTop>
+    <FeedbackLoading :visible="isShowLoading" />
+    <OtherBackTop />
+    <CookieHint />
   </div>
 </template>
 
@@ -68,7 +69,7 @@ const closeLoading = () => {
 
     .content {
       width: calc(100% - var(--my-nav-width));
-      height: 100vh;
+      height: calc(100% - var(--my-header-height));
       padding-top: 30px;
 
 

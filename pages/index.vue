@@ -23,13 +23,14 @@ getData();
 
 <template>
   <NuxtLayout>
-    <GeneralButton type="grb" @click="showDialog">
-      hello
-    </GeneralButton>
-    <GeneralButton>
-      hello
-    </GeneralButton>
-    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />
+    <!--    <GeneralButton type="grb" @click="showDialog">-->
+    <!--      hello-->
+    <!--    </GeneralButton>-->
+    <!--    <GeneralButton>-->
+    <!--      hello-->
+    <!--    </GeneralButton>-->
+    <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
+    <DataEntryList />
   </NuxtLayout>
 </template>
 
