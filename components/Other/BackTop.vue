@@ -24,13 +24,13 @@ const handleScroll = () => {
 </script>
 
 <template>
-  <div :class="['back-top', { visible: visible }]" @click="scrollEaseOut(0)">
+  <section :class="['back-top', { visible: visible }]" @click="scrollEaseOut(0)">
     <svg viewBox="0 0 34 34">
       <circle class="b" cx="17" cy="17" r="15.92" />
       <circle :style="`stroke-dashoffset: ${rollAway};`" class="c scrollProgress" cx="17" cy="17" r="15.92" />
       <path class="line d" d="M15.07,21.06,19.16,17l-4.09-4.06" />
     </svg>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

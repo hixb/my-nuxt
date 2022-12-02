@@ -56,7 +56,7 @@ const setSidebarToggle = (equipment: string) => {
     <div :class="['pc-aside', sidebarData.isShowSidebar ? 'pc-aside-active' : 'pc-aside-no-active']">
       <div :class="['pc', {'zoom-sidebar': !sidebarData.isShowSidebar}]">
         <div class="avatar">
-          <div class="avatar-bg"></div>
+          <div class="avatar-bg" />
         </div>
         <ul>
           <li v-for="item in sidebarList" :key="item.icon">
@@ -73,7 +73,7 @@ const setSidebarToggle = (equipment: string) => {
         </ul>
         <nav>
           <template v-if="sidebarData.isShowSidebar">
-            <div class="menu">
+            <section class="menu">
               <ul>
                 <li v-for="item in footerRule" :key="item.text">
                   <NuxtLink :to="item.router">
@@ -81,7 +81,7 @@ const setSidebarToggle = (equipment: string) => {
                   </NuxtLink>
                 </li>
               </ul>
-            </div>
+            </section>
             <div class="link">
               <ul>
                 <li v-for="item in footerConnect" :key="item.icon">
@@ -105,7 +105,7 @@ const setSidebarToggle = (equipment: string) => {
     <Transition name="slide-fade">
       <div v-if="sidebarData.isShowSidebar" class="mobile-aside">
         <div :class="['mobile']">
-          <div class="mask" @click="setSidebarToggle"></div>
+          <div class="mask" @click="setSidebarToggle" />
           <div class="aside-list">
             <div class="title">
               <SvgIcon icon="essetional/close-square" @click="setSidebarToggle" />

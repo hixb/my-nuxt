@@ -17,7 +17,7 @@ const emit = defineEmits(["close"]);
 
 <template>
   <Transition>
-    <div v-show="visible" :class="className" :style="{ width, height }" class="my-dialog">
+    <section v-show="visible" :class="className" :style="{ width, height }" class="my-dialog">
       <Transition name="bounce">
         <div v-show="visible" class="dialog-body">
           <div class="close-btn" @click="emit('close', false)">
@@ -31,7 +31,7 @@ const emit = defineEmits(["close"]);
           </div>
         </div>
       </Transition>
-    </div>
+    </section>
   </Transition>
 </template>
 

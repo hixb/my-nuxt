@@ -16,16 +16,16 @@ const data = reactive([
 <template>
   <section class="data-list">
     <article v-for="item in data" :key="item.title">
-      <section class="cover">
+      <div class="cover">
         <NuxtLink :to="item.url">
           <div class="operate">
-            <SvgIcon :is-open-hover="false" customize-class="icon" icon="emails-message/message"></SvgIcon>
-            <SvgIcon :is-open-hover="false" customize-class="icon" icon="archive/archive-add">1</SvgIcon>
+            <SvgIcon :is-open-hover="false" customize-class="icon" icon="emails-message/message" />
+            <SvgIcon :is-open-hover="false" customize-class="icon" icon="archive/archive-add" />
           </div>
           <img :src="item.pic" alt="">
         </NuxtLink>
-      </section>
-      <section class="detail">
+      </div>
+      <div class="detail">
         <h2 class="title">
           <NuxtLink :to="item.url">
             {{ item.title }}
@@ -34,11 +34,11 @@ const data = reactive([
         <p class="content">
           {{ item.content }}
         </p>
-        <section class="outer">
+        <div class="outer">
           <span class="date">{{ item.date }}</span>
           <NuxtLink :to="item.url" class="read">阅读全文</NuxtLink>
-        </section>
-      </section>
+        </div>
+      </div>
     </article>
   </section>
 </template>
