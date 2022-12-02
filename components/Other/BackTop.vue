@@ -2,23 +2,26 @@
 import { onMounted, ref } from "#imports";
 import { scrollEaseOut } from "~/plugins/utils/common";
 
-const rollAway = ref<number>(100);
+const rollAway = ref<number>(0);
 const visible = ref<boolean>(false);
+
 onMounted(() => {
-  const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
-  const windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-  const scrollAvail = pageHeight - windowHeight;
+  handleScroll();
   window.onscroll = () => {
+    const pageHeight: number = document.body.scrollHeight || document.documentElement.scrollHeight;
+    const windowHeight: number = document.documentElement.clientHeight || document.body.clientHeight;
     handleScroll();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    rollAway.value = +((scrollTop / scrollAvail) * 100) - 100;
+    const dashoffsetVal = -((scrollTop / (pageHeight - windowHeight)) * 100) + 100;
+    rollAway.value = dashoffsetVal < 0 ? 0 : dashoffsetVal > 100 ? 100 : dashoffsetVal;
   };
 });
+
 /**
  * 处理滚动
  */
 const handleScroll = () => {
-  let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+  let scrollTop: number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
   visible.value = scrollTop > 500;
 };
 </script>
@@ -27,7 +30,7 @@ const handleScroll = () => {
   <section :class="['back-top', { visible: visible }]" @click="scrollEaseOut(0)">
     <svg viewBox="0 0 34 34">
       <circle class="b" cx="17" cy="17" r="15.92" />
-      <circle :style="`stroke-dashoffset: ${rollAway};`" class="c scrollProgress" cx="17" cy="17" r="15.92" />
+      <circle :style="{ strokeDashoffset: rollAway }" class="c scrollProgress" cx="17" cy="17" r="15.92" />
       <path class="line d" d="M15.07,21.06,19.16,17l-4.09-4.06" />
     </svg>
   </section>
@@ -55,10 +58,11 @@ const handleScroll = () => {
     transform: rotate(-90deg);
     stroke-width: 1.5;
     fill: #fffdfc;
+    transition: var(--my-theme-trans3);
 
     .b {
-      fill: var(--my-theme-bg-color);
-      stroke: var(--my-theme-scrollbar-bg);
+      fill: var(--my-theme-fill-color);
+      stroke: var(--my-theme-str-color);
       opacity: .9;
     }
 
@@ -68,6 +72,7 @@ const handleScroll = () => {
       stroke-dasharray: 100 100;
       stroke-dashoffset: 100;
       stroke-linecap: round;
+      transition: var(--my-theme-trans3);
     }
 
     .d {
@@ -76,6 +81,13 @@ const handleScroll = () => {
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 1;
+    }
+  }
+
+  &:hover {
+    svg {
+      opacity: .8;
+      transition: var(--my-theme-trans3);
     }
   }
 }
