@@ -63,7 +63,7 @@ const enterSearch = (e: any) => {
 </script>
 
 <template>
-  <div :style="{width: width, height: height}" class="search-wrap-ipt">
+  <section :style="{width: width, height: height}" class="search-wrap-ipt">
     <div class="search-btn" @click="findModel">
       <SvgIcon :is-open-hover="false" icon="search/search" />
     </div>
@@ -71,7 +71,7 @@ const enterSearch = (e: any) => {
     <div v-if="keyword.length > 0 && clearBtnStatus" class="btn-clear" @click="clearInput">
       <SvgIcon :is-open-hover="false" icon="essetional/close-square" />
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">

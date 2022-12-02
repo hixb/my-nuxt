@@ -12,7 +12,7 @@ const agreeCookie = () => {
 
 <template>
   <Transition name="slide-fade">
-    <div v-if="visible" class="cookie-popup">
+    <section v-if="visible" class="cookie-popup">
       <h4 class="title">{{ $t("cookie-popup-title") }}</h4>
       <p>{{ $t("cookie-popup-content") }}</p>
       <div class="btn-area">
@@ -28,7 +28,7 @@ const agreeCookie = () => {
           {{ $t("cookie-popup-more") }}
         </GeneralButton>
       </div>
-    </div>
+    </section>
   </Transition>
 </template>
 

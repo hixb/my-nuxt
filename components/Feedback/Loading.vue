@@ -10,7 +10,7 @@ withDefaults(defineProps<{
 
 <template>
   <Transition>
-    <div v-show="visible" class="my-loading">
+    <section v-show="visible" class="my-loading">
       <svg>
         <g>
           <path d="M 50,100 A 1,1 0 0 1 50,0" />
@@ -26,7 +26,7 @@ withDefaults(defineProps<{
         </defs>
       </svg>
       <span>{{ text }}</span>
-    </div>
+    </section>
   </Transition>
 </template>
 

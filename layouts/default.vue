@@ -41,7 +41,7 @@ const closeLoading = () => {
 </script>
 
 <template>
-  <div class="app">
+  <section class="app">
     <Transition>
       <div v-if="loadingAnimation">
         <LayoutHeader />
@@ -57,8 +57,8 @@ const closeLoading = () => {
     </Transition>
     <FeedbackLoading :visible="isShowLoading" />
     <OtherBackTop />
-    <CookieHint />
-  </div>
+    <OtherCookieHint />
+  </section>
 </template>
 
 <style lang="scss" scoped>

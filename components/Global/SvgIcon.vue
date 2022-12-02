@@ -37,9 +37,9 @@ if (!rawIcon.value) {
 </script>
 
 <template>
-  <div :class="['svg-pic', borderRadius, customizeClass, { 'open-hover': isOpenHover }]">
+  <section :class="['svg-pic', borderRadius, customizeClass, { 'open-hover': isOpenHover }]">
     <span :class="{ 'nuxt-icon--fill': !filled }" class="nuxt-icon" v-html="rawIcon" />
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
