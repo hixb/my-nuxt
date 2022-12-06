@@ -13,7 +13,7 @@ const agreeCookie = () => {
 <template>
   <Transition name="slide-fade">
     <section v-if="visible" class="cookie-popup">
-      <h4 class="title">{{ $t("cookie-popup-title") }}</h4>
+      <GeneralHeadText bold>{{ $t("cookie-popup-title") }}</GeneralHeadText>
       <p>{{ $t("cookie-popup-content") }}</p>
       <div class="btn-area">
         <GeneralButton customize-class="accept" shape="semicircle" @click="agreeCookie">
@@ -51,22 +51,6 @@ const agreeCookie = () => {
 
   * {
     color: var(--my-theme-color);
-  }
-
-  > h4 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-
-    &:after {
-      content: '';
-      display: inline-block;
-      vertical-align: middle;
-      width: 25px;
-      margin: 0 10px;
-      border-bottom: 1px solid var(--my-theme-wire-color);
-      opacity: .5;
-    }
   }
 
   > p {
