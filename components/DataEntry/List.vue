@@ -3,12 +3,13 @@ import { reactive } from "#imports";
 
 const data = reactive([
   {
-    pic: "https://down.om.cn/v3/Uploads/Boss/2022-10-10/spLVMIR611JEqvjQfdLIx1hskrWPiYxu.jpg?imageView2/2/w/310/h/162/q/95",
+    pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmxL-hkIX19cdlV93xhQnaZSwqU6Jmeq7JK9P7c_FbGFfemeaMVZnC3Ow4WZbc8kMlhxGjLSR2AhN9gsxfhtkPovJJ7zUDBILREULXuvNt2aFMcUAtKbN38kPngpTfHMLwmGuGZb7zK8vaX24LRXDdXus632s2zJp7mNqqzeIar5h8E_6grv8j0T_Y4g/w600-h300-p-k-no-nu-rw-e30/Plus_UI_Typography.webp",
     title: "js判读两个数组对象是否相同",
     content: "let arr1 = [{id: 1, name: '嘿嘿', go: 'xi', child: {id: 55}, is: 2}, 'hh…",
     date: "2022-07-26T08:56:00+08:00",
     commentCount: 2,
-    url: "/"
+    url: "/",
+    source: "/"
   }
 ]);
 </script>
@@ -26,6 +27,10 @@ const data = reactive([
         </NuxtLink>
       </div>
       <div class="detail">
+        <div class="where">
+          in
+          <NuxtLink :to="item.source">Documentation</NuxtLink>
+        </div>
         <h2 class="title">
           <NuxtLink :to="item.url">
             {{ item.title }}
@@ -35,7 +40,10 @@ const data = reactive([
           {{ item.content }}
         </p>
         <div class="outer">
-          <span class="date">{{ item.date }}</span>
+          <span class="date">
+            <b class="published">Published</b>
+            {{ item.date }}
+          </span>
           <NuxtLink :to="item.url" class="read">阅读全文</NuxtLink>
         </div>
       </div>
@@ -50,9 +58,22 @@ const data = reactive([
   background: var(--my-theme-content);
   box-shadow: 0 5px 35px rgba(0, 0, 0, .07);
   border-radius: 10px;
+  position: relative;
 
   * {
     transition: var(--my-theme-trans3);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 15px;
+    background: var(--my-theme-special-color);
+    border-radius: 0 0 0 20px;
+    opacity: .1;
   }
 
   > article {
@@ -130,6 +151,23 @@ const data = reactive([
       flex-direction: column;
       justify-content: center;
 
+      .where {
+        opacity: .7;
+        color: var(--my-theme-color);
+        margin-bottom: 15px;
+
+        a {
+          opacity: 1;
+          transition: var(--my-theme-trans3);
+
+          &:hover {
+            opacity: .7;
+            transition: var(--my-theme-trans3);
+            text-decoration: underline;
+          }
+        }
+      }
+
       .title {
         font-size: 17px;
         font-weight: bold;
@@ -162,6 +200,18 @@ const data = reactive([
           opacity: .8;
           font-size: 15px;
           color: var(--my-theme-color);
+          display: flex;
+          align-items: center;
+
+          .published {
+            background-color: var(--my-theme-special-color);
+            color: #fff;
+            font-weight: normal;
+            padding: 2px 4px;
+            font-size: 12px;
+            margin-right: 5px;
+            border-radius: 2px;
+          }
         }
 
         .read {
