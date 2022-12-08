@@ -3,20 +3,20 @@ import { useCommonStore } from "~/stores";
 import { onDeactivated, onMounted, ref, watch } from "#imports";
 
 const commonStores = useCommonStore();
-const curSidebarShowStatus = ref<any>(true);
+const curSidebarShowStatus = ref<boolean>(true);
 const isShowLoading = ref<boolean>(false);
 const loadingAnimation = ref<boolean>(false);
 const loadTimer = ref<any>(null);
 
-watch(commonStores, (newVal) => {
-  curSidebarShowStatus.value = newVal.isShowSidebar;
+watch(commonStores, newVal => {
+  curSidebarShowStatus.value = newVal.sidebarData.isShowSidebar;
 }, { immediate: true });
 
 onMounted(() => {
   loadingAnimation.value = true;
-  loadTimer.value = setTimeout(() => {
-    // closeLoading();
-  }, 1000);
+  // loadTimer.value = setTimeout(() => {
+  // closeLoading();
+  // }, 1000);
 });
 
 onDeactivated(() => {

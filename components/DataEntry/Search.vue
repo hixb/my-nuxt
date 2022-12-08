@@ -6,8 +6,7 @@ type updateKeywordProps = {
   (e: "updateKeyword", val: string | number): void
 }
 
-// TODO: 解构`props`会导致值失去反应性
-const { width, height, noContentToast, showClearBth } = withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   width?: string
   height?: string
   noContentToast?: string
@@ -25,13 +24,13 @@ const clearBtnStatus = ref<boolean>(false);
 
 const updateKeywordEmit = defineEmits<updateKeywordProps>();
 
-watch(keyword, (newVal, oldValue) => {
+watch(keyword, (newVal: string | number) => {
   updateKeywordEmit("updateKeyword", newVal);
   if (newVal == "" && oldKeyword) {
     oldKeyword.value = "";
   } else {
-    if (showClearBth) {
-      clearBtnStatus.value = showClearBth;
+    if (props.showClearBth) {
+      clearBtnStatus.value = props.showClearBth;
     }
   }
 });
@@ -44,8 +43,8 @@ const clearInput = () => {
 /** 搜索 */
 const findModel = () => {
   if (keyword.value == "" && oldKeyword.value == "") {
-    if (noContentToast) {
-      console.log(noContentToast);
+    if (props.noContentToast) {
+      console.log(props.noContentToast);
     }
     return;
   }
@@ -55,15 +54,15 @@ const findModel = () => {
 };
 
 /** 回车搜索 */
-const enterSearch = (e: any) => {
-  if (e["keyCode"] == 13) {
+const enterSearch = (e: KeyboardEvent) => {
+  if (e.keyCode == 13) {
     findModel();
   }
 };
 </script>
 
 <template>
-  <section :style="{width: width, height: height}" class="search-wrap-ipt">
+  <section :style="{width: props.width, height: props.height}" class="search-wrap-ipt">
     <div class="search-btn" @click="findModel">
       <SvgIcon :is-open-hover="false" icon="search/search" />
     </div>

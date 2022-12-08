@@ -10,7 +10,7 @@ const props = defineProps({
   flower: { type: Boolean, default: false }
 });
 
-const fontSize = computed(() => {
+const fontSize = computed((): string | number => {
   return (typeof props.fontSize == "number" && !isNaN(props.fontSize)) ? props.fontSize : `${props.fontSize}px`;
 });
 </script>

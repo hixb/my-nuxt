@@ -22,10 +22,13 @@ const props = withDefaults(defineProps<SvgProps>(), {
   customizeClass: ""
 });
 
-const iconsImport = import.meta.glob("assets/icons/**/**.svg", { as: "raw", eager: false });
-const rawIcon = ref(await iconsImport[`/assets/icons/${props.icon}.svg`]());
+const iconsImport: Record<string, () => Promise<Record<string, any>>> = import.meta.glob("assets/icons/**/**.svg", {
+  as: "raw",
+  eager: false
+});
+const rawIcon = ref<Record<string, any>>(await iconsImport[`/assets/icons/${props.icon}.svg`]());
 
-watch(() => props.icon, async newVal => {
+watch(() => props.icon, async(newVal: string) => {
   newVal && (rawIcon.value = await iconsImport[`/assets/icons/${newVal}.svg`]());
 }, {
   immediate: true
