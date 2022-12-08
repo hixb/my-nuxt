@@ -23,9 +23,9 @@ getData();
 
 <template>
   <NuxtLayout>
-    <GeneralButton type="grb" @click="showDialog">
-      hello
-    </GeneralButton>
+    <!--    <GeneralButton type="grb" @click="showDialog">-->
+    <!--      hello-->
+    <!--    </GeneralButton>-->
     <!--    <GeneralButton>-->
     <!--      hello-->
     <!--    </GeneralButton>-->
