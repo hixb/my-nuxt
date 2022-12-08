@@ -4,32 +4,14 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 const defaultConfig = {
   timeout: 5000,
   baseUrl: ""
-}
+};
 
 class Service {
+  private static axiosInstance = axios.create(defaultConfig);
+
   constructor() {
     this.httpInterceptorsRequest();
     this.httpInterceptorsResponse();
-  }
-
-  private static axiosInstance = axios.create(defaultConfig);
-
-  // 请求拦截
-  private httpInterceptorsRequest() {
-    Service.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-      return config;
-    }, error => {
-      return Promise.reject(error);
-    })
-  }
-
-  // 响应拦截
-  private httpInterceptorsResponse() {
-    Service.axiosInstance.interceptors.response.use((response: AxiosResponse) => {
-      return response;
-    }, error => {
-      return Promise.reject(error);
-    })
   }
 
   // 封装 get 请求
@@ -40,6 +22,24 @@ class Service {
   // 封装 post 请求
   public post<T>(url: string, params: AxiosRequestConfig): Promise<T> {
     return Service.axiosInstance.post(url, params).then(res => res.data).catch();
+  }
+
+  // 请求拦截
+  private httpInterceptorsRequest() {
+    Service.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    });
+  }
+
+  // 响应拦截
+  private httpInterceptorsResponse() {
+    Service.axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+      return response;
+    }, error => {
+      return Promise.reject(error);
+    });
   }
 }
 

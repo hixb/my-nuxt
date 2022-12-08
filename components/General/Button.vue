@@ -34,7 +34,7 @@ const radius = ref<number>(0);
 const context = ref<any>(null);
 const initialized = ref<boolean>(false);
 const speedOpacity = ref<number>(0);
-const timer = ref<any>(null);
+const timer = ref<number>(-1);
 const origin = reactive<any>({
   x: "",
   y: ""
@@ -43,8 +43,8 @@ const el = ref<any>("");
 
 onDeactivated(() => {
   if (timer.value) {
-    window.cancelAnimationFrame(timer);
-    timer.value = null;
+    window.cancelAnimationFrame(timer.value);
+    timer.value = -1;
   }
 });
 
@@ -52,10 +52,10 @@ onDeactivated(() => {
  * 初始化
  * @param el
  */
-const init = (el: any) => {
+const init = (el: { parentElement: HTMLElement; width: number; height: number | undefined; getContext: (arg0: string) => never; }) => {
   const oBtn = el.parentElement;
   color.value = getStyle(el.parentElement, "color");
-  const w: any = getStyleNumber(oBtn, "width");
+  const w: number = getStyleNumber(oBtn, "width") || 0;
   // 透明度的速度
   speedOpacity.value = (props.speed / w) * props.opacity;
   // canvas 宽和高
@@ -68,10 +68,10 @@ const init = (el: any) => {
  * 波纹
  * @param event
  */
-const ripple = (event: any) => {
+const ripple = (event: MouseEvent) => {
   if (timer) {
     // 清除上次没有执行的动画
-    window.cancelAnimationFrame(timer);
+    window.cancelAnimationFrame(timer.value);
   }
   el.value = event.target;
   // 执行初始化
@@ -114,21 +114,19 @@ const draw = () => {
  * 根据属性, 获取元素的样式值
  * @param el
  * @param attr
- * @param pseudoClass
  */
-const getStyle = (el: any, attr: any, pseudoClass: any = null) => {
-  return window.getComputedStyle(el, pseudoClass)[attr];
+const getStyle = (el: HTMLElement, attr: string) => {
+  return window.getComputedStyle(el, null)[attr as never];
 };
 
 /**
  * 获取属性, 并且属性值是数字, 而不是字符串
  * @param el
  * @param attr
- * @param pseudoClass
  */
-const getStyleNumber = (el: any, attr: any, pseudoClass: any = null) => {
+const getStyleNumber = (el: HTMLElement, attr: string) => {
   try {
-    const val = getStyle(el, attr, pseudoClass);
+    const val = getStyle(el, attr);
     return parseFloat(val);
   } catch (e) {
     console.error(e);

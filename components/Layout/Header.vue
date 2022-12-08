@@ -9,6 +9,16 @@ interface ISidebarData {
   isShowSidebar: boolean;
 }
 
+type IMenuList = {
+  equipment: string;
+  list: {
+    indent: string;
+    icon: string[];
+  }[];
+}[]
+
+type IThemeType = "dark-mode" | "light-mode";
+
 const { setLocale, locale } = useLocal();
 const commonStores = useCommonStore();
 const sidebarData = reactive<ISidebarData>({
@@ -17,7 +27,7 @@ const sidebarData = reactive<ISidebarData>({
 });
 const defaultThemeMode = ref<string>(commonStores.curTheme);
 // 菜单列表
-const menuList = reactive([
+const menuList = reactive<IMenuList>([
   {
     equipment: "pc",
     list: [
@@ -42,7 +52,7 @@ onMounted(() => {
   setRootMode();
 });
 
-watch(commonStores, (newVal) => {
+watch(commonStores, newVal => {
   if (newVal) {
     sidebarData.equipment = newVal.sidebarData.equipment;
     sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
@@ -53,7 +63,7 @@ watch(commonStores, (newVal) => {
  * 设置主题
  */
 const setThemeMode = () => {
-  const curTheme = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
+  const curTheme: IThemeType = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
   defaultThemeMode.value = curTheme;
   localStorage.setItem("theme", curTheme);
   setRootMode();
@@ -64,7 +74,7 @@ const setThemeMode = () => {
  * 设置根模式
  */
 const setRootMode = () => {
-  if (process.client) (document.querySelector("body") as any).className = defaultThemeMode.value;
+  process.client && ((document.querySelector("body") as HTMLElement).className = defaultThemeMode.value);
 };
 
 /**

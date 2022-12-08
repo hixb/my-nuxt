@@ -28,12 +28,14 @@ const footerConnect = reactive([
   { router: "/", icon: "crypto-company/js" },
 ]);
 
-watch(commonStores, (newVal) => {
+watch(commonStores, newVal => {
   if (newVal) {
     sidebarData.equipment = newVal.sidebarData.equipment;
     sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
   }
-}, { immediate: true });
+}, {
+  immediate: true
+});
 
 /**
  * 设置侧边栏
