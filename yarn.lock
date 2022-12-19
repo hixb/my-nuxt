@@ -912,13 +912,13 @@
     vite-plugin-checker "^0.5.1"
     vue-bundle-renderer "^1.0.0"
 
-"@pinia/nuxt@^0.4.5":
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.4.5.tgz#be97fe6d074955f1709231e336cb8ea2b3b1e147"
-  integrity sha512-lnJdZkpySxBArpiOLTJZtA+QSbODl6xIk4psgGWzrWiEwPjUSup/RmQ7zlWz7dmQTONA/mttR0j4V1Zh0b5NKA==
+"@pinia/nuxt@^0.4.6":
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.4.6.tgz#ce83714f700594187d8a29e8f4bdaf31abe0bef1"
+  integrity sha512-HjrYEfLdFpmsjhicPJgL36jVhzHWukIQPFFHGTSF84Cplu+f2nY2XHKqe9ToHzE9rLee2RjLOwAzOnXa/I/u6A==
   dependencies:
     "@nuxt/kit" "^3.0.0"
-    pinia ">=2.0.25"
+    pinia ">=2.0.27"
 
 "@rollup/plugin-alias@^4.0.2":
   version "4.0.2"
@@ -4275,7 +4275,7 @@ pinia-plugin-persistedstate@^3.0.1:
   resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.0.1.tgz#4bd64f35617ea536f1e4ec0ff140576bd92e39a9"
   integrity sha512-WRNWtR4v8StJqBQH+Qiz88SGnlr4wvEyh7wtA+fYEVLoIOnpZ0v4FICvUcC8eUkAIvQL3n6/Ew2yryw7okazvA==
 
-pinia@>=2.0.25, pinia@^2.0.28:
+pinia@>=2.0.27, pinia@^2.0.28:
   version "2.0.28"
   resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.28.tgz#887c982d854972042d9bdfd5bc4fad3b9d6ab02a"
   integrity sha512-YClq9DkqCblq9rlyUual7ezMu/iICWdBtfJrDt4oWU9Zxpijyz7xB2xTwx57DaBQ96UGvvTMORzALr+iO5PVMw==
