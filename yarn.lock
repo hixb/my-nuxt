@@ -1267,12 +1267,7 @@
     "@vue/compiler-dom" "3.2.45"
     "@vue/shared" "3.2.45"
 
-"@vue/devtools-api@^6.2.1":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.2.1.tgz#6f2948ff002ec46df01420dfeff91de16c5b4092"
-  integrity sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==
-
-"@vue/devtools-api@^6.4.5":
+"@vue/devtools-api@^6.2.1", "@vue/devtools-api@^6.4.5":
   version "6.4.5"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz#d54e844c1adbb1e677c81c665ecef1a2b4bb8380"
   integrity sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==
@@ -4314,10 +4309,10 @@ pinia-plugin-persistedstate@^3.0.1:
   resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.0.1.tgz#4bd64f35617ea536f1e4ec0ff140576bd92e39a9"
   integrity sha512-WRNWtR4v8StJqBQH+Qiz88SGnlr4wvEyh7wtA+fYEVLoIOnpZ0v4FICvUcC8eUkAIvQL3n6/Ew2yryw7okazvA==
 
-pinia@>=2.0.25, pinia@^2.0.25:
-  version "2.0.25"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.25.tgz#1e9d50ab54d106c8fcb39090293d780b3b8152b6"
-  integrity sha512-3reAkjJ6bW2D5hZKRMS0c9rUbHVlsVyZd037xO0PJr2AuF/09RRSBnFLlJgmHF4Jx6dEoW/jZBOHTushY7IMlw==
+pinia@>=2.0.25, pinia@^2.0.28:
+  version "2.0.28"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.28.tgz#887c982d854972042d9bdfd5bc4fad3b9d6ab02a"
+  integrity sha512-YClq9DkqCblq9rlyUual7ezMu/iICWdBtfJrDt4oWU9Zxpijyz7xB2xTwx57DaBQ96UGvvTMORzALr+iO5PVMw==
   dependencies:
     "@vue/devtools-api" "^6.4.5"
     vue-demi "*"
