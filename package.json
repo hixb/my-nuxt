@@ -11,17 +11,17 @@
   "devDependencies": {
     "@pinia/nuxt": "^0.4.5",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.44.0",
+    "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^9.3.0",
     "nuxt": "^3.0.0",
     "sass": "^1.57.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "@intlify/nuxt3": "^0.2.4",
-    "axios": "^1.2.1",
-    "pinia": "^2.0.25",
+    "axios": "^1.2.0",
+    "pinia": "^2.0.28",
     "pinia-plugin-persistedstate": "^3.0.1"
   }
 }
