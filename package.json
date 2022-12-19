@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@intlify/nuxt3": "^0.2.4",
-    "axios": "^1.2.0",
+    "axios": "^1.2.1",
     "pinia": "^2.0.25",
     "pinia-plugin-persistedstate": "^3.0.1"
   }
