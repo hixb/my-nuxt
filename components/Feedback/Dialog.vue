@@ -21,7 +21,7 @@ const emit = defineEmits(["close"]);
       <Transition name="bounce">
         <div v-show="visible" class="dialog-body">
           <div class="close-btn" @click="emit('close', false)">
-            <SvgIcon :is-open-hover="false" icon="essetional/close-square" />
+            <GlobalSvgIcon :is-open-hover="false" icon="essetional/close-square" />
           </div>
           <div v-if="isShowTitle" class="title">
             <slot name="title" />

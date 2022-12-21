@@ -63,7 +63,7 @@ const setSidebarToggle = (equipment: string) => {
         <ul>
           <li v-for="item in sidebarList" :key="item.icon">
             <NuxtLink :to="item.router">
-              <SvgIcon
+              <GlobalSvgIcon
                 :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                 :icon="item.icon"
                 :is-open-hover="!sidebarData.isShowSidebar"
@@ -88,7 +88,7 @@ const setSidebarToggle = (equipment: string) => {
               <ul>
                 <li v-for="item in footerConnect" :key="item.icon">
                   <NuxtLink :to="item.router">
-                    <SvgIcon
+                    <GlobalSvgIcon
                       :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                       :icon="item.icon"
                       :is-open-hover="!sidebarData.isShowSidebar"
@@ -99,7 +99,7 @@ const setSidebarToggle = (equipment: string) => {
             </div>
           </template>
           <template v-else>
-            <SvgIcon icon="essetional/add" @click="setSidebarToggle" />
+            <GlobalSvgIcon icon="essetional/add" @click="setSidebarToggle" />
           </template>
         </nav>
       </div>
@@ -110,12 +110,12 @@ const setSidebarToggle = (equipment: string) => {
           <div class="mask" @click="setSidebarToggle" />
           <div class="aside-list">
             <div class="title">
-              <SvgIcon icon="essetional/close-square" @click="setSidebarToggle" />
+              <GlobalSvgIcon icon="essetional/close-square" @click="setSidebarToggle" />
             </div>
             <ul class="each-list">
               <li v-for="item in sidebarList" :key="item.icon">
                 <NuxtLink :to="item.router">
-                  <SvgIcon
+                  <GlobalSvgIcon
                     :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                     :icon="item.icon"
                     :is-open-hover="!sidebarData.isShowSidebar"
@@ -138,7 +138,7 @@ const setSidebarToggle = (equipment: string) => {
                 <ul>
                   <li v-for="item in footerConnect" :key="item.icon">
                     <NuxtLink :to="item.router">
-                      <SvgIcon
+                      <GlobalSvgIcon
                         :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                         :icon="item.icon"
                         :is-open-hover="!sidebarData.isShowSidebar"
