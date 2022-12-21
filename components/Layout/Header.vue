@@ -3,7 +3,6 @@ import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
 import { onMounted, reactive, ref, watch } from "#imports";
 import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
-import SvgIcon from "~/components/Global/SvgIcon.vue";
 
 interface ISidebarData {
   equipment: string;
@@ -138,7 +137,7 @@ const relatedOperations = (indent: string) => {
   <header>
     <div v-for="item in menuList" :key="item.equipment" :class="item.equipment">
       <div class="head-l">
-        <SvgIcon
+        <GlobalSvgIcon
           :icon="sidebarData.isShowSidebar ? 'essetional/line' : 'arrow/arrow-right'"
           @click="setSidebarToggle('pc')"
         />
@@ -149,7 +148,7 @@ const relatedOperations = (indent: string) => {
           <DataEntrySearch height="40px" width="360px" />
         </div>
         <div class="area-func">
-          <SvgIcon
+          <GlobalSvgIcon
             v-for="list in item.list"
             :key="list.indent"
             :icon="list.indent == 'theme'
