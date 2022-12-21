@@ -64,11 +64,11 @@ const enterSearch = (e: KeyboardEvent) => {
 <template>
   <section :style="{width: props.width, height: props.height}" class="search-wrap-ipt">
     <div class="search-btn" @click="findModel">
-      <SvgIcon :is-open-hover="false" icon="search/search" />
+      <GlobalSvgIcon :is-open-hover="false" icon="search/search" />
     </div>
     <input v-model.trim="keyword" :placeholder="$t('header.header-input-text')" type="text" @keypress="enterSearch" />
     <div v-if="keyword.length > 0 && clearBtnStatus" class="btn-clear" @click="clearInput">
-      <SvgIcon :is-open-hover="false" icon="essetional/close-square" />
+      <GlobalSvgIcon :is-open-hover="false" icon="essetional/close-square" />
     </div>
   </section>
 </template>

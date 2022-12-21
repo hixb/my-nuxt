@@ -20,8 +20,8 @@ const data = reactive([
       <div class="cover">
         <NuxtLink :to="item.url">
           <div class="operate">
-            <SvgIcon :is-open-hover="false" customize-class="icon" icon="emails-message/message" />
-            <SvgIcon :is-open-hover="false" customize-class="icon" icon="archive/archive-add" />
+            <GlobalSvgIcon :is-open-hover="false" customize-class="icon" icon="emails-message/message" />
+            <GlobalSvgIcon :is-open-hover="false" customize-class="icon" icon="archive/archive-add" />
           </div>
           <img :src="item.pic" alt="">
         </NuxtLink>
