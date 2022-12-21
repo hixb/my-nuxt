@@ -141,7 +141,7 @@ const relatedOperations = (indent: string) => {
           :icon="sidebarData.isShowSidebar ? 'essetional/line' : 'arrow/arrow-right'"
           @click="setSidebarToggle('pc')"
         />
-        <h1>{{ $t("my-name") }}</h1>
+        <h1>{{ $t("common.my-name") }}</h1>
       </div>
       <div class="head-r">
         <div v-if="item.equipment == 'pc'" class="area-search">

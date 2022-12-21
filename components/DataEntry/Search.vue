@@ -66,7 +66,7 @@ const enterSearch = (e: KeyboardEvent) => {
     <div class="search-btn" @click="findModel">
       <SvgIcon :is-open-hover="false" icon="search/search" />
     </div>
-    <input v-model.trim="keyword" :placeholder="$t('header-input-text')" type="text" @keypress="enterSearch" />
+    <input v-model.trim="keyword" :placeholder="$t('header.header-input-text')" type="text" @keypress="enterSearch" />
     <div v-if="keyword.length > 0 && clearBtnStatus" class="btn-clear" @click="clearInput">
       <SvgIcon :is-open-hover="false" icon="essetional/close-square" />
     </div>

@@ -1,3 +1,6 @@
+import en from "./locales/en";
+import cn from "./locales/cn";
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   typescript: {
@@ -12,11 +15,16 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ["@intlify/nuxt3", "@pinia/nuxt"],
-  // config for `@intlify/nuxt3`
-  intlify: {
-    localeDir: "locales", // set the `locales` directory at source directory of your Nuxt application
-    vueI18n: {},
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n"],
+  i18n: {
+    vueI18n: {
+      legacy: false,
+      globalInjection: true,
+      fallbackLocale: "cn",
+      warnHtmlMessage: false,
+      messages: { "zh-CN": cn, en },
+      fallbackWarn: false
+    }
   },
   plugins: [
     {
