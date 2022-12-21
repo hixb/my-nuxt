@@ -13,14 +13,14 @@ const sidebarData = reactive<ISidebarData>({
   isShowSidebar: false
 });
 const sidebarList = reactive([
-  { router: "/", icon: "essetional/home", text: "sidebar-home-text" },
-  { router: "/", icon: "audio/subtitle", text: "sidebar-article-text" },
-  { router: "/", icon: "users/profile-2user", text: "sidebar-about-text" },
+  { router: "/", icon: "essetional/home", text: "sidebar.sidebar-home-text" },
+  { router: "/", icon: "audio/subtitle", text: "sidebar.sidebar-article-text" },
+  { router: "/", icon: "users/profile-2user", text: "sidebar.sidebar-about-text" },
 ]);
 const footerRule = reactive([
-  { router: "/", text: "sidebar-sitemap-text" },
-  { router: "/", text: "sidebar-disclaimer-text" },
-  { router: "/", text: "sidebar-privacy-text" },
+  { router: "/", text: "sidebar.sidebar-sitemap-text" },
+  { router: "/", text: "sidebar.sidebar-disclaimer-text" },
+  { router: "/", text: "sidebar.sidebar-privacy-text" },
 ]);
 const footerConnect = reactive([
   { router: "/", icon: "crypto-company/facebook" },
