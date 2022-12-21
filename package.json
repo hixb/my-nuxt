@@ -6,7 +6,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .js,.ts,.vue --ignore-path .eslintignore .",
+    "lint:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .eslintignore ."
   },
   "devDependencies": {
     "@pinia/nuxt": "^0.4.6",

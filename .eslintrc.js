@@ -10,9 +10,10 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
     ecmaFeatures: {
-      // 添加ES特性支持，使之能够识别ES6语法
+      // 添加ES特性支持, 使之能够识别ES6语法
       legacyDecorators: true,
       jsx: true,
+      tsx: true
     },
     ecmaVersion: "latest",
     parser: "@typescript-eslint/parser",
@@ -69,10 +70,10 @@ module.exports = {
       "named": "never",
       "asyncArrow": "never"
     }],
-    "vue/multi-word-component-names": 0, //关闭vue文件和组件命名校验
+    "vue/multi-word-component-names": 0, // 关闭vue文件和组件命名校验
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "warn",
+    "@typescript-eslint/no-explicit-any": ["off"]
   }
 };
