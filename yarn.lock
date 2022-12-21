@@ -605,7 +605,7 @@
 
 "@intlify/nuxt3@^0.2.4":
   version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@intlify/nuxt3/-/nuxt3-0.2.4.tgz#5b5311d9950eec86cfeef7d19a45764a913c158b"
+  resolved "https://registry.npmmirror.com/@intlify/nuxt3/-/nuxt3-0.2.4.tgz#5b5311d9950eec86cfeef7d19a45764a913c158b"
   integrity sha512-t8wMX3L9kfRL7aLGzix1Azb2XllfZNMCNc7d7X8EeSrX2NjCJPJPPtBk3lpNwmVSXiUJOrvlBLVdBLe4qj0t/w==
   dependencies:
     "@intlify/shared" latest
