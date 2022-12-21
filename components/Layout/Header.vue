@@ -3,6 +3,7 @@ import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
 import { onMounted, reactive, ref, watch } from "#imports";
 import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
+import SvgIcon from "~/components/Global/SvgIcon.vue";
 
 interface ISidebarData {
   equipment: string;
