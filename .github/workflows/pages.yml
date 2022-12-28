@@ -60,7 +60,7 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: nuxt
       - name: Restore cache
-        uses: actions/cache@v3.2.0
+        uses: actions/cache@v3.2.2
         with:
           path: |
             dist
