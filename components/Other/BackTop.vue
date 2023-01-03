@@ -21,7 +21,7 @@ onMounted(() => {
  * 处理滚动
  */
 const handleScroll = () => {
-  let scrollTop: number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+  let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
   visible.value = scrollTop > 500;
 };
 </script>

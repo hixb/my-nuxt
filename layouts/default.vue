@@ -26,16 +26,16 @@ onDeactivated(() => {
 /**
  * 显示loading
  */
-const showLoading = () => {
-  isShowLoading.value = true;
-};
+// const showLoading = () => {
+//   isShowLoading.value = true;
+// };
 
 /**
  * 关闭loading
  */
-const closeLoading = () => {
-  isShowLoading.value = false;
-};
+// const closeLoading = () => {
+//   isShowLoading.value = false;
+// };
 
 // showLoading();
 </script>

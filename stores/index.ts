@@ -1,15 +1,15 @@
-import { defineStore, acceptHMRUpdate } from "pinia";
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 interface ISidebarData {
-  equipment: string
-  isShowSidebar: boolean
+  equipment: string;
+  isShowSidebar: boolean;
 }
 
 export const useCommonStore = defineStore({
   id: "common",
   persist: true,
   state: () => ({
-    sidebarData:<ISidebarData> {
+    sidebarData: <ISidebarData>{
       equipment: "pc",
       isShowSidebar: false
     },
@@ -36,5 +36,4 @@ export const useCommonStore = defineStore({
   }
 });
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useCommonStore, import.meta.hot));
+import.meta.hot && import.meta.hot.accept(acceptHMRUpdate(useCommonStore, import.meta.hot));

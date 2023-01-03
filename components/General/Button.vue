@@ -17,11 +17,6 @@ const props = defineProps({
     type: String as PropType<"plain" | "circle" | "round" | "square" | "semicircle">,
     default: "plain"
   },
-  // 自定义类名
-  customizeClass: {
-    type: String,
-    default: ""
-  },
   // 跳转路由
   href: {
     type: String,
@@ -142,7 +137,7 @@ const jump = () => {
 </script>
 
 <template>
-  <button :class="['my-btn', shape, type, customizeClass]" @click="jump">
+  <button :class="['my-btn', shape, type]" @click="jump">
     <canvas class="ripple" @click="ripple" />
     <slot />
   </button>

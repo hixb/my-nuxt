@@ -3,7 +3,7 @@ import { computed } from "#imports";
 
 const props = defineProps({
   // 字体大小
-  fontSize: { type: [Number, String], default: "" },
+  fontSize: { type: [Number, String], default: "18px" },
   // 是否加粗字体
   bold: { type: Boolean, default: false },
   // 打开右侧花
@@ -16,18 +16,18 @@ const fontSize = computed((): string | number => {
 </script>
 
 <template>
-  <h4 :class="['head-text', { flower }]" :style="{ fontSize, fontWeight: bold ? 'bold' : '' }">
+  <h4 :class="['head-text', { flower }]" :style="{ fontWeight: bold && 'bold' }">
     <slot />
   </h4>
 </template>
 
 <style lang="scss" scoped>
 .head-text {
-  font-size: 18px;
   margin-bottom: 10px;
   color: var(--my-theme-color);
   position: relative;
   font-weight: normal;
+  font-size: v-bind(fontSize);
 
   &:after {
     content: "";

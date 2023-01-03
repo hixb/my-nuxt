@@ -10,9 +10,9 @@ watchEffect(() => {
   user.setNewName("zhuxb");
 });
 
-const showDialog = () => {
-  isShowDialog.value = true;
-};
+// const showDialog = () => {
+//   isShowDialog.value = true;
+// };
 
 function getData() {
   fetchRoomList();
