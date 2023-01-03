@@ -123,6 +123,8 @@ module.exports = {
       "non-void-html-element-start-tag-with-trailing-solidus": false,
       "x-invalid-end-tag": true,
       "x-invalid-namespace": true
-    }]
+    }],
+    // Allow the `any` type
+    "@typescript-eslint/no-explicit-any": "off"
   }
 };
