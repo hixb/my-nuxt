@@ -1,23 +1,22 @@
 <script lang="ts" setup>
-defineProps({
+const emit = defineEmits(["close"]);
+
+const props = defineProps({
   // 是否可见
   visible: { type: Boolean, default: false },
-  // 自定义内类名
-  className: { type: String, default: "" },
   // 宽度
-  width: { type: String, default: "" },
+  width: { type: String, default: "100%" },
   // 高度
-  height: { type: String, default: "" },
+  height: { type: String, default: "100%" },
   // 是否显示标题
   isShowTitle: { type: Boolean, default: true }
 });
 
-const emit = defineEmits(["close"]);
 </script>
 
 <template>
   <Transition>
-    <section v-show="visible" :class="className" :style="{ width, height }" class="my-dialog">
+    <section v-show="visible" class="my-dialog">
       <Transition name="bounce">
         <div v-show="visible" class="dialog-body">
           <div class="close-btn" @click="emit('close', false)">
@@ -75,8 +74,6 @@ const emit = defineEmits(["close"]);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
-  height: 100%;
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
@@ -85,6 +82,8 @@ const emit = defineEmits(["close"]);
   z-index: 10;
   backdrop-filter: saturate(180%) blur(10px);
   transition: all .25s ease;
+  width: v-bind("props.width");
+  height: v-bind("props.height");
 }
 
 .dialog-body {

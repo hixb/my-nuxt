@@ -26,8 +26,7 @@ export const useUserStore = defineStore("user", () => {
     setNewName,
     otherNames,
     savedName
-  }
-})
+  };
+});
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
+import.meta.hot && import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));

@@ -76,11 +76,9 @@ export default class DB {
   getList(storeName: string) {
     const store = this.db.transaction(storeName).objectStore(storeName);
     const request = store.getAll();
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       request.onsuccess = (event: any) => {
         resolve(event.target.result);
-      };
-      request.onerror = (event: any) => {
       };
     });
   }

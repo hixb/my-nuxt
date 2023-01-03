@@ -26,7 +26,7 @@ export async function saveLanguageApi(lang: any) {
 
   const { success } = resultOr;
   const obj = success ? { name: lang, id: 1 } : { name: lang };
-  const result: IResultOr = await airbnbDB.updateItem("language", obj).then((res: any) => {
+  const result: IResultOr = await airbnbDB.updateItem("language", obj).then(() => {
     return {
       code: 200,
       message: "success",

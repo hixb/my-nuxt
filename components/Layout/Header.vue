@@ -144,15 +144,15 @@ const relatedOperations = (indent: string) => {
         <h1>{{ $t("common.my-name") }}</h1>
       </div>
       <div class="head-r">
-        <div v-if="item.equipment == 'pc'" class="area-search">
+        <div v-if="item.equipment === 'pc'" class="area-search">
           <DataEntrySearch height="40px" width="360px" />
         </div>
         <div class="area-func">
           <GlobalSvgIcon
             v-for="list in item.list"
             :key="list.indent"
-            :icon="list.indent == 'theme'
-              ? defaultThemeMode == 'light-mode'
+            :icon="list.indent === 'theme'
+              ? defaultThemeMode === 'light-mode'
                 ? list.icon[0]
                 : list.icon[1]
               : list.icon[0]"

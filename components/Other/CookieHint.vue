@@ -16,11 +16,11 @@ const agreeCookie = () => {
       <GeneralHeadText bold>{{ $t("cookiePopup.cookie-popup-title") }}</GeneralHeadText>
       <p>{{ $t("cookiePopup.cookie-popup-content") }}</p>
       <div class="btn-area">
-        <GeneralButton customize-class="accept" shape="semicircle" @click="agreeCookie">
+        <GeneralButton class="accept" shape="semicircle" @click="agreeCookie">
           {{ $t("cookiePopup.cookie-popup-agree") }}
         </GeneralButton>
         <GeneralButton
-          customize-class="more-details"
+          class="more-details"
           href="https://policies.google.com/technologies/cookies"
           shape="semicircle"
           type="ordinary"
