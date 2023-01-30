@@ -1,0 +1,34 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+code.hljs {
+  padding: 3px 5px;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+.hljs-comment, .hljs-quote {
+  color: #bbb;
+}
+
+:deep(.hljs) {
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: var(--my-theme-content);
+  line-height: 21px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

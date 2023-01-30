@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
-import { onMounted, reactive, ref, watch } from "#imports";
+import { nextTick, onMounted, reactive, ref, watch } from "#imports";
 import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
+import { themeVariety } from "~/plugins/highlight.client";
 
 interface ISidebarData {
   equipment: string;
@@ -66,6 +67,9 @@ const setThemeMode = () => {
   const curTheme: IThemeType = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
   defaultThemeMode.value = curTheme;
   localStorage.setItem("theme", curTheme);
+  nextTick(() => {
+    themeVariety(curTheme);
+  });
   setRootMode();
   commonStores.setTheme(curTheme);
 };
