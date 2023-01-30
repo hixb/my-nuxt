@@ -951,10 +951,10 @@
     vite-plugin-checker "^0.5.4"
     vue-bundle-renderer "^1.0.0"
 
-"@nuxtjs/i18n@^8.0.0-beta.8":
-  version "8.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/i18n/-/i18n-8.0.0-beta.8.tgz#1581dbf6e237d69b8997dc8d596bd62ec6757d46"
-  integrity sha512-XXOGdAnlbjHPVtY0exI+V+K9Lz0xo3oOtR0mZDV1hvO5H5EOQGvHtHvG6aufFsR10rgw4tI66pCvo/MLKeoH4g==
+"@nuxtjs/i18n@^8.0.0-beta.9":
+  version "8.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/i18n/-/i18n-8.0.0-beta.9.tgz#6bccff4f900a09a9cb220f35dfa22f248a0a0d0c"
+  integrity sha512-Vz90kpmr1WJIPqAhlLWD3Yov8/DWCUQiT/5Xu8Kuqw+iZ47ZI7HI2W6BzwusHSRHn+fINxg/lKgs0uWw38PfKw==
   dependencies:
     "@intlify/bundle-utils" "^3.4.0"
     "@intlify/shared" "9.3.0-beta.11"
