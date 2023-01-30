@@ -15,7 +15,7 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n"],
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vueuse/nuxt"],
   i18n: {
     vueI18n: {
       legacy: false,

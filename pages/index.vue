@@ -1,24 +1,12 @@
 <script lang="ts" setup>
 import { useUserStore } from "~/stores/user";
-import { ref, watchEffect } from "#imports";
-import { fetchRoomList } from "~/server/api";
+import { watchEffect } from "#imports";
 
 const user = useUserStore();
-const isShowDialog = ref<boolean>(false);
 
 watchEffect(() => {
   user.setNewName("zhuxb");
 });
-
-// const showDialog = () => {
-//   isShowDialog.value = true;
-// };
-
-function getData() {
-  fetchRoomList();
-}
-
-getData();
 </script>
 
 <template>
