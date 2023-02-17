@@ -1,3 +1,4 @@
+import stylelintPlugin from "vite-plugin-stylelint";
 import en from "./locales/en";
 import cn from "./locales/cn";
 
@@ -13,7 +14,8 @@ export default defineNuxtConfig({
           additionalData: "@import \"assets/css/common/index.scss\";"
         }
       }
-    }
+    },
+    plugins: [stylelintPlugin()]
   },
   modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vueuse/nuxt"],
   i18n: {
