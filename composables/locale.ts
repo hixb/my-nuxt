@@ -14,6 +14,7 @@ export function useLocal() {
 
   const setLocale = (l: string) => {
     currentLocale.value = l;
+
     locale.value = l;
   };
 
@@ -21,9 +22,11 @@ export function useLocal() {
     if (!currentLocale.value) {
       if (process.server) {
         const nuxtApp = useNuxtApp();
+
         if (nuxtApp.ssrContext?.req?.headers) {
           const acceptLanguage = nuxtApp.ssrContext.req.headers["accept-language"] || "zh-CN";
           const preferredLanguage = acceptLanguage.split(",")[0];
+
           setLocale(preferredLanguage);
         }
       }

@@ -2,12 +2,13 @@
 import { ref } from "#imports";
 
 const visible = ref<boolean>(true);
+
 /**
  * 同意cookie
  */
-const agreeCookie = () => {
+function agreeCookie() {
   visible.value = false;
-};
+}
 </script>
 
 <template>

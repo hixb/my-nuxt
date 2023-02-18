@@ -10,19 +10,26 @@ const data = reactive([
     commentCount: 2,
     url: "/",
     source: "/"
+  },
+  {
+    pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmxL-hkIX19cdlV93xhQnaZSwqU6Jmeq7JK9P7c_FbGFfemeaMVZnC3Ow4WZbc8kMlhxGjLSR2AhN9gsxfhtkPovJJ7zUDBILREULXuvNt2aFMcUAtKbN38kPngpTfHMLwmGuGZb7zK8vaX24LRXDdXus632s2zJp7mNqqzeIar5h8E_6grv8j0T_Y4g/w600-h300-p-k-no-nu-rw-e30/Plus_UI_Typography.webp",
+    title: "js判读两个数组对象是否相同",
+    content: "let arr1 = [{id: 1, name: '嘿嘿', go: 'xi', child: {id: 55}, is: 2}, 'hh…",
+    date: "2022-07-26T08:56:00+08:00",
+    commentCount: 2,
+    url: "/",
+    source: "/"
   }
 ]);
 </script>
 
 <template>
   <section class="data-list">
+    <GeneralHeadText bold flower>{{ $t("articleTitle.pinned-post") }}</GeneralHeadText>
     <article v-for="item in data" :key="item.title">
       <div class="cover">
         <NuxtLink :to="item.url">
-          <div class="operate">
-            <GlobalSvgIcon :is-open-hover="false" customize-class="icon" icon="emails-message/message" />
-            <GlobalSvgIcon :is-open-hover="false" customize-class="icon" icon="archive/archive-add" />
-          </div>
+          <OtherListCoverOperate />
           <img :src="item.pic" alt="">
         </NuxtLink>
       </div>
@@ -53,12 +60,9 @@ const data = reactive([
 
 <style lang="scss" scoped>
 .data-list {
-  overflow: hidden;
-  padding: 10px;
-  background: var(--my-theme-content);
-  box-shadow: 0 5px 35px rgba(0, 0, 0, .07);
-  border-radius: 10px;
-  position: relative;
+  .head-text {
+    margin-bottom: 40px;
+  }
 
   * {
     transition: var(--my-theme-trans3);
@@ -78,6 +82,17 @@ const data = reactive([
 
   > article {
     display: flex;
+    overflow: hidden;
+    padding: 10px;
+    background: var(--my-theme-content);
+    box-shadow: 0 5px 35px rgba(0, 0, 0, .07);
+    border-radius: 10px;
+    position: relative;
+    margin-top: 20px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
 
     .cover {
       flex: 0 0 310px;
@@ -100,37 +115,6 @@ const data = reactive([
           width: 310px;
           height: 162px;
           object-fit: cover;
-        }
-
-        .operate {
-          position: absolute;
-          top: 10px;
-          right: 6px;
-          z-index: 1;
-          display: flex;
-
-          .icon {
-            width: 26px;
-            height: 26px;
-            background-color: #fff;
-            transition: var(--my-theme-trans3);
-            box-shadow: 0 8px 25px 0 rgba(0, 0, 0, .1);
-            margin: 0 5px;
-
-            :deep(svg) {
-              width: 16px;
-              height: 16px;
-
-              * {
-                stroke: #08102b;
-              }
-            }
-
-            &:hover {
-              opacity: .8;
-              transition: var(--my-theme-trans3);
-            }
-          }
         }
       }
 
@@ -221,10 +205,8 @@ const data = reactive([
         }
       }
     }
-  }
 
-  &:hover {
-    > article {
+    &:hover {
       .cover {
         > a {
           img {

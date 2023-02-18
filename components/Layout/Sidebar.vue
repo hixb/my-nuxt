@@ -8,30 +8,35 @@ interface ISidebarData {
 }
 
 const commonStores = useCommonStore();
+
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
+
 const sidebarList = reactive([
   { router: "/", icon: "essetional/home", text: "sidebar.sidebar-home-text" },
   { router: "/", icon: "audio/subtitle", text: "sidebar.sidebar-article-text" },
   { router: "/", icon: "users/profile-2user", text: "sidebar.sidebar-about-text" },
 ]);
+
 const footerRule = reactive([
   { router: "/", text: "sidebar.sidebar-sitemap-text" },
   { router: "/", text: "sidebar.sidebar-disclaimer-text" },
   { router: "/", text: "sidebar.sidebar-privacy-text" },
 ]);
+
 const footerConnect = reactive([
   { router: "/", icon: "crypto-company/facebook" },
   { router: "/", icon: "crypto-company/huobi-token-(ht)" },
   { router: "/", icon: "crypto-company/js" },
 ]);
 
-watch(commonStores, newVal => {
+watch(() => commonStores.sidebarData, newVal => {
   if (newVal) {
-    sidebarData.equipment = newVal.sidebarData.equipment;
-    sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
+    sidebarData.equipment = newVal.equipment;
+
+    sidebarData.isShowSidebar = newVal.isShowSidebar;
   }
 }, {
   immediate: true
@@ -41,16 +46,19 @@ watch(commonStores, newVal => {
  * 设置侧边栏
  * @param equipment 设备
  */
-const setSidebarToggle = (equipment: string) => {
+function setSidebarToggle(equipment: string) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
+
   const obj: ISidebarData = {
     equipment,
     isShowSidebar: !sidebarStatus
   };
+
   sidebarData.equipment = obj.equipment;
   sidebarData.isShowSidebar = obj.isShowSidebar;
+
   commonStores.setSidebarData(obj);
-};
+}
 </script>
 
 <template>

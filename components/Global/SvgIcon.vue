@@ -26,6 +26,7 @@ const iconsImport: Record<string, () => Promise<Record<string, any>>> = import.m
   as: "raw",
   eager: false
 });
+
 const rawIcon = ref<Record<string, any>>(await iconsImport[`/assets/icons/${props.icon}.svg`]());
 
 watch(() => props.icon, async(newVal: string) => {
@@ -34,9 +35,7 @@ watch(() => props.icon, async(newVal: string) => {
   immediate: true
 });
 
-if (!rawIcon.value) {
-  console.error(`[SvgIcon] Icon '${props.icon}' doesn't exist in 'assets/icons'`);
-}
+!rawIcon.value && console.error(`[SvgIcon] Icon '${props.icon}' doesn't exist in 'assets/icons'`);
 </script>
 
 <template>

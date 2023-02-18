@@ -4,6 +4,7 @@ import { useCommonStore } from "~/stores";
 import { nextTick, onMounted, reactive, ref, watch } from "#imports";
 import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
 import { themeVariety } from "~/plugins/highlight.client";
+import { useWindowSize } from "@vueuse/core";
 
 interface ISidebarData {
   equipment: string;
@@ -21,13 +22,16 @@ type IMenuList = {
 type IThemeType = "dark-mode" | "light-mode";
 
 const { setLocale, locale } = useLocal();
+
 const commonStores = useCommonStore();
+
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
+
 const defaultThemeMode = ref<string>(commonStores.curTheme);
-// 菜单列表
+
 const menuList = reactive<IMenuList>([
   {
     equipment: "pc",
@@ -48,93 +52,114 @@ const menuList = reactive<IMenuList>([
   }
 ]);
 
+const { width } = useWindowSize();
+
 onMounted(() => {
   getLocaleData();
+
   setRootMode();
 });
 
 watch(commonStores, newVal => {
   if (newVal) {
     sidebarData.equipment = newVal.sidebarData.equipment;
+
     sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
   }
 }, { immediate: true });
 
+watch(width, (newVal) => {
+  newVal && newVal <= 896 && sidebarData.isShowSidebar && setSidebarToggle("pc");
+}, {
+  immediate: true
+});
+
 /**
  * 设置主题
  */
-const setThemeMode = () => {
+function setThemeMode() {
   const curTheme: IThemeType = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
+
   defaultThemeMode.value = curTheme;
+
   localStorage.setItem("theme", curTheme);
-  nextTick(() => {
-    themeVariety(curTheme);
-  });
+
+  nextTick(() => themeVariety(curTheme));
+
   setRootMode();
+
   commonStores.setTheme(curTheme);
-};
+}
 
 /**
  * 设置根模式
  */
-const setRootMode = () => {
+function setRootMode() {
   process.client && ((document.querySelector("body") as HTMLElement).className = defaultThemeMode.value);
-};
+}
 
 /**
  * 设置侧边栏
  * @param equipment 设备
  */
-const setSidebarToggle = (equipment: string) => {
+function setSidebarToggle(equipment: string) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
+
   const obj: ISidebarData = {
     equipment,
     isShowSidebar: !sidebarStatus
   };
+
   sidebarData.equipment = obj.equipment;
+
   sidebarData.isShowSidebar = obj.isShowSidebar;
+
   commonStores.setSidebarData(obj);
-};
+}
 
 /**
  * 获取语言
  */
-const getLocaleData = () => {
+function getLocaleData() {
   fetchLanguageApi().then(res => {
     if (res.code === 200) {
       if (res.result) {
         const { name } = res.result;
+
         setLocale(name);
       } else {
         setLocaleData(navigator.language == "zh" ? "zh-CN" : "en");
       }
     }
   });
-};
+}
 
 /**
  * 设置首语言
  * @param language 语种
  */
-const setLocaleData = (language: string) => {
+function setLocaleData(language: string) {
   setLocale(language);
+
   saveLanguageApi(language);
-};
+}
 
 /**
  * 相关操作
  * @param indent 标识
  */
-const relatedOperations = (indent: string) => {
+function relatedOperations(indent: string) {
   switch (indent) {
     case "translate":
       setLocaleData(locale.value === "en" ? "zh-CN" : "en");
+
       break;
     case "theme":
       setThemeMode();
+
       break;
   }
-};
+}
 </script>
 
 <template>

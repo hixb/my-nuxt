@@ -11,6 +11,12 @@ watchEffect(() => {
 
 <template>
   <NuxtLayout>
+    <div class="home">
+      <div class="host">
+        <DataEntryList />
+      </div>
+      <DataEntryPopularPosts />
+    </div>
     <!--    <GeneralButton type="grb" @click="showDialog">-->
     <!--      hello-->
     <!--    </GeneralButton>-->
@@ -18,8 +24,17 @@ watchEffect(() => {
     <!--      hello-->
     <!--    </GeneralButton>-->
     <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
-    <DataEntryList />
   </NuxtLayout>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home {
+  display: flex;
+  justify-content: space-between;
+
+  .host {
+    flex: 1;
+    margin-right: 20px;
+  }
+}
+</style>
