@@ -3,16 +3,21 @@ import { onMounted, ref } from "#imports";
 import { scrollEaseOut } from "~/plugins/utils/common";
 
 const rollAway = ref<number>(0);
+
 const visible = ref<boolean>(false);
 
 onMounted(() => {
   handleScroll();
+
   window.onscroll = () => {
     const pageHeight: number = document.body.scrollHeight || document.documentElement.scrollHeight;
     const windowHeight: number = document.documentElement.clientHeight || document.body.clientHeight;
+
     handleScroll();
+
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const dashoffsetVal = -((scrollTop / (pageHeight - windowHeight)) * 100) + 100;
+
     rollAway.value = dashoffsetVal < 0 ? 0 : dashoffsetVal > 100 ? 100 : dashoffsetVal;
   };
 });
@@ -20,10 +25,10 @@ onMounted(() => {
 /**
  * 处理滚动
  */
-const handleScroll = () => {
+function handleScroll() {
   let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
   visible.value = scrollTop > 500;
-};
+}
 </script>
 
 <template>

@@ -5,9 +5,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import bash from "highlight.js/lib/languages/bash";
 import "highlight.js/styles/gradient-light.css";
 
-nextTick(() => {
-  themeVariety(window.localStorage.getItem("theme") || "dark-mode");
-});
+nextTick(() => themeVariety(window.localStorage.getItem("theme") || "dark-mode"));
 
 // register languages
 hljs.registerLanguage("xml", xml);
@@ -18,10 +16,7 @@ hljs.registerLanguage("bash", bash);
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive("hl", {
     mounted(el) {
-      const elements = el.querySelectorAll("pre");
-      elements.forEach((item: HTMLElement) => {
-        hljs.highlightElement(item);
-      });
+      el!.querySelectorAll("pre")!.forEach((item: HTMLElement) => hljs.highlightElement(item));
     }
   });
 });
@@ -37,7 +32,10 @@ export function themeVariety(theme: string) {
   };
 
   const style = document.createElement("style");
+
   style.type = "text/css";
+
   style.innerHTML = theme == "light-mode" ? codeStyle.light : codeStyle.dark;
+
   (document.getElementsByTagName("head") as any).item(0).appendChild(style);
 }

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useCommonStore } from "~/stores";
 import { reactive, watch } from "#imports";
-import { useWindowSize } from "@vueuse/core";
 
 interface ISidebarData {
   equipment: string;
@@ -33,20 +32,11 @@ const footerConnect = reactive([
   { router: "/", icon: "crypto-company/js" },
 ]);
 
-const { width } = useWindowSize();
-
 watch(() => commonStores.sidebarData, newVal => {
   if (newVal) {
     sidebarData.equipment = newVal.equipment;
-    sidebarData.isShowSidebar = newVal.isShowSidebar;
-  }
-}, {
-  immediate: true
-});
 
-watch(width, (newVal) => {
-  if (newVal && newVal <= 896 && sidebarData.isShowSidebar) {
-    sidebarData.isShowSidebar = false;
+    sidebarData.isShowSidebar = newVal.isShowSidebar;
   }
 }, {
   immediate: true
@@ -56,16 +46,19 @@ watch(width, (newVal) => {
  * 设置侧边栏
  * @param equipment 设备
  */
-const setSidebarToggle = (equipment: string) => {
+function setSidebarToggle(equipment: string) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
+
   const obj: ISidebarData = {
     equipment,
     isShowSidebar: !sidebarStatus
   };
+
   sidebarData.equipment = obj.equipment;
   sidebarData.isShowSidebar = obj.isShowSidebar;
+
   commonStores.setSidebarData(obj);
-};
+}
 </script>
 
 <template>

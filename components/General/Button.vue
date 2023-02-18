@@ -25,20 +25,28 @@ const props = defineProps({
 });
 
 const color = ref<string>("");
+
 const radius = ref<number>(0);
+
 const context = ref<any>(null);
+
 const initialized = ref<boolean>(false);
+
 const speedOpacity = ref<number>(0);
+
 const timer = ref<number>(-1);
+
 const origin = reactive<any>({
   x: "",
   y: ""
 });
+
 const el = ref<any>("");
 
 onDeactivated(() => {
   if (timer.value) {
     window.cancelAnimationFrame(timer.value);
+
     timer.value = -1;
   }
 });
@@ -47,93 +55,112 @@ onDeactivated(() => {
  * 初始化
  * @param el
  */
-const init = (el: { parentElement: HTMLElement; width: number; height: number | undefined; getContext: (arg0: string) => never; }) => {
+function init(el: { parentElement: HTMLElement; width: number; height: number | undefined; getContext: (arg0: string) => never; }) {
   const oBtn = el.parentElement;
+
   color.value = getStyle(el.parentElement, "color");
+
   const w: number = getStyleNumber(oBtn, "width") || 0;
+
   // 透明度的速度
   speedOpacity.value = (props.speed / w) * props.opacity;
+
   // canvas 宽和高
   el.width = w;
+
   el.height = getStyleNumber(oBtn, "height");
+
   context.value = el.getContext("2d");
-};
+}
 
 /**
  * 波纹
  * @param event
  */
-const ripple = (event: MouseEvent) => {
-  if (timer) {
-    // 清除上次没有执行的动画
-    window.cancelAnimationFrame(timer.value);
-  }
+function ripple(event: MouseEvent) {
+  // 清除上次没有执行的动画
+  timer && window.cancelAnimationFrame(timer.value);
+
   el.value = event.target;
+
   // 执行初始化
   if (!initialized.value) {
     initialized.value = true;
     init(el.value);
   }
+
   radius.value = 0;
+
   // 点击坐标原点
   origin.x = event.offsetX;
   origin.y = event.offsetY;
+
   context.value.clearRect(0, 0, el.value.width, el.value.height);
+
   el.value.style.opacity = props.opacity;
+
   draw();
-};
+}
 
 /**
  * 绘制波纹
  */
-const draw = () => {
+function draw() {
   context.value.beginPath();
+
   // 绘制波纹
   context.value.arc(origin.x, origin.y, radius.value, 0, 2 * Math.PI, false);
+
   context.value.fillStyle = color.value;
+
   context.value.fill();
+
   // 定义下次的绘制半径和透明度
   radius.value += props.speed;
+
   el.value.style.opacity -= speedOpacity.value;
+
   // 通过判断半径小于元素宽度或者还有透明度, 不断绘制圆形
   if (radius.value < el.width || el.value.style.opacity > 0) {
     timer.value = window.requestAnimationFrame(draw);
   } else {
     // 清除画布
     context.value.clearRect(0, 0, el.value.width, el.value.height);
+
     el.value.style.opacity = 0;
   }
-};
+}
 
 /**
  * 根据属性, 获取元素的样式值
  * @param el
  * @param attr
  */
-const getStyle = (el: HTMLElement, attr: string) => {
+function getStyle(el: HTMLElement, attr: string) {
   return window.getComputedStyle(el, null)[attr as never];
-};
+}
 
 /**
  * 获取属性, 并且属性值是数字, 而不是字符串
  * @param el
  * @param attr
  */
-const getStyleNumber = (el: HTMLElement, attr: string) => {
+function getStyleNumber(el: HTMLElement, attr: string) {
   try {
     const val = getStyle(el, attr);
+
     return parseFloat(val);
   } catch (e) {
     console.error(e);
   }
-};
+}
 
 /**
  * 跳转路由
  */
-const jump = () => {
+function jump() {
   props.href && window.open(props.href);
-};
+}
 </script>
 
 <template>

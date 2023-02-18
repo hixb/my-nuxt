@@ -28,6 +28,7 @@ const ctx = computed(() => el.value!.getContext("2d")!);
 
 onMounted(() => {
   init();
+
   startFrame();
 });
 
