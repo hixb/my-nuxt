@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useCommonStore } from "~/stores";
 import { reactive, watch } from "#imports";
+import { useWindowSize } from "@vueuse/core";
 
 interface ISidebarData {
   equipment: string;
@@ -8,30 +9,44 @@ interface ISidebarData {
 }
 
 const commonStores = useCommonStore();
+
 const sidebarData = reactive<ISidebarData>({
   equipment: "pc",
   isShowSidebar: false
 });
+
 const sidebarList = reactive([
   { router: "/", icon: "essetional/home", text: "sidebar.sidebar-home-text" },
   { router: "/", icon: "audio/subtitle", text: "sidebar.sidebar-article-text" },
   { router: "/", icon: "users/profile-2user", text: "sidebar.sidebar-about-text" },
 ]);
+
 const footerRule = reactive([
   { router: "/", text: "sidebar.sidebar-sitemap-text" },
   { router: "/", text: "sidebar.sidebar-disclaimer-text" },
   { router: "/", text: "sidebar.sidebar-privacy-text" },
 ]);
+
 const footerConnect = reactive([
   { router: "/", icon: "crypto-company/facebook" },
   { router: "/", icon: "crypto-company/huobi-token-(ht)" },
   { router: "/", icon: "crypto-company/js" },
 ]);
 
-watch(commonStores, newVal => {
+const { width } = useWindowSize();
+
+watch(() => commonStores.sidebarData, newVal => {
   if (newVal) {
-    sidebarData.equipment = newVal.sidebarData.equipment;
-    sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
+    sidebarData.equipment = newVal.equipment;
+    sidebarData.isShowSidebar = newVal.isShowSidebar;
+  }
+}, {
+  immediate: true
+});
+
+watch(width, (newVal) => {
+  if (newVal && newVal <= 896 && sidebarData.isShowSidebar) {
+    sidebarData.isShowSidebar = false;
   }
 }, {
   immediate: true

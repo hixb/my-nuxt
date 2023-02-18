@@ -4,6 +4,7 @@ import { useCommonStore } from "~/stores";
 import { nextTick, onMounted, reactive, ref, watch } from "#imports";
 import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
 import { themeVariety } from "~/plugins/highlight.client";
+import { useWindowSize } from "@vueuse/core";
 
 interface ISidebarData {
   equipment: string;
@@ -48,6 +49,8 @@ const menuList = reactive<IMenuList>([
   }
 ]);
 
+const { width } = useWindowSize();
+
 onMounted(() => {
   getLocaleData();
   setRootMode();
@@ -59,6 +62,14 @@ watch(commonStores, newVal => {
     sidebarData.isShowSidebar = newVal.sidebarData.isShowSidebar;
   }
 }, { immediate: true });
+
+watch(width, (newVal) => {
+  if (newVal && newVal <= 896 && sidebarData.isShowSidebar) {
+    setSidebarToggle("pc");
+  }
+}, {
+  immediate: true
+});
 
 /**
  * 设置主题
@@ -85,7 +96,7 @@ const setRootMode = () => {
  * 设置侧边栏
  * @param equipment 设备
  */
-const setSidebarToggle = (equipment: string) => {
+function setSidebarToggle(equipment: string) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
   const obj: ISidebarData = {
     equipment,
@@ -94,7 +105,7 @@ const setSidebarToggle = (equipment: string) => {
   sidebarData.equipment = obj.equipment;
   sidebarData.isShowSidebar = obj.isShowSidebar;
   commonStores.setSidebarData(obj);
-};
+}
 
 /**
  * 获取语言
