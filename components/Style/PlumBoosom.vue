@@ -160,6 +160,6 @@ onMounted(async() => {
   bottom: 0;
   right: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
 }
 </style>
