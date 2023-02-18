@@ -17,8 +17,16 @@ html body svg * {
   stroke: var(--my-theme-svg-color);
 }
 
-.t-over {
+@mixin t-over {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@mixin t-many-over($num: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
 }

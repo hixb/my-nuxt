@@ -18,6 +18,10 @@ const en = {
     "cookie-popup-content": "We serve cookies on this website to analyze traffic, remember your preferences and optimize your experience.",
     "cookie-popup-agree": "Agree",
     "cookie-popup-more": "More"
+  },
+  articleTitle: {
+    "pinned-post": "Pinned Post",
+    "popular-posts": "Popular Posts"
   }
 };
 
