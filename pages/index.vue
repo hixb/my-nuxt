@@ -19,7 +19,6 @@ watchEffect(() => {
     <!--    </GeneralButton>-->
     <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
     <DataEntryList />
-    <StylePlumBoosom />
   </NuxtLayout>
 </template>
 
