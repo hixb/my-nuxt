@@ -147,19 +147,10 @@ onMounted(async() => {
 </script>
 
 <template>
-  <div :style="`mask-image: ${mask};--webkit-mask-image: ${mask};`" class="plum">
+  <div
+    :style="`mask-image: ${mask};--webkit-mask-image: ${mask};`"
+    class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none z-0"
+  >
     <canvas ref="el" height="400" width="400" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.plum {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-</style>
