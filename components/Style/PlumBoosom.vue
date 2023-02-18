@@ -147,7 +147,7 @@ onMounted(async() => {
 </script>
 
 <template>
-  <div :style="`mask-image: ${mask};--webkit-mask-image: ${mask};`" class="plum" style="z-index: -1">
+  <div :style="`mask-image: ${mask};--webkit-mask-image: ${mask};`" class="plum">
     <canvas ref="el" height="400" width="400" />
   </div>
 </template>
