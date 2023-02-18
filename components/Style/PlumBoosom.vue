@@ -1,135 +1,165 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "#imports";
+import type { Fn } from "@vueuse/core";
+import { useRafFn, useWindowSize } from "@vueuse/core";
+import { computed, onMounted, reactive, ref } from "#imports";
 
-interface Point {
-  x: number,
-  y: number
-}
+const r180 = Math.PI;
 
-interface Branch {
-  start: Point,
-  length: number,
-  theta: number
-}
+const r90 = Math.PI / 2;
 
-const WIDTH = 600;
-const HEIGHT = 600;
+const r15 = Math.PI / 12;
 
-/**
- * canvas dom element
- */
-const el = ref<HTMLCanvasElement>();
+const color = "#88888825";
 
-const paddingTask: Function[] = [];
+const el = ref<HTMLCanvasElement | null>(null);
 
-const frameCount = ref(0);
+const { random } = Math;
 
-const ctx = computed(() => el.value!.getContext("2d")!);
+const size = reactive(useWindowSize());
 
-onMounted(() => {
-  init();
-
-  startFrame();
+const start = ref<Fn>(() => {
 });
 
-/**
- * Init canvas
- */
-function init() {
-  ctx.value.strokeStyle = "rgba(208,208,208, .5)";
+const init = ref(4);
 
-  step({
-    start: { x: WIDTH / 2, y: HEIGHT },
-    length: 20,
-    theta: -Math.PI / 2
-  });
+const len = ref(6);
+
+const stopped = ref(false);
+
+const mask = computed(() => "radial-gradient(circle, transparent, black);");
+
+function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400, _dpi?: number) {
+  const ctx = canvas.getContext("2d")!;
+
+  const dpr = window.devicePixelRatio || 1;
+
+  // @ts-expect-error vendor
+  const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
+
+  const dpi = _dpi || dpr / bsr;
+
+  canvas.style.width = `${width}px`;
+
+  canvas.style.height = `${height}px`;
+
+  canvas.width = dpi * width;
+
+  canvas.height = dpi * height;
+
+  ctx.scale(dpi, dpi);
+
+  return { ctx, dpi };
 }
 
-function step(b: Branch, depth = 0) {
-  const end = getEndPoint(b);
+function polar2cart(x = 0, y = 0, r = 0, theta = 0) {
+  const dx = r * Math.cos(theta);
+  const dy = r * Math.sin(theta);
 
-  drawBranch(b);
-
-  if (depth < 5 || Math.random() < 0.5) {
-    paddingTask.push(() => step({
-      start: end,
-      length: b.length + (Math.random() * 10 - 5),
-      theta: b.theta - 0.2 * Math.random()
-    }, depth + 1));
-  }
-
-  if (depth < 5 || Math.random() < 0.5) {
-    paddingTask.push(() => step({
-      start: end,
-      length: b.length + (Math.random() * 10 - 5),
-      theta: b.theta + 0.2 * Math.random()
-    }, depth + 1));
-  }
+  return [x + dx, y + dy];
 }
 
-function frame() {
-  const tasks = [...paddingTask];
+onMounted(async() => {
+  const canvas = el.value!;
+  const { ctx } = initCanvas(canvas, size.width, size.height);
+  const { width, height } = canvas;
 
-  paddingTask.length = 0;
+  let steps: Fn[] = [];
+  let prevSteps: Fn[] = [];
 
-  tasks.forEach(fn => fn());
-}
+  let iterations = 0;
 
-function startFrame() {
-  requestAnimationFrame(() => {
-    frameCount.value += 1;
+  const step = (x: number, y: number, rad: number) => {
+    const length = random() * len.value;
 
-    frameCount.value % 10 == 0 && frame();
+    const [nx, ny] = polar2cart(x, y, length, rad);
 
-    startFrame();
-  });
-}
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(nx, ny);
+    ctx.stroke();
 
-/**
- * lineTo
- */
-function lineTo(p1: Point, p2: Point) {
-  ctx.value.beginPath();
+    const rad1 = rad + random() * r15;
+    const rad2 = rad - random() * r15;
 
-  ctx.value.moveTo(p1.x, p1.y);
+    if (nx < -100 || nx > size.width + 100 || ny < -100 || ny > size.height + 100) return;
 
-  ctx.value.lineTo(p2.x, p2.y);
+    if (iterations <= init.value || random() > 0.5) steps.push(() => step(nx, ny, rad1));
 
-  ctx.value.stroke();
-}
-
-function getEndPoint(b: Branch): Point {
-  return {
-    x: b.start.x + b.length * Math.cos(b.theta),
-    y: b.start.y + b.length * Math.sin(b.theta)
+    if (iterations <= init.value || random() > 0.5) steps.push(() => step(nx, ny, rad2));
   };
-}
 
-function drawBranch(b: Branch) {
-  lineTo(b.start, getEndPoint(b));
-}
+  let lastTime = performance.now();
+
+  const interval = 1000 / 40;
+
+  let controls: ReturnType<typeof useRafFn>;
+
+  const frame = () => {
+    if (performance.now() - lastTime < interval) return;
+
+    iterations += 1;
+
+    prevSteps = steps;
+
+    steps = [];
+
+    lastTime = performance.now();
+
+    if (!prevSteps.length) {
+      controls.pause();
+      stopped.value = true;
+    }
+
+    prevSteps.forEach(i => i());
+  };
+
+  controls = useRafFn(frame, { immediate: false });
+
+  start.value = () => {
+    controls.pause();
+
+    iterations = 0;
+
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.lineWidth = 1;
+
+    ctx.strokeStyle = color;
+
+    prevSteps = [];
+
+    steps = [
+      () => step(random() * size.width, 0, r90),
+      () => step(random() * size.width, size.height, -r90),
+      () => step(0, random() * size.height, 0),
+      () => step(size.width, random() * size.height, r180),
+    ];
+
+    if (size.width < 500) steps = steps.slice(0, 2);
+
+    controls.resume();
+
+    stopped.value = false;
+  };
+
+  start.value();
+});
 </script>
 
 <template>
-  <div class="hello">
-    <canvas id="c" ref="el" :height="HEIGHT" :width="WIDTH" />
+  <div :style="`mask-image: ${mask};--webkit-mask-image: ${mask};`" class="plum">
+    <canvas ref="el" height="400" width="400" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.hello {
-  //--webkit-mask-image: radial-gradient(circle, transparent, black);
-  //position: fixed;
-  //pointer-events: none;
-  //top: 0;
-  //left: 0;
-  //bottom: 0;
-  //right: 0;
-
-  canvas {
-    border: 1px solid #fff;
-    display: block;
-    vertical-align: middle;
-  }
+.plum {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: -1;
 }
 </style>

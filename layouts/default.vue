@@ -63,6 +63,9 @@ onDeactivated(() => {
 
 <style lang="scss" scoped>
 .app {
+  position: relative;
+  z-index: 2;
+
   main {
     display: flex;
     margin-top: var(--my-header-height);
