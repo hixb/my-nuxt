@@ -30,7 +30,7 @@
     "@vueuse/nuxt": "^9.12.0",
     "axios": "^1.3.3",
     "highlight.js": "^11.7.0",
-    "pinia": "^2.0.30",
+    "pinia": "^2.0.32",
     "pinia-plugin-persistedstate": "^3.0.2"
   }
 }
