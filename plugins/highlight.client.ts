@@ -5,7 +5,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import bash from "highlight.js/lib/languages/bash";
 import "highlight.js/styles/gradient-light.css";
 
-nextTick(() => themeVariety(window.localStorage.getItem("theme") || "dark-mode"));
+process.client && nextTick(() => themeVariety(window.localStorage.getItem("theme") || "dark-mode"));
 
 // register languages
 hljs.registerLanguage("xml", xml);
