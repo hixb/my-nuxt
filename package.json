@@ -13,7 +13,7 @@
     "@pinia/nuxt": "^0.4.7",
     "@types/node": "^18.15.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.1",
     "@unocss/nuxt": "^0.50.4",
     "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",
