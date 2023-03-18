@@ -14,7 +14,7 @@
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.54.1",
-    "@unocss/nuxt": "^0.50.4",
+    "@unocss/nuxt": "^0.50.6",
     "eslint": "^8.36.0",
     "eslint-plugin-vue": "^9.9.0",
     "nuxt": "^3.3.1",
