@@ -42,7 +42,7 @@ watch(() => commonStores.sidebarData, newVal => {
  * 设置侧边栏
  * @param equipment 设备
  */
-function setSidebarToggle(equipment: string) {
+function setSidebarToggle(equipment: SidebarParams["equipment"]) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
 
   const obj: SidebarParams = {
