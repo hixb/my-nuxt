@@ -49,8 +49,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     {
-      src: "@/plugins/index.ts",
-      ssr: false,
+      src: "@/plugins/index.client.ts",
       mode: "client"
     }
   ]
