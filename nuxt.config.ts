@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     },
     plugins: [stylelintPlugin()]
   },
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vueuse/nuxt", "@unocss/nuxt"],
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vueuse/nuxt", "@unocss/nuxt", "@nuxt/image-edge"],
   i18n: {
     vueI18n: {
       legacy: false,
