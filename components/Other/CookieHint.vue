@@ -1,13 +1,25 @@
 <script lang="ts" setup>
-import { ref } from "#imports";
+import { onMounted, ref, useLocalStore } from "#imports";
+import { LocalStorageConst } from "~/types/interface/utils/local";
 
-const visible = ref<boolean>(true);
+const localStore = useLocalStore();
+
+const visible = ref<boolean>(false);
+
+onMounted(() => {
+  if (!localStore.get<boolean>(LocalStorageConst.COOKIE_POPUP)) {
+    visible.value = true;
+  }
+
+  visible.value && setTimeout(() => agreeCookie(), 6000);
+});
 
 /**
  * 同意cookie
  */
 function agreeCookie() {
   visible.value = false;
+  localStore.set(LocalStorageConst.COOKIE_POPUP, false);
 }
 </script>
 

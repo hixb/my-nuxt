@@ -1,39 +1,39 @@
-import { acceptHMRUpdate, defineStore } from "pinia";
+import { acceptHMRUpdate, defineStore, StoreDefinition } from "pinia";
+import { SidebarParams } from "~/types/interface/components/sidebar";
 
-interface ISidebarData {
-  equipment: string;
-  isShowSidebar: boolean;
+interface CommonActions {
+  /**
+   * 设置侧边栏数据
+   * @param {SidebarParams} val
+   */
+  setSidebarData(val: SidebarParams): void;
 }
+
+/**
+ * store定义类型
+ */
+type StoreDefinitionType = StoreDefinition<
+  "common",
+  {
+    sidebarData: SidebarParams
+  },
+  CommonActions, any
+>
 
 export const useCommonStore = defineStore({
   id: "common",
   persist: true,
   state: () => ({
-    sidebarData: <ISidebarData>{
+    sidebarData: <SidebarParams>{
       equipment: "pc",
       isShowSidebar: false
-    },
-    curTheme: "dark-mode"
+    }
   }),
-  getters: {},
   actions: {
-    /**
-     * 设置侧边栏数据
-     * @param val
-     */
-    setSidebarData(val: ISidebarData) {
+    setSidebarData(val: SidebarParams) {
       this.sidebarData = val;
-    },
-
-    /**
-     * 设置主题
-     * @param theme
-     */
-    setTheme(theme: string) {
-      this.curTheme = theme;
-      localStorage.setItem("theme", theme);
     }
   }
 });
 
-import.meta.hot && import.meta.hot.accept(acceptHMRUpdate(useCommonStore, import.meta.hot));
+import.meta.hot && import.meta.hot.accept(acceptHMRUpdate(useCommonStore as StoreDefinitionType, import.meta.hot));

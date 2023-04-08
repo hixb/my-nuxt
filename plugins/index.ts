@@ -1,12 +1,8 @@
-import airbnb from "./db";
+import { useIdbStore } from "~/utils/idb";
 
-if (process.client) {
-  airbnb.airbnbDB.openStore({
-    ...airbnb.languageObjectStore,
-    ...airbnb.themeObjectStore
-  }).then((res: any) => {
-    console.log("%c ✅ Initialized object repository successfully", "color: #41B375;");
-  });
+if (process?.client) {
+  const idbStore = useIdbStore();
+  idbStore.defaultGetStore();
 }
 
-export default { };
+export default {};

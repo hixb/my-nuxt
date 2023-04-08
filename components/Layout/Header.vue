@@ -2,14 +2,11 @@
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
 import { nextTick, onMounted, reactive, ref, watch } from "#imports";
-import { fetchLanguageApi, saveLanguageApi } from "~/server/localApi/language";
 import { themeVariety } from "~/plugins/highlight.client";
 import { useWindowSize } from "@vueuse/core";
-
-interface ISidebarData {
-  equipment: string;
-  isShowSidebar: boolean;
-}
+import { DatabaseSurfaceEnum, LanguageEnum, LanguageType, ThemeEnum, ThemeType } from "~/types/interface/utils/idb";
+import { SidebarParams } from "~/types/interface/components/sidebar";
+import { useIdbStore } from "~/utils/idb";
 
 type IMenuList = {
   equipment: string;
@@ -19,18 +16,18 @@ type IMenuList = {
   }[];
 }[]
 
-type IThemeType = "dark-mode" | "light-mode";
-
 const { setLocale, locale } = useLocal();
 
 const commonStores = useCommonStore();
 
-const sidebarData = reactive<ISidebarData>({
+const idbStore = useIdbStore();
+
+const sidebarData = reactive<SidebarParams>({
   equipment: "pc",
   isShowSidebar: false
 });
 
-const defaultThemeMode = ref<string>(commonStores.curTheme);
+const defaultThemeMode = ref<ThemeType>(await idbStore.get(DatabaseSurfaceEnum.THEME).then(value => value) || ThemeEnum.LIGHT);
 
 const menuList = reactive<IMenuList>([
   {
@@ -78,17 +75,15 @@ watch(width, (newVal) => {
  * 设置主题
  */
 function setThemeMode() {
-  const curTheme: IThemeType = defaultThemeMode.value == "dark-mode" ? "light-mode" : "dark-mode";
+  const curTheme: ThemeType = defaultThemeMode.value == ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
 
   defaultThemeMode.value = curTheme;
-
-  localStorage.setItem("theme", curTheme);
 
   nextTick(() => themeVariety(curTheme));
 
   setRootMode();
 
-  commonStores.setTheme(curTheme);
+  idbStore.set(DatabaseSurfaceEnum.THEME, curTheme);
 }
 
 /**
@@ -102,16 +97,14 @@ function setRootMode() {
  * 设置侧边栏
  * @param equipment 设备
  */
-function setSidebarToggle(equipment: string) {
+function setSidebarToggle(equipment: SidebarParams["equipment"]) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
-
-  const obj: ISidebarData = {
+  const obj: SidebarParams = {
     equipment,
     isShowSidebar: !sidebarStatus
   };
 
   sidebarData.equipment = obj.equipment;
-
   sidebarData.isShowSidebar = obj.isShowSidebar;
 
   commonStores.setSidebarData(obj);
@@ -121,27 +114,23 @@ function setSidebarToggle(equipment: string) {
  * 获取语言
  */
 function getLocaleData() {
-  fetchLanguageApi().then(res => {
-    if (res.code === 200) {
-      if (res.result) {
-        const { name } = res.result;
-
-        setLocale(name);
-      } else {
-        setLocaleData(navigator.language == "zh" ? "zh-CN" : "en");
-      }
+  idbStore.get(DatabaseSurfaceEnum.LANGUAGE).then(value => {
+    if (value) {
+      setLocale(value);
+    } else {
+      setLocaleData(navigator.language == "zh" ? LanguageEnum.CN : LanguageEnum.EN);
     }
   });
 }
 
 /**
  * 设置首语言
- * @param language 语种
+ * @param {LanguageType} language 语种
  */
-function setLocaleData(language: string) {
+function setLocaleData(language: LanguageType) {
   setLocale(language);
 
-  saveLanguageApi(language);
+  idbStore.set(DatabaseSurfaceEnum.LANGUAGE, language);
 }
 
 /**
@@ -151,7 +140,7 @@ function setLocaleData(language: string) {
 function relatedOperations(indent: string) {
   switch (indent) {
     case "translate":
-      setLocaleData(locale.value === "en" ? "zh-CN" : "en");
+      setLocaleData(locale.value === "en" ? LanguageEnum.CN : LanguageEnum.EN);
 
       break;
     case "theme":

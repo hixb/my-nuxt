@@ -1,5 +1,6 @@
 import { useI18n } from "vue-i18n";
 import { useNuxtApp } from "#app";
+import { LanguageEnum } from "~/types/interface/utils/idb";
 
 /**
  * i18n
@@ -8,7 +9,7 @@ export function useLocal() {
   const { locale } = useI18n();
 
   // 设置首语言
-  locale.value = "zh-CN";
+  locale.value = LanguageEnum.CN;
 
   const currentLocale = useCookie("locale", { maxAge: 20 * 365 * 24 * 60 * 60 });
 
@@ -24,7 +25,7 @@ export function useLocal() {
         const nuxtApp = useNuxtApp();
 
         if (nuxtApp.ssrContext?.req?.headers) {
-          const acceptLanguage = nuxtApp.ssrContext.req.headers["accept-language"] || "zh-CN";
+          const acceptLanguage = nuxtApp.ssrContext.req.headers["accept-language"] || LanguageEnum.CN;
           const preferredLanguage = acceptLanguage.split(",")[0];
 
           setLocale(preferredLanguage);
