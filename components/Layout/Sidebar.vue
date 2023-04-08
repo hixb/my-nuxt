@@ -1,15 +1,11 @@
 <script lang="ts" setup>
 import { useCommonStore } from "~/stores";
 import { reactive, watch } from "#imports";
-
-interface ISidebarData {
-  equipment: string;
-  isShowSidebar: boolean;
-}
+import { SidebarParams } from "~/types/interface/components/sidebar";
 
 const commonStores = useCommonStore();
 
-const sidebarData = reactive<ISidebarData>({
+const sidebarData = reactive<SidebarParams>({
   equipment: "pc",
   isShowSidebar: false
 });
@@ -46,10 +42,10 @@ watch(() => commonStores.sidebarData, newVal => {
  * 设置侧边栏
  * @param equipment 设备
  */
-function setSidebarToggle(equipment: string) {
+function setSidebarToggle(equipment: SidebarParams["equipment"]) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
 
-  const obj: ISidebarData = {
+  const obj: SidebarParams = {
     equipment,
     isShowSidebar: !sidebarStatus
   };

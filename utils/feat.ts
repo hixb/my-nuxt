@@ -1,5 +1,10 @@
-function mathEaseout(A: number, B: number, rate: number, callback: Function) {
-  if (A == B || typeof A != "number") return;
+function mathEaseout(
+  A: number,
+  B: number,
+  rate: number,
+  callback: (keepsake: number, boo: boolean) => void
+) {
+  if (A == B) return;
 
   B = B || 0;
 

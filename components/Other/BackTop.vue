@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "#imports";
-import { scrollEaseOut } from "~/plugins/utils/common";
+import { scrollEaseOut } from "~/utils/feat";
 
 const rollAway = ref<number>(0);
 

@@ -6,7 +6,7 @@ const commonStores = useCommonStore();
 const curSidebarShowStatus = ref<boolean>(true);
 const isShowLoading = ref<boolean>(false);
 const loadingAnimation = ref<boolean>(false);
-const loadTimer = ref<any>(null);
+const loadTimer = ref<ReturnType<typeof setTimeout>>();
 
 watch(commonStores, newVal => {
   curSidebarShowStatus.value = newVal.sidebarData.isShowSidebar;
@@ -20,7 +20,7 @@ onMounted(() => {
 });
 
 onDeactivated(() => {
-  clearInterval(loadTimer);
+  clearTimeout(loadTimer.value);
 });
 
 /**

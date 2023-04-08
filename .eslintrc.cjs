@@ -44,11 +44,7 @@ module.exports = {
       skipTemplates: true,
     }],
     // Disallow unused variables
-    "no-unused-vars": ["error", {
-      vars: "all",
-      args: "none",
-      ignoreRestSiblings: false
-    },],
+    "no-unused-vars": 0,
     // Disallow unused variable definitions of v-for directives or scope attributes
     "vue/no-unused-vars": "off",
     // Enforce self-closing style
