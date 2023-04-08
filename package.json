@@ -1,6 +1,11 @@
 {
   "private": true,
   "name": "my-nuxt",
+  "description": "This is my groundbreaking project",
+  "engines": {
+    "node": ">=14.0.0",
+    "pnpm": ">=6.14.0"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
