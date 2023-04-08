@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { useUserStore } from "~/stores/user";
-import { watchEffect } from "#imports";
+import { useSeoMeta, watchEffect } from "#imports";
+
+useSeoMeta({
+  title: "My Nuxt App",
+  description: () => "My program for logging issues."
+});
 
 const user = useUserStore();
 

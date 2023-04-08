@@ -30,7 +30,16 @@ const data = reactive([
       <div class="cover">
         <NuxtLink :to="item.url">
           <OtherListCoverOperate />
-          <img :src="item.pic" alt="">
+          <NuxtImg
+            :alt="item.title"
+            :src="item.pic"
+            fit="cover"
+            format="webp"
+            height="162"
+            loading="lazy"
+            quality="80"
+            width="310"
+          />
         </NuxtLink>
       </div>
       <div class="detail">

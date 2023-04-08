@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { reactive } from "#imports";
 
+const pic = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmxL-hkIX19cdlV93xhQnaZSwqU6Jmeq7JK9P7c_FbGFfemeaMVZnC3Ow4WZbc8kMlhxGjLSR2AhN9gsxfhtkPovJJ7zUDBILREULXuvNt2aFMcUAtKbN38kPngpTfHMLwmGuGZb7zK8vaX24LRXDdXus632s2zJp7mNqqzeIar5h8E_6grv8j0T_Y4g/w600-h300-p-k-no-nu-rw-e30/Plus_UI_Typography.webp";
+
 const data = reactive([
   {
-    pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmxL-hkIX19cdlV93xhQnaZSwqU6Jmeq7JK9P7c_FbGFfemeaMVZnC3Ow4WZbc8kMlhxGjLSR2AhN9gsxfhtkPovJJ7zUDBILREULXuvNt2aFMcUAtKbN38kPngpTfHMLwmGuGZb7zK8vaX24LRXDdXus632s2zJp7mNqqzeIar5h8E_6grv8j0T_Y4g/w600-h300-p-k-no-nu-rw-e30/Plus_UI_Typography.webp",
+    pic,
     title: "js判读两个数组对象是否相同",
     content: "let arr1 = [{id: 1, name: '嘿嘿', go: 'xi', child: {id: 55}, is: 2}, 'hh…",
     date: "2022-07-26T08:56:00+08:00",
@@ -12,7 +14,7 @@ const data = reactive([
     source: "/"
   },
   {
-    pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmxL-hkIX19cdlV93xhQnaZSwqU6Jmeq7JK9P7c_FbGFfemeaMVZnC3Ow4WZbc8kMlhxGjLSR2AhN9gsxfhtkPovJJ7zUDBILREULXuvNt2aFMcUAtKbN38kPngpTfHMLwmGuGZb7zK8vaX24LRXDdXus632s2zJp7mNqqzeIar5h8E_6grv8j0T_Y4g/w600-h300-p-k-no-nu-rw-e30/Plus_UI_Typography.webp",
+    pic,
     title: "js判读两个数组对象是否相同",
     content: "let arr1 = [{id: 1, name: '嘿嘿', go: 'xi', child: {id: 55}, is: 2}, 'hh…",
     date: "2022-07-26T08:56:00+08:00",
@@ -30,7 +32,16 @@ const data = reactive([
       <div class="cover">
         <NuxtLink :to="item.url">
           <OtherListCoverOperate />
-          <img :src="item.pic" alt="">
+          <NuxtImg
+            :alt="item.title"
+            :src="item.pic"
+            fit="cover"
+            format="webp"
+            height="162"
+            loading="lazy"
+            quality="80"
+            width="310"
+          />
         </NuxtLink>
       </div>
       <div class="detail">
