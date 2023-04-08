@@ -9,7 +9,9 @@ import { DatabaseSurfaceEnum, ThemeEnum, ThemeType } from "~/types/interface/uti
 
 const idbStore = useIdbStore();
 
-process?.client && nextTick(async() => themeVariety(await idbStore.get(DatabaseSurfaceEnum.THEME).then(value => value) || ThemeEnum.DARK));
+if (process?.client) {
+  nextTick(async() => themeVariety(await idbStore.get(DatabaseSurfaceEnum.THEME).then(value => value) || ThemeEnum.DARK));
+}
 
 // register languages
 hljs.registerLanguage("xml", xml);
