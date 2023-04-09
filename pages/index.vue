@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useUserStore } from "~/stores/user";
-import { useSeoMeta, watchEffect } from "#imports";
 
 useSeoMeta({
   title: "My Nuxt App",
@@ -9,15 +8,21 @@ useSeoMeta({
 
 const user = useUserStore();
 
+const isShow = ref(false);
+
 watchEffect(() => {
   user.setNewName("zhuxb");
+});
+
+onMounted(() => {
+  setTimeout(() => isShow.value = true, 5000);
 });
 </script>
 
 <template>
   <NuxtLayout>
-    <div class="home">
-      <div class="host">
+    <div class="justify-space-between flex">
+      <div class="mr-20px flex-1">
         <DataEntryList />
       </div>
       <DataEntryPopularPosts />
@@ -29,17 +34,8 @@ watchEffect(() => {
     <!--      hello-->
     <!--    </GeneralButton>-->
     <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
+    <FeedbackNotification :show="isShow" content="hello" />
   </NuxtLayout>
 </template>
 
-<style lang="scss" scoped>
-.home {
-  display: flex;
-  justify-content: space-between;
-
-  .host {
-    flex: 1;
-    margin-right: 20px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -22,6 +22,9 @@ const cn = {
   articleTitle: {
     "pinned-post": "精选文章",
     "popular-posts": "热门帖子"
+  },
+  notification: {
+    "notification-title": "通知",
   }
 };
 

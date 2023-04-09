@@ -22,6 +22,9 @@ const en = {
   articleTitle: {
     "pinned-post": "Pinned Post",
     "popular-posts": "Popular Posts"
+  },
+  notification: {
+    "notification-title": "Notification",
   }
 };
 
