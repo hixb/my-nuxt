@@ -22,6 +22,7 @@ module.exports = {
     "plugin:vue/recommended",
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
+    "@unocss"
   ],
   plugins: [
     "vue",
@@ -121,6 +122,8 @@ module.exports = {
       "x-invalid-namespace": true
     }],
     // Allow the `any` type
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    // Disallow the use of undeclared variables unless mentioned in /*global */ comments.
+    "no-undef": 0
   }
 };
