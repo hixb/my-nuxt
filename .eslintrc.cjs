@@ -22,6 +22,7 @@ module.exports = {
     "plugin:vue/recommended",
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
+    "@unocss"
   ],
   plugins: [
     "vue",

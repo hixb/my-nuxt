@@ -36,7 +36,15 @@ export default defineNuxtConfig({
     },
     plugins: [stylelintPlugin()]
   },
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vueuse/nuxt", "@unocss/nuxt", "@nuxt/image-edge", "nuxt-purgecss"],
+  modules: [
+    "@pinia/nuxt",
+    "@nuxtjs/i18n",
+    "@vueuse/nuxt",
+    "@unocss/nuxt",
+    "@nuxt/image-edge",
+    "nuxt-purgecss",
+    "@unocss/nuxt"
+  ],
   i18n: {
     vueI18n: {
       legacy: false,
