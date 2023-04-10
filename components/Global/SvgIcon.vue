@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref, watch } from "#imports";
 
-type SvgProps = {
-  borderRadius?: string
-  isOpenHover?: boolean
-  icon: string
-  filled?: boolean
-  customizeClass?: string
+interface SvgProps {
+  borderRadius?: string;
+  isOpenHover?: boolean;
+  icon: string;
+  filled?: boolean;
+  customizeClass?: string;
 }
 
 const props = withDefaults(defineProps<SvgProps>(), {
@@ -22,20 +22,27 @@ const props = withDefaults(defineProps<SvgProps>(), {
   customizeClass: ""
 });
 
-const iconsImport: Record<string, () => Promise<Record<string, any>>> = import.meta.glob("assets/icons/**/**.svg", {
-  as: "raw",
-  eager: false
-});
+const iconsImport: Record<string, () => Promise<Record<string, any>>> =
+  import.meta.glob("assets/icons/**/**.svg", {
+    as: "raw",
+    eager: false
+  });
 
-const rawIcon = ref<Record<string, any>>(await iconsImport[`/assets/icons/${props.icon}.svg`]());
+const rawIcon = ref<Record<string, any>>(await checkSvgFn(props.icon));
 
 watch(() => props.icon, async(newVal: string) => {
-  newVal && (rawIcon.value = await iconsImport[`/assets/icons/${newVal}.svg`]());
+  newVal && (rawIcon.value = await checkSvgFn(newVal));
 }, {
   immediate: true
 });
 
 !rawIcon.value && console.error(`[SvgIcon] Icon '${props.icon}' doesn't exist in 'assets/icons'`);
+
+async function checkSvgFn(val: string) {
+  const isFn = await iconsImport[`/assets/icons/${val}.svg`];
+
+  return typeof isFn === "function" ? isFn() : isFn;
+}
 </script>
 
 <template>
