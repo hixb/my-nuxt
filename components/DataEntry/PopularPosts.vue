@@ -24,15 +24,20 @@ const data = reactive([
 </script>
 
 <template>
-  <section class="popular-posts">
+  <section class="popular-posts w300px">
     <GeneralHeadText bold flower>{{ $t("articleTitle.popular-posts") }}</GeneralHeadText>
-    <article v-for="(item, index) in data" :key="index">
-      <div class="cover">
-        <NuxtLink :to="item.url">
+    <article
+      v-for="(item, index) in data"
+      :key="index"
+      class="mb20px b-rd-10px p20px"
+    >
+      <div class="cover relative mb20px overflow-hidden b-rd-5px">
+        <NuxtLink :to="item.url" class="block h132px">
           <OtherListCoverOperate />
           <NuxtImg
             :alt="item.title"
             :src="item.pic"
+            class="h100% w100% b-rd-5px object-cover"
             fit="cover"
             format="webp"
             height="162"
@@ -42,20 +47,20 @@ const data = reactive([
           />
         </NuxtLink>
       </div>
-      <div class="detail">
-        <div class="where">
-          {{ item.date }} <span class="line"></span> in
+      <div class="detail mx-10px flex flex-col justify-center">
+        <div class="where align-center mx-25px mb8px flex items-center">
+          {{ item.date }} <span class="line mx-5px inline-block h1px w10px"></span> in
           <NuxtLink :to="item.source">Documentation</NuxtLink>
         </div>
-        <div class="description">
-          <div class="num">01</div>
+        <div class="description flex items-start">
+          <div class="num mt5px w25px flex-none text-12px">01</div>
           <div class="right-content">
             <h2 class="title">
-              <NuxtLink :to="item.url">
+              <NuxtLink :to="item.url" class="text-15px font-bold lh-23px">
                 {{ item.title }}
               </NuxtLink>
             </h2>
-            <p class="content">
+            <p class="content text-13px font-100 lh-18px op80">
               {{ item.content }}
             </p>
           </div>
@@ -67,8 +72,6 @@ const data = reactive([
 
 <style lang="scss" scoped>
 .popular-posts {
-  width: 300px;
-
   .head-text {
     margin-bottom: 40px;
   }
@@ -76,30 +79,13 @@ const data = reactive([
   > article {
     background: var(--my-theme-content);
     box-shadow: 0 5px 35px rgb(0 0 0 / 7%);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
 
     &:last-of-type {
       margin-bottom: 0;
     }
 
     .cover {
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 20px;
-      border-radius: 5px;
-
-      > a {
-        display: block;
-        height: 132px;
-      }
-
       img {
-        border-radius: 5px;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
         transition: var(--my-theme-trans4);
       }
 
@@ -114,49 +100,27 @@ const data = reactive([
 
     .detail {
       flex: 1 0 calc(100% - 310px - 40px);
-      margin: 0 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
 
       .where {
-        display: flex;
-        align-items: center;
-        margin: 0 25px 8px;
-
         .line {
-          margin: 0 5px;
-          width: 10px;
-          height: 1px;
           background-color: var(--my-theme-wire-color);
-          display: inline-block;
         }
       }
 
       .description {
-        display: flex;
-        align-items: flex-start;
-
         * {
           line-height: 1;
         }
 
         .num {
-          width: 25px;
           color: var(--my-theme-wire-color);
-          font-size: 12px;
-          margin-top: 5px;
-          flex: none;
         }
 
         .right-content {
           .title > a {
             color: var(--my-theme-color);
-            font-size: 15px;
-            font-weight: bold;
             transition: var(--my-theme-trans3);
             @include t-many-over(2);
-            line-height: 23px;
 
             &:hover {
               color: var(--my-theme-special-color);
@@ -165,12 +129,8 @@ const data = reactive([
           }
 
           .content {
-            color: var(--my-theme-color);
-            opacity: .8;
-            font-size: 13px;
-            font-weight: 100;
             margin-top: 12px;
-            line-height: 18px;
+            color: var(--my-theme-color);
           }
         }
       }

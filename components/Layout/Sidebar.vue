@@ -24,7 +24,7 @@ const footerRule = reactive([
 
 const footerConnect = reactive([
   { router: "/", icon: "crypto-company/facebook" },
-  { router: "/", icon: "crypto-company/huobi-token-(ht)" },
+  { router: "/", icon: "crypto-company/huobi-token-ht" },
   { router: "/", icon: "crypto-company/js" },
 ]);
 
