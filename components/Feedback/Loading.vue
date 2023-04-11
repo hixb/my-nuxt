@@ -10,8 +10,8 @@ withDefaults(defineProps<{
 
 <template>
   <Transition>
-    <section v-show="visible" class="my-loading">
-      <svg>
+    <section v-show="visible" class="my-loading fixed left-0 top-0 z-100 h100% w100%">
+      <svg class="absolute left-50% top-50% h150px w100px overflow-visible">
         <g>
           <path d="M 50,100 A 1,1 0 0 1 50,0" />
         </g>
@@ -25,7 +25,7 @@ withDefaults(defineProps<{
           </linearGradient>
         </defs>
       </svg>
-      <span>{{ text }}</span>
+      <span class="absolute left-50% top-65% overflow-visible text-18px">{{ text }}</span>
     </section>
   </Transition>
 </template>
@@ -35,23 +35,11 @@ $transition-duration: 2s;
 $path-length: 157.5px;
 
 .my-loading {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: saturate(180%) blur(10px);
-  z-index: 100;
 
   svg {
-    position: absolute;
-    left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
-    overflow: visible;
-    width: 100px;
-    height: 150px;
 
     g {
       animation: slide $transition-duration linear infinite;
@@ -79,13 +67,8 @@ $path-length: 157.5px;
   }
 
   span {
-    position: absolute;
-    left: 50%;
-    top: 65%;
     transform: translateX(-50%);
-    overflow: visible;
     color: var(--my-theme-special-color);
-    font-size: 18px;
   }
 }
 

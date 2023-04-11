@@ -24,7 +24,7 @@ const footerRule = reactive([
 
 const footerConnect = reactive([
   { router: "/", icon: "crypto-company/facebook" },
-  { router: "/", icon: "crypto-company/huobi-token-(ht)" },
+  { router: "/", icon: "crypto-company/huobi-token-ht" },
   { router: "/", icon: "crypto-company/js" },
 ]);
 
@@ -59,7 +59,7 @@ function setSidebarToggle(equipment: SidebarParams["equipment"]) {
 
 <template>
   <aside>
-    <div :class="['pc-aside', sidebarData.isShowSidebar ? 'pc-aside-active' : 'pc-aside-no-active']">
+    <div :class="['pc-aside sticky z-1', sidebarData.isShowSidebar ? 'pc-aside-active' : 'w80px']">
       <div :class="['pc', {'zoom-sidebar': !sidebarData.isShowSidebar}]">
         <div class="avatar">
           <div class="avatar-bg" />

@@ -32,10 +32,19 @@ function handleScroll() {
 </script>
 
 <template>
-  <section :class="['back-top', { visible: visible }]" @click="scrollEaseOut(0)">
+  <section
+    :class="[
+      'back-top flex items-center justify-center fixed right-20px bottom-20px w45px h45px b-rd-50% cursor-pointer invisible op0 z-5',
+      { visible: visible }
+    ]"
+    @click="scrollEaseOut(0)"
+  >
     <svg viewBox="0 0 34 34">
-      <circle class="b" cx="17" cy="17" r="15.92" />
-      <circle :style="{ strokeDashoffset: rollAway }" class="c scrollProgress" cx="17" cy="17" r="15.92" />
+      <circle class="b op90" cx="17" cy="17" r="15.92" />
+      <circle
+        :style="{ strokeDashoffset: rollAway }" class="c scrollProgress fill-none stroke-cap-round" cx="17"
+        cy="17" r="15.92"
+      />
       <path class="line d" d="M15.07,21.06,19.16,17l-4.09-4.06" />
     </svg>
   </section>
@@ -43,19 +52,6 @@ function handleScroll() {
 
 <style lang="scss" scoped>
 .back-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 5;
   transform: scale(0);
   transition: transform .3s ease, opacity .3s ease, visibility .3s ease, margin-bottom 1s ease;
 
@@ -68,15 +64,12 @@ function handleScroll() {
     .b {
       fill: var(--my-theme-fill-color);
       stroke: var(--my-theme-str-color);
-      opacity: .9;
     }
 
     .c {
-      fill: none;
       stroke: var(--my-theme-special-color);
       stroke-dasharray: 100 100;
       stroke-dashoffset: 100;
-      stroke-linecap: round;
       transition: var(--my-theme-trans3);
     }
 

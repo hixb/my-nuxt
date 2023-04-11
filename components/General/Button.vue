@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onDeactivated, reactive, ref } from "#imports";
 import type { PropType } from "vue";
 
 const props = defineProps({
@@ -55,7 +54,12 @@ onDeactivated(() => {
  * 初始化
  * @param el
  */
-function init(el: { parentElement: HTMLElement; width: number; height: number | undefined; getContext: (arg0: string) => never; }) {
+function init(el: {
+  parentElement: HTMLElement;
+  width: number;
+  height: number | undefined;
+  getContext: (arg0: string) => never;
+}) {
   const oBtn = el.parentElement;
 
   color.value = getStyle(el.parentElement, "color");
@@ -164,17 +168,14 @@ function jump() {
 </script>
 
 <template>
-  <button :class="['my-btn', shape, type]" @click="jump">
-    <canvas class="ripple" @click="ripple" />
+  <button :class="['my-btn overflow-hidden relative cursor-pointer', shape, type]" @click="jump">
+    <canvas class="absolute left-0 top-0 h100% w100% op0" @click="ripple" />
     <slot />
   </button>
 </template>
 
 <style lang="scss" scoped>
 .my-btn {
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
   transition: var(--my-theme-trans3);
 
   &:hover {
@@ -183,14 +184,6 @@ function jump() {
   }
 }
 
-.ripple {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
 .plain {
   padding: 8px 12px;

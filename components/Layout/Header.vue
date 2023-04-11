@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { useLocal } from "~/composables/locale";
 import { useCommonStore } from "~/stores";
-import { nextTick, onMounted, reactive, ref, watch } from "#imports";
 import { themeVariety } from "~/plugins/highlight.client";
 import { useWindowSize } from "@vueuse/core";
 import { DatabaseSurfaceEnum, LanguageEnum, LanguageType, ThemeEnum, ThemeType } from "~/types/interface/utils/idb";
@@ -152,7 +151,7 @@ function relatedOperations(indent: string) {
 </script>
 
 <template>
-  <header>
+  <header class="fixed left-0 top-0 z-2 w100vw">
     <div v-for="item in menuList" :key="item.equipment" :class="item.equipment">
       <div class="head-l">
         <GlobalSvgIcon

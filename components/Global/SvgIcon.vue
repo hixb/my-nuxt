@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
-
-type SvgProps = {
-  borderRadius?: string
-  isOpenHover?: boolean
-  icon: string
-  filled?: boolean
-  customizeClass?: string
+interface SvgProps {
+  borderRadius?: string;
+  isOpenHover?: boolean;
+  icon: string;
+  filled?: boolean;
+  customizeClass?: string;
 }
 
 const props = withDefaults(defineProps<SvgProps>(), {
@@ -22,41 +20,45 @@ const props = withDefaults(defineProps<SvgProps>(), {
   customizeClass: ""
 });
 
-const iconsImport: Record<string, () => Promise<Record<string, any>>> = import.meta.glob("assets/icons/**/**.svg", {
-  as: "raw",
-  eager: false
-});
+const iconsImport: Record<string, () => Promise<Record<string, any>>> =
+  import.meta.glob("assets/icons/**/**.svg", {
+    as: "raw",
+    eager: false
+  });
 
-const rawIcon = ref<Record<string, any>>(await iconsImport[`/assets/icons/${props.icon}.svg`]());
+const rawIcon = ref<Record<string, any>>(await checkSvgFn(props.icon));
 
 watch(() => props.icon, async(newVal: string) => {
-  newVal && (rawIcon.value = await iconsImport[`/assets/icons/${newVal}.svg`]());
+  newVal && (rawIcon.value = await checkSvgFn(newVal));
 }, {
   immediate: true
 });
 
 !rawIcon.value && console.error(`[SvgIcon] Icon '${props.icon}' doesn't exist in 'assets/icons'`);
+
+async function checkSvgFn(val: string) {
+  const isFn = await iconsImport[`/assets/icons/${val}.svg`];
+
+  return typeof isFn === "function" ? isFn() : isFn;
+}
 </script>
 
 <template>
-  <section :class="['svg-pic', borderRadius, customizeClass, { 'open-hover': isOpenHover }]">
-    <span :class="{ 'nuxt-icon--fill': !filled }" class="nuxt-icon" v-html="rawIcon" />
+  <section
+    :class="[
+      'svg-pic w40px h40px flex items-center justify-center cursor-pointer',
+      borderRadius,
+      customizeClass,
+      { 'open-hover': isOpenHover }
+    ]"
+  >
+    <span :class="{ 'nuxt-icon--fill': !filled }" class="contents" v-html="rawIcon" />
   </section>
 </template>
 
 <style lang="scss">
 .svg-pic {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: var(--my-theme-trans2);
-  cursor: pointer;
-
-  .nuxt-icon {
-    display: contents;
-  }
 
   svg {
     width: 20px;

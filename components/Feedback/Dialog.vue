@@ -16,16 +16,25 @@ const props = defineProps({
 
 <template>
   <Transition>
-    <section v-show="visible" class="my-dialog">
+    <section
+      v-show="visible"
+      class="my-dialog fixed left-0 top-0 z-10 max-h-100vh flex items-start justify-center overflow-x-auto overflow-y-hidden pb-80px pt-80px"
+    >
       <Transition name="bounce">
-        <div v-show="visible" class="dialog-body">
-          <div class="close-btn" @click="emit('close', false)">
+        <div
+          v-show="visible"
+          class="dialog-body relative m-auto h300px max-w-800px min-w-400px w400px b-rd-20px px-16px py-10px"
+        >
+          <div
+            class="close-btn absolute right--5px top--5px h34px w34px flex cursor-pointer items-center justify-center overflow-hidden b-rd-10px"
+            @click="emit('close', false)"
+          >
             <GlobalSvgIcon :is-open-hover="false" icon="essetional/close-square" />
           </div>
-          <div v-if="isShowTitle" class="title">
+          <div v-if="isShowTitle" class="mb-10px px-10px">
             <slot name="title" />
           </div>
-          <div class="content">
+          <div class="px-16px py-10px">
             <slot name="content" />
           </div>
         </div>
@@ -68,18 +77,6 @@ const props = defineProps({
 
 .my-dialog {
   background-color: rgba(0, 0, 0, .2);
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-top: 80px;
-  padding-bottom: 80px;
-  z-index: 10;
   backdrop-filter: saturate(180%) blur(10px);
   transition: all .25s ease;
   width: v-bind("props.width");
@@ -87,25 +84,9 @@ const props = defineProps({
 }
 
 .dialog-body {
-  width: 400px;
-  height: 300px;
-  margin: auto;
   transition: all .25s ease;
-  max-width: 800px;
-  position: relative;
-  min-width: 400px;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, .05);
-  border-radius: 20px;
   background-color: var(--my-theme-bg-color);
-  padding: 10px 16px;
-
-  .title {
-    padding: 10px 10px 0;
-  }
-
-  .content {
-    padding: 10px 16px;
-  }
 
   * {
     color: var(--my-theme-color);
@@ -113,19 +94,8 @@ const props = defineProps({
 }
 
 .close-btn {
-  position: absolute;
-  top: -5px;
-  right: -5px;
   background-color: var(--my-theme-darkBs);
-  width: 34px;
-  height: 34px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .5);
-  cursor: pointer;
-  border-radius: 10px;
   transition: all .3s ease;
 
   &:hover {

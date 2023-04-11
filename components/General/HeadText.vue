@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed } from "#imports";
-
 const props = defineProps({
   // 字体大小
   fontSize: { type: [Number, String], default: "18px" },
@@ -16,27 +14,25 @@ const fontSize = computed((): string | number => {
 </script>
 
 <template>
-  <h4 :class="['head-text', { flower }]" :style="{ fontWeight: bold && 'bold' }">
+  <h4
+    :class="[
+      'head-text relative font-normal after:content-empty after:inline-block after:align-mid after:w25px after:mx-10px after:op50',
+      { flower }
+    ]"
+    :style="{ fontWeight: bold && 'bold' }"
+  >
     <slot />
   </h4>
 </template>
 
 <style lang="scss" scoped>
 .head-text {
-  margin-bottom: 10px;
   color: var(--my-theme-color);
-  position: relative;
-  font-weight: normal;
   font-size: v-bind(fontSize);
+  margin-bottom: 10px;
 
   &:after {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 25px;
-    margin: 0 10px;
     border-bottom: 1px solid var(--my-theme-wire-color);
-    opacity: 0.5;
   }
 }
 
