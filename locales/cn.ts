@@ -25,6 +25,16 @@ const cn = {
   },
   notification: {
     "notification-title": "通知",
+  },
+  footer: {
+    "footer-with": "用咖啡制作",
+    "footer-design-title": "我的设计",
+    "footer-design-des": "好的设计让平凡变得不平凡。",
+    "footer-server": "使用的服务器：`vercel`",
+    "footer-my": "我",
+    "footer-about": "关于我",
+    "footer-copyright": "版权所有。",
+    "footer-notes": "笔记"
   }
 };
 

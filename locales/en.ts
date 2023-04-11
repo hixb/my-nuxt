@@ -25,6 +25,16 @@ const en = {
   },
   notification: {
     "notification-title": "Notification",
+  },
+  footer: {
+    "footer.with": "Made with coffee by",
+    "footer-design-title": "My Design",
+    "footer-design-des": "Good design makes the ordinary extraordinary.",
+    "footer-server": "Server used: `vercel`",
+    "footer-my": "My",
+    "footer-about": "About",
+    "footer-copyright": "All Rights Reserved.",
+    "footer-notes": "Notes"
   }
 };
 

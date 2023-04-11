@@ -84,7 +84,7 @@ const data = reactive([
 
   > article {
     background: var(--my-theme-content);
-    box-shadow: 0 5px 35px rgba(0, 0, 0, .07);
+    box-shadow: var(--my-theme-shallow-shadow);
 
     &:after {
       content: '';
