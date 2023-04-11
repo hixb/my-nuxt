@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onDeactivated, reactive, ref } from "#imports";
 import type { PropType } from "vue";
 
 const props = defineProps({

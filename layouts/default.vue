@@ -41,14 +41,14 @@ onDeactivated(() => {
 </script>
 
 <template>
-  <section class="app">
+  <section class="app relative z-2">
     <Transition>
       <div v-if="loadingAnimation">
         <LayoutHeader />
-        <main>
+        <main class="flex">
           <LayoutSidebar />
-          <div class="content">
-            <div class="inner">
+          <div class="content pt30px">
+            <div class="inner mx-auto my-0 max-w-1280px px-25px">
               <slot />
             </div>
           </div>
@@ -63,25 +63,12 @@ onDeactivated(() => {
 
 <style lang="scss" scoped>
 .app {
-  position: relative;
-  z-index: 2;
-
   main {
-    display: flex;
     margin-top: var(--my-header-height);
 
     .content {
       width: calc(100% - var(--my-nav-width));
       height: calc(100% - var(--my-header-height));
-      padding-top: 30px;
-
-
-      .inner {
-        padding-left: 25px;
-        padding-right: 25px;
-        margin: 0 auto;
-        max-width: 1280px;
-      }
     }
   }
 }

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onMounted, ref, useLocalStore } from "#imports";
 import { LocalStorageConst } from "~/types/interface/utils/local";
 
 const localStore = useLocalStore();
@@ -25,11 +24,14 @@ function agreeCookie() {
 
 <template>
   <Transition name="slide-fade">
-    <section v-if="visible" class="cookie-popup">
+    <section
+      v-if="visible"
+      class="cookie-popup fixed bottom--600px left-40px right-auto top-auto z-10 max-w-400px b-rd-15px p20px"
+    >
       <GeneralHeadText bold>{{ $t("cookiePopup.cookie-popup-title") }}</GeneralHeadText>
-      <p>{{ $t("cookiePopup.cookie-popup-content") }}</p>
-      <div class="btn-area">
-        <GeneralButton class="accept" shape="semicircle" @click="agreeCookie">
+      <p class="text-14px lh-20px">{{ $t("cookiePopup.cookie-popup-content") }}</p>
+      <div class="mt15px">
+        <GeneralButton class="accept w264px" shape="semicircle" @click="agreeCookie">
           {{ $t("cookiePopup.cookie-popup-agree") }}
         </GeneralButton>
         <GeneralButton
@@ -47,38 +49,19 @@ function agreeCookie() {
 
 <style lang="scss" scoped>
 .cookie-popup {
-  position: fixed;
-  top: auto;
-  left: 40px;
-  right: auto;
-  bottom: -600px;
-  z-index: 10;
-  padding: 20px;
   background: var(--my-theme-hint-bgc);
   backdrop-filter: blur(10px);
-  border-radius: 15px;
   box-shadow: 0 0 40px rgba(0, 0, 0, .1);
   animation: bottomToTop 2.5s forwards;
   animation-delay: 1s;
-  max-width: 400px;
 
   * {
     color: var(--my-theme-color);
   }
 
-  > p {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
-  .btn-area {
-    margin-top: 15px;
-
-    .accept {
-      width: 264px;
-      color: #fff;
-      margin-right: 10px;
-    }
+  .accept {
+    color: #fff;
+    margin-right: 10px;
   }
 }
 

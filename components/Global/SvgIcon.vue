@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
-
 interface SvgProps {
   borderRadius?: string;
   isOpenHover?: boolean;
@@ -46,24 +44,21 @@ async function checkSvgFn(val: string) {
 </script>
 
 <template>
-  <section :class="['svg-pic', borderRadius, customizeClass, { 'open-hover': isOpenHover }]">
-    <span :class="{ 'nuxt-icon--fill': !filled }" class="nuxt-icon" v-html="rawIcon" />
+  <section
+    :class="[
+      'svg-pic w40px h40px flex items-center justify-center cursor-pointer',
+      borderRadius,
+      customizeClass,
+      { 'open-hover': isOpenHover }
+    ]"
+  >
+    <span :class="{ 'nuxt-icon--fill': !filled }" class="contents" v-html="rawIcon" />
   </section>
 </template>
 
 <style lang="scss">
 .svg-pic {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: var(--my-theme-trans2);
-  cursor: pointer;
-
-  .nuxt-icon {
-    display: contents;
-  }
 
   svg {
     width: 20px;

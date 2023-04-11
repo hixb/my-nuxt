@@ -8,13 +8,7 @@ aside {
   width: var(--my-nav-width);
 }
 
-.pc-aside-no-active {
-  width: 80px;
-}
-
 .pc-aside {
-  position: sticky;
-  z-index: 1;
   transition: var(--my-theme-trans3);
   top: var(--my-header-height);
 

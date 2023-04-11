@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <NuxtPage />
-    <StylePlumBoosom />
-  </div>
+  <NuxtPage />
+  <StylePlumBoosom />
 </template>

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
-
 /** 更新关键字 */
 type updateKeywordProps = {
   (e: "updateKeyword", val: string | number): void
