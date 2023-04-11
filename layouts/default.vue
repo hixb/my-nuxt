@@ -50,6 +50,7 @@ onDeactivated(() => {
           <div class="content pt30px">
             <div class="inner mx-auto my-0 max-w-1280px px-25px">
               <slot />
+              <LayoutFooter />
             </div>
           </div>
         </main>
