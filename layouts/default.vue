@@ -4,7 +4,6 @@ import { onDeactivated, onMounted, ref, watch } from "#imports";
 
 const commonStores = useCommonStore();
 const curSidebarShowStatus = ref<boolean>(true);
-const isShowLoading = ref<boolean>(false);
 const loadingAnimation = ref<boolean>(false);
 const loadTimer = ref<ReturnType<typeof setTimeout>>();
 
@@ -14,30 +13,11 @@ watch(commonStores, newVal => {
 
 onMounted(() => {
   loadingAnimation.value = true;
-  // loadTimer.value = setTimeout(() => {
-  // closeLoading();
-  // }, 1000);
 });
 
 onDeactivated(() => {
   clearTimeout(loadTimer.value);
 });
-
-/**
- * 显示loading
- */
-// const showLoading = () => {
-//   isShowLoading.value = true;
-// };
-
-/**
- * 关闭loading
- */
-// const closeLoading = () => {
-//   isShowLoading.value = false;
-// };
-
-// showLoading();
 </script>
 
 <template>
@@ -56,7 +36,6 @@ onDeactivated(() => {
         </main>
       </div>
     </Transition>
-    <FeedbackLoading :visible="isShowLoading" />
     <OtherBackTop />
     <OtherCookieHint />
   </section>

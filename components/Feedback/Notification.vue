@@ -58,13 +58,17 @@ const position = computed(() => {
 
 watch(() => props.show, newVal => {
   if (newVal) {
-    newVal && (visible.value = true);
+    visible.value = newVal;
 
     timer.value = setTimeout(() => {
       visible.value = false;
     }, props.destroy);
+  } else {
+    destroyNotification();
   }
 });
+
+onDeactivated(() => destroyNotification());
 
 function destroyNotification() {
   if (timer.value) {

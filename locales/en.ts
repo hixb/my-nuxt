@@ -9,6 +9,7 @@ const en = {
     "sidebar-home-text": "Home",
     "sidebar-article-text": "Article",
     "sidebar-about-text": "About",
+    "sidebar-about-icon": "Icon Lib",
     "sidebar-sitemap-text": "Sitemap",
     "sidebar-disclaimer-text": "Disclaimer",
     "sidebar-privacy-text": "Privacy",

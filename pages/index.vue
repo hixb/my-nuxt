@@ -34,7 +34,6 @@ onMounted(() => {
     <!--      hello-->
     <!--    </GeneralButton>-->
     <!--    <FeedbackDialog :visible="isShowDialog" @close="isShowDialog = false" />-->
-    <FeedbackNotification :show="isShow as boolean" content="hello" />
   </NuxtLayout>
 </template>
 

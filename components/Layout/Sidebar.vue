@@ -14,6 +14,7 @@ const sidebarList = reactive([
   { router: "/", icon: "essetional/home", text: "sidebar.sidebar-home-text" },
   { router: "/", icon: "audio/subtitle", text: "sidebar.sidebar-article-text" },
   { router: "/", icon: "users/profile-2user", text: "sidebar.sidebar-about-text" },
+  { router: "/icon", icon: "crypto-company/icon-icx", text: "sidebar.sidebar-about-icon" },
 ]);
 
 const footerRule = reactive([
@@ -66,7 +67,7 @@ function setSidebarToggle(equipment: SidebarParams["equipment"]) {
         </div>
         <ul>
           <li v-for="item in sidebarList" :key="item.icon">
-            <NuxtLink :to="item.router">
+            <NuxtLink :to="item.router" prefetch>
               <GlobalSvgIcon
                 :border-radius="!sidebarData.isShowSidebar ? 'semicircle' : 'round'"
                 :icon="item.icon"
