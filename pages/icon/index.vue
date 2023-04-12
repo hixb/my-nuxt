@@ -51,7 +51,7 @@ onMounted(async() => {
 
 function getIconName(name: string) {
   isShowNotify.value = false;
-  useClipboard().copy(name);
+  useClipboard().copy(name.toLowerCase().replace(/\(|\)/g, ""));
   nextTick(() => isShowNotify.value = true);
 }
 </script>
