@@ -12,6 +12,8 @@ const iconList = ref<Partial<{
 
 const isShowNotify = ref(false);
 
+const isShowLoading = ref(true);
+
 onMounted(async() => {
   const icon = import.meta.glob("assets/iconLib/**/**.svg", {
     as: "raw",
@@ -47,6 +49,8 @@ onMounted(async() => {
     }
     return acc;
   }, {});
+
+  isShowLoading.value = false;
 });
 
 function getIconName(name: string) {
@@ -75,6 +79,7 @@ function getIconName(name: string) {
       </div>
     </section>
     <FeedbackNotification :show="isShowNotify as boolean" content="Copy Success!" />
+    <FeedbackLoading :visible="isShowLoading as boolean" />
   </NuxtLayout>
 </template>
 
