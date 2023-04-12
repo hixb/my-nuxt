@@ -9,6 +9,7 @@ const cn = {
     "sidebar-home-text": "首页",
     "sidebar-article-text": "文章",
     "sidebar-about-text": "关于",
+    "sidebar-about-icon": "图标库",
     "sidebar-sitemap-text": "网站地图",
     "sidebar-disclaimer-text": "免责声明",
     "sidebar-privacy-text": "隐私",
