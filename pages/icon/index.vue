@@ -85,7 +85,6 @@ function getIconName(name: string) {
 
 <style lang="scss" scoped>
 .container {
-  background-color: var(--my-theme-darkBs);
   box-shadow: var(--my-theme-shallow-shadow);
 
   .icon-box-list {
