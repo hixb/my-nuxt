@@ -41,9 +41,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@vueuse/nuxt",
     "@unocss/nuxt",
-    "@nuxt/image-edge",
-    "nuxt-purgecss",
-    "@unocss/nuxt"
+    "@nuxt/image-edge"
   ],
   i18n: {
     vueI18n: {
