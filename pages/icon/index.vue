@@ -1,57 +1,59 @@
 <script lang="ts" setup>
 import { useClipboard } from "@vueuse/core";
 
-const iconList = ref<Partial<{
+interface IconParams {
   [key: string]: {
-    name: string;
-    path: string;
-    cate: string;
+    name?: string;
+    path?: string;
+    cate?: string;
     svg: string;
   }[]
-}>>([]);
+}
+
+const iconList = ref<Partial<IconParams>>({});
 
 const isShowNotify = ref(false);
 
-const isShowLoading = ref(true);
+withIcon();
 
-onMounted(async() => {
-  const icon = import.meta.glob("assets/iconLib/**/**.svg", {
-    as: "raw",
-    eager: false
-  });
-
-  for (const key in icon) {
-    if (Object.hasOwnProperty.call(icon, key)) {
-      const item = icon[key];
+async function withIcon() {
+  const icon = Object.entries(import.meta.glob("assets/iconLib/**/**.svg", { as: "raw", eager: false }))
+    .map(async(item: [string, () => Promise<string>]) => {
       // name
-      const name = item.name.split("/").pop().split("_").pop().split(".")[0];
+      const name = item[0].split("/").pop()?.split("_").pop()?.split(".")[0];
 
       // path
-      const path = item
-        .name
-        .split("_")
-        .pop()
-        .split(".")[0]
-        .replace("/assets/iconLib/", "");
+      const path = item[0].split("_").pop()?.split(".")[0].replace("/assets/iconLib/", "");
 
       // cate
-      const cate = path.split("/")[0];
+      const cate = path?.split("/")[0];
 
-      iconList.value.push({ name, path, cate, svg: await icon[key]() });
-    }
-  }
+      // svg picture
+      const svg = await item[1]().then(res => res);
 
-  iconList.value = iconList.value.reduce((acc, curr) => {
+      return {
+        name,
+        path,
+        cate,
+        svg
+      };
+    });
+
+
+  const res = await Promise.all(icon);
+
+  iconList.value = res.reduce<IconParams>((acc, curr) => {
+    if (!curr.cate) return acc;
+
     if (acc[curr.cate]) {
-      acc[curr.cate].push(curr);
+      acc[curr.cate]?.push(curr);
     } else {
       acc[curr.cate] = [curr];
     }
-    return acc;
-  }, {});
 
-  isShowLoading.value = false;
-});
+    return acc;
+  }, {} as IconParams);
+}
 
 function getIconName(name: string) {
   isShowNotify.value = false;
@@ -64,12 +66,11 @@ function getIconName(name: string) {
   <NuxtLayout>
     <section class="b-rd-10px p20px container">
       <h3 class="text-30px font-bold">Icon Lib:</h3>
-      <div v-for="(item, name) in iconList" :key="item" class="cate-list mt30px flex flex-col">
+      <div v-for="(item, name) in iconList" :key="name" class="cate-list mt30px flex flex-col">
         <h4>{{ name }}</h4>
         <ul class="icon-box-list flex flex-wrap">
           <li
-            v-for="v in item" :key="v.name"
-            class="m10px h50px w62.5px flex flex-col cursor-pointer items-center"
+            v-for="v in item" :key="v.name" class="m10px h50px w62px flex flex-col cursor-pointer items-center"
             @click="getIconName(v.path)"
           >
             <div class="" v-html="v.svg"></div>
@@ -78,8 +79,7 @@ function getIconName(name: string) {
         </ul>
       </div>
     </section>
-    <FeedbackNotification :show="isShowNotify as boolean" content="Copy Success!" />
-    <FeedbackLoading :visible="isShowLoading as boolean" />
+    <FeedbackNotification :show="isShowNotify" content="Copy Success!" />
   </NuxtLayout>
 </template>
 
@@ -91,7 +91,7 @@ function getIconName(name: string) {
     margin-top: 10px;
 
     li {
-      > span {
+      >span {
         @include t-many-over(1);
       }
     }
