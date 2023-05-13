@@ -50,7 +50,7 @@ const findModel = () => {
       type="text"
       @keypress="+$event.keyCode === 13 && findModel()"
     />
-    <div v-if="String(keyword).length > 0 && clearBtnStatus" class="cursor-pointer" @click="keyword.value = ''">
+    <div v-if="String(keyword).length > 0 && clearBtnStatus" class="cursor-pointer" @click="keyword = ''">
       <GlobalSvgIcon :is-open-hover="false" icon="essetional/close-square" />
     </div>
   </section>

@@ -1,8 +1,5 @@
 import { useIdbStore } from "~/utils/idb";
 
-if (process.client) {
-  const idbStore = useIdbStore();
-  idbStore.defaultGetStore();
-}
+process.client && useIdbStore().defaultGetStore();
 
 export default {};

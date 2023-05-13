@@ -55,7 +55,9 @@ async function withIcon() {
   }, {} as IconParams);
 }
 
-function getIconName(name: string) {
+function getIconName(name: string | undefined) {
+  if (!name) return;
+
   isShowNotify.value = false;
   useClipboard().copy(name.toLowerCase().replace(/\(|\)/g, ""));
   nextTick(() => isShowNotify.value = true);
