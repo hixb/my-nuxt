@@ -19,7 +19,7 @@ const fontSize = computed((): string | number => {
       'head-text relative font-normal after:content-empty after:inline-block after:align-mid after:w25px after:mx-10px after:op50',
       { flower }
     ]"
-    :style="{ fontWeight: bold && 'bold' }"
+    :style="{ fontWeight: bold ? 'bold' : 'initial' }"
   >
     <slot />
   </h4>

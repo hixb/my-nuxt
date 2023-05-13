@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 withDefaults(defineProps<{
+  /**
+   * 是否显示
+   */
   visible: boolean,
+  /**
+   * loading 文字
+   */
   text?: string | number
 }>(), {
   visible: false,

@@ -41,13 +41,13 @@ watch(() => commonStores.sidebarData, newVal => {
 
 /**
  * 设置侧边栏
- * @param equipment 设备
+ * @param {SidebarParams["equipment"]} [equipment] 设备
  */
-function setSidebarToggle(equipment: SidebarParams["equipment"]) {
+function setSidebarToggle(equipment?: SidebarParams["equipment"]) {
   const sidebarStatus = commonStores.sidebarData.isShowSidebar;
 
   const obj: SidebarParams = {
-    equipment,
+    equipment: equipment ? equipment : sidebarData.equipment,
     isShowSidebar: !sidebarStatus
   };
 
@@ -112,7 +112,7 @@ function setSidebarToggle(equipment: SidebarParams["equipment"]) {
     <Transition name="slide-fade">
       <div v-if="sidebarData.isShowSidebar" class="mobile-aside">
         <div :class="['mobile']">
-          <div class="mask" @click="setSidebarToggle" />
+          <div class="mask" @click="setSidebarToggle()" />
           <div class="aside-list">
             <div class="title">
               <GlobalSvgIcon icon="essetional/close-square" @click="setSidebarToggle" />
