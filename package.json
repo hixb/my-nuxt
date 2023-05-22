@@ -20,7 +20,7 @@
     "@types/node": "^20.1.2",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
-    "@unocss/eslint-config": "^0.51.2",
+    "@unocss/eslint-config": "^0.52.0",
     "@unocss/nuxt": "^0.52.0",
     "eslint": "^8.37.0",
     "eslint-plugin-vue": "^9.10.0",
