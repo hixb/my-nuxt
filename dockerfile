@@ -1,4 +1,4 @@
-FROM node:13.11.0
+FROM node:13.14.0
 MAINTAINER hixb
 ENV NODE_ENV=production
 ENV HOST 0.0.0.0
