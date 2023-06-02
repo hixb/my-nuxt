@@ -18,7 +18,7 @@
     "@nuxt/image-edge": "1.0.0-28092818.5c21f4c",
     "@nuxtjs/i18n": "^8.0.0-beta.10",
     "@pinia/nuxt": "^0.4.11",
-    "@types/node": "^20.2.5",
+    "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@unocss/eslint-config": "^0.52.7",
