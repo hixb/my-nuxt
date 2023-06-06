@@ -209,13 +209,17 @@ function adjustLayout() {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+
+  &:after {
+    content: '';
+    flex-grow: 999999999 !important;
+  }
 }
 
 .child {
   margin: 5px;
   height: 250px;
   overflow: hidden;
-  max-width: 492px;
 }
 
 img {

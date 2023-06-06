@@ -19,47 +19,26 @@ const images = [
   { src: `${path}65c2/f0ab0fdff1756c7a8012f0385a08af4b${suffix}`, width: 0, marginRight: 0 },
   { src: `${path}9947/3fb96605d679984043bfbd2cdc1200b8${suffix}`, width: 0, marginRight: 0 },
 ];
-// const images = [
-//   { src: `${path}9e12/2e0b2f019f57e8d3249118439ed19786${suffix}`, width: 0, marginRight: 0 },
-// ];
 </script>
 
 <template>
-  <ul>
-    <li v-for="(item, index) in images" :key="index">
-      <img :src="item.src" alt="">
+  <ul un-after="content-none grow-999999999" class="flex flex-wrap overflow-hidden">
+    <li v-for="(item, index) in images" :key="index" class="relative m-8px h-250px min-w-150px grow-1 overflow-hidden hover:transition-all-300">
+      <a href="">
+        <img class="h-250px max-w-100% min-w-100% b-rd-10px object-cover object-top vertical-bottom" :src="item.src" alt="">
+      </a>
+      <div class="content invisible absolute bottom-0 left-0 h-60px w-100% flex items-center justify-center b-rd-10px bg-hex-0008 text-18px font-bold text-hex-fff op0 transition-all-300">
+        哈哈哈哈
+      </div>
     </li>
   </ul>
 </template>
 
 <style scoped lang="scss">
 ul {
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 1330px;
-  overflow: hidden;
-
-  &:after {
-    content: '';
-    flex-grow: 999999999;
-  }
-
-  li {
-    flex-grow: 1;
-    margin: 8px;
-    height: 250px;
-    position: relative;
-    min-width: 150px;
-
-    img {
-      height: 250px;
-      object-fit: cover;
-      max-width: 100%;
-      min-width: 100%;
-      vertical-align: bottom;
-      border-radius: 10px;
-      object-position: top;
-    }
+  li:hover .content {
+    opacity: 1;
+    visibility: visible;
   }
 }
 </style>
