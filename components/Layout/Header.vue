@@ -26,7 +26,7 @@ const sidebarData = reactive<SidebarParams>({
   isShowSidebar: false
 });
 
-const defaultThemeMode = ref<ThemeType>(await idbStore.get(DatabaseSurfaceEnum.THEME).then(value => value) || ThemeEnum.LIGHT);
+const defaultThemeMode = ref<ThemeType>(ThemeEnum.DARK);
 
 const menuList = reactive<IMenuList>([
   {
@@ -50,8 +50,13 @@ const menuList = reactive<IMenuList>([
 
 const { width } = useWindowSize();
 
-onMounted(() => {
+onMounted(async() => {
   getLocaleData();
+
+  await idbStore.get(DatabaseSurfaceEnum.THEME).then(value => {
+    if (value)
+      defaultThemeMode.value = value;
+  });
 
   setRootMode();
 });
@@ -113,13 +118,7 @@ function setSidebarToggle(equipment: SidebarParams["equipment"]) {
  * 获取语言
  */
 function getLocaleData() {
-  idbStore.get(DatabaseSurfaceEnum.LANGUAGE).then(value => {
-    if (value) {
-      setLocale(value);
-    } else {
-      setLocaleData(navigator.language == "zh" ? LanguageEnum.CN : LanguageEnum.EN);
-    }
-  });
+  idbStore.get(DatabaseSurfaceEnum.LANGUAGE).then(value => setLocale(value ? value : LanguageEnum.EN));
 }
 
 /**
