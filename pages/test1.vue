@@ -22,7 +22,7 @@ const images = [
 </script>
 
 <template>
-  <ul un-after="content-none grow-999999999" class="flex flex-wrap overflow-hidden">
+  <ul class="flex flex-wrap overflow-hidden">
     <li v-for="(item, index) in images" :key="index" class="relative m-8px h-250px min-w-150px grow-1 overflow-hidden hover:transition-all-300">
       <a href="">
         <img class="h-250px max-w-100% min-w-100% b-rd-10px object-cover object-top vertical-bottom" :src="item.src" alt="">
@@ -36,6 +36,11 @@ const images = [
 
 <style scoped lang="scss">
 ul {
+  &:after {
+    content: "";
+    flex-grow: 999999999;
+  }
+
   li:hover .content {
     opacity: 1;
     visibility: visible;
