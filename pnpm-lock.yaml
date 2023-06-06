@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@nuxt/image-edge':
-    specifier: 1.0.0-28099902.2b6ed1c
-    version: 1.0.0-28099902.2b6ed1c
+    specifier: 1.0.0-28100678.6e9298b
+    version: 1.0.0-28100678.6e9298b
   '@nuxtjs/i18n':
     specifier: ^8.0.0-beta.10
     version: 8.0.0-beta.10(vue@3.3.4)
@@ -879,11 +879,11 @@ packages:
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
 
-  /@nuxt/image-edge@1.0.0-28099902.2b6ed1c:
-    resolution: {integrity: sha512-NWLol7AFVaikRqNqpoq5FO/sgWcgFtTbpY7EuBJqTCa37xkMW7iS3ouee4R9upR/ECwj7xSkRsA32UzIoJ5yuA==}
+  /@nuxt/image-edge@1.0.0-28100678.6e9298b:
+    resolution: {integrity: sha512-FxFgVozne13JmSdigz6f4UP16htN3a+i8tKZO8y3/Wj6KekwGpFWXEbBGtaGgDkqha5rH+m3qvGzj9dWo7D4QA==}
     engines: {node: ^14.16.0 || >=16.11.0}
     dependencies:
-      '@nuxt/kit': 3.5.2
+      '@nuxt/kit': 3.5.3
       consola: 3.1.0
       defu: 6.1.2
       h3: 1.6.6
@@ -952,6 +952,31 @@ packages:
       - rollup
       - supports-color
 
+  /@nuxt/kit@3.5.3:
+    resolution: {integrity: sha512-QzoOGqa1zjKQfg7Y50TrrFAL9DhtIpYYs10gihcM1ISPrn9ROht+VEjqsaMvT+L8JuQbNf8wDYl8qzsdWGU29Q==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dependencies:
+      '@nuxt/schema': 3.5.3
+      c12: 1.4.1
+      consola: 3.1.0
+      defu: 6.1.2
+      globby: 13.1.4
+      hash-sum: 2.0.0
+      ignore: 5.2.4
+      jiti: 1.18.2
+      knitwork: 1.0.0
+      mlly: 1.3.0
+      pathe: 1.1.1
+      pkg-types: 1.0.3
+      scule: 1.0.0
+      semver: 7.5.1
+      unctx: 2.3.1
+      unimport: 3.0.7(rollup@3.23.0)
+      untyped: 1.3.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+
   /@nuxt/schema@3.3.3:
     resolution: {integrity: sha512-OxedDFqBJG8bfTEDOH5hVbQLXpFpSmBOM/oC6J4dTqM2GiWxYJysML5Lo7FPSMqFkTtgxVmd75bp+DRPE5XzWA==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
@@ -991,11 +1016,28 @@ packages:
       - rollup
       - supports-color
 
+  /@nuxt/schema@3.5.3:
+    resolution: {integrity: sha512-Tnon4mYfJZmsCtx4NZ9A+qjwo4DcZ6tERpEhYBY81PX7AiJ+hFPBFR1qR32Tff66/qJjZg5UXj6H9AdzwEYr2w==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dependencies:
+      defu: 6.1.2
+      hookable: 5.5.3
+      pathe: 1.1.1
+      pkg-types: 1.0.3
+      postcss-import-resolver: 2.0.0
+      std-env: 3.3.3
+      ufo: 1.1.2
+      unimport: 3.0.7(rollup@3.23.0)
+      untyped: 1.3.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+
   /@nuxt/telemetry@2.2.0:
     resolution: {integrity: sha512-Z2UmPkBy5WjxvHKuUcl1X6vKWnIyWSP+9UGde1F+MzzZxYgAQybFud1uL2B3KCowxZdoqT1hd2WklV7EtyCwrQ==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.5.2
+      '@nuxt/kit': 3.5.3
       chalk: 5.2.0
       ci-info: 3.8.0
       consola: 3.1.0
@@ -1014,7 +1056,7 @@ packages:
       ofetch: 1.0.1
       parse-git-config: 3.0.0
       rc9: 2.1.0
-      std-env: 3.3.2
+      std-env: 3.3.3
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5844,9 +5886,6 @@ packages:
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
-
-  /std-env@3.3.2:
-    resolution: {integrity: sha512-uUZI65yrV2Qva5gqE0+A7uVAvO40iPo6jGhs7s8keRfHCmtg+uB2X6EiLGCI9IgL1J17xGhvoOqSz79lzICPTA==}
 
   /std-env@3.3.3:
     resolution: {integrity: sha512-Rz6yejtVyWnVjC1RFvNmYL10kgjC49EOghxWn0RFqlCHGFpQx+Xe7yW3I4ceK1SGrWIGMjD5Kbue8W/udkbMJg==}
