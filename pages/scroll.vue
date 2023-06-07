@@ -204,14 +204,13 @@ function playBoxes() {
 .scroll-box {
   width: 100%;
   height: 100%;
-  background: #000;
+  background: rgba(0, 0, 0, .2);
   position: absolute;
   overflow: hidden;
 
   div {
     width: 100%;
     height: 100%;
-    background: #000;
     position: absolute;
   }
 }
