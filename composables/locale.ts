@@ -9,7 +9,7 @@ export function useLocal() {
   const { locale } = useI18n();
 
   // 设置首语言
-  locale.value = LanguageEnum.CN;
+  locale.value = LanguageEnum.EN;
 
   const currentLocale = useCookie("locale", { maxAge: 20 * 365 * 24 * 60 * 60 });
 
