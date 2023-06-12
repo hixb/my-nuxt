@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@nuxt/image-edge':
-    specifier: 1.0.0-rc.1-28106434.299e03e
-    version: 1.0.0-rc.1-28106434.299e03e
+    specifier: 1.0.0-rc.1-28109383.55ca3fc
+    version: 1.0.0-rc.1-28109383.55ca3fc
   '@nuxtjs/i18n':
     specifier: ^8.0.0-beta.10
     version: 8.0.0-beta.10(vue@3.3.4)
@@ -885,8 +885,8 @@ packages:
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
 
-  /@nuxt/image-edge@1.0.0-rc.1-28106434.299e03e:
-    resolution: {integrity: sha512-X2IlPsXOLawpiKEdlS408S57+OYqoRjlGyKcI/xQAynXjSo8X5JIKam7YlL4iBu/Rk8Qicfyvgl7cjR9jVGJDA==}
+  /@nuxt/image-edge@1.0.0-rc.1-28109383.55ca3fc:
+    resolution: {integrity: sha512-CyqRYNkW88MtCfGnxt4e2mmgRw09YKWUELLTFKHTbYSkHX8e1S3pSAjEgasfA9tdnLnqRT7ctPSsjS4nQJJ1oA==}
     engines: {node: ^14.16.0 || >=16.11.0}
     dependencies:
       '@nuxt/kit': 3.5.3
