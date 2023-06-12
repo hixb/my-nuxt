@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@nuxt/image-edge':
-    specifier: 1.0.0-rc.1-28109383.55ca3fc
-    version: 1.0.0-rc.1-28109383.55ca3fc
+    specifier: 1.0.0-rc.1-28109463.8782712
+    version: 1.0.0-rc.1-28109463.8782712
   '@nuxtjs/i18n':
     specifier: ^8.0.0-beta.10
     version: 8.0.0-beta.10(vue@3.3.4)
@@ -885,8 +885,8 @@ packages:
   /@nuxt/devalue@2.0.2:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
 
-  /@nuxt/image-edge@1.0.0-rc.1-28109383.55ca3fc:
-    resolution: {integrity: sha512-CyqRYNkW88MtCfGnxt4e2mmgRw09YKWUELLTFKHTbYSkHX8e1S3pSAjEgasfA9tdnLnqRT7ctPSsjS4nQJJ1oA==}
+  /@nuxt/image-edge@1.0.0-rc.1-28109463.8782712:
+    resolution: {integrity: sha512-X02YO3aW5Qg0zldMDtxRNofbh0haluLJAQL5skBTEwsixYt0kxfKqh3/DZlW0MF88lnSK7E9J+yBxn/73UZTxg==}
     engines: {node: ^14.16.0 || >=16.11.0}
     dependencies:
       '@nuxt/kit': 3.5.3
