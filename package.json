@@ -15,7 +15,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/image-edge": "1.0.0-rc.1-28135297.08462d1",
+    "@nuxt/image-edge": "1.0.0-rc.1-28139579.37395b7",
     "@nuxtjs/i18n": "^8.0.0-beta.10",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18.15.11",
