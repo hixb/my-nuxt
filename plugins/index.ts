@@ -1,5 +1,5 @@
 import { useIdbStore } from "~/utils/idb";
 
-process.client && useIdbStore().defaultGetStore();
-
-export default {};
+export default defineNuxtPlugin(() => {
+  process.client && useIdbStore().defaultGetStore();
+});
