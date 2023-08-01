@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/image-edge": "1.0.0-rc.1-28164352.ad7c010",
+    "@nuxt/image-edge": "1.0.0-rc.1-28180077.d51e794",
     "@nuxtjs/i18n": "^8.0.0-beta.10",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18",

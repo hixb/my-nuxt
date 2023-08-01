@@ -23,8 +23,8 @@ devDependencies:
     specifier: latest
     version: 0.7.2(nuxt@3.6.1)(vite@4.3.9)
   '@nuxt/image-edge':
-    specifier: 1.0.0-rc.1-28164352.ad7c010
-    version: 1.0.0-rc.1-28164352.ad7c010
+    specifier: 1.0.0-rc.1-28180077.d51e794
+    version: 1.0.0-rc.1-28180077.d51e794
   '@nuxtjs/i18n':
     specifier: ^8.0.0-beta.10
     version: 8.0.0-beta.10(vue@3.3.4)
@@ -1369,8 +1369,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nuxt/image-edge@1.0.0-rc.1-28164352.ad7c010:
-    resolution: {integrity: sha512-deOQY0VAYtpjjxF1H1f18FgaIHU8gzecy4fge9rAZav4M4I7mY+uwgsidbYkEmJhoKv31ruE80TDLaE81PFFmQ==}
+  /@nuxt/image-edge@1.0.0-rc.1-28180077.d51e794:
+    resolution: {integrity: sha512-GbdBqEon+V8D7YmCmTLNuP2kKGfOIeEt4oWeznJ5eOwzADwNJfl96hmirkz4Vbm6qD901k3Xtg0eZK18ZY5K2A==}
     engines: {node: ^14.16.0 || >=16.11.0}
     dependencies:
       '@nuxt/kit': 3.6.5
@@ -1382,7 +1382,7 @@ packages:
       ohash: 1.1.2
       pathe: 1.1.1
       std-env: 3.3.3
-      ufo: 1.1.2
+      ufo: 1.2.0
     optionalDependencies:
       ipx: 1.2.0
     transitivePeerDependencies:
@@ -3591,6 +3591,7 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    requiresBuild: true
     dev: true
 
   /color-string@1.9.1:
@@ -5053,7 +5054,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       dir-glob: 3.0.1
-      fast-glob: 3.3.0
+      fast-glob: 3.3.1
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 4.0.0
@@ -5437,7 +5438,7 @@ packages:
       node-fetch-native: 1.2.0
       pathe: 1.1.1
       sharp: 0.32.1
-      ufo: 1.1.2
+      ufo: 1.2.0
       xss: 1.0.14
     dev: true
     optional: true
@@ -5845,7 +5846,7 @@ packages:
       http-shutdown: 1.2.2
       ip-regex: 5.0.0
       node-forge: 1.3.1
-      ufo: 1.1.2
+      ufo: 1.2.0
     dev: true
 
   /loader-runner@4.3.0:
@@ -8822,6 +8823,10 @@ packages:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
     dev: true
 
+  /ufo@1.2.0:
+    resolution: {integrity: sha512-RsPyTbqORDNDxqAdQPQBpgqhWle1VcTSou/FraClYlHf6TZnQcGslpLcAphNR+sQW4q5lLWLbOsRlh9j24baQg==}
+    dev: true
+
   /ultrahtml@1.2.0:
     resolution: {integrity: sha512-vxZM2yNvajRmCj/SknRYGNXk2tqiy6kRNvZjJLaleG3zJbSh/aNkOqD1/CVzypw8tyHyhpzYuwQgMMhUB4ZVNQ==}
     dev: true
@@ -8903,15 +8908,15 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.26.2)
       escape-string-regexp: 5.0.0
-      fast-glob: 3.3.0
+      fast-glob: 3.3.1
       local-pkg: 0.4.3
-      magic-string: 0.30.0
+      magic-string: 0.30.1
       mlly: 1.4.0
       pathe: 1.1.1
       pkg-types: 1.0.3
       scule: 1.0.0
       strip-literal: 1.0.1
-      unplugin: 1.3.1
+      unplugin: 1.4.0
     transitivePeerDependencies:
       - rollup
     dev: true
