@@ -1,0 +1,115 @@
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+body {
+  background-color: var(--my-bg-base-color);
+  color: var(--my-text-base-color);
+  transition: var(--my-theme-trans3);
+  font-family: 'Barlow', 'Noto Sans SC', sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  color: #fff;
+  background: var(--my-special-color);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 3px;
+  background-color: var(--my-scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--my-scrollbar-bg);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--my-scrollbar-bg-hover);
+  }
+}
+
+hr {
+  color: var(--my-border-color);
+}
+
+i {
+  font-style: normal;
+}
+
+// 圆角
+.round {
+  border-radius: 50%;
+}
+
+// 半圆角
+.semicircle {
+  border-radius: 15px;
+}
+
+// 设置 svg stroke
+.set-svg-stroke {
+  stroke: var(--my-special-color);
+}
+
+svg * {
+  stroke: var(--my-svg-color);
+}
+
+.blur-backdrop {
+  backdrop-filter: saturate(180%) blur(10px);
+  background: rgba(0, 0, 0, .2);
+  transform: translate(-50%, -50%);
+
+  * {
+    backdrop-filter: none;
+  }
+
+  @apply
+  block
+  fixed
+  top-1/2
+  left-1/2
+  z-10
+  transition-[var(--my-theme-trans1)]
+  w-screen
+  h-screen
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity .3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: var(--my-theme-content);
+  line-height: 21px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: revert;
+  font-weight: revert;
+}

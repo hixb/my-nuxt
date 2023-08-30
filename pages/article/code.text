@@ -1,0 +1,382 @@
+<h2>查看被占用端口:</h2><pre><code class="language-bash">netstat -aon | findstr 8080</code></pre><h2>查看被占用端口PID:</h2><pre><code class="language-bash">tasklist | findstr 88888</code></pre><h2>杀掉进程:</h2><pre><code class="language-bash">tasklist /f /PID 88888</code></pre><p><br></p><p></p>
+<h2>检查两个数组对象是否相同</h2><h3>实现函数</h3><pre><code class="language-typescript">function equalsObj(oldData: any, newData: any): boolean {
+  if (oldData === newData)
+    return true
+
+  if (isObject(oldData) && isObject(newData) && Object.keys(oldData).length === Object.keys(newData).length) {
+    for (const key in oldData) {
+      if (oldData.hasOwnProperty(key)) {
+        if (!equalsObj(oldData[key], newData[key]))
+          return false
+      }
+    }
+  }
+  else if (isArray(oldData) && isArray(newData) && oldData.length === newData.length) {
+    for (let i = 0, length = oldData.length; i &lt; length; i++) {
+      if (!equalsObj(oldData[i], newData[i]))
+        return false
+    }
+  }
+  else {
+    return false
+  }
+  return true
+}</code></pre><h3>测试:</h3><pre><code class="language-typescript">const arr1: (Record&lt;string, any&gt; | string)[] = [{ id: 1, name: '嘿嘿', go: 'xi', child: { id: 55 }, is: 2 }, 'hh']
+const arr2: (Record&lt;string, any&gt; | string)[] = [{ id: 1, name: '嘿嘿', go: 'xi', child: { id: 55 }, is: 2 }, 'hh']
+
+console.log(equalsObj(arr1, arr2))
+console.log(equalsObj(JSON.stringify(arr1), JSON.stringify(arr2)))</code></pre><h3>工具函数:</h3><pre><code class="language-typescript">
+export const isString = (arg: unknown): arg is string =&gt; typeof arg == 'string'
+export const isArray = &lt;T&gt;(arg: unknown): arg is T[] =&gt; Array.isArray(arg) && typeof arg == 'object'
+export const isNumber = (arg: unknown): arg is number =&gt; !Number.isNaN(Number(arg))
+export const isFunction = (arg: unknown): arg is () =&gt; void =&gt; typeof arg === 'function'
+export const isObject = (arg: unknown): arg is Record&lt;any, any&gt; =&gt; arg !== null && typeof arg === 'object'
+export const isRegExp = (arg: unknown): arg is RegExp =&gt; Object.prototype.toString.call(arg) === '[object RegExp]'
+export function isPromise&lt;T = any&gt;(arg: unknown): arg is Promise&lt;T&gt; {
+  return (
+    (isObject(arg) || isFunction(arg))
+    && isFunction((arg as any).then)
+    && isFunction((arg as any).catch)
+  )
+}
+</code></pre><h2>其他工具</h2><pre><code class="language-typescript">'use strict'
+
+export namespace UseModels {
+  type ModelParams&lt;T extends ModelPathType&gt; = typeof ALL_MODELS_PARAMS[T]
+  type ModelParamsKey&lt;T extends ModelPathType&gt; = keyof ModelParams&lt;T&gt;
+  type ModelParamsWithIndexSignature&lt;T extends ModelPathType&gt; = ModelParams&lt;T&gt; & {
+    [key: string]: AvailableValue
+  }
+  type FnKeepsakeKeyType&lt;T extends ModelPathType&gt; = ModelParamsKey&lt;T&gt;
+  type AvailableValue = number | string
+  type FetchReturnType&lt;T extends ModelPathType, U extends ModelParamsKey&lt;T&gt; | ModelParamsKey&lt;T&gt;[] | [], SimpleType&gt; =
+    U extends ModelParamsKey&lt;T&gt;[] | []
+      ? { [P in (U extends [] ? ModelParamsKey&lt;T&gt;[] : U)[number]]: AvailableValue }
+      : SimpleType
+  type ModelObjectsKeyType = ModelParamsWithIndexSignature&lt;ModelPathType&gt;
+  type SubclassKeyType = typeof SUBCLASS[number]
+  type ReassignObjectReturnType = Record&lt;keyof ModelObjectsKeyType, AvailableValue&gt;
+
+  export declare namespace MultiCategoryScreening {
+    export type SelectionType = number | number[]
+    export interface SubclassArraysType {
+      key: SubclassKeyType
+      preselectionValues: SelectionType
+      alreadySelectValues: SelectionType
+    }
+
+    export interface ReturnType {
+      url: string
+      subclassArrays: SubclassArraysType[]
+    }
+
+    export interface TransferType {
+      id: number
+      subclass: SubclassKeyType
+      type: ModelPathType
+      maxLength: number
+      pathname: string
+      firstID?: number
+      keyword?: AvailableValue | null
+    }
+  }
+
+  export interface UtilsInterface {
+    readonly MULTI_CATEGORY_SEPARATOR: string
+    joinObjectValues: (type: keyof typeof ModelPathType[keyof typeof ModelPathType], objects: Record&lt;string, AvailableValue&gt;) =&gt; string
+    customError: (message: string) =&gt; Error
+    routerArrayData: &lt;T extends ModelPathType&gt;(type: T, pathname: string) =&gt; [AvailableValue[] | [], number, number]
+    reassignObject: &lt;T extends ModelPathType&gt;(type: T, pathname: string) =&gt; ReassignObjectReturnType
+
+    toNumber(v: string): number
+
+    toNumber(v: string[]): AvailableValue[]
+
+    backToSimple(value: AvailableValue): AvailableValue
+
+    backToSimple(value: AvailableValue[]): AvailableValue[]
+  }
+
+  export interface ModelInterface {
+    multiCategoryScreening(parameter: MultiCategoryScreening.TransferType): MultiCategoryScreening.ReturnType
+
+    createModelListURL&lt;T extends ModelPathType&gt;(
+      type: T,
+      key?: FnKeepsakeKeyType&lt;T&gt;[] | FnKeepsakeKeyType&lt;T&gt;,
+      value?: number[] | string[] | AvailableValue[],
+      useTheCurrentPathToChange?: string | boolean
+    ): string
+
+    createModelListURL(
+      type: ModelPathType,
+      key?: FnKeepsakeKeyType&lt;ModelPathType&gt; | string,
+      value?: AvailableValue,
+      useTheCurrentPathToChange?: string | boolean
+    ): string
+
+    fetchModelParameterValue&lt;T extends ModelPathType, U extends ModelParamsKey&lt;T&gt; | ModelParamsKey&lt;T&gt;[] | []&gt;(
+      type: T,
+      parameter: U,
+      availablePath?: string | boolean
+    ): FetchReturnType&lt;T, U, AvailableValue&gt;
+  }
+
+  export const SUBCLASS = ['cate_id', 'style', 'attribute1', 'attribute2', 'attribute3'] as const
+
+  export enum ModelPathType {
+    MODEL = 'models/model',
+    SU = 'models/su',
+  }
+
+  export const ALL_MODELS_PARAMS = {
+    [ModelPathType.MODEL]: { cate_pid: 0 },
+    [ModelPathType.SU]: { cate_pid: 0 },
+  }
+
+  abstract class Utils implements UtilsInterface {
+    readonly MULTI_CATEGORY_SEPARATOR = '_'
+
+    toNumber(v: string): number
+    toNumber(v: string[]): AvailableValue[]
+    toNumber(v: string[] | string): number | AvailableValue[] {
+      return isNumber(v) ? Number(v) : this.backToSimple(v as string[])
+    }
+
+    joinObjectValues: UseModels.UtilsInterface['joinObjectValues'] = (type, objects) =&gt; {
+      for (const key in objects) {
+        if (Object.prototype.hasOwnProperty.call(objects, key))
+          objects[key] = objects[key].toString()
+      }
+
+      return `/${type}-${Object.values(objects).join('-')}.html`
+    }
+
+    customError: UseModels.UtilsInterface['customError'] = (message): Error =&gt; {
+      throw new Error(message)
+    }
+
+    backToSimple(value: AvailableValue): AvailableValue
+    backToSimple(value: AvailableValue[]): AvailableValue[]
+    backToSimple(value: AvailableValue | AvailableValue[]) {
+      const toNum = (v: AvailableValue) =&gt; isNumber(v) ? this.toNumber(String(v)) : v
+
+      return isArray(value) ? value.map(v =&gt; toNum(v)) : toNum(value)
+    }
+
+    routerArrayData: UseModels.UtilsInterface['routerArrayData'] = (type, pathname) =&gt; {
+      const routerArray = pathname.match(/([\d_]+(-[\d_]+)*)/g)?.join('')?.split('-') ?? []
+
+      return [
+        routerArray,
+        routerArray.length,
+        Object.keys(ALL_MODELS_PARAMS[type]).length,
+      ]
+    }
+
+    reassignObject: UseModels.UtilsInterface['reassignObject'] = (type, pathname) =&gt; {
+      const [routerArray] = this.routerArrayData(type, pathname)
+      const currentRouterResult: ReassignObjectReturnType = {}
+
+      Object.keys(ALL_MODELS_PARAMS[type]).forEach((key: keyof ModelObjectsKeyType, index) =&gt;
+        currentRouterResult[key] = this.backToSimple(routerArray[index]),
+      )
+
+      return currentRouterResult
+    }
+  }
+
+  export class ModelFn extends Utils implements ModelInterface {
+    multiCategoryScreening: UseModels.ModelInterface['multiCategoryScreening'] = (parameter) =&gt; {
+      const [DEFAULT_ID, SELF] = [0 as const, new ModelFn()]
+
+      const { id, subclass, type, maxLength, firstID, pathname, keyword } = parameter
+      const currentRouterResult = this.reassignObject(type, pathname)
+
+      const delimiterConnect = (array: AvailableValue[]) =&gt; array.join(this.MULTI_CATEGORY_SEPARATOR)
+
+      const checkMulti: number | number[] = isString(this.backToSimple(currentRouterResult[subclass]))
+        ? (currentRouterResult[subclass] as string).split(this.MULTI_CATEGORY_SEPARATOR).map(v =&gt; +v)
+        : this.backToSimple(currentRouterResult[subclass]) as number
+      const isMultiArrays = isArray(checkMulti)
+      const assignmentKeyword = keyword && String(keyword)?.trim() ? `?keyword=${String(keyword).trim()}` : ''
+
+      const clearZero = (array: number[]) =&gt; delimiterConnect(array.filter(v =&gt; v !== DEFAULT_ID))
+      const clearCategory = () =&gt; {
+        const optionalCategory: SubclassKeyType[] = ['cate_id']
+        const clearCategory: SubclassKeyType[] = ['style', 'attribute1', 'attribute2', 'attribute3']
+
+        if (optionalCategory.includes(subclass))
+          clearCategory.forEach(item =&gt; currentRouterResult[item] = DEFAULT_ID)
+
+        currentRouterResult.page = 1
+      }
+
+      if (isMultiArrays ? (firstID ? checkMulti.slice(1) : checkMulti).find(v =&gt; v === id) : checkMulti === id) {
+        currentRouterResult[subclass] = isMultiArrays
+          ? firstID
+            ? delimiterConnect([
+              isMultiArrays && checkMulti.filter(v =&gt; v !== firstID).length ? DEFAULT_ID : firstID,
+              ...checkMulti.slice(1).filter(v =&gt; v !== id),
+            ])
+            : delimiterConnect(checkMulti.filter(v =&gt; v !== id))
+          : DEFAULT_ID
+      }
+      else {
+        if (id === DEFAULT_ID) {
+          currentRouterResult[subclass] = DEFAULT_ID
+        }
+        else if (isMultiArrays && checkMulti.length &gt;= maxLength) {
+          const originalArray = firstID ? [firstID, ...checkMulti] : checkMulti
+
+          firstID ? originalArray.splice(1, originalArray.length - maxLength) : originalArray.shift()
+          currentRouterResult[subclass] = delimiterConnect([...originalArray, id])
+        }
+        else {
+          currentRouterResult[subclass] = firstID
+            ? clearZero(isMultiArrays ? [firstID, ...checkMulti, id] : [firstID, checkMulti, id])
+            : clearZero(isMultiArrays ? [...checkMulti, id] : [checkMulti, id])
+        }
+      }
+
+      function* generateSubclassArray(): Generator&lt;MultiCategoryScreening.SubclassArraysType, void&gt; {
+        const [keys, originValues] = [
+          Object.keys(currentRouterResult),
+          String(SELF.reassignObject(type, pathname)[subclass]).split(SELF.MULTI_CATEGORY_SEPARATOR),
+        ]
+
+        do {
+          const key = &lt;SubclassKeyType&gt;keys.shift()
+
+          if (SUBCLASS.includes(key)) {
+            const routerResultArray = String(currentRouterResult[key]).split(SELF.MULTI_CATEGORY_SEPARATOR)
+
+            yield &lt;MultiCategoryScreening.SubclassArraysType&gt;{
+              key,
+              preselectionValues:
+                routerResultArray.length &gt; 1 ? SELF.toNumber(routerResultArray) : +currentRouterResult[key],
+              alreadySelectValues:
+                originValues.length &gt; 1
+                  ? firstID ? SELF.toNumber(originValues).slice(1) : SELF.toNumber(originValues)
+                  : +originValues.join(''),
+            }
+          }
+        } while (keys.length &gt; 0)
+      }
+
+      clearCategory()
+
+      return {
+        url: `/${type}-${Object.values(currentRouterResult).join('-')}.html${assignmentKeyword}`,
+        subclassArrays: [...generateSubclassArray.bind(this)()],
+      } as UseModels.MultiCategoryScreening.ReturnType
+    }
+
+    createModelListURL&lt;T extends ModelPathType&gt;(
+      type: T,
+      key?: FnKeepsakeKeyType&lt;T&gt;[] | FnKeepsakeKeyType&lt;T&gt;,
+      value?: number[] | string[] | AvailableValue[],
+      useTheCurrentPathToChange?: string | boolean
+    ): string
+    createModelListURL(
+      type: ModelPathType,
+      key?: FnKeepsakeKeyType&lt;ModelPathType&gt; | string,
+      value?: AvailableValue,
+      useTheCurrentPathToChange?: string | boolean
+    ): string
+    createModelListURL&lt;T extends ModelPathType&gt;(
+      type: T,
+      key?: FnKeepsakeKeyType&lt;T&gt; | FnKeepsakeKeyType&lt;T&gt;[] | string,
+      value?: AvailableValue | number[] | string[] | AvailableValue[],
+      useTheCurrentPathToChange: string | boolean = false,
+    ): string {
+      if (key && !value)
+        this.customError('A value must be provided when a key is provided.')
+
+      if (!key)
+        return this.joinObjectValues(type, ALL_MODELS_PARAMS[type])
+
+      if (isArray(key) !== isArray(value))
+        this.customError('The type of key and value must be the same.')
+
+      if (isString(key) && !Object.keys(ALL_MODELS_PARAMS[type]).find(item =&gt; item == key))
+        this.customError(`"${key}" is not a valid parameter.`)
+
+      const pathname = isString(useTheCurrentPathToChange) ? useTheCurrentPathToChange : window.location.pathname
+
+      if (useTheCurrentPathToChange) {
+        if (!pathname.includes(`${type}-`)) {
+          this.customError(`"${pathname}" path does not match, needs to match at: ${type}-.`)
+        }
+        else {
+          const [, inputLength, fixedLength] = this.routerArrayData(type, pathname)
+
+          if (inputLength !== fixedLength)
+            this.customError(`Your route parameter length is ${inputLength}, the expected length is ${fixedLength}.`)
+        }
+      }
+
+      const currentParams = (
+        useTheCurrentPathToChange ? this.reassignObject(type, pathname) : ALL_MODELS_PARAMS[type]
+      ) as ModelParamsWithIndexSignature&lt;T&gt;
+
+      if (isArray(key) && isArray(value)) {
+        key.length !== value.length && this.customError('The lengths of \'key\' and \'value\' arrays do not match.')
+
+        for (const index of key) {
+          if (index in currentParams)
+            (currentParams[index] as AvailableValue) = value[key.indexOf(index)]
+        }
+      }
+      else {
+        (currentParams[key as ModelParamsKey&lt;T&gt;] as AvailableValue) = value as AvailableValue
+      }
+
+      return this.joinObjectValues(type, currentParams)
+    }
+
+    fetchModelParameterValue&lt;T extends ModelPathType, U extends ModelParamsKey&lt;T&gt; | ModelParamsKey&lt;T&gt;[] | []&gt;(
+      type: T,
+      parameter: U,
+      availablePath: string | boolean = true,
+    ): FetchReturnType&lt;T, U, AvailableValue&gt; {
+      const pathname = isString(availablePath) ? availablePath : window.location.pathname
+      const [routerArray, inputLength, fixedLength] = this.routerArrayData(type, pathname)
+
+      if (!pathname.includes(type) || inputLength !== fixedLength) {
+        this.customError(
+          `${!pathname.includes(type)
+            ? `The incoming path or the automatically obtained path does not contain "${type}"`
+            : `Your route parameter length is ${inputLength}, the expected length is ${fixedLength}.`
+          }`,
+        )
+      }
+
+      const mergeObjects = Object.keys(ALL_MODELS_PARAMS[type]).reduce(
+        (merged, key, index) =&gt; {
+          merged[key] = routerArray[index]
+          return merged
+        },
+        {} as { [key: string]: AvailableValue },
+      )
+
+      if (isArray(parameter)) {
+        let objects = {};
+
+        ((!parameter.length ? Object.keys(ALL_MODELS_PARAMS[type]) : parameter) as string[]).forEach((item) =&gt; {
+          const eachItem = mergeObjects[item]
+
+          if (eachItem) {
+            objects = Object.assign(objects, {
+              [item]: this.backToSimple(eachItem),
+            })
+          }
+        })
+
+        return objects as FetchReturnType&lt;T, U, never&gt;
+      }
+
+      return this.backToSimple(mergeObjects[parameter as string]) as FetchReturnType&lt;T, U, AvailableValue&gt;
+    }
+  }
+}
+</code></pre><p><br></p>

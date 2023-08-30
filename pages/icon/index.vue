@@ -1,100 +1,157 @@
 <script lang="ts" setup>
-import { useClipboard } from "@vueuse/core";
-
 interface IconParams {
   [key: string]: {
-    name?: string;
-    path?: string;
-    cate?: string;
-    svg: string;
+    name?: string
+    path?: string
+    cate?: string
+    svg: string
   }[]
 }
 
-const iconList = ref<Partial<IconParams>>({});
+const route = useRoute()
 
-const isShowNotify = ref(false);
+const iconList = ref<Partial<IconParams>>({})
+const visibleIconList = ref<Partial<IconParams>>({})
 
-withIcon();
+const breadcrumb = [
+  { link: '/', name: '首页' },
+  { link: route.path, name: '图标库' },
+]
 
-async function withIcon() {
-  const icon = Object.entries(import.meta.glob("assets/iconLib/**/**.svg", { as: "raw", eager: false }))
-    .map(async(item: [string, () => Promise<string>]) => {
-      // name
-      const name = item[0].split("/").pop()?.split("_").pop()?.split(".")[0];
+const batchSize = 100
+const loadedCount = ref(0)
+const currentBatchIndex = ref(1)
 
-      // path
-      const path = item[0].split("_").pop()?.split(".")[0].replace("/assets/iconLib/", "");
+const isLoad = ref(false)
 
-      // cate
-      const cate = path?.split("/")[0];
+const totalFileCount = ref(0)
 
-      // svg picture
-      const svg = await item[1]().then(res => res);
+const hasMoreToLoad = computed(() => totalFileCount.value - 1 === loadedCount.value)
+
+async function loadNextBatch() {
+  if (isLoad.value || hasMoreToLoad.value)
+    return
+
+  isLoad.value = true
+
+  await nextTick()
+
+  const startIndex = (currentBatchIndex.value - 1) * batchSize
+  const endIndex = startIndex + batchSize
+  const glob = import.meta.glob('assets/iconLib/**/**.svg', { as: 'raw', eager: false })
+
+  totalFileCount.value = Object.keys(glob).length + 1
+
+  const icon = Object.entries(glob)
+    .slice(startIndex, endIndex)
+    .map(async (item: [string, () => Promise<string>]) => {
+      const name = item[0].split('/').pop()?.split('_').pop()?.split('.')[0]
+      const path = item[0].split('_').pop()?.split('.')[0].replace('/assets/iconLib/', '')
+      const cate = path?.split('/')[0]
+      const svg = await item[1]().then(res => res)
 
       return {
         name,
         path,
         cate,
-        svg
-      };
-    });
+        svg,
+      }
+    })
 
+  const res = await Promise.all(icon)
 
-  const res = await Promise.all(icon);
+  const updatedIconList = { ...iconList.value }
+  for (const curr of res) {
+    if (!curr.cate)
+      continue
 
-  iconList.value = res.reduce<IconParams>((acc, curr) => {
-    if (!curr.cate) return acc;
+    if (updatedIconList[curr.cate])
+      updatedIconList[curr.cate]?.push(curr)
+    else
+      updatedIconList[curr.cate] = [curr]
+  }
 
-    if (acc[curr.cate]) {
-      acc[curr.cate]?.push(curr);
-    } else {
-      acc[curr.cate] = [curr];
-    }
+  iconList.value = updatedIconList
+  loadedCount.value += res.length
+  currentBatchIndex.value++
 
-    return acc;
-  }, {} as IconParams);
+  isLoad.value = false
 }
 
 function getIconName(name: string | undefined) {
-  if (!name) return;
+  if (!name)
+    return
 
-  isShowNotify.value = false;
-  useClipboard().copy(name.toLowerCase().replace(/\(|\)/g, ""));
-  nextTick(() => isShowNotify.value = true);
+  useClipboard().copy(name.toLowerCase().replace(/\(|\)/g, ''))
 }
+
+async function loadInitialBatch() {
+  await loadNextBatch()
+  updateVisibleIconList()
+}
+
+function updateVisibleIconList() {
+  const startIndex = (currentBatchIndex.value - 1) * batchSize
+  const endIndex = Math.min(startIndex + batchSize, totalFileCount.value)
+
+  const updatedVisibleList: Partial<IconParams> = {}
+
+  for (const category in iconList.value) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (iconList.value.hasOwnProperty(category))
+      updatedVisibleList[category] = iconList.value[category]?.slice(0, endIndex)
+  }
+
+  visibleIconList.value = updatedVisibleList
+}
+
+onMounted(() => loadInitialBatch())
 </script>
 
 <template>
-  <NuxtLayout>
-    <section class="b-rd-10px p20px container">
-      <h3 class="text-30px font-bold">Icon Lib:</h3>
-      <div v-for="(item, name) in iconList" :key="name" class="cate-list mt30px flex flex-col">
-        <h4>{{ name }}</h4>
-        <ul class="icon-box-list flex flex-wrap">
-          <li
-            v-for="v in item" :key="v.name" class="m10px h50px w62px flex flex-col cursor-pointer items-center"
-            @click="getIconName(v.path)"
-          >
-            <div class="" v-html="v.svg"></div>
-            <span class="mt5px text-12px op60">{{ v.name }}</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <FeedbackNotification :show="isShowNotify" content="Copy Success!" />
-  </NuxtLayout>
+  <NavigationBreadcrumb :list="breadcrumb" />
+  <section class="px-5 py-10 container rounded-lg">
+    <h3 class="text-3xl font-bold">
+      图标库
+    </h3>
+    <div v-for="(item, name) in iconList" :key="name" class="cate-list flex flex-col">
+      <h4 class="mb-5 mt-10">
+        {{ name }}
+      </h4>
+      <ul class="icon-box-list flex flex-wrap gap-5 items-start">
+        <li
+          v-for="v in item" :key="v.name"
+          class="h-[50px] w-[62px] max-w-[62px] flex flex-col cursor-pointer items-center"
+          @click="getIconName(v.path)"
+        >
+          <div class="" v-html="v.svg" />
+          <span class="mt-2 text-xs opacity-60 line-clamp-2">{{ v.name }}</span>
+        </li>
+      </ul>
+    </div>
+    <GeneralButton
+      class="!w-32 mx-auto mt-20 mb-3"
+      radius="full"
+      :is-loading="isLoad"
+      :is-disabled="hasMoreToLoad || isLoad"
+      :color="hasMoreToLoad ? 'default' : 'primary'"
+      @click="loadNextBatch"
+    >
+      {{ hasMoreToLoad ? '已全部加载' : '加载更多' }}
+    </GeneralButton>
+  </section>
 </template>
 
 <style lang="scss" scoped>
 .container {
-  box-shadow: var(--my-theme-shallow-shadow);
+  box-shadow: var(--my-shallow-shadow);
 
   .icon-box-list {
     margin-top: 10px;
 
     li {
       >span {
-        @include t-many-over(1);
+
       }
     }
   }

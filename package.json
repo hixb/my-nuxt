@@ -1,6 +1,6 @@
 {
-  "private": true,
   "name": "my-nuxt",
+  "private": true,
   "description": "This is my groundbreaking project",
   "engines": {
     "node": ">=14.0.0",
@@ -12,34 +12,26 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.41.0",
     "@nuxt/devtools": "latest",
-    "@nuxt/image-edge": "1.0.0-rc.1-28180077.d51e794",
-    "@nuxtjs/i18n": "^8.0.0-beta.10",
-    "@pinia/nuxt": "^0.4.11",
-    "@types/node": "^18",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@unocss/eslint-config": "^0.54.0",
-    "@unocss/nuxt": "^0.54.0",
-    "@vueuse/core": "^10.2.1",
-    "@vueuse/nuxt": "^10.2.1",
-    "eslint": "^8.44.0",
-    "eslint-plugin-vue": "^9.15.1",
-    "nuxt": "^3.6.1",
-    "sass": "^1.63.6",
-    "stylelint": "^15.10.0",
-    "stylelint-config-recommended-vue": "^1.4.0",
-    "stylelint-config-standard-scss": "^10.0.0",
-    "typescript": "^5.1.6",
-    "vite-plugin-stylelint": "^4.3.0"
+    "@nuxt/image": "1.0.0-rc.1",
+    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/node": "^18.17.3",
+    "@vueuse/core": "^10.3.0",
+    "@vueuse/nuxt": "^10.3.0",
+    "eslint": "^8.47.0",
+    "highlight.js": "^11.8.0",
+    "nuxt": "^3.6.5",
+    "sass": "^1.65.1",
+    "vue-types": "^5.1.1"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "highlight.js": "^11.8.0",
-    "pinia": "^2.1.4",
-    "pinia-plugin-persistedstate": "^3.1.0"
+    "axios": "^1.4.0"
   }
 }

@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "common";
+
+@layer base {
+  :root {
+    --my-special-color: #482dff;
+    --color-secondary: rgb(111 114 185);
+    --my-sidebar-width: 300px;
+
+    --my-text-bodyC: #08102b;
+
+    --my-special-primary: #0070f0;
+    --my-special-secondary: #9455d3;
+    --my-special-success: #41B375;
+    --my-special-warning: #f5a524;
+    --my-special-danger: #f31260;
+
+    --my-widget-tac: #989b9f;
+  }
+}
+
+:root {
+  --my-theme-trans1: all .1s ease;
+  --my-theme-trans2: all .2s ease;
+  --my-theme-trans3: all .3s ease;
+  --my-theme-trans4: all .4s ease;
+  --my-theme-trans15: all 1.5s ease;
+}
+
+.light {
+  // 文字
+  --my-text-base-color: #343435;
+  --my-fill-color: #ffffff;
+  --my-str-color: #e6e6e6;
+
+  // 背景
+  --my-bg-base-color: #fffdfc;
+  --my-bg-mild: #fffdfc;
+  --my-mobile-bg: #fffdfc;
+
+  // 强调
+  --my-special-color: #0070f0;
+  --my-special-default: #d4d4d8;
+
+  // 盒子
+  --my-shadow: 0 10px 30px -5px rgba(0, 0, 0, .3);
+  --my-shallow-shadow: 0 5px 35px rgba(0, 0, 0, .1);
+  --my-border-color: #e6e6e6;
+  --my-box-bg: #fffdfc;
+  --my-dark-border: transparent;
+
+  // 图标
+  --my-svg-color: #292d32;
+
+  // 其他
+  // 禁用
+  --my-disable-color: #7b7a7a;
+  // 滚动条
+  --my-scrollbar-bg: #d7d7d9;
+  --my-scrollbar-bg-hover: #a5a4a6;
+  --my-scrollbar-color: #fdfcff;
+  --my-transB: rgba(0, 0, 0, .05);
+  --my-darkT: rgba(0, 0, 0, .03);
+  --my-darkBs: #fffdfc;
+  --my-darkTa: var(--color-secondary);
+  --my-waveB: #C6DAFC;
+}
+
+.dark {
+  // 文字
+  --my-text-base-color: #fffdfc;
+  --my-fill-color: #2d2d30;
+  --my-str-color: #404045;
+
+  // 背景
+  --my-bg-base-color: #1e1e1e;
+  --my-bg-mild: #252526;
+  --my-mobile-bg: #2d2d30;
+
+  // 强调
+  --my-special-color: #41B375;
+  --my-special-default: #3f3f46;
+
+  // 盒子
+  --my-shadow: 0 10px 30px -5px rgba(0, 0, 0, .5);
+  --my-shallow-shadow: 0 5px 35px rgba(0, 0, 0, .07);
+  --my-border-color: #404040;
+  --my-box-bg: #2d2d30;
+  --my-dark-border: rgba(255, 255, 255, .15);
+
+  // 图标
+  --my-svg-color: #d5d3d3;
+
+  // 其他
+  // 禁用
+  --my-disable-color: #5c5c5c;
+  // 滚动条背景颜色
+  --my-scrollbar-bg: #171717;
+  --my-scrollbar-bg-hover: #141414;
+  --my-scrollbar-color: #1e1e1e;
+  --my-transB: #2d2d30;
+  --my-darkBs: #252526;
+  --my-darkT: #252526;
+  --my-darkTa: #989b9f;
+  --my-waveB: #343435;
+}

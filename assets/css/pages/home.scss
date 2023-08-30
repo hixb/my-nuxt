@@ -1,0 +1,68 @@
+.item {
+  &:before {
+    @apply content-[""] absolute right-0 top-0 w-10 h-4 bg-[var(--my-darkTa)] rounded-[0_0.75rem_0_20px] opacity-20
+  }
+
+  @apply
+  flex
+  items-center
+  p-2.5
+  bg-[var(--my-box-bg)]
+  shadow-[0_5px_35px_rgba(0,0,0,.07)]
+  rounded-xl
+  max-h-48
+  max-xs:max-h-52
+  max-xs:mb-20
+  max-xs:bg-[transparent]
+  max-xs:p-0
+}
+
+.time {
+  &:before {
+    @apply content-[attr(data-type)] bg-[var(--my-special-color)] inline text-[#fff] text-xs p-0.5 rounded-sm mr-0.5
+  }
+
+  &:after {
+    @apply content-[attr(data-text)] inline text-xs whitespace-nowrap overflow-ellipsis overflow-hidden
+  }
+}
+
+.description {
+  @apply
+  flex
+  flex-col
+  ml-5
+  mr-2.5
+  flex-1
+  max-xs:absolute
+  max-xs:bg-[var(--my-mobile-bg)]
+  max-xs:flex-[0_0_calc(100%-42px)]
+  max-xs:left-1/2
+  max-xs:-bottom-14
+  max-xs:my-0
+  max-xs:mx-auto
+  max-xs:p-3.5
+  max-xs:rounded-xl
+  max-xs:-translate-x-1/2
+  max-xs:shadow-[0_10px_20px_-5px_rgba(0,0,0,.1)]
+  max-xs:w-[calc(100%-30px)]
+}
+
+.releases-article {
+  @apply
+  bg-[var(--my-box-bg)]
+  w-[calc(33.33%-14px)]
+  relative
+  overflow-hidden
+  shadow-[0_5px_35px_rgba(0,0,0,.07)]
+  rounded-xl
+  p-2.5
+  flex
+  flex-col
+  first-of-type:ml-0
+  max-lg:w-[calc(50%-10px)]
+  max-2md:w-[calc(33.33%-14px)]
+  max-md:w-[calc(50%-10px)]
+  max-xs:w-full
+  max-xs:mx-0
+}

@@ -1,8 +1,8 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g class="set-svg-stroke">
-    <path d="M14.5 10.6523H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+  <g>
+    <path class="set-svg-stroke" d="M14.5 10.6523H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
           stroke-linejoin="round"/>
-    <path d="M12 8.21094V13.2109" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+    <path class="set-svg-stroke" d="M12 8.21094V13.2109" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
           stroke-linejoin="round"/>
   </g>
   <path
