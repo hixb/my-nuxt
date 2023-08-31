@@ -1,12 +1,8 @@
 <script setup lang="ts">
-const showIcon = ref(false)
 </script>
 
 <template>
   <div class="max-h-6">
-    <div v-if="showIcon" class="absolute top-0 left-0 right-0 my-2.5 mx-1.5 !ml-2 item w-max z-10">
-      <SvgIcon class="mx-0.5" :is-open-hover="false" :size="16" :overall-size="16" icon="design-tools/path" />
-    </div>
     <ul class="absolute top-0 left-0 right-0 py-2.5 px-1.5 text-xs flex justify-end">
       <li class="item-btn">
         <SvgIcon class="mx-0.5" :is-open-hover="false" :size="16" :overall-size="16" icon="emails-message/message" />
