@@ -12,9 +12,7 @@ interface ServerData {
   updatedAt: string
 }
 
-const { data } = await useFetch<ServerData[]>('https://api.nuxtjs.dev/mountains', {
-  server: true,
-})
+const { data } = await useAsyncData<ServerData[]>('mountains', () => $fetch('https://api.nuxtjs.dev/mountains'))
 const latestRelease: ServerData = data.value![0]
 const historyR: ServerData[] = data.value!.filter((v, i) => i !== 0)
 
@@ -50,10 +48,10 @@ function loadMore() {
       最新发布
     </GeneralHeadTitle>
     <article class="item relative max-xs:before:!content-none">
-      <DataDiaplayListCover :cover="latestRelease.image" />
+      <DataDiaplayListCover :cover="latestRelease.image" link="/article/2344" />
       <div class="description">
         <div class="before:opacity-70 before:content-[attr(data-text)] before:mr-1 text-xs mb-2" data-text="在">
-          <NuxtLink class="opacity-90 hover:underline" to="/">
+          <NuxtLink class="opacity-90 hover:underline" to="/article/2344">
             {{ latestRelease.countries.join("、") }}
           </NuxtLink>
         </div>
@@ -90,15 +88,22 @@ function loadMore() {
         :key="index"
         class="releases-article"
       >
-        <DataDiaplayListCover :cover="item.image" class="!flex-[0_0_134px] max-md:!flex-[0_0_180px] max-xs:!flex-[0_0_230px]" />
+        <DataDiaplayListCover
+          :cover="item.image"
+          class="!flex-[0_0_134px] max-md:!flex-[0_0_180px] max-xs:!flex-[0_0_230px]"
+          :link="`/article/${index}`"
+        />
         <div class="flex flex-col ml-5 mr-2.5 flex-1 !mx-0 !mt-5">
           <div class="before:opacity-70 before:content-[attr(data-text)] text-xs mb-2 before:mr-1" data-text="在">
-            <NuxtLink class="opacity-90 hover:underline" to="/">
+            <NuxtLink class="opacity-90 hover:underline" :to="`/article/${index}`">
               {{ item.countries.join("、") }}
             </NuxtLink>
           </div>
           <h3 class="group text-lg font-bold line-clamp-2 max-lg:text-base">
-            <NuxtLink class="block hover:text-[var(--my-special-color)] transition-[var(--my-theme-trans3)]" to="/">
+            <NuxtLink
+              class="block hover:text-[var(--my-special-color)] transition-[var(--my-theme-trans3)]"
+              :to="`/article/${index}`"
+            >
               {{ item.title }}
             </NuxtLink>
           </h3>
@@ -107,7 +112,7 @@ function loadMore() {
           </p>
           <div class="flex align-baseline justify-between items-center mt-3.5 max-lg:mt-1.5 truncate">
             <time data-text="2022.01.01" data-type="公共" class="time" />
-            <NuxtLink to="/" class="text-[var(--my-special-color)] text-xs">
+            <NuxtLink :to="`/article/${index}`" class="text-[var(--my-special-color)] text-xs">
               阅读更多
             </NuxtLink>
           </div>
