@@ -8,14 +8,17 @@ const props = withDefaults(defineProps<IProps>(), {
 })
 
 const { directoryArray } = useArticleProcessing(props.content)
+const { lessThanMD } = useScreen()
 
 const showDirectory = ref(false)
-
 const useDirectoryRef = ref<HTMLElement | null>(null)
 
 onClickOutside(useDirectoryRef, () => showDirectory.value = false)
 
 function scrollToSection(id: string) {
+  if (lessThanMD.value)
+    showDirectory.value = false
+
   const el = document.querySelector(id)
 
   if (el)

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { scrollEaseOut } from '~/utils/feat'
+
 const router = useRouter()
 
 const { setOpenAside } = useAside()
@@ -10,9 +12,13 @@ const isShowSearchLayer = ref(false)
 const footerMenuList = reactive([
   { identify: 'home', icon: 'essetional/home-1', go: () => router.push('/') },
   { identify: 'search', icon: 'search/search', go: () => isShowSearchLayer.value = true },
-  { identify: 'menu', icon: 'settings/menu', go: () => isShowSearchLayer.value = true },
+  {
+    identify: 'menu',
+    icon: 'settings/menu',
+    go: () => setOpenAside(width.value <= ScreenSize.XL && width.value >= ScreenSize.MD ? 2 : lessThanMD ? 1 : 0),
+  },
   { identify: 'theme', icon, go: () => toggleTheme() },
-  { identify: 'up', icon: 'arrow/arrow-up-3', go: () => toggleTheme(), size: 25 },
+  { identify: 'up', icon: 'arrow/arrow-up-3', go: () => scrollEaseOut(0), size: 25 },
 ])
 </script>
 

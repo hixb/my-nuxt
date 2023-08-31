@@ -118,14 +118,14 @@ onMounted(() => loadInitialBatch())
       <h4 class="mb-5 mt-10">
         {{ name }}
       </h4>
-      <ul class="icon-box-list flex flex-wrap gap-5 items-start">
+      <ul class="icon-box-list flex flex-wrap items-start">
         <li
           v-for="v in item" :key="v.name"
-          class="h-[50px] w-[62px] max-w-[62px] flex flex-col cursor-pointer items-center"
+          class="h-[50px] w-[10%] flex flex-col cursor-pointer items-center mb-7 max-lg:w-[14.2%]"
           @click="getIconName(v.path)"
         >
           <div class="" v-html="v.svg" />
-          <span class="mt-2 text-xs opacity-60 line-clamp-2">{{ v.name }}</span>
+          <span class="mt-2 text-xs opacity-60 line-clamp-1 px-2">{{ v.name }}</span>
         </li>
       </ul>
     </div>

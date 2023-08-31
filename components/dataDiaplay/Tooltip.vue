@@ -15,11 +15,11 @@ const { height: elementHeight } = useElementSize(useTooltipChildRef)
 </script>
 
 <template>
-  <div ref="useTooltipRef" class="tooltip relative w-fit h-max">
+  <div ref="useTooltipRef" class="tooltip relative w-fit h-max z-110">
     <slot />
     <div
       ref="useTooltipChildRef"
-      class="absolute left-1/2 -translate-x-1/2 w-max max-w-xs bg-[var(--my-box-bg)] shadow-[0_10px_25px_-3px_rgba(0,0,0,.1)] py-2 px-4 rounded-lg text-2xs leading-5"
+      class="absolute left-1/2 -translate-x-1/2 w-max max-w-xs bg-[var(--my-box-bg)] shadow-[0_10px_25px_-3px_rgba(0,0,0,.1)] py-2 px-4 rounded-lg text-2xs leading-5 z-[1000]"
       :class="[isHovered ? 'show' : 'hide']"
       :style="{ bottom: `-${elementHeight + 20}px` }"
     >
