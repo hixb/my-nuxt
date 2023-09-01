@@ -48,7 +48,7 @@ async function fetchFileInfo() {
     const response = await fetch(props.filePath)
     const blob = await response.blob()
     const fileExtension = props.filePath.slice((props.filePath.lastIndexOf('.') - 1 >>> 0) + 2).split('?')[0]
-    const filename = getFilename(props.filePath).split('?')[0]
+    const filename = getFilename(props.filePath).split('.')[0].split('?')[0]
     const fileSize = blob.size < 1024 * 1024
       ? `${(blob.size / 1024).toFixed(2)}KB`
       : `${(blob.size / (1024 * 1024)).toFixed(2)}MB`
