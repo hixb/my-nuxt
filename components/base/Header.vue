@@ -30,8 +30,8 @@ const footerMenuList = reactive([
         @click="setOpenAside(width <= ScreenSize.XL && width >= ScreenSize.MD ? 2 : lessThanMD ? 1 : 0)"
       />
       <h1 class="ml-1">
-        <NuxtLink class="block font-thin truncate text-lg max-w-[140px] max-md:text-sm" to="/" rel="首页" title="HELLO">
-          HELLO
+        <NuxtLink class="website-title" to="/" rel="首页" title="HELLO">
+          Xiaobing's Blog
         </NuxtLink>
       </h1>
     </div>
@@ -185,5 +185,27 @@ header {
   px-6
   max-md:opacity-100
   max-md:visible
+}
+
+.website-title {
+  animation: typing 2s steps(15), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 1px solid var(--my-text-base-color);
+  line-height: 1;
+
+  @apply block font-thin truncate text-lg max-w-[140px] w-[121px] max-md:text-sm max-md:w-[95px]
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 </style>

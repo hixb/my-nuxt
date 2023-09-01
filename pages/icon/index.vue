@@ -109,37 +109,39 @@ onMounted(() => loadInitialBatch())
 </script>
 
 <template>
-  <NavigationBreadcrumb :list="breadcrumb" />
-  <section class="px-5 py-10 container rounded-lg">
-    <h3 class="text-3xl font-bold">
-      图标库
-    </h3>
-    <div v-for="(item, name) in iconList" :key="name" class="cate-list flex flex-col">
-      <h4 class="mb-5 mt-10">
-        {{ name }}
-      </h4>
-      <ul class="icon-box-list flex flex-wrap items-start">
-        <li
-          v-for="v in item" :key="v.name"
-          class="h-[50px] w-[10%] flex flex-col cursor-pointer items-center mb-7 max-lg:w-[14.2%]"
-          @click="getIconName(v.path)"
-        >
-          <div class="" v-html="v.svg" />
-          <span class="mt-2 text-xs opacity-60 line-clamp-1 px-2">{{ v.name }}</span>
-        </li>
-      </ul>
-    </div>
-    <GeneralButton
-      class="!w-32 mx-auto mt-20 mb-3"
-      radius="full"
-      :is-loading="isLoad"
-      :is-disabled="hasMoreToLoad || isLoad"
-      :color="hasMoreToLoad ? 'default' : 'primary'"
-      @click="loadNextBatch"
-    >
-      {{ hasMoreToLoad ? '已全部加载' : '加载更多' }}
-    </GeneralButton>
-  </section>
+  <NuxtLayout>
+    <NavigationBreadcrumb :list="breadcrumb" />
+    <section class="px-5 py-10 container rounded-lg">
+      <h3 class="text-3xl font-bold">
+        图标库
+      </h3>
+      <div v-for="(item, name) in iconList" :key="name" class="cate-list flex flex-col">
+        <h4 class="mb-5 mt-10">
+          {{ name }}
+        </h4>
+        <ul class="icon-box-list flex flex-wrap items-start">
+          <li
+            v-for="v in item" :key="v.name"
+            class="h-[50px] w-[10%] flex flex-col cursor-pointer items-center mb-7 max-lg:w-[14.2%]"
+            @click="getIconName(v.path)"
+          >
+            <div class="" v-html="v.svg" />
+            <span class="mt-2 text-xs opacity-60 line-clamp-1 px-2">{{ v.name }}</span>
+          </li>
+        </ul>
+      </div>
+      <GeneralButton
+        class="!w-32 mx-auto mt-20 mb-3"
+        radius="full"
+        :is-loading="isLoad"
+        :is-disabled="hasMoreToLoad || isLoad"
+        :color="hasMoreToLoad ? 'default' : 'primary'"
+        @click="loadNextBatch"
+      >
+        {{ hasMoreToLoad ? '已全部加载' : '加载更多' }}
+      </GeneralButton>
+    </section>
+  </NuxtLayout>
 </template>
 
 <style lang="scss" scoped>

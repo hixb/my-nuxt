@@ -295,7 +295,6 @@ function setAsideActive(always: AsideAlways) {
   border-right: 1px solid var(--my-dark-border);
 
   @apply
-  bg-[var(--my-bg-base-color)]
   fixed
   self-end
   bottom-0
