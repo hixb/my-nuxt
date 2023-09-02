@@ -1,29 +1,29 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   code?: string
-  language?: 'TYPESCRIPT' |
-  'JAVASCRIPT' |
-  'HTML' |
-  'CSS' |
-  'BASH' |
-  'SHELL' |
-  'PYTHON' |
-  'TEXT' |
-  'NONE' |
-  'NUXT' |
-  'NEXT' |
-  'VUE' |
-  'REACT' |
-  'SVELTE' |
-  'ASTRO' |
-  'EXPRESS' |
-  'KOA' |
-  'NEST'
+  language?: 'TypeScript' |
+  'JavaScript' |
+  'Html' |
+  'Css' |
+  'Bash' |
+  'Shell' |
+  'Python' |
+  'Text' |
+  'Node' |
+  'Nuxt' |
+  'Next' |
+  'Vue' |
+  'React' |
+  'Svelte' |
+  'Astro' |
+  'Express' |
+  'Koa' |
+  'Nest'
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   code: '<pre><code class="language-typescript">export const isRegExp = (arg: unknown): arg is RegExp = Object.prototype.toString.call(arg) === "[object RegExp]"</code></pre>',
-  language: 'TYPESCRIPT',
+  language: 'TypeScript',
 })
 
 const { withAnchor, toString } = useArticleProcessing(props.code)
@@ -54,8 +54,8 @@ function copy() {
         <li>
           <SvgIcon
             :icon="timer ? 'design-tools/copy-success' : 'design-tools/copy'"
-            :size="18"
             :overall-size="42"
+            :size="18"
             @click="copy"
           />
         </li>
@@ -67,6 +67,6 @@ function copy() {
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>
