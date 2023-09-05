@@ -6,6 +6,7 @@ const router = useRouter()
 const { setOpenAside } = useAside()
 const { lessThanMD, width, ScreenSize } = useScreen()
 const { icon, toggleTheme } = useTheme()
+const { websiteTitle } = useAuthor()
 
 const isShowSearchLayer = ref(false)
 
@@ -30,8 +31,8 @@ const footerMenuList = reactive([
         @click="setOpenAside(width <= ScreenSize.XL && width >= ScreenSize.MD ? 2 : lessThanMD ? 1 : 0)"
       />
       <h1 class="ml-1">
-        <NuxtLink class="website-title" to="/" rel="首页" title="HELLO">
-          Xiaobing's Blog
+        <NuxtLink class="website-title" to="/" rel="canonical" title="HELLO">
+          {{ websiteTitle }}
         </NuxtLink>
       </h1>
     </div>

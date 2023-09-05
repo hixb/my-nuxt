@@ -16,8 +16,10 @@ const { data } = await useAsyncData<ServerData[]>('mountains', () => $fetch('htt
 const latestRelease: ServerData = data.value![0]
 const historyR: ServerData[] = data.value!.filter((v, i) => i !== 0)
 
+const { websiteTitle } = useAuthor()
+
 useSeoMeta({
-  title: 'HELLO',
+  title: websiteTitle,
 })
 
 const historyReleases = ref(historyR.slice(0, 3))

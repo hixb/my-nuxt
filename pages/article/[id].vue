@@ -18,12 +18,32 @@ const routerAddress = ref('')
 
 const copyTimer = ref<ReturnType<typeof setTimeout>>()
 
-const shareToOtherApps = reactive([
-  { icon: 'crypto-company/facebook', link: '/', name: 'Facebook' },
-  { icon: 'crypto-company/whatsapp', link: '/', name: 'Whatsapp' },
-  { icon: 'crypto-company/twitter', link: '/', name: 'Twitter' },
-  { icon: 'crypto-company/telegram', link: '/', name: 'Telegram' },
-  { icon: 'emails-message/sms', link: '/', name: 'Email' },
+const shareToOtherApps = computed(() => [
+  {
+    icon: 'crypto-company/facebook',
+    link: `https://www.facebook.com/sharer.php?u=${routerAddress.value}`,
+    name: 'Facebook',
+  },
+  {
+    icon: 'crypto-company/whatsapp',
+    link: `https://api.whatsapp.com/send?text=${routerAddress.value}`,
+    name: 'Whatsapp',
+  },
+  {
+    icon: 'crypto-company/twitter',
+    link: `https://twitter.com/share?url=${routerAddress.value}`,
+    name: 'Twitter',
+  },
+  {
+    icon: 'crypto-company/telegram',
+    link: `https://t.me/share/url?url=${routerAddress.value}`,
+    name: 'Telegram',
+  },
+  {
+    icon: 'emails-message/sms',
+    link: `mailto:?body=${routerAddress.value}`,
+    name: 'Email',
+  },
 ])
 
 onMounted(async () => routerAddress.value = window.location.href)
@@ -112,11 +132,12 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
         分享到其他应用程序
       </template>
       <template #content>
-        <ul class="relative w-full -left-2.5 -right-2.5 mb-5 flex flex-wrap justify-center gap-5">
-          <li v-for="(item, index) in shareToOtherApps" :key="index" class="text-center">
+        <ul class="relative w-full -left-2.5 -right-2.5 mb-5 flex flex-wrap justify-center">
+          <li v-for="(item, index) in shareToOtherApps" :key="index" class="text-center mb-5 w-[20%] max-xs:w-[33.33%]">
             <NuxtLink
               class="flex items-center justify-center flex-wrap w-16 h-16 mx-auto mb-2 p-2 rounded-3xl bg-[#f1f1f0] dark:bg-[rgba(0,0,0,.15)] cursor-pointer"
               :to="item.link"
+              target="_blank"
             >
               <SvgIcon :is-open-hover="false" :overall-size="22" :size="22" :icon="item.icon" />
             </NuxtLink>
