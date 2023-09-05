@@ -41,6 +41,6 @@ const labelList = reactive([
     @apply content-[''] w-16 h-16 absolute z-0 bg-[rgba(0,0,0,.04)] bottom-0 left-0 rounded-[0_70px_0_0]
   }
 
-  @apply bg-[var(--my-box-bg)] w-full h-max overflow-hidden p-5 rounded-xl relative shadow-[0_5px_35px_rgba(0,0,0,.07)] mt-10
+  @apply bg-[var(--my-box-bg)] w-full h-max overflow-hidden p-5 rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.07)] mt-10 sticky top-[74px]
 }
 </style>

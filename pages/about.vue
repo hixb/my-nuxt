@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute()
+const { authorName } = useAuthor()
 
 const breadcrumb = [
   { link: '/', name: '首页' },
@@ -30,7 +31,7 @@ const blogStats = reactive([
             src="/avatar.jpg"
           >
           <h1 class="mb-5">
-            Xiaobing Zhu
+            {{ authorName }}
           </h1>
           <p class="leading-7 text-center">
             Lorem ipsum dolor sit amet. Qui ratione rerum vel odit alias qui totam placeat! Aut esse sint hic possimus
