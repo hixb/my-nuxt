@@ -10,7 +10,7 @@ const articleList = reactive([
     <GeneralHeadTitle flower>
       热门文章
     </GeneralHeadTitle>
-    <DataDiaplayListCover class="mb-6" link="/" />
+    <dataDisplayListCover class="mb-6" link="/" />
     <article v-for="(item, index) in articleList" :key="index" class="flex mb-6 last-of-type:mb-0">
       <span class="block h-full w-6 text-xs opacity-60 mt-1 min-w-[25px] max-w-[25px] flex-1 select-none">
         {{ index + 1 }}
