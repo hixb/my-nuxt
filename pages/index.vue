@@ -51,7 +51,7 @@ function loadMore() {
         最新发布
       </GeneralHeadTitle>
       <article class="item relative max-xs:before:!content-none">
-        <DataDiaplayListCover :cover="latestRelease.image" link="/article/2344" />
+        <dataDisplayListCover :cover="latestRelease.image" link="/article/2344" />
         <div class="description">
           <div class="before:opacity-70 before:content-[attr(data-text)] before:mr-1 text-xs mb-2" data-text="在">
             <NuxtLink class="opacity-90 hover:underline" to="/article/2344">
@@ -91,7 +91,7 @@ function loadMore() {
           :key="index"
           class="releases-article"
         >
-          <DataDiaplayListCover
+          <dataDisplayListCover
             :cover="item.image"
             class="!flex-[0_0_134px] max-md:!flex-[0_0_180px] max-xs:!flex-[0_0_230px]"
             :link="`/article/${index}`"

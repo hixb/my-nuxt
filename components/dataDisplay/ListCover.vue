@@ -15,7 +15,7 @@ withDefaults(defineProps<{
     <NuxtLink class="w-full h-full flex" :to="link" :target="target">
       <NuxtImg class="w-full" :src="cover ?? ''" alt="" loading="lazy" />
     </NuxtLink>
-    <DataDiaplayListCoverOperate />
+    <dataDisplayListCoverOperate />
   </div>
 </template>
 

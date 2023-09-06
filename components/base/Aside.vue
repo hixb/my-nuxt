@@ -5,8 +5,8 @@
 <template>
   <aside>
     <div>
-      <DataDiaplayPopularList />
-      <DataDiaplayLabelList />
+      <dataDisplayPopularList />
+      <dataDisplayLabelList />
     </div>
   </aside>
 </template>
