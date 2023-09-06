@@ -1,19 +1,26 @@
 <script setup lang="ts">
-import type { AsideAlways } from '~/composables/useAside'
-
 interface AsideItemParams {
   link: string
   title: string
-  rel: ('nofollow' | 'noopener' | 'noreferrer' | 'author' | 'canonical' | '')[]
+  rel: Relation[]
   icon?: string
   activeIcon?: string
   active?: boolean
   sublist?: AsideItemParams[]
 }
 
-const fixedList = reactive({
+const SUBCLASS_HEIGHT = 32
+
+const fixedList = reactive<{
+  [key: string]: {
+    link: string
+    rel: Relation[]
+    icon?: string
+    title?: string
+  }[]
+}>({
   top: [
-    { title: '网站地图', link: '/', rel: [''] },
+    { title: '网站地图', link: '/', rel: [] },
     { title: '免责声明', link: '/', rel: [] },
     { title: '隐私', link: '/', rel: [] },
   ],
@@ -56,10 +63,15 @@ const asideList = reactive<{ [key: string]: AsideItemParams[] }>({
 const { width, lessThanMD, ScreenSize } = useScreen()
 const { openAside, setOpenAside } = useAside()
 
+const useDropDownSubListRef = ref<HTMLElement[]>()
+
 watch(() => openAside.value, (newVal) => {
   if (!newVal) {
     for (const key in asideList)
       asideList[key].forEach(item => item.active = false)
+
+    if (useDropDownSubListRef.value?.length)
+      useDropDownSubListRef.value.forEach(item => item.style.height = '0px')
   }
 })
 
@@ -75,11 +87,16 @@ onMounted(() => {
 })
 
 function transitionState(index: number, item: AsideItemParams) {
-  if (!openAside.value)
+  if (!openAside.value || !useDropDownSubListRef.value?.length)
     return
 
   if (item.sublist?.length)
     item.active = !item.active
+
+  if (useDropDownSubListRef.value?.length) {
+    useDropDownSubListRef.value[index - 1].style.height
+      = `${item.active ? item.sublist!.length * SUBCLASS_HEIGHT : 0}px`
+  }
 }
 
 function setAsideActive(always: AsideAlways) {
@@ -129,7 +146,7 @@ function setAsideActive(always: AsideAlways) {
               >
                 <SvgIcon :size="19" :is-open-hover="false" :icon="v.icon as string" />
                 <Transition name="fade" mode="out-in">
-                  <span v-show="openAside">
+                  <span v-show="openAside" class="line-clamp-1">
                     {{ v.title }}
                   </span>
                 </Transition>
@@ -141,7 +158,7 @@ function setAsideActive(always: AsideAlways) {
                     :is-open-hover="false"
                     :icon="v.active ? v.activeIcon as string : v.icon as string"
                   />
-                  <span v-show="openAside">
+                  <span v-show="openAside" class="line-clamp-1">
                     {{ v.title }}
                   </span>
                   <SvgIcon
@@ -154,11 +171,15 @@ function setAsideActive(always: AsideAlways) {
                     icon="arrow/arrow-down"
                   />
                 </div>
-                <ul v-show="v.sublist?.length && v.active" class="sub-list flex items-center flex-col transition-all z-20">
+                <ul
+                  ref="useDropDownSubListRef"
+                  class="sub-list flex items-center flex-col transition-[var(--my-theme-trans3)] z-20 overflow-hidden h-0"
+                >
                   <li
                     v-for="(s, idx) in v.sublist"
                     :key="idx"
-                    class="menu-item relative sublist-item !h-8"
+                    class="menu-item relative sublist-item transition-[var(--my-theme-trans2)]"
+                    :class="[`!h-[${SUBCLASS_HEIGHT}px]`, v.active ? 'visible opacity-100' : 'invisible opacity-0']"
                   >
                     <NuxtLink class="w-full h-full flex items-center" :to="s.link" :rel="s.rel.join(' ')">
                       {{ s.title }}
@@ -209,7 +230,7 @@ function setAsideActive(always: AsideAlways) {
             <ul class="flex items-center justify-center mt-1">
               <li v-for="(item, index) in fixedList.bottom" :key="index">
                 <NuxtLink :to="item.link" :rel="item.rel.join(' ')">
-                  <SvgIcon :overall-size="30" :size="18" :icon="item.icon" />
+                  <SvgIcon :overall-size="30" :size="18" :icon="item?.icon ?? ''" />
                 </NuxtLink>
               </li>
             </ul>
