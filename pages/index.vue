@@ -1,20 +1,9 @@
 <script setup lang="ts">
-interface ServerData {
-  title: string
-  description: string
-  height: string
-  countries: string[]
-  continent: string
-  image: string
-  dir: string
-  path: string
-  slug: string
-  updatedAt: string
-}
+import { fetchHomeData } from '~/server/homeData'
 
-const { data } = await useAsyncData<ServerData[]>('mountains', () => $fetch('https://api.nuxtjs.dev/mountains'))
-const latestRelease: ServerData = data.value![0]
-const historyR: ServerData[] = data.value!.filter((v, i) => i !== 0)
+const data = await fetchHomeData()
+const latestRelease = data[0]
+const historyR = data.filter((v, i) => i !== 0)
 
 const { websiteTitle } = useAuthor()
 
