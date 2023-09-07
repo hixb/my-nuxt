@@ -124,12 +124,10 @@ function setAsideActive(always: AsideAlways) {
           lessThanMD && openAside ? '!rounded-3xl overflow-hidden !pt-16' : '',
         ]"
       >
-        <template v-if="lessThanMD">
-          <div class="absolute top-2 left-8 flex items-center cursor-pointer">
-            <SvgIcon :is-open-hover="false" :size="50" icon="essetional/close-square" @click="setAsideActive(2)" />
-            关闭
-          </div>
-        </template>
+        <div v-if="lessThanMD" class="absolute top-2 left-8 flex items-center cursor-pointer">
+          <SvgIcon :is-open-hover="false" :size="50" icon="essetional/close-square" @click="setAsideActive(2)" />
+          关闭
+        </div>
         <div
           v-for="(item, key, index) in asideList"
           :key="index"
