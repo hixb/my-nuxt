@@ -21,7 +21,7 @@
     "axios": "^1.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.41.0",
+    "@antfu/eslint-config": "^0.42.0",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "1.0.0-rc.2",
     "@nuxtjs/color-mode": "^3.3.0",
