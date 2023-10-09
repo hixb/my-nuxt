@@ -10,10 +10,8 @@ interface IProps {
 
 type State = 'success' | 'error' | 'wait' | 'init'
 
-// https://safe-down.om.cn/v3/recycle/Uploads/Material/2023-08-24/XHBn2icSx6Css3EX5cncRSQtypSfjEFD.7z?attname=test3d%E6%A8%A1%E5%9E%8BID_10001826.7z&e=1692934761&token=IAM-RboAM3uk383QejGVWTCbw3SBlLHoL8DN7je0GaUd:ECrzIbwa7hA0wy1pi_JF7ehnQjk=&attname=test3d%E6%A8%A1%E5%9E%8BID_10001826.7z
-
 const props = withDefaults(defineProps<IProps>(), {
-  filePath: 'https://down.om.cn/test/Church1.jpg',
+  filePath: 'https://4.bp.blogspot.com/-vFEJV8v5Bms/X1WnI01Q71I/AAAAAAAAP5w/do4OYrEPQBAcceIkM2sq9fcQbnhca9nOQCNcBGAsYHQ/s0/travel-boating-experience.jpg',
   cover: 'https://3.bp.blogspot.com/-J0e6w8GFsbc/YgFZCWbqZVI/AAAAAAAACRs/v2epBVKMzq89syX3OVsjaqwg2UlX1H_mgCK4BGAYYCw/s360-rw-e30/FineshopDesign_Logo.png',
   original: '未知',
 })
@@ -154,7 +152,7 @@ async function startDownload() {
     >
       <div class="flex flex-row items-center">
         <div
-          :style="{ backgroundImage: `url(${props.cover})` }"
+          :style="{ backgroundImage: `url(${gettingInformation === 'error' ? '' : props.cover})` }"
           class="w-[100px] h-[100px] bg-cover bg-center bg-no-repeat shadow-[0_0_10px_rgba(0,0,0,.1)] bg-[rgba(0,0,0,.08)] rounded-md mr-4 relative"
           :class="downloading ? '!rounded-full' : ''"
         >
@@ -169,7 +167,7 @@ async function startDownload() {
           </template>
           <template v-else-if="gettingInformation === 'error'">
             <span class="z-[101] text-[var(--my-special-danger)] w-full h-full flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              获取失败
+              Fail
             </span>
           </template>
           <svg
@@ -204,14 +202,17 @@ async function startDownload() {
           </template>
           <template v-else-if="gettingInformation === 'error'">
             <span class="z-[101] text-[var(--my-special-danger)] w-full h-full flex items-center justify-center">
-              获取失败
+              Fail
             </span>
           </template>
         </div>
       </div>
       <button
         class="download-btn absolute -bottom-5 right-5 shadow-[0_0_15px_rgba(0,0,0,.09)] bg-[var(--my-special-color)] w-10 h-10 flex items-center justify-center rounded-full transition-[--my-theme-trans2] hover:scale-[1.03]"
-        :class="downloading ? 'opacity-0 invisible' : 'opacity-100 visible'"
+        :class="[
+          downloading ? 'opacity-0 invisible' : 'opacity-100 visible',
+          gettingInformation !== 'success' ? 'opacity-60 cursor-no-drop' : '',
+        ]"
         @click="startDownload"
       >
         <svg v-if="!downloadCompleted" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
