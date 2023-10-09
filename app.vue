@@ -1,8 +1,5 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator color="var(--my-special-color)" />
   <BaseHeader />
   <NuxtPage />
   <OtherBackTop />

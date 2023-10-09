@@ -17,6 +17,7 @@ const articleOperation = reactive([
 const routerAddress = ref('')
 
 const copyTimer = ref<ReturnType<typeof setTimeout>>()
+const showViewImage = ref(false)
 
 const shareToOtherApps = computed(() => [
   {
@@ -117,9 +118,11 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
 
     <dataDisplayCoding />
 
-    <dataDisplayTooltip content="Hello, world">
+    <dataDisplayTooltip content="Hello, world" @click="showViewImage = true">
       <GeneralButton>hello</GeneralButton>
     </dataDisplayTooltip>
+
+    <DataDisplayViewImage :show="showViewImage" @update:show="showViewImage = $event" />
 
     <DataEntryDownload />
 

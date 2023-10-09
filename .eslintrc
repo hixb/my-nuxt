@@ -1,3 +1,7 @@
 {
-  "extends": "@antfu"
+  "extends": "@antfu",
+  "rules": {
+    // Disallow TypeScript namespaces.
+    "@typescript-eslint/no-namespace": "off"
+  }
 }
