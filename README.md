@@ -1,28 +1,23 @@
-# Nuxt 3 Minimal Starter
-
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+# My Nuxt.js Project
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
+# install for pnpm
 pnpm install --shamefully-hoist
 ```
 
-## Development Server
+## Environmental requirements
+The minimum **node** version required is greater than or equal to 14.0.0
 
-Start the development server on http://localhost:3000
+The minimum **pnpm** version required is greater than or equal to 6.14.0
 
+## Development
 ```bash
-npm run dev
+# run for pnpm
+pnpm run dev
 ```
 
 ## Production
@@ -30,13 +25,11 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm run preview
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
