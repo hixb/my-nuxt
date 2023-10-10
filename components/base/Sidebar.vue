@@ -1,8 +1,8 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface AsideItemParams {
   link: string
   title: string
-  rel: Relation[]
+  rel: Relation[] | string
   icon?: string
   activeIcon?: string
   active?: boolean
@@ -12,20 +12,21 @@ interface AsideItemParams {
 const SUBCLASS_HEIGHT = 32
 
 const { connectMe } = useAuthor()
+const { isArray } = useChecks()
 
 const fixedList = reactive<{
   [key: string]: {
     link: string
-    rel: Relation[]
+    rel: Relation[] | string
     icon?: string
     title?: string
     target?: Target
   }[]
 }>({
   top: [
-    { title: '网站地图', link: '/', rel: [] },
-    { title: '免责声明', link: '/', rel: [] },
-    { title: '隐私', link: '/', rel: [] },
+    { title: '网站地图', link: '/', rel: [].join(' ') },
+    { title: '免责声明', link: '/', rel: [].join(' ') },
+    { title: '隐私', link: '/', rel: [].join(' ') },
   ],
   bottom: connectMe,
 })
@@ -107,20 +108,20 @@ function setAsideActive(always: AsideAlways) {
 
 <template>
   <article
-    class="shrink-0 relative z-1 max-md:fixed max-md:invisible max-md:opacity-0 max-md:!z-40 border-r border-[var(--my-dark-border)] transition-[width] shadow-[0_0_15px_rgba(0,0,0,0.07)] z-20"
     :class="[
       openAside ? 'w-60' : 'w-20',
       lessThanMD && openAside ? 'open-sidebar !h-[calc(100vh-40px)] !z-20 !w-10/12 !rounded-3xl max-md:!visible max-md:!opacity-100' : '',
       lessThanMD && !openAside ? 'close-sidebar' : '',
     ]"
+    class="shrink-0 relative z-1 max-md:fixed max-md:invisible max-md:opacity-0 max-md:!z-40 border-r border-[var(--my-dark-border)] transition-[width] shadow-[0_0_15px_rgba(0,0,0,0.07)] z-20"
   >
     <div class="sticky top-16">
       <div
-        class="flex text-xs relative h-[calc(100vh-64px)] pb-20 flex-col p-5 transition-[var(--my-theme-trans3)]"
         :class="[
           !openAside && 'px-4',
           lessThanMD && openAside ? '!rounded-3xl overflow-hidden !pt-16' : '',
         ]"
+        class="flex text-xs relative h-[calc(100vh-64px)] pb-20 flex-col p-5 transition-[var(--my-theme-trans3)]"
       >
         <div v-if="lessThanMD" class="absolute top-2 left-8 flex items-center cursor-pointer">
           <SvgIcon :is-open-hover="false" :size="50" icon="essetional/close-square" @click="setAsideActive(2)" />
@@ -129,19 +130,19 @@ function setAsideActive(always: AsideAlways) {
         <div
           v-for="(item, key, index) in asideList"
           :key="index"
-          class="menu-list"
           :class="Object.keys(asideList).length === index + 1 ? 'after:!content-none' : ''"
+          class="menu-list"
         >
           <ul class="flex flex-col">
             <li v-for="(v, i) in item" :key="i" class="group w-full px-1 relative">
               <NuxtLink
                 v-if="v.link"
-                class="menu-item items-center whitespace-nowrap"
+                :rel="isArray(v.rel) ? v.rel.join(' ') : v.rel"
                 :to="v.link"
-                :rel="v.rel.join(' ')"
+                class="menu-item items-center whitespace-nowrap"
               >
-                <SvgIcon :size="19" :is-open-hover="false" :icon="v.icon as string" />
-                <Transition name="fade" mode="out-in">
+                <SvgIcon :icon="v.icon as string" :is-open-hover="false" :size="19" />
+                <Transition mode="out-in" name="fade">
                   <span v-show="openAside" class="line-clamp-1">
                     {{ v.title }}
                   </span>
@@ -150,20 +151,20 @@ function setAsideActive(always: AsideAlways) {
               <div v-else class="flex-col items-start">
                 <div class="menu-item flex items-center relative w-full" @click="transitionState(i, v)">
                   <SvgIcon
-                    :size="19"
-                    :is-open-hover="false"
                     :icon="v.active ? v.activeIcon as string : v.icon as string"
+                    :is-open-hover="false"
+                    :size="19"
                   />
                   <span v-show="openAside" class="line-clamp-1">
                     {{ v.title }}
                   </span>
                   <SvgIcon
                     v-if="openAside"
-                    :is-open-hover="false"
-                    :size="13"
-                    :overall-size="30"
-                    class="absolute top-0 bottom-0 right-1.5 m-auto"
                     :class="{ 'rotate-180': v.active }"
+                    :is-open-hover="false"
+                    :overall-size="30"
+                    :size="13"
+                    class="absolute top-0 bottom-0 right-1.5 m-auto"
                     icon="arrow/arrow-down"
                   />
                 </div>
@@ -174,10 +175,13 @@ function setAsideActive(always: AsideAlways) {
                   <li
                     v-for="(s, idx) in v.sublist"
                     :key="idx"
-                    class="menu-item relative sublist-item transition-[var(--my-theme-trans2)]"
                     :class="[`!h-[${SUBCLASS_HEIGHT}px]`, v.active ? 'visible opacity-100' : 'invisible opacity-0']"
+                    class="menu-item relative sublist-item transition-[var(--my-theme-trans2)]"
                   >
-                    <NuxtLink class="w-full h-full flex items-center" :to="s.link" :rel="s.rel.join(' ')">
+                    <NuxtLink
+                      :rel="isArray(s.rel) ? s.rel.join(' ') : s.rel" :to="s.link"
+                      class="w-full h-full flex items-center"
+                    >
                       {{ s.title }}
                     </NuxtLink>
                   </li>
@@ -192,9 +196,9 @@ function setAsideActive(always: AsideAlways) {
                   <NuxtLink
                     v-for="(s, idx) in v.sublist"
                     :key="idx"
-                    class="h-8 flex items-center hover:text-[var(--my-special-color)] hover:bg-[var(--my-transB)] hover:transition-[var(--my-theme-trans3)] px-4"
+                    :rel="isArray(s.rel) ? s.rel.join(' ') : s.rel"
                     :to="s.link"
-                    :rel="s.rel.join(' ')"
+                    class="h-8 flex items-center hover:text-[var(--my-special-color)] hover:bg-[var(--my-transB)] hover:transition-[var(--my-theme-trans3)] px-4"
                   >
                     {{ s.title }}
                   </NuxtLink>
@@ -205,19 +209,22 @@ function setAsideActive(always: AsideAlways) {
         </div>
 
         <div
-          class="sidebar-footer z-1"
           :class="[
             openAside ? 'w-60' : 'w-20',
             lessThanMD ? 'max-w-[480px] !w-full bottom-0 border-r-0 !absolute' : '',
           ]"
+          class="sidebar-footer z-1"
         >
           <template v-if="openAside">
             <ul class="flex items-center justify-center truncate">
-              <li v-for="(item, index) in fixedList.top" :key="index" class="after:content-['·'] after:px-1.5 last-of-type:after:content-none">
+              <li
+                v-for="(item, index) in fixedList.top" :key="index"
+                class="after:content-['·'] after:px-1.5 last-of-type:after:content-none"
+              >
                 <NuxtLink
-                  class="hover:underline hover:opacity-70 transition-[var(--my-theme-trans1)]"
+                  :rel="isArray(item.rel) ? item.rel.join(' ') : item.rel"
                   :to="item.link"
-                  :rel="item.rel.join(' ')"
+                  class="hover:underline hover:opacity-70 transition-[var(--my-theme-trans1)]"
                 >
                   {{ item.title }}
                 </NuxtLink>
@@ -225,8 +232,8 @@ function setAsideActive(always: AsideAlways) {
             </ul>
             <ul class="flex items-center justify-center mt-1">
               <li v-for="(item, index) in fixedList.bottom" :key="index">
-                <NuxtLink :to="item.link" :rel="item.rel.join(' ')" :target="item.target">
-                  <SvgIcon :overall-size="30" :size="18" :icon="item?.icon ?? ''" />
+                <NuxtLink :rel="item.rel" :target="item.target" :to="item.link">
+                  <SvgIcon :icon="item?.icon ?? ''" :overall-size="30" :size="18" />
                 </NuxtLink>
               </li>
             </ul>
@@ -239,13 +246,13 @@ function setAsideActive(always: AsideAlways) {
     </div>
   </article>
   <div
-    class="blur-backdrop invisible opacity-0 transition-[var(--my-theme-trans2)] max-md:!z-30"
     :class="openAside && lessThanMD ? '!opacity-100 !visible transition-[var(--my-theme-trans2)]' : ''"
+    class="blur-backdrop invisible opacity-0 transition-[var(--my-theme-trans2)] max-md:!z-30"
     @click="setAsideActive(2)"
   />
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .menu-item {
   @apply
   flex

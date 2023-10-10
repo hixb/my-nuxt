@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { websiteTitle, connectMe } = useAuthor()
+const { isArray } = useChecks()
 
 const show = ref(true)
 const progress = ref(10)
@@ -40,7 +41,7 @@ function updateProgress() {
       </div>
       <ul class="flex items-center">
         <li v-for="(item, index) in connectMe" :key="index">
-          <NuxtLink :rel="item.rel.join(' ')" :target="item.target" :to="item.link">
+          <NuxtLink :rel="isArray(item.rel) ? item.rel.join(' ') : item.rel" :target="item.target" :to="item.link">
             <SvgIcon :icon="item.icon" />
           </NuxtLink>
         </li>
