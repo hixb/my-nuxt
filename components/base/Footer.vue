@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { connectMe } = useAuthor()
+const { connectMe, filing } = useAuthor()
 </script>
 
 <template>
@@ -21,12 +21,12 @@ const { connectMe } = useAuthor()
       </div>
       <p class="max-xs:hidden">
         <NuxtLink to="/" target="_blank">
-          粤公网安备 44156545号
+          {{ filing }}
         </NuxtLink>
       </p>
       <ul class="flex items-center">
         <li v-for="(item, index) in connectMe" :key="index">
-          <NuxtLink :to="item.link" target="_blank" :rel="item.rel.join(' ')">
+          <NuxtLink :to="item.link" :target="item.target" :rel="item.rel.join(' ')">
             <SvgIcon :overall-size="30" :size="20" :icon="item.icon" />
           </NuxtLink>
         </li>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   show: boolean
   src?: string
 }>(), {
@@ -36,6 +36,13 @@ const { x: windowScrollX, y: windowScrollY } = useScroll(documentReady.value)
 // When the mouse moves, the coordinate position will change.
 // Check whether the mouse moves.
 const isMoved = computed(() => /(?<!\d)0px.*?0px/.test(style.value))
+
+watchDebounced(() => props.show, (newVal: boolean) => {
+  if (!newVal && scalingRatio.value !== 1) {
+    scalingRatio.value = 1
+    imageZoom.value = { transform: `scale(${scalingRatio.value})` }
+  }
+}, { debounce: 600 })
 
 function handleMouseWheel(evt: WheelEvent) {
   if (!useImageMaskRef.value)

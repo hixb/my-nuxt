@@ -38,7 +38,7 @@ function updateProgress() {
       </div>
       <ul class="flex items-center">
         <li v-for="(item, index) in connectMe" :key="index">
-          <NuxtLink :to="item.link" target="_blank" :rel="item.rel.join(' ')">
+          <NuxtLink :to="item.link" :target="item.target" :rel="item.rel.join(' ')">
             <SvgIcon :icon="item.icon" />
           </NuxtLink>
         </li>
@@ -46,7 +46,3 @@ function updateProgress() {
     </div>
   </Transition>
 </template>
-
-<style scoped lang="scss">
-
-</style> 

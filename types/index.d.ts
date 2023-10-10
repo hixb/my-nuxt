@@ -34,3 +34,6 @@ type Relation =
  * Sidebar switching parameters 0-switch 1-open 2-close
  */
 type AsideAlways = 0 | 1 | 2
+
+// Target
+type Target = '_blank' | '_self' | 'target' | '_parent' | '_top'

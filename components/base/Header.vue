@@ -21,6 +21,18 @@ const footerMenuList = reactive([
   { identify: 'theme', icon, go: () => toggleTheme() },
   { identify: 'up', icon: 'arrow/arrow-up-3', go: () => scrollEaseOut(0), size: 25 },
 ])
+
+const useSearchIptRef = ref<HTMLInputElement | null>(null)
+const searchKeyword = ref('')
+// purified keywords to prevent XSS attacks.
+const sanitizedInputValue = ref('')
+
+function sanitizeInput() {
+  sanitizedInputValue.value = new DOMParser()
+    .parseFromString(searchKeyword.value, 'text/html')
+    .documentElement
+    .textContent || ''
+}
 </script>
 
 <template>
@@ -39,7 +51,15 @@ const footerMenuList = reactive([
     <div class="flex-1 flex items-center justify-between">
       <div class="search">
         <SvgIcon class="max-md:hidden" :is-open-hover="false" icon="search/search" />
-        <input class="h-10 flex-1 text-sm" type="text" placeholder="搜索...">
+        <input
+          ref="useSearchIptRef"
+          v-model="searchKeyword"
+          class="h-10 flex-1 text-sm"
+          type="text"
+          placeholder="Search • Ctrl+K"
+          @input="sanitizeInput"
+        >
+        {{ sanitizedInputValue }}
       </div>
       <ul class="flex items-center">
         <li class="hidden max-md:block">

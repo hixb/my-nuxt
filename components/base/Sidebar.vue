@@ -19,6 +19,7 @@ const fixedList = reactive<{
     rel: Relation[]
     icon?: string
     title?: string
+    target?: Target
   }[]
 }>({
   top: [
@@ -224,7 +225,7 @@ function setAsideActive(always: AsideAlways) {
             </ul>
             <ul class="flex items-center justify-center mt-1">
               <li v-for="(item, index) in fixedList.bottom" :key="index">
-                <NuxtLink :to="item.link" :rel="item.rel.join(' ')">
+                <NuxtLink :to="item.link" :rel="item.rel.join(' ')" :target="item.target">
                   <SvgIcon :overall-size="30" :size="18" :icon="item?.icon ?? ''" />
                 </NuxtLink>
               </li>
