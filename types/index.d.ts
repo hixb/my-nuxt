@@ -35,5 +35,7 @@ type Relation =
  */
 type AsideAlways = 0 | 1 | 2
 
-// Target
+/**
+ * Target
+ */
 type Target = '_blank' | '_self' | 'target' | '_parent' | '_top'

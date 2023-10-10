@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const props = withDefaults(defineProps<{
   show: boolean
   src?: string
@@ -27,7 +27,7 @@ const imageZoom = ref<Record<string, string>>({
 const documentReady = computed(() => process.client ? document : undefined)
 
 const { width, height } = useElementSize(useImageRef)
-const { style  } = useDraggable(useImageMaskRef)
+const { style } = useDraggable(useImageMaskRef)
 const { x, y } = useMouseInElement(documentReady.value?.body)
 const { isOutside } = useMouseInElement(useImageMaskRef)
 const { x: windowScrollX, y: windowScrollY } = useScroll(documentReady.value)
@@ -61,16 +61,15 @@ function handleMouseWheel(evt: WheelEvent) {
         <img
           v-if="show"
           ref="useImageRef"
-          class="block max-w-[92%] max-h-[92%] w-auto m-auto rounded-xl shadow-[0_5px_30px_0_rgba(0,0,0,.05)] scale-100 absolute"
-          alt=""
+          :class="[isMousedown ? 'clear-transition' : '']"
           :src="src"
           :style="[style, imageZoom, isMoved ? { inset: '0 !important', margin: 'auto' } : '']"
-          :class="[isMousedown ? 'clear-transition' : '']"
+          alt=""
+          class="block max-w-[92%] max-h-[92%] w-auto m-auto rounded-xl shadow-[0_5px_30px_0_rgba(0,0,0,.05)] scale-100 absolute"
         >
       </Transition>
       <div
         ref="useImageMaskRef"
-        class="max-w-[92%] max-h-[92%] w-auto m-autoshadow-[0_5px_30px_0_rgba(0,0,0,.05)] absolute z-10"
         :class="[isMousedown ? 'cursor-grabbing' : 'cursor-grab']"
         :style="[
           style,
@@ -78,20 +77,21 @@ function handleMouseWheel(evt: WheelEvent) {
           isMoved ? { inset: '0 !important', margin: 'auto' } : '',
           { width: `${width}px`, height: `${height}px` },
         ]"
+        class="max-w-[92%] max-h-[92%] w-auto m-autoshadow-[0_5px_30px_0_rgba(0,0,0,.05)] absolute z-10"
         @mousedown="isMousedown = true"
         @mouseup.stop="isMousedown = false"
         @wheel.prevent="handleMouseWheel"
       />
       <SvgIcon
         v-show="isOutside"
-        icon="essetional/close-square"
-        class="clear-transition absolute top-14 left-14 bg-[var(--my-special-color)] !cursor-none z-20"
-        :size="CLOSE_BUTTON_SIZE"
         :is-open-hover="false"
+        :size="CLOSE_BUTTON_SIZE"
         :style="{
           left: `${x - (CLOSE_BUTTON_SIZE / 2) - windowScrollX}px`,
           top: `${y - (CLOSE_BUTTON_SIZE / 2) - windowScrollY}px`,
         }"
+        class="clear-transition absolute top-14 left-14 bg-[var(--my-special-color)] !cursor-none z-20"
+        icon="essetional/close-square"
         @click="emit('update:show', false)"
       />
       <span class="absolute top-2 right-2 !text-xl">{{ Math.round(scalingRatio * 100) }}%</span>
@@ -99,7 +99,7 @@ function handleMouseWheel(evt: WheelEvent) {
   </Transition>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .view-image {
   background-color: rgba(0, 0, 0, .2);
   backdrop-filter: saturate(180%) blur(10px);

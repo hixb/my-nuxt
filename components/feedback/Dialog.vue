@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   visible: boolean
   width?: string
@@ -6,7 +6,7 @@ interface IProps {
   isShowTitle?: boolean
 }
 
-const props = withDefaults(defineProps<IProps>(), {
+withDefaults(defineProps<IProps>(), {
   visible: false,
   width: '500px',
   isShowTitle: true,
@@ -44,7 +44,7 @@ const emit = defineEmits(['close'])
   </Transition>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .bounce-enter-active {
   animation: bounce-in 0.3s;
 }

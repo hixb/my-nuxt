@@ -20,7 +20,11 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400&display=swap' },
-        { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Barlow|Roboto+Mono|Titillium+Web' },
+        {
+          rel: 'stylesheet',
+          type: 'text/css',
+          href: 'https://fonts.font.im/css?family=Barlow|Roboto+Mono|Titillium+Web',
+        },
       ],
     },
   },

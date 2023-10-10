@@ -1,8 +1,8 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 
 import type { Config } from 'tailwindcss'
 
-export default <Partial<Config>> {
+export default <Partial<Config>>{
   darkMode: 'class',
   theme: {
     colors: {

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { fetchHomeData } from '~/server/homeData'
 
 const data = await fetchHomeData()
@@ -62,8 +62,8 @@ function loadMore() {
             {{ latestRelease.description }}
           </p>
           <div class="flex align-baseline justify-between items-center mt-3.5 max-lg:mt-1.5 truncate">
-            <time :data-text="latestRelease.updatedAt" data-type="公共" class="time" />
-            <NuxtLink to="/article/2344" class="text-[var(--my-special-color)] text-xs">
+            <time :data-text="latestRelease.updatedAt" class="time" data-type="公共" />
+            <NuxtLink class="text-[var(--my-special-color)] text-xs" to="/article/2344">
               阅读更多
             </NuxtLink>
           </div>
@@ -82,28 +82,28 @@ function loadMore() {
         >
           <DataDisplayListCover
             :cover="item.image"
-            class="!flex-[0_0_134px] max-md:!flex-[0_0_180px] max-xs:!flex-[0_0_230px]"
             :link="`/article/${index}`"
+            class="!flex-[0_0_134px] max-md:!flex-[0_0_180px] max-xs:!flex-[0_0_230px]"
           />
           <div class="flex flex-col ml-5 mr-2.5 flex-1 !mx-0 !mt-5">
             <div class="before:opacity-70 before:content-[attr(data-text)] text-xs mb-2 before:mr-1" data-text="在">
-              <NuxtLink class="opacity-90 hover:underline" :to="`/article/${index}`">
+              <NuxtLink :to="`/article/${index}`" class="opacity-90 hover:underline">
                 {{ item.countries.join("、") }}
               </NuxtLink>
             </div>
             <h3 class="group text-lg font-bold line-clamp-2 max-lg:text-base">
               <NuxtLink
-                class="block hover:text-[var(--my-special-color)] transition-[var(--my-theme-trans3)]"
                 :to="`/article/${index}`"
+                class="block hover:text-[var(--my-special-color)] transition-[var(--my-theme-trans3)]"
               >
                 {{ item.title }}
               </NuxtLink>
             </h3>
-            <p class="line-clamp-2 text-sm opacity-80 mt-3" :title="item.description">
+            <p :title="item.description" class="line-clamp-2 text-sm opacity-80 mt-3">
               {{ item.description }}
             </p>
             <div class="flex align-baseline justify-between items-center mt-3.5 max-lg:mt-1.5 truncate">
-              <time data-text="2022.01.01" data-type="公共" class="time" />
+              <time class="time" data-text="2022.01.01" data-type="公共" />
               <NuxtLink :to="`/article/${index}`" class="text-[var(--my-special-color)] text-xs">
                 阅读更多
               </NuxtLink>
@@ -113,14 +113,14 @@ function loadMore() {
       </div>
     </div>
     <GeneralButton
+      :color="isLoadAll ? 'default' : 'primary'"
+      :is-disabled="isLoadAll"
+      :is-loading="!!timer"
       class="!w-32 mx-auto mt-10 mb-12"
       radius="full"
-      :is-loading="!!timer"
-      :is-disabled="isLoadAll"
-      :color="isLoadAll ? 'default' : 'primary'"
       @click="loadMore"
     >
-      {{ isLoadAll ? '已全部加载' : '加载更多' }}
+      {{ isLoadAll ? "已全部加载" : "加载更多" }}
     </GeneralButton>
   </NuxtLayout>
 </template>

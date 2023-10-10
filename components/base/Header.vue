@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { scrollEaseOut } from '~/utils/feat'
 
 const router = useRouter()
@@ -43,20 +43,20 @@ function sanitizeInput() {
         @click="setOpenAside(width <= ScreenSize.XL && width >= ScreenSize.MD ? 2 : lessThanMD ? 1 : 0)"
       />
       <h1 class="ml-1">
-        <NuxtLink class="website-title" to="/" rel="canonical" title="HELLO">
+        <NuxtLink class="website-title" rel="canonical" title="HELLO" to="/">
           {{ websiteTitle }}
         </NuxtLink>
       </h1>
     </div>
     <div class="flex-1 flex items-center justify-between">
       <div class="search">
-        <SvgIcon class="max-md:hidden" :is-open-hover="false" icon="search/search" />
+        <SvgIcon :is-open-hover="false" class="max-md:hidden" icon="search/search" />
         <input
           ref="useSearchIptRef"
           v-model="searchKeyword"
           class="h-10 flex-1 text-sm"
-          type="text"
           placeholder="Search • Ctrl+K"
+          type="text"
           @input="sanitizeInput"
         >
         {{ sanitizedInputValue }}
@@ -82,7 +82,7 @@ function sanitizeInput() {
             <SvgIcon :icon="icon" @click="toggleTheme" />
             <template #fallback>
               <i class="w-10 h-10 flex items-center justify-center opacity-30 cursor-no-drop">
-                <img class="w-6 h-6" src="@/assets/icons/weather/sun.svg" alt="">
+                <img alt="" class="w-6 h-6" src="@/assets/icons/weather/sun.svg">
               </i>
             </template>
           </ClientOnly>
@@ -96,25 +96,25 @@ function sanitizeInput() {
       />
       <div class="input-box">
         <SvgIcon :is-open-hover="false" icon="search/search" />
-        <input class="w-full h-16 pl-2 text-xs font-thin" type="text" placeholder="搜索...">
+        <input class="w-full h-16 pl-2 text-xs font-thin" placeholder="搜索..." type="text">
       </div>
     </template>
     <div class="footer-menu">
       <div v-for="item in footerMenuList" :key="item.identify" class="footer-menu-list" @click="item.go">
         <template v-if="item.identify === 'theme'">
           <ClientOnly>
-            <SvgIcon :hover-filled="true" :is-open-hover="false" :icon="item.icon" />
+            <SvgIcon :hover-filled="true" :icon="item.icon" :is-open-hover="false" />
           </ClientOnly>
         </template>
         <template v-else>
-          <SvgIcon :hover-filled="true" :is-open-hover="false" :icon="item.icon" :size="(item as any).size" />
+          <SvgIcon :hover-filled="true" :icon="item.icon" :is-open-hover="false" :size="(item as any).size" />
         </template>
       </div>
     </div>
   </header>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 header {
   @apply
   transition-[var(--my-theme-trans1)]

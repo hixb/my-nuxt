@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   content: string
 }
@@ -36,7 +36,7 @@ function scrollToSection(id: string) {
         <path d="M0-10,150,0l10,150S137.643,80.734,100.143,43.234,0-10,0-10Z" transform="translate(0 10)" />
       </svg>
       <span class="icon-dir">
-        <SvgIcon icon="emails-message/direct" :is-open-hover="false" />
+        <SvgIcon :is-open-hover="false" icon="emails-message/direct" />
       </span>
       <svg class="rad in" viewBox="0 0 160 160">
         <path d="M0-10,150,0l10,150S137.643,80.734,100.143,43.234,0-10,0-10Z" transform="translate(0 10)" />
@@ -46,10 +46,10 @@ function scrollToSection(id: string) {
       <div class="h-12 flex items-center justify-between px-2.5">
         <span class="py-4 px-2.5">目录</span>
         <SvgIcon
-          icon="essetional/close-square"
-          :size="40"
-          :overall-size="40"
           :is-open-hover="false"
+          :overall-size="40"
+          :size="40"
+          icon="essetional/close-square"
           @click="showDirectory = false"
         />
       </div>
@@ -58,8 +58,8 @@ function scrollToSection(id: string) {
           <li
             v-for="(item, index) in directoryArray"
             :key="item.id"
-            :data-marker="`${index + 1}、`"
             :data-content="`#${item.processedID}`"
+            :data-marker="`${index + 1}、`"
             class="relative text-sm before:content-[attr(data-marker)] before:absolute before:top-0 before:-left-5 leading-6"
           >
             <span
@@ -72,16 +72,16 @@ function scrollToSection(id: string) {
       </div>
     </div>
     <div
-      class="blur-backdrop invisible opacity-0 transition-[var(--my-theme-trans2)] max-md:z-10"
       :class="[
         showDirectory ? 'max-2md:!opacity-100 max-2md:!visible transition-[var(--my-theme-trans2)]' : '',
       ]"
+      class="blur-backdrop invisible opacity-0 transition-[var(--my-theme-trans2)] max-md:z-10"
       @click="showDirectory = false"
     />
   </nav>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .rad {
   width: 20px;
   height: 20px;

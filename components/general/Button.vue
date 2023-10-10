@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   /**
    * 按钮大小
@@ -144,7 +144,6 @@ function drawRipple() {
 
 <template>
   <button
-    class="button overflow-hidden relative flex items-center justify-center "
     :class="[
       isDisabled ? 'disabled' : '',
       isLoading ? `!w-28 loading` : '',
@@ -153,9 +152,10 @@ function drawRipple() {
       color,
     ]"
     :disabled="isDisabled"
+    class="button overflow-hidden relative flex items-center justify-center "
   >
     <canvas class="absolute left-0 top-0 w-full h-full opacity-0" @click="ripple" />
-    <FeedbackLoading classes="mr-1 !bg-[#fff]" :show="!!isLoading" />
+    <FeedbackLoading :show="!!isLoading" classes="mr-1 !bg-[#fff]" />
     <template v-if="isLoading">
       Loading...
     </template>
@@ -165,7 +165,7 @@ function drawRipple() {
   </button>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .button {
   transition: var(--my-theme-trans3);
 

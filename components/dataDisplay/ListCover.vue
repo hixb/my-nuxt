@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 withDefaults(defineProps<{
   link: string
   cover?: string
@@ -12,14 +12,14 @@ withDefaults(defineProps<{
 
 <template>
   <div class="cover">
-    <NuxtLink class="w-full h-full flex" :to="link" :target="target">
-      <NuxtImg class="w-full" :src="cover ?? ''" alt="" loading="lazy" />
+    <NuxtLink :target="target" :to="link" class="w-full h-full flex">
+      <NuxtImg :src="cover ?? ''" alt="" class="w-full" loading="lazy" />
     </NuxtLink>
     <DataDisplayListCoverOperate />
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .cover {
   img {
     transition: all .3s;

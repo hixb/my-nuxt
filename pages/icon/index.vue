@@ -131,14 +131,14 @@ onMounted(() => loadInitialBatch())
         </ul>
       </div>
       <GeneralButton
+        :color="hasMoreToLoad ? 'default' : 'primary'"
+        :is-disabled="hasMoreToLoad || isLoad"
+        :is-loading="isLoad"
         class="!w-32 mx-auto mt-20 mb-3"
         radius="full"
-        :is-loading="isLoad"
-        :is-disabled="hasMoreToLoad || isLoad"
-        :color="hasMoreToLoad ? 'default' : 'primary'"
         @click="loadNextBatch"
       >
-        {{ hasMoreToLoad ? '已全部加载' : '加载更多' }}
+        {{ hasMoreToLoad ? "已全部加载" : "加载更多" }}
       </GeneralButton>
     </section>
   </NuxtLayout>
@@ -152,7 +152,7 @@ onMounted(() => loadInitialBatch())
     margin-top: 10px;
 
     li {
-      >span {
+      > span {
 
       }
     }

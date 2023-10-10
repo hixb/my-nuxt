@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   list: {
     link: string
@@ -12,14 +12,14 @@ withDefaults(defineProps<IProps>(), {})
 <template>
   <ul class="breadcrumb pb-5 flex items-center">
     <li v-for="item in list" :key="item.name">
-      <NuxtLink class="text-sm hover:opacity-80 transition-[var(--my-theme-trans3)]" :to="item.link">
+      <NuxtLink :to="item.link" class="text-sm hover:opacity-80 transition-[var(--my-theme-trans3)]">
         {{ item.name }}
       </NuxtLink>
     </li>
   </ul>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .breadcrumb {
   > * {
     &:not(:last-child) {

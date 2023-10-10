@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
 </script>
 
@@ -11,7 +11,7 @@
   </aside>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 aside {
   @apply
   flex
