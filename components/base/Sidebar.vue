@@ -11,6 +11,8 @@ interface AsideItemParams {
 
 const SUBCLASS_HEIGHT = 32
 
+const { connectMe } = useAuthor()
+
 const fixedList = reactive<{
   [key: string]: {
     link: string
@@ -24,12 +26,7 @@ const fixedList = reactive<{
     { title: '免责声明', link: '/', rel: [] },
     { title: '隐私', link: '/', rel: [] },
   ],
-  bottom: [
-    { icon: 'crypto-company/twitch', link: '/', rel: ['nofollow', 'noopener'] },
-    { icon: 'crypto-company/facebook', link: '/', rel: ['nofollow', 'noopener'] },
-    { icon: 'crypto-company/whatsapp', link: '/', rel: ['nofollow', 'noopener'] },
-    { icon: 'crypto-company/google', link: '/', rel: ['nofollow', 'noopener'] },
-  ],
+  bottom: connectMe,
 })
 
 const asideList = reactive<{ [key: string]: AsideItemParams[] }>({

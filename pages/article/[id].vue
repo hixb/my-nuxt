@@ -74,7 +74,7 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
 <template>
   <NuxtLayout>
     <NavigationBreadcrumb :list="breadcrumb" />
-    <dataDisplayArticleDirectory :content="code" />
+    <DataDisplayArticleDirectory :content="code" />
     <div class="flex justify-between items-center mb-3">
       <div class="lucky">
         <SvgIcon class="mr-1" :overall-size="16" icon="security/laugh" :is-open-hover="false" />
@@ -116,11 +116,11 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
       </ul>
     </div>
 
-    <dataDisplayCoding />
+    <DataDisplayCoding />
 
-    <dataDisplayTooltip content="Hello, world" @click="showViewImage = true">
+    <DataDisplayTooltip content="Hello, world" @click="showViewImage = true">
       <GeneralButton>hello</GeneralButton>
-    </dataDisplayTooltip>
+    </DataDisplayTooltip>
 
     <DataDisplayViewImage :show="showViewImage" @update:show="showViewImage = $event" />
 
