@@ -1,14 +1,14 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const { openAside } = useAside()
 </script>
 
 <template>
   <svg
+    :style="openAside ? 'width: calc(100vw - 243px)' : 'width: calc(100vw - 85px)'"
     class="waves max-md:!w-[100vw]"
     preserveAspectRatio="none"
     shape-rendering="auto"
     viewBox="0 24 150 28"
-    :style="openAside ? 'width: calc(100vw - 243px)' : 'width: calc(100vw - 85px)'"
   >
     <defs>
       <path id="wave-bg" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
@@ -22,7 +22,7 @@ const { openAside } = useAside()
   </svg>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .waves {
   position: absolute;
   bottom: 0;

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
 </script>
 
@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 * {
   line-height: 1;
 }

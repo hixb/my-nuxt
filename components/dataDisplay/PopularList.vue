@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const articleList = reactive([
   { title: '版式和代码', time: '01.01', source: '文档', description: '所有新版式和书写格式所有新版式和书写格式所有' },
   { title: '版式和代码', time: '01.01', source: '文档', description: '所有新版式和书写格式所有新版式和书写格式所有' },
@@ -41,7 +41,7 @@ const articleList = reactive([
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .popular {
   &:before {
     @apply content-[''] w-16 h-16 absolute z-0 bg-[rgba(0,0,0,.04)] bottom-0 left-0 rounded-[0_70px_0_0]

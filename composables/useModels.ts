@@ -165,7 +165,7 @@ export namespace UseModels {
         : this.backToSimple(currentRouterResult[subclass]) as number
       const isMultiArrays = isArray(checkMulti)
 
-      const trimmedKeyword  = !!keyword && String(keyword)?.trim() ? String(keyword).trim() : ''
+      const trimmedKeyword = !!keyword && String(keyword)?.trim() ? String(keyword).trim() : ''
       const assignmentKeyword = trimmedKeyword ? `?keyword=${trimmedKeyword}` : ''
 
       const delimiterConnect = (array: AvailableValue[]) => array.join(this.MULTI_CATEGORY_SEPARATOR)
@@ -174,7 +174,7 @@ export namespace UseModels {
         const optionalCategory: SubclassKeyType[] = ['cate_id']
         const clearCategory: SubclassKeyType[] = ['style', 'attribute1', 'attribute2', 'attribute3']
 
-        if (optionalCategory.includes(subclass)) 
+        if (optionalCategory.includes(subclass))
           clearCategory.forEach(item => currentRouterResult[item] = DEFAULT_ID)
 
         currentRouterResult.page = 1

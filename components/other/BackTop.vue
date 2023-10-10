@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { scrollEaseOut } from '~/utils/feat'
 
 const rollAway = ref<number>(0)
@@ -31,10 +31,10 @@ function handleScroll() {
 
 <template>
   <section
-    class="back-top flex items-center justify-center fixed right-5 bottom-5 w-11 h-11 rounded-full cursor-pointer invisible opacity-0 z-10 max-md:bottom-20"
     :class="[
       { visible },
     ]"
+    class="back-top flex items-center justify-center fixed right-5 bottom-5 w-11 h-11 rounded-full cursor-pointer invisible opacity-0 z-10 max-md:bottom-20"
     @click="scrollEaseOut(0)"
   >
     <svg viewBox="0 0 34 34">
@@ -48,7 +48,7 @@ function handleScroll() {
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .back-top {
   transform: scale(0);
   transition: transform .3s ease, opacity .3s ease, visibility .3s ease, margin-bottom 1s ease, bottom 1s ease;

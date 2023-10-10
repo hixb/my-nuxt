@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 interface IProps {
   show: boolean
   isCover?: boolean
@@ -14,7 +14,7 @@ withDefaults(defineProps<IProps>(), {
 
 <template>
   <Transition mode="out-in">
-    <div v-if="show" class="loading" :class="[classes, isCover ? 'cover' : '']" />
+    <div v-if="show" :class="[classes, isCover ? 'cover' : '']" class="loading" />
   </Transition>
   <div
     v-if="show && isCover"
@@ -22,7 +22,7 @@ withDefaults(defineProps<IProps>(), {
   />
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .loading {
   background-color: var(--my-svg-color);
   background-repeat: no-repeat;

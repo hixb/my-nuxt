@@ -1,27 +1,27 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 </script>
 
 <template>
   <div class="max-h-6">
     <ul class="absolute top-0 left-0 right-0 py-2.5 px-1.5 text-xs flex justify-end">
       <li class="item-btn">
-        <SvgIcon class="mx-0.5" :is-open-hover="false" :size="16" :overall-size="16" icon="emails-message/message" />
+        <SvgIcon :is-open-hover="false" :overall-size="16" :size="16" class="mx-0.5" icon="emails-message/message" />
         <NuxtLink to="/">
           7
         </NuxtLink>
       </li>
       <li class="item-btn">
-        <SvgIcon class="mx-0.5" :is-open-hover="false" :size="16" :overall-size="16" icon="security/eye" />
+        <SvgIcon :is-open-hover="false" :overall-size="16" :size="16" class="mx-0.5" icon="security/eye" />
         2K
       </li>
-      <li class="item-btn show-text" aria-label="稍后阅读">
-        <SvgIcon class="mx-0.5" :is-open-hover="false" :size="16" :overall-size="16" icon="archive/archive-add" />
+      <li aria-label="稍后阅读" class="item-btn show-text">
+        <SvgIcon :is-open-hover="false" :overall-size="16" :size="16" class="mx-0.5" icon="archive/archive-add" />
       </li>
     </ul>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .item-btn {
   @apply
   flex
@@ -39,7 +39,7 @@
 
 .show-text {
   &:after {
-    transition: all .4s cubic-bezier(.18,.89,.32,1.28);
+    transition: all .4s cubic-bezier(.18, .89, .32, 1.28);
 
     @apply content-[attr(aria-label)] whitespace-nowrap opacity-0 invisible w-0
   }

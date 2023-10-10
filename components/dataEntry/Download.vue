@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { AxiosResponse } from 'axios'
 import axios from 'axios'
 
@@ -144,21 +144,21 @@ async function startDownload() {
 
 <template>
   <div
-    class="relative flex items-center justify-center max-w-lg rounded-xl"
     :style="{ margin: downloading ? '32px 0 72px' : '32px 0' }"
+    class="relative flex items-center justify-center max-w-lg rounded-xl"
   >
     <div
       class="p-3.5 relative bg-[var(--my-box-bg)] w-full flex flex-col text-sm rounded-xl shadow-[0_0_35px_rgba(0,0,0,.09)] z-20"
     >
       <div class="flex flex-row items-center">
         <div
+          :class="downloading ? '!rounded-full' : ''"
           :style="{ backgroundImage: `url(${gettingInformation === 'error' ? '' : props.cover})` }"
           class="w-[100px] h-[100px] bg-cover bg-center bg-no-repeat shadow-[0_0_10px_rgba(0,0,0,.1)] bg-[rgba(0,0,0,.08)] rounded-md mr-4 relative"
-          :class="downloading ? '!rounded-full' : ''"
         >
           <FeedbackLoading
-            :show="gettingInformation === 'wait' || gettingInformation === 'init'"
             :is-cover="true"
+            :show="gettingInformation === 'wait' || gettingInformation === 'init'"
           />
           <template v-if="!props.cover && gettingInformation === 'success'">
             <span class="flex justify-center items-center w-full h-full text-lg">
@@ -166,30 +166,32 @@ async function startDownload() {
             </span>
           </template>
           <template v-else-if="gettingInformation === 'error'">
-            <span class="z-[101] text-[var(--my-special-danger)] w-full h-full flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <span
+              class="z-[101] text-[var(--my-special-danger)] w-full h-full flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
               Fail
             </span>
           </template>
           <svg
-            class="w-full h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 invisible transition-[var(--my-theme-trans15)] -rotate-90"
-            viewBox="0 0 34 34"
             :class="downloading ? '!opacity-100 !visible' : ''"
+            class="w-full h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 invisible transition-[var(--my-theme-trans15)] -rotate-90"
             style="stroke-width: 1.5;"
+            viewBox="0 0 34 34"
           >
             <circle class="fill-none stroke-[#e6e6e6] opacity-90" cx="17" cy="17" r="15.92" />
             <circle
+              :style="[{ strokeDashoffset: progress <= 0 ? 0 : progress }, 'stroke-dasharray: 100, 100']"
               class="fill-none stroke-[var(--my-special-color)] transition-[var(--my-theme-trans15)]"
               cx="17"
               cy="17"
               r="15.92"
-              :style="[{ strokeDashoffset: progress <= 0 ? 0 : progress }, 'stroke-dasharray: 100, 100']"
             />
           </svg>
         </div>
         <div class="flex-grow w-[calc(100%-115px)] relative">
           <FeedbackLoading
-            :show="gettingInformation === 'wait' || gettingInformation === 'init'"
             :is-cover="true"
+            :show="gettingInformation === 'wait' || gettingInformation === 'init'"
           />
           <template v-if="gettingInformation === 'success'">
             <span class="info" data-text="名称：">{{ fileInfo.name }}</span>
@@ -208,46 +210,49 @@ async function startDownload() {
         </div>
       </div>
       <button
-        class="download-btn absolute -bottom-5 right-5 shadow-[0_0_15px_rgba(0,0,0,.09)] bg-[var(--my-special-color)] w-10 h-10 flex items-center justify-center rounded-full transition-[--my-theme-trans2] hover:scale-[1.03]"
         :class="[
           downloading ? 'opacity-0 invisible' : 'opacity-100 visible',
           gettingInformation !== 'success' ? 'opacity-60 cursor-no-drop' : '',
         ]"
+        class="download-btn absolute -bottom-5 right-5 shadow-[0_0_15px_rgba(0,0,0,.09)] bg-[var(--my-special-color)] w-10 h-10 flex items-center justify-center rounded-full transition-[--my-theme-trans2] hover:scale-[1.03]"
         @click="startDownload"
       >
-        <svg v-if="!downloadCompleted" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          v-if="!downloadCompleted" fill="none" height="20" viewBox="0 0 24 24" width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M16.4405 8.89844C20.0405 9.20844 21.5105 11.0584 21.5105 15.1084V15.2384C21.5105 19.7084 19.7205 21.4984 15.2505 21.4984H8.74047C4.27047 21.4984 2.48047 19.7084 2.48047 15.2384V15.1084C2.48047 11.0884 3.93047 9.23844 7.47047 8.90844"
-            stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           />
           <g>
             <path
-              d="M12 2V14.88" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round"
+              d="M12 2V14.88" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="1.5"
             />
             <path
               d="M15.3484 12.6484L11.9984 15.9984L8.64844 12.6484" stroke="#292D32"
-              stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="1.5"
             />
           </g>
         </svg>
-        <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg v-else fill="none" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M14.55 21.67C18.84 20.54 22 16.64 22 12C22 6.48 17.56 2 12 2C5.33 2 2 7.56 2 7.56M2 7.56V3M2 7.56H4.01H6.44"
-            stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           />
           <path
-            d="M2 12C2 17.52 6.48 22 12 22" stroke="#292D32" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3"
+            d="M2 12C2 17.52 6.48 22 12 22" stroke="#292D32" stroke-dasharray="3 3"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           />
         </svg>
       </button>
     </div>
     <div
-      class="opacity-0 invisible absolute h-[40px] w-full rounded-xl transition-[--my-theme-trans15] flex items-center justify-center bg-[var(--my-box-bg)] shadow-[0_0_35px_rgba(0,0,0,.09)]"
       :class="downloading ? '!opacity-100 !visible z-10' : ''"
       :style="{ bottom: downloading ? '-40px' : '0' }"
+      class="opacity-0 invisible absolute h-[40px] w-full rounded-xl transition-[--my-theme-trans15] flex items-center justify-center bg-[var(--my-box-bg)] shadow-[0_0_35px_rgba(0,0,0,.09)]"
     >
       <span class="text-sm">正在下载（{{ percentage }}%）</span>
     </div>
@@ -257,7 +262,7 @@ async function startDownload() {
   </Transition>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .download-btn {
   svg {
     * {
@@ -276,7 +281,7 @@ async function startDownload() {
 
 .download-bar {
   &:after, &:before {
-    background: linear-gradient(-45deg, #4086F4, #31A952, #FBBE01, #EB4132,#4086F4, #31A952, #FBBE01, #EB4132);
+    background: linear-gradient(-45deg, #4086F4, #31A952, #FBBE01, #EB4132, #4086F4, #31A952, #FBBE01, #EB4132);
     background-size: 200%;
     z-index: 9999;
 

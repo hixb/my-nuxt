@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const labelList = reactive([
   { link: '/', title: '文档' },
   { link: '/', title: '文档' },
@@ -15,16 +15,19 @@ const labelList = reactive([
       标签
     </GeneralHeadTitle>
     <ul class="w-[calc(100%+10px)] -left-[5px] -right-[5px] flex flex-wrap relative text-2xs">
-      <li v-for="(item, index) in labelList" :key="index" class="w-[calc(50%-10px)] m-[0_5px] mb-2.5 overflow-hidden rounded">
+      <li
+        v-for="(item, index) in labelList" :key="index"
+        class="w-[calc(50%-10px)] m-[0_5px] mb-2.5 overflow-hidden rounded"
+      >
         <NuxtLink
+          :title="item.title"
           class="bg-[rgba(0,0,0,.15)] text-[var(--my-darkT)] flex items-baseline justify-between py-2 px-2.5"
           to="/"
-          :title="item.title"
         >
           <span class="opacity-70 truncate text-[var(--my-text-base-color)]">{{ item.title }}</span>
           <span class="inline-flex items-center">
             <span class="mx-1 text-[var(--my-text-base-color)] opacity-70">1</span>
-            <SvgIcon :is-open-hover="false" :size="18" :overall-size="18" class="opacity-70" icon="archive/frame" />
+            <SvgIcon :is-open-hover="false" :overall-size="18" :size="18" class="opacity-70" icon="archive/frame" />
           </span>
         </NuxtLink>
       </li>
@@ -35,7 +38,7 @@ const labelList = reactive([
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .label-list {
   &:before {
     @apply content-[''] w-16 h-16 absolute z-0 bg-[rgba(0,0,0,.04)] bottom-0 left-0 rounded-[0_70px_0_0]
