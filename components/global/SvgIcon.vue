@@ -77,18 +77,18 @@ watchEffect(getIcon)
 
 <template>
   <i
-    :data-icon="props.icon"
-    class="svg-icon w-10 h-10 flex items-center justify-center cursor-pointer select-none" :class="[
+    :class="[
       borderRadius,
       customizeClass,
       { 'open-hover': isOpenHover, 'disabled': disabled },
     ]"
-    :style="{ width: `${overallSize}px`, height: `${overallSize}px` }"
+    :data-icon="props.icon" :style="{ width: `${overallSize}px`, height: `${overallSize}px` }"
+    class="svg-icon w-10 h-10 flex items-center justify-center cursor-pointer select-none"
   >
     <span
       :class="{ 'icon--fill': filled, 'icon-hover--fill': hoverFilled }"
-      class="contents"
       :style="{ width: `${props.size}px`, height: `${props.size}px` }"
+      class="contents"
       v-html="icon"
     />
     <slot />
@@ -110,7 +110,6 @@ watchEffect(getIcon)
 }
 
 .icon--fill {
-
   :deep(svg) {
     stroke: var(--my-special-color);
     fill: var(--my-special-color);
