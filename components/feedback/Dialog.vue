@@ -92,8 +92,8 @@ const emit = defineEmits(['close'])
   transition: all .25s ease;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, .05);
   background-color: var(--my-bg-base-color);
-  width: v-bind("props.width");
-  height: v-bind("props.height");
+  width: v-bind("props?.width");
+  height: v-bind("props?.height");
 
   * {
     color: var(--my-text-base-color);
