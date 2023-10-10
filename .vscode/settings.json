@@ -1,7 +1,7 @@
 {
   // Visuals
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "Hibiscus",
   "workbench.editor.tabCloseButton": "left",
   "workbench.fontAliasing": "antialiased",
   "workbench.iconTheme": "material-icon-theme",

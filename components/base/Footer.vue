@@ -1,10 +1,5 @@
 <script setup lang="ts">
-const connect = reactive([
-  { icon: 'crypto-company/twitch', link: '/' },
-  { icon: 'crypto-company/facebook', link: '/' },
-  { icon: 'crypto-company/whatsapp', link: '/' },
-  { icon: 'crypto-company/google', link: '/' },
-])
+const { connectMe } = useAuthor()
 </script>
 
 <template>
@@ -30,8 +25,8 @@ const connect = reactive([
         </NuxtLink>
       </p>
       <ul class="flex items-center">
-        <li v-for="(item, index) in connect" :key="index">
-          <NuxtLink :to="item.link" target="_blank">
+        <li v-for="(item, index) in connectMe" :key="index">
+          <NuxtLink :to="item.link" target="_blank" :rel="item.rel.join(' ')">
             <SvgIcon :overall-size="30" :size="20" :icon="item.icon" />
           </NuxtLink>
         </li>

@@ -2,218 +2,66 @@
 
 const { isString, isArray, isNumber } = useChecks()
 
-/**
- * @fileOverview Model links related functions.
- * @namespace UseModels
- */
 export namespace UseModels {
-  /**
-   * Indicates getting the value in the model parameters.
-   */
   type ModelParams<T extends ModelPathType> = typeof ALL_MODELS_PARAMS[T]
-  /**
-   * Indicates getting the key in the model parameters.
-   */
   type ModelParamsKey<T extends ModelPathType> = keyof ModelParams<T>
-  /**
-   * Indicates a model parameter with an index signature.
-   */
   type ModelParamsWithIndexSignature<T extends ModelPathType> = ModelParams<T> & {
     [key: string]: AvailableValue
   }
-  /**
-   * Indicates the formal parameter key type of the function.
-   */
   type FnKeepsakeKeyType<T extends ModelPathType> = ModelParamsKey<T>
-  /**
-   * Indicates the type of value that can be passed.
-   */
   type AvailableValue = number | string
-  /**
-   * Indicates the return value type of the **fetchModelParameterValue** function.
-   * @template T Available types are ModelPathType
-   * @template U Available types are ModelParamsKey<T> | ModelParamsKey<T>[] | []
-   * @template SimpleType Simple data type.
-   */
   type FetchReturnType<T extends ModelPathType, U extends ModelParamsKey<T> | ModelParamsKey<T>[] | [], SimpleType extends unknown | ''> =
     U extends ModelParamsKey<T>[] | []
       ? { [P in (U extends [] ? ModelParamsKey<T>[] : U)[number]]: AvailableValue }
       : SimpleType
-  /**
-   * Indicates the type of key in the model object.
-   */
   type ModelObjectsKeyType = ModelParamsWithIndexSignature<ModelPathType>
-  /**
-   * Indicates subclass type.
-   */
   type SubclassKeyType = typeof SUBCLASS[number]
-  /**
-   * Indicates the return value type of the reassigned object.
-   */
   type ReassignObjectReturnType = Record<keyof ModelObjectsKeyType, AvailableValue>
 
-  /**
-   * @fileOverview Multi-category filtering related types.
-   * @namespace MultiCategoryScreening
-   */
   export declare namespace MultiCategoryScreening {
-    /**
-     * Indicates the type of the selected subclass value.
-     */
     export type SelectionType = number | number[]
 
-    /**
-     * Indicates a subclass array type.
-     */
     export interface SubclassArraysType {
-      /**
-       * Subclass identifier.
-       */
       key: SubclassKeyType
-      /**
-       * The subcategory value to be selected.
-       */
       preselectionValues: SelectionType
-      /**
-       * Selected subcategory value.
-       */
       alreadySelectValues: SelectionType
     }
 
-    /**
-     * Indicates the type of multi-category filtering returned.
-     */
     export interface ReturnType {
-      /**
-       * Link address.
-       */
       url: string
-      /**
-       * Subclass array.
-       */
       subclassArrays: SubclassArraysType[]
     }
 
-    /**
-     * Indicates multi-category filtering parameters.
-     */
     export interface TransferType {
-      /**
-       * The ID of the current click.
-       */
       id: number
-      /**
-       * Click type.
-       */
       subclass: SubclassKeyType
-      /**
-       * Category.
-       */
       type: ModelPathType
-      /**
-       * Maximum length that can be selected.
-       */
       maxLength: number
-      /**
-       * Path.
-       */
       pathname: string
-      /**
-       * The first item ID is used for parameters. The first item is an unchanged ID.
-       */
       firstID?: number
-      /**
-       * Address bar keywords.
-       */
       keyword?: AvailableValue | null
     }
   }
 
-  /**
-   * Indicates the type of tool class.
-   */
   export interface UtilsInterface {
-    /**
-     * Multiple category separators.
-     */
     readonly MULTI_CATEGORY_SEPARATOR: string
-    /**
-     * Connect objects.
-     * @param {typeof ModelPathType[keyof typeof ModelPathType]} type Type.
-     * @param {Record<string, number>} objects Object.
-     */
     joinObjectValues: (type: typeof ModelPathType[keyof typeof ModelPathType], objects: Record<string, AvailableValue>) => string
-    /**
-     * Custom error.
-     * @param {string} message Message.
-     */
     customError: (message: string) => Error
-    /**
-     * Route array data.
-     * @template T
-     * @param {T} type Type.
-     * @param {string} pathname Pathname.
-     */
     routerArrayData: <T extends ModelPathType>(type: T, pathname: string) => [AvailableValue[] | [], number, number]
-    /**
-     * Reassign object.
-     * @template T
-     * @param {T} type Type.
-     * @param {string} pathname Pathname.
-     */
     reassignObject: <T extends ModelPathType>(type: T, pathname: string) => ReassignObjectReturnType
 
-    /**
-     * Convert string to number.
-     * @param {string} v Value.
-     */
     toNumber(v: string): number
 
-    /**
-     * Convert string to number.
-     * @param {string[]} v Value.
-     */
     toNumber(v: string[]): AvailableValue[]
 
-    /**
-     * Return check type value.
-     * @param {AvailableValue} value Value.
-     */
     backToSimple(value: AvailableValue): AvailableValue
 
-    /**
-     * Return check type value.
-     * @param {AvailableValue[]} value Value.
-     */
     backToSimple(value: AvailableValue[]): AvailableValue[]
   }
 
-  /**
-   * Indicates the type of a general class.
-   */
   export interface ModelInterface {
-    /**
-     * Multi-category filtering.
-     * @param {MultiCategoryScreening.TransferType} parameter Katasan.
-     * @author Xiaobing Zhu <zhuxb@tuju.cn>
-     * @copyright Tuju 2023
-     */
     multiCategoryScreening(parameter: MultiCategoryScreening.TransferType): MultiCategoryScreening.ReturnType
 
-    /**
-     * URL to generate model list.
-     * @template T Available types are ModelPathType.
-     * @param {T} type Type.
-     * @param {FnKeepsakeKeyType<T>[] | FnKeepsakeKeyType<T>} [key] Parameter key.
-     * @param {number[] | string[] | AvailableValue[]} [value] Parameter value.
-     * @param {string | boolean} [useTheCurrentPathToChange] Whether to use the current path to change the path to be generated.
-     * @author Xiaobing Zhu <zhuxb@tuju.cn>
-     * @copyright Tuju 2023
-     * @example
-     * createModelListURL(ModelPathType.MODEL, ["cate_pid", "cate_id"], [1, 2])
-     * or
-     * createModelListURL(ModelPathType.MODEL, ["cate_pid", "cate_id"], [1, "2"])
-     */
     createModelListURL<T extends ModelPathType>(
       type: T,
       key?: FnKeepsakeKeyType<T>[] | FnKeepsakeKeyType<T>,
@@ -221,19 +69,6 @@ export namespace UseModels {
       useTheCurrentPathToChange?: string | boolean
     ): string
 
-    /**
-     * URL to generate model list.
-     * @param {ModelPathType} type Type.
-     * @param {FnKeepsakeKeyType<ModelPathType> | string} [key] Parameter key.
-     * @param {AvailableValue} [value] Parameter value.
-     * @param {string | boolean} [useTheCurrentPathToChange] Whether to use the current path to change the path to be generated.
-     * @author Xiaobing Zhu <zhuxb@tuju.cn>
-     * @copyright Tuju 2023
-     * @example
-     * createModelListURL(ModelPathType.MODEL, "cate_pid", 1)
-     * or
-     * createModelListURL(ModelPathType.MODEL, "cate_pid", "1")
-     */
     createModelListURL(
       type: ModelPathType,
       key?: FnKeepsakeKeyType<ModelPathType> | string,
@@ -241,27 +76,6 @@ export namespace UseModels {
       useTheCurrentPathToChange?: string | boolean
     ): string
 
-    /**
-     * Get model link parameter values.
-     * @template T
-     * @template U
-     * @param {T} type Type.
-     * @param {U} parameter Parameter key.
-     * @param {string | boolean} [availablePath] The path to get the parameters.
-     * @description [parameter]If it is [], it means to get all parameter values.
-     * @example
-     * // Returns the value of `cate id`.
-     * fetchModelParameterValue(ModelPathType.MODEL, "cate_id");
-     * // Return model link `all` parameter values.
-     * fetchModelParameterValue(ModelPathType.MODEL, []);
-     * // Return the value of `cate_id`, `original`.
-     * fetchModelParameterValue(ModelPathType.MODEL, ["cate_id", "original"]);
-     * // Returns the value of `cate_id`, `original` of the incoming link.
-     * fetchModelParameterValue(ModelPathType.MODEL, ["cate_id", "original"], "/models/model-0-0-0-1-0-0-0-2-0-0-0-1-0-0-0-0-0.html");
-     * @author Xiaobing Zhu <zhuxb@tuju.cn>
-     * @copyright Tuju 2023
-     * @return {FetchReturnType<T, U, (AvailableValue | never)>}
-     */
     fetchModelParameterValue<T extends ModelPathType, U extends ModelParamsKey<T> | ModelParamsKey<T>[] | []>(
       type: T,
       parameter: U,
@@ -269,7 +83,6 @@ export namespace UseModels {
     ): FetchReturnType<T, U, AvailableValue>
   }
 
-  // Subclass cate_id-secondary classification style-style attribute1-attribute 1 attribute2-attribute 2 attribute3-attribute 3.
   export const SUBCLASS = ['cate_id', 'style', 'attribute1', 'attribute2', 'attribute3'] as const
 
   export enum ModelPathType {
@@ -288,9 +101,6 @@ export namespace UseModels {
     },
   }
 
-  /**
-   * Model tool class.
-   */
   abstract class Utils implements UtilsInterface {
     readonly MULTI_CATEGORY_SEPARATOR = '_'
 
@@ -343,40 +153,23 @@ export namespace UseModels {
     }
   }
 
-  /**
-   * Model function class.
-   */
   export class ModelFn extends Utils implements ModelInterface {
     multiCategoryScreening: UseModels.ModelInterface['multiCategoryScreening'] = (parameter) => {
       const [DEFAULT_ID, SELF] = [0 as const, new ModelFn()]
+
       const { id, subclass, type, maxLength, firstID, pathname, keyword } = parameter
       const currentRouterResult = this.reassignObject(type, pathname)
 
-      // Check whether there are multiple IDs in the currently selected type.
       const checkMulti: number | number[] = isString(this.backToSimple(currentRouterResult[subclass]))
         ? (currentRouterResult[subclass] as string).split(this.MULTI_CATEGORY_SEPARATOR).map(v => +v)
         : this.backToSimple(currentRouterResult[subclass]) as number
-
-      // Check if `subclass` is an array.
       const isMultiArrays = isArray(checkMulti)
 
-      // Keywords.
-      const assignmentKeyword = !!keyword && !!String(keyword)?.trim() ? `?keyword=${String(keyword).trim()}` : ''
+      const trimmedKeyword  = !!keyword && String(keyword)?.trim() ? String(keyword).trim() : ''
+      const assignmentKeyword = trimmedKeyword ? `?keyword=${trimmedKeyword}` : ''
 
-      /**
-       * Separator connection.
-       * @param {AvailableValue[]} array Array.
-       */
       const delimiterConnect = (array: AvailableValue[]) => array.join(this.MULTI_CATEGORY_SEPARATOR)
-      /**
-       * Clear zero.
-       * @param {number[]} array Array.
-       */
       const clearZero = (array: number[]) => delimiterConnect(array.filter(v => v !== DEFAULT_ID))
-      /**
-       * Clear Category.
-       * @description Clear categories when other categories are selected.
-       */
       const clearCategory = () => {
         const optionalCategory: SubclassKeyType[] = ['cate_id']
         const clearCategory: SubclassKeyType[] = ['style', 'attribute1', 'attribute2', 'attribute3']
@@ -387,20 +180,10 @@ export namespace UseModels {
         currentRouterResult.page = 1
       }
 
-      // Determine whether the currently clicked ID exists,
-      // if it is an array (if there is firstID, ignore it), then delete the ID in the array,
-      // if it is a number, directly assign a value of 0.
       if (isMultiArrays ? (firstID ? checkMulti.slice(1) : checkMulti).find(v => v === id) : checkMulti === id) {
-        // Check if it is an array
-        //   ? Check if firstID exists
-        //     ? Delete the selected id except firstID
-        //     : Delete the currently selected id
-        //   : Directly assign a value of 0.
         currentRouterResult[subclass] = isMultiArrays
           ? firstID
             ? delimiterConnect([
-              // Whether it is an array and excluding firstID, check the length of the array,
-              // if there is no length, return to the default ID.
               isMultiArrays && checkMulti.filter(v => v !== firstID).length ? DEFAULT_ID : firstID,
               ...checkMulti.slice(1).filter(v => v !== id),
             ])
@@ -408,28 +191,18 @@ export namespace UseModels {
           : DEFAULT_ID
       }
       else {
-        // Determine whether the currently clicked ID is 0. If it is 0,
-        // it means everything is selected. Clear the selected items and assign a value of 0.
         if (id === DEFAULT_ID) {
           currentRouterResult[subclass] = DEFAULT_ID
         }
         else if (isMultiArrays && checkMulti.length >= maxLength) {
-          // Original array: Check if the first item ID exists.
-          //   ? Then add the first item ID to the array.
-          //   : Ordinary item array.
           const originalArray = firstID ? [firstID, ...checkMulti] : checkMulti
 
-          // Check whether the first item ID exists.
-          //   ? Start deleting from the first item. The length of deletion is the array length - the maximum length.
-          //   : Delete the first item of the array.
           firstID ? originalArray.splice(1, originalArray.length - maxLength) : originalArray.shift()
           currentRouterResult[subclass] = delimiterConnect([...originalArray, id])
         }
         else {
           currentRouterResult[subclass] = firstID
-            // Keep the original ID, add the first item ID to the array, and add the currently clicked ID to the array.
             ? clearZero(isMultiArrays ? [firstID, ...checkMulti, id] : [firstID, checkMulti, id])
-            // Keep the original ID and add the currently clicked ID to the array.
             : clearZero(isMultiArrays ? [...checkMulti, id] : [checkMulti, id])
         }
       }
@@ -446,14 +219,17 @@ export namespace UseModels {
           if (SUBCLASS.includes(key)) {
             const routerResultArray = String(currentRouterResult[key]).split(SELF.MULTI_CATEGORY_SEPARATOR)
 
+            const preselectionValues = routerResultArray.length > 1
+              ? SELF.toNumber(routerResultArray)
+              : +currentRouterResult[key]
+            const alreadySelectValues = originValues.length > 1
+              ? SELF.toNumber(firstID ? originValues.slice(1) : originValues)
+              : +originValues.join('')
+
             yield {
               key,
-              preselectionValues:
-                routerResultArray.length > 1 ? SELF.toNumber(routerResultArray) : +currentRouterResult[key],
-              alreadySelectValues:
-                originValues.length > 1
-                  ? firstID ? SELF.toNumber(originValues).slice(1) : SELF.toNumber(originValues)
-                  : +originValues.join(''),
+              preselectionValues,
+              alreadySelectValues,
             } as MultiCategoryScreening.SubclassArraysType
           }
         } while (keys.length > 0)
