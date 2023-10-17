@@ -124,6 +124,18 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
       </ul>
     </div>
 
+    <DataDisplayCollapse>
+      <template #title>
+        Accordion_first_title
+      </template>
+      <template #content>
+        <p>
+          Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions,
+          award-winning fireworks and seasonal special events.
+        </p>
+      </template>
+    </DataDisplayCollapse>
+
     <DataDisplayCoding />
 
     <DataDisplayTooltip content="Hello, world" @click="showViewImage = true">

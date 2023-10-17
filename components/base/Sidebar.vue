@@ -14,7 +14,7 @@ const SUBCLASS_HEIGHT = 32
 const { connectMe } = useAuthor()
 const { isArray } = useChecks()
 
-const fixedList = reactive<{
+const fixedList: {
   [key: string]: {
     link: string
     rel: Relation[] | string
@@ -22,14 +22,14 @@ const fixedList = reactive<{
     title?: string
     target?: Target
   }[]
-}>({
+} = {
   top: [
     { title: '网站地图', link: '/', rel: [].join(' ') },
     { title: '免责声明', link: '/', rel: [].join(' ') },
     { title: '隐私', link: '/', rel: [].join(' ') },
   ],
   bottom: connectMe,
-})
+}
 
 const asideList = reactive<{ [key: string]: AsideItemParams[] }>({
   public: [

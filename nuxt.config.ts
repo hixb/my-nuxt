@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxt/image',
+    '@formkit/auto-animate/nuxt',
   ],
   colorMode: {
     classSuffix: '',

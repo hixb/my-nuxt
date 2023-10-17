@@ -36,6 +36,10 @@ interface SvgProps {
    * 总体大小
    */
   overallSize?: number
+  /**
+   * 选中后的样式
+   */
+  special?: boolean
 }
 
 const props = withDefaults(defineProps<SvgProps>(), {
@@ -47,6 +51,7 @@ const props = withDefaults(defineProps<SvgProps>(), {
   size: 20,
   disabled: false,
   overallSize: 40,
+  special: false,
 })
 
 const icon = ref<string | Record<string, any>>('')
@@ -81,6 +86,7 @@ watchEffect(getIcon)
       borderRadius,
       customizeClass,
       { 'open-hover': isOpenHover, 'disabled': disabled },
+      special ? 'special' : '',
     ]"
     :data-icon="props.icon" :style="{ width: `${overallSize}px`, height: `${overallSize}px` }"
     class="svg-icon w-10 h-10 flex items-center justify-center cursor-pointer select-none"
@@ -96,6 +102,20 @@ watchEffect(getIcon)
 </template>
 
 <style lang="scss" scoped>
+.common {
+  transition: var(--my-theme-trans2);
+  background-color: var(--my-transB);
+
+  :deep(svg) {
+    transition: var(--my-theme-trans2);
+
+    * {
+      transition: var(--my-theme-trans2);
+      stroke: var(--my-special-color);
+    }
+  }
+}
+
 .svg-icon {
   transition: var(--my-theme-trans2);
 
@@ -145,17 +165,13 @@ watchEffect(getIcon)
 
 .open-hover {
   &:hover {
-    transition: var(--my-theme-trans2);
-    background-color: var(--my-transB);
-
-    :deep(svg) {
-      transition: var(--my-theme-trans2);
-
-      * {
-        transition: var(--my-theme-trans2);
-        stroke: var(--my-special-color);
-      }
-    }
+    @extend .common;
   }
+}
+
+.special {
+  background: none;
+
+  @extend .common;
 }
 </style>
