@@ -12,7 +12,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div ref="useDropdownRef" class="border border-[rgba(255,255,255,.15)] bg-[var(--my-darkBs)] py-5 px-4 my-5 rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.07)] overflow-hidden">
+  <div
+    ref="useDropdownRef"
+    class="border border-[rgba(255,255,255,.15)] bg-[var(--my-darkBs)] py-5 px-4 my-5 rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.07)] overflow-hidden"
+  >
     <div
       :class="showAccordion ? 'text-[var(--my-special-color)]' : ''"
       class="font-bold cursor-pointer flex align-baseline transition-[var(--my-theme-trans1)] items-center select-none text-lg"

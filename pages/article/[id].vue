@@ -130,7 +130,8 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
       </template>
       <template #content>
         <p>
-          Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events.
+          Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions,
+          award-winning fireworks and seasonal special events.
         </p>
       </template>
     </DataDisplayCollapse>

@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"
-          d="M88,134.87236l89.91726,79.12718a8,8,0,0,0,13.08288-4.21869L228.61385,45.64829a8,8,0,0,0-10.72308-9.233L33.33393,108.91975a8,8,0,0,0,1.35629,15.29065Z"/>
-    <line x1="88" x2="224.112" y1="134.872" y2="36.569" fill="none" stroke="#000" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="10"/>
-    <path class="set-svg-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"
-          d="M132.90708,174.39059l-31.25023,31.25023A8,8,0,0,1,88,199.984v-65.1116"/>
+  <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"
+        d="M88,134.87236l89.91726,79.12718a8,8,0,0,0,13.08288-4.21869L228.61385,45.64829a8,8,0,0,0-10.72308-9.233L33.33393,108.91975a8,8,0,0,0,1.35629,15.29065Z"/>
+  <line x1="88" x2="224.112" y1="134.872" y2="36.569" fill="none" stroke="#000" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="10"/>
+  <path class="set-svg-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"
+        d="M132.90708,174.39059l-31.25023,31.25023A8,8,0,0,1,88,199.984v-65.1116"/>
 </svg>
