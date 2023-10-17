@@ -18,6 +18,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.0",
     "axios": "^1.5.1"
   },
   "devDependencies": {
