@@ -1,24 +1,28 @@
 <script generic="T" lang="ts" setup>
-interface IProps {}
-withDefaults(defineProps<IProps>(), {})
+interface IProps {
+  disabled?: boolean
+}
+withDefaults(defineProps<IProps>(), {
+  disabled: false,
+})
 
 const list = reactive([
-  { name: '添加个', value: 1 },
-  { name: '官换机', value: 2 },
-  { name: 'hel官换机干结构化lo', value: 3 },
-  { name: '答复你感觉你', value: 4 },
-  { name: '看看看看扩扩扩给你的开发紧你感觉', value: 5 },
-  { name: '的号码达克罗宁和', value: 6 },
-  { name: '的号码达克罗宁和', value: 7 },
-  { name: '的号码达克罗宁和', value: 8 },
-  { name: '的号码达克罗宁和', value: 9 },
-  { name: '的号码达克罗宁和', value: 10 },
-  { name: '的号码达克罗宁和', value: 11 },
-  { name: '的号码达克罗宁和', value: 12 },
-  { name: '的号码达克罗宁和', value: 13 },
+  { name: 1, value: 1 },
+  { name: 2, value: 2 },
+  { name: 3, value: 3 },
+  { name: 4, value: 4 },
+  { name: 5, value: 5 },
+  { name: 6, value: 6 },
+  { name: 7, value: 7 },
+  { name: 8, value: 8 },
+  { name: 9, value: 9 },
+  { name: 10, value: 10 },
+  { name: 11, value: 11 },
+  { name: 12, value: 12 },
+  { name: 13, value: 13 },
 ])
 
-const currentSelect = ref({})
+const currentSelect = ref<Record<string, any>>({})
 const isOpen = ref(false)
 
 const useSelectedRef = ref<HTMLDivElement | null>()
@@ -38,19 +42,37 @@ function handleScroll() {
       ? 'bottom'
       : 'center'
 }
+
+function selectItem(item: any) {
+  const name = currentSelect.value?.name
+  if (name && name === item.name) {
+    currentSelect.value = {}
+    return
+  }
+
+  currentSelect.value = item
+  isOpen.value = false
+}
 </script>
 
 <template>
   <div
     ref="useSelectedRef"
+    :class="disabled ? 'opacity-80 !cursor-no-drop' : ''"
     class="w-64 h-11 shadow-[0_0_25px_rgba(0,0,0,.07)] bg-[var(--my-box-bg)] rounded-lg cursor-pointer px-3 flex items-center justify-between relative mb-52 border border-[var(--my-border-color)]"
-    @click="isOpen = !isOpen"
+    @click="() => { !disabled ? isOpen = !isOpen : null }"
   >
-    <span class="truncate select-none text-[13px] font-bold">
-      {{ !!!currentSelect?.name ? "none" : currentSelect.name }}
+    <span
+      :class="[
+        !currentSelect?.name && isOpen ? '-translate-y-2.5 text-xs font-normal' : '',
+        !currentSelect?.name ? 'text-[var(--my-special-danger)] opacity-80' : 'text-[var(--my-special-color)]',
+      ]"
+      class="truncate select-none text-[13px] font-bold transition-[var(--my-theme-trans2)]"
+    >
+      {{ !!!currentSelect?.name ? "No choice" : currentSelect.name }}
     </span>
     <SvgIcon
-      :class="isOpen ? 'rotate-180' : ''"
+      :class="[isOpen ? 'rotate-180' : '', disabled ? 'opacity-80 !cursor-no-drop' : '']"
       :is-open-hover="false"
       :overall-size="15"
       :size="15"
@@ -72,7 +94,7 @@ function handleScroll() {
           v-for="item in list"
           :key="item.value"
           class="px-2 h-8 flex items-center hover:bg-[var(--my-darkT)] hover:opacity-80 rounded-lg justify-between"
-          @click.stop="() => { currentSelect = item; isOpen = false }"
+          @click.stop="selectItem(item)"
         >
           <span
             :class="item.value === currentSelect.value ? 'text-[var(--my-special-color)]' : ''"
@@ -109,7 +131,7 @@ function handleScroll() {
 
 @keyframes transition-scale {
   0% {
-    transform: scale(.2);
+    transform: scale(.5);
     transform-origin: top center;
   }
 

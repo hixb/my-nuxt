@@ -6,6 +6,9 @@ const show = ref(true)
 const progress = ref(10)
 
 onBeforeMount(() => {
+  if (!show.value)
+    return
+
   updateProgress()
   show.value = true
 })
@@ -29,7 +32,7 @@ function updateProgress() {
 <template>
   <Transition>
     <div
-      v-show="show"
+      v-if="show"
       class="fixed top-0 left-0 w-screen h-screen z-[999] bg-[var(--my-bg-base-color)] flex flex-col items-center justify-between py-16 select-none"
     >
       <h2>{{ websiteTitle }}</h2>

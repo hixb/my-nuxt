@@ -11,7 +11,7 @@ interface IProps {
 type State = 'success' | 'error' | 'wait' | 'init'
 
 const props = withDefaults(defineProps<IProps>(), {
-  filePath: 'https://4.bp.blogspot.com/-vFEJV8v5Bms/X1WnI01Q71I/AAAAAAAAP5w/do4OYrEPQBAcceIkM2sq9fcQbnhca9nOQCNcBGAsYHQ/s0/travel-boating-experience.jpg',
+  filePath: 'https://safe-down.om.cn/v3/Uploads/Material/2023-09-26/xPICXyQXfrfWuQKJdVqcLvmhUZapQCJs.zip?attname=%E4%B8%9C%E5%8D%97%E4%BA%9A%E5%85%B6%E5%AE%83%E6%95%88%E6%9E%9C%E5%9B%BEID_10001851.zip&e=1697707594&token=IAM-RboAM3uk383QejGVWTCbw3SBlLHoL8DN7je0GaUd:zGNNmmbuYr-lemqZkZz6nrDzjXk=&attname=%E4%B8%9C%E5%8D%97%E4%BA%9A%E5%85%B6%E5%AE%83%E6%95%88%E6%9E%9C%E5%9B%BEID_10001851.zip',
   cover: 'https://3.bp.blogspot.com/-J0e6w8GFsbc/YgFZCWbqZVI/AAAAAAAACRs/v2epBVKMzq89syX3OVsjaqwg2UlX1H_mgCK4BGAYYCw/s360-rw-e30/FineshopDesign_Logo.png',
   original: '未知',
 })

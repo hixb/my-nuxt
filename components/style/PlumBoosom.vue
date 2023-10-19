@@ -16,29 +16,22 @@ const start = ref<Fn>(() => {
 })
 
 const init = ref(4)
-
 const len = ref(6)
-
 const stopped = ref(false)
 
 const mask = computed(() => 'radial-gradient(circle, transparent, black);')
 
 function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400, _dpi?: number) {
   const ctx = canvas.getContext('2d')!
-
   const dpr = window.devicePixelRatio || 1
 
   // @ts-expect-error vendor
   const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1
-
   const dpi = _dpi || dpr / bsr
 
   canvas.style.width = `${width}px`
-
   canvas.style.height = `${height}px`
-
   canvas.width = dpi * width
-
   canvas.height = dpi * height
 
   ctx.scale(dpi, dpi)
@@ -65,7 +58,6 @@ onMounted(async () => {
 
   const step = (x: number, y: number, rad: number) => {
     const length = random() * len.value
-
     const [nx, ny] = polar2cart(x, y, length, rad)
 
     ctx.beginPath()
@@ -87,9 +79,7 @@ onMounted(async () => {
   }
 
   let lastTime = performance.now()
-
   const interval = 1000 / 40
-
   let controls: ReturnType<typeof useRafFn>
 
   const frame = () => {
@@ -97,11 +87,8 @@ onMounted(async () => {
       return
 
     iterations += 1
-
     prevSteps = steps
-
     steps = []
-
     lastTime = performance.now()
 
     if (!prevSteps.length) {
@@ -116,13 +103,10 @@ onMounted(async () => {
 
   start.value = () => {
     controls.pause()
-
     iterations = 0
 
     ctx.clearRect(0, 0, width, height)
-
     ctx.lineWidth = 1
-
     ctx.strokeStyle = color
 
     prevSteps = []
@@ -138,7 +122,6 @@ onMounted(async () => {
       steps = steps.slice(0, 2)
 
     controls.resume()
-
     stopped.value = false
   }
 
