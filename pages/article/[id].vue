@@ -136,6 +136,8 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
       </template>
     </DataDisplayCollapse>
 
+    <DataEntrySelect />
+
     <DataDisplayCoding />
 
     <DataDisplayTooltip content="Hello, world" @click="showViewImage = true">

@@ -53,9 +53,10 @@ function copy() {
       <ul class="flex items-center justify-center">
         <li>
           <SvgIcon
-            :icon="timer ? 'design-tools/copy-success' : 'design-tools/copy'"
+            :icon="timer ? 'arrow/hook' : 'design-tools/copy'"
             :overall-size="42"
             :size="18"
+            :special="!!timer"
             @click="copy"
           />
         </li>
