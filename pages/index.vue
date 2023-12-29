@@ -6,7 +6,6 @@ const latestRelease = data[0]
 const historyR = data.filter((v, i) => i !== 0)
 
 const { websiteTitle } = useAuthor()
-const { $toast } = useNuxtApp()
 
 useSeoMeta({
   title: websiteTitle,
@@ -32,19 +31,12 @@ function loadMore() {
     timer.value = undefined
   }, 2000)
 }
-
-function show() {
-  // $toast.success('These documents refer to the latest version of vuesax (4.0+), to see the documents of the previous versions you can do it here 👉 Vuesax 3.x', {
-  //   title: 'Documentation Vuesax 4.0+',
-  // })
-  $toast.success('These')
-}
 </script>
 
 <template>
   <NuxtLayout>
     <div>
-      <GeneralHeadTitle flower @click="show">
+      <GeneralHeadTitle flower>
         最新发布
       </GeneralHeadTitle>
       <article class="item relative max-xs:before:!content-none">
