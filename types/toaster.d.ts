@@ -1,19 +1,11 @@
-namespace ToastSpace {
-  enum ToastType {
-    /**
-     * Secondary
-     */
-    SECONDARY = 'secondary',
-    /**
-     * System
-     */
-    SYSTEM = 'system',
-  }
+import type { ToastSpaceEnum } from '~/types/enum'
+import type { SiteTypeKey } from '~/types/index'
 
+namespace ToastSpace {
   /**
    * Toast type key.
    */
-  type ToastTypeKey = keyof typeof ToastType
+  type ToastTypeKey = keyof typeof ToastSpaceEnum.ToastType
 
   /**
    * Appear position.
@@ -35,7 +27,7 @@ namespace ToastSpace {
     /**
      * Toast type.
      */
-    type?: ToastSpace.ToastType & SiteStatus
+    type?: ToastSpace.ToastTypeKey & SiteTypeKey
     /**
      * Toast duration.
      */

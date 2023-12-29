@@ -1,14 +1,16 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import { ToastSpaceEnum } from '~/types/enum'
+
 const props = withDefaults(defineProps<{
   message: string
   position?: ToastSpace.Position
-  type?: ToastSpace.ToastType & SiteStatus
+  type?: ToastSpace.ToastTypeKey & SiteTypeKey | any
   duration?: number
   title?: string
 }>(), {
   message: 'These documents refer to the latest version of vuesax (4.0+), to see the documents of the previous versions you can do it here 👉 Vuesax 3.x',
   position: 'top-right',
-  type: 'primary',
+  type: ToastSpaceEnum.ToastType.SYSTEM,
   duration: 3000,
 })
 
@@ -32,47 +34,49 @@ function showToast() {
 
 function dismiss() {
   visible.value = false
-  clearTimeout(timer.value)
+  timer.value && clearTimeout(timer.value)
   timer.value = null
 }
 </script>
 
 <template>
-  <Transition :name="`toast-${position}`">
-    <div
-      v-if="visible && message"
-      class="toast-parent fixed z-[200000] p-3 max-h-24 min-h-16 w-[340px] text-[#fff] flex items-start flex-col justify-center"
-      :class="[
-        `toast-parent--${position}`,
-        type === 'system' ? 'bg-[var(--my-special-color)]' : `bg-[var(--my-special-${type})]`,
-        {
-          'top-0 left-1/2 -translate-x-1/2 rounded-b-2xl transition-all duration-500 hover:translate-y-0.5 hover:transition-all hover:duration-500': position === 'top',
-          'bottom-0 left-1/2 -translate-x-1/2 rounded-t-2xl transition-all duration-500 hover:-translate-y-0.5 hover:transition-all hover:duration-500': position === 'bottom',
-          'top-1 right-0 rounded-l-2xl transition-all duration-500 hover:-translate-x-0.5 hover:transition-all hover:duration-500': position === 'top-right',
-          'top-1 left-0 rounded-r-2xl transition-all duration-500 hover:translate-x-0.5 hover:transition-all hover:duration-500': position === 'top-left',
-          'bottom-1 right-0 rounded-l-2xl transition-all duration-500 hover:-translate-x-0.5 hover:transition-all hover:duration-500': position === 'bottom-right',
-          'bottom-1 left-0 rounded-r-2xl transition-all duration-500 hover:translate-x-0.5 hover:transition-all hover:duration-500': position === 'bottom-left',
-        },
-      ]"
-    >
-      <SvgIcon
-        class="icon-close absolute top-0 right-0"
-        icon="essetional/close-square"
-        :is-open-hover="false"
-        :size="30"
-        @click="dismiss"
-      />
-      <h3 v-if="title" class="text-sm mb-2">
-        {{ title }}
-      </h3>
-      <div class="text-sm line-clamp-2">
-        {{ message }}
+  <Suspense>
+    <Transition :name="`toast-${position}`">
+      <div
+        v-if="visible && message"
+        :class="[
+          `toast-parent--${position}`,
+          type === 'system' ? 'bg-[var(--my-special-color)]' : `bg-[var(--my-special-${type})]`,
+          {
+            'top-0 left-1/2 -translate-x-1/2 rounded-b-2xl transition-all duration-500 hover:translate-y-0.5 hover:transition-all hover:duration-500': position === 'top',
+            'bottom-0 left-1/2 -translate-x-1/2 rounded-t-2xl transition-all duration-500 hover:-translate-y-0.5 hover:transition-all hover:duration-500': position === 'bottom',
+            'top-1 right-0 rounded-l-2xl transition-all duration-500 hover:-translate-x-0.5 hover:transition-all hover:duration-500': position === 'top-right',
+            'top-1 left-0 rounded-r-2xl transition-all duration-500 hover:translate-x-0.5 hover:transition-all hover:duration-500': position === 'top-left',
+            'bottom-1 right-0 rounded-l-2xl transition-all duration-500 hover:-translate-x-0.5 hover:transition-all hover:duration-500': position === 'bottom-right',
+            'bottom-1 left-0 rounded-r-2xl transition-all duration-500 hover:translate-x-0.5 hover:transition-all hover:duration-500': position === 'bottom-left',
+          },
+        ]"
+        class="toast-parent fixed z-[200000] p-3 max-h-24 min-h-16 w-[340px] text-[#fff] flex items-start flex-col justify-center"
+      >
+        <SvgIcon
+          :is-open-hover="false"
+          :size="30"
+          class="icon-close absolute top-0 right-0"
+          icon="essetional/close-square"
+          @click="dismiss"
+        />
+        <h3 v-if="title" class="text-sm mb-2">
+          {{ title }}
+        </h3>
+        <div class="text-sm line-clamp-2">
+          {{ message }}
+        </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </Suspense>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .icon-close {
   :deep(svg) {
     stroke: #fff;

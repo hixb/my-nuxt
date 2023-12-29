@@ -18,7 +18,9 @@
         <BaseFooter />
       </div>
     </main>
-    <StyleWaves />
+    <ClientOnly>
+      <StyleWaves />
+    </ClientOnly>
   </div>
 </template>
 

@@ -1,3 +1,5 @@
+import type { SiteSpaceEnum } from '~/types/enum'
+
 /**
  * Link association
  */
@@ -108,28 +110,6 @@ namespace IndexedBDSpace {
 }
 
 /**
- * Site status.
- */
-enum SiteStatus {
-  /**
-   * Success
-   */
-  SUCCESS = 'success',
-  /**
-   * Primary
-   */
-  PRIMARY = 'primary',
-  /**
-   * Danger
-   */
-  DANGER = 'danger',
-  /**
-   * Warning
-   */
-  WARNING = 'warning',
-}
-
-/**
  * Site type key.
  */
-type SiteTypeKey = keyof typeof SiteStatus
+type SiteTypeKey = keyof typeof SiteSpaceEnum.SiteType

@@ -4,5 +4,7 @@
   <BaseHeader />
   <NuxtPage />
   <OtherBackTop />
-  <StylePlumBoosom />
+  <ClientOnly>
+    <StylePlumBoosom />
+  </ClientOnly>
 </template>
