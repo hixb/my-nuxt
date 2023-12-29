@@ -106,3 +106,30 @@ namespace IndexedBDSpace {
    */
   type IDBValidKeyType = IDBValidKey & typeof BDEnum[keyof typeof BDEnum]
 }
+
+/**
+ * Site status.
+ */
+enum SiteStatus {
+  /**
+   * Success
+   */
+  SUCCESS = 'success',
+  /**
+   * Primary
+   */
+  PRIMARY = 'primary',
+  /**
+   * Danger
+   */
+  DANGER = 'danger',
+  /**
+   * Warning
+   */
+  WARNING = 'warning',
+}
+
+/**
+ * Site type key.
+ */
+type SiteTypeKey = keyof typeof SiteStatus
