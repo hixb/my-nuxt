@@ -1,4 +1,4 @@
-export function useLog() {
+export function useLogs() {
   return {
     log: (message: any) => {
       // eslint-disable-next-line n/prefer-global/process
