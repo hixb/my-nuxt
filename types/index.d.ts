@@ -1,3 +1,5 @@
+import type { SiteSpaceEnum } from '~/types/enum'
+
 /**
  * Link association
  */
@@ -106,3 +108,8 @@ namespace IndexedBDSpace {
    */
   type IDBValidKeyType = IDBValidKey & typeof BDEnum[keyof typeof BDEnum]
 }
+
+/**
+ * Site type key.
+ */
+type SiteTypeKey = keyof typeof SiteSpaceEnum.SiteType

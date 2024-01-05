@@ -136,11 +136,25 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
       </template>
     </DataDisplayCollapse>
 
+    <DataEntrySelect />
+
     <DataDisplayCoding />
 
-    <DataDisplayTooltip content="Hello, world" @click="showViewImage = true">
-      <GeneralButton>hello</GeneralButton>
-    </DataDisplayTooltip>
+    <div class="flex items-center">
+      <GeneralButton class="!w-max" color="success" @click="showViewImage = true">
+        open picture
+      </GeneralButton>
+
+      <GeneralButton class="!w-max ml-5" color="warning" @click="showSharePopup = true">
+        open share dialog
+      </GeneralButton>
+
+      <DataDisplayTooltip content="Hello, world">
+        <GeneralButton class="!w-max ml-5" color="secondary">
+          tooltip
+        </GeneralButton>
+      </DataDisplayTooltip>
+    </div>
 
     <DataDisplayViewImage :show="showViewImage" @update:show="showViewImage = $event" />
 
@@ -185,7 +199,7 @@ const { withAnchor, readingTimeMinutes } = useArticleProcessing(code.value)
             class="px-2 text-[var(--my-special-color)] flex items-center self-stretch shrink-0 cursor-pointer"
             @click="copy"
           >
-            <SvgIcon :icon="copyTimer ? 'design-tools/copy-success' : 'design-tools/copy'" />
+            <SvgIcon :icon="copyTimer ? 'arrow/hook' : 'design-tools/copy'" :special="copyTimer" />
           </label>
         </div>
       </template>

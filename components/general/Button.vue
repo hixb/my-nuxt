@@ -152,7 +152,7 @@ function drawRipple() {
       color,
     ]"
     :disabled="isDisabled"
-    class="button overflow-hidden relative flex items-center justify-center "
+    class="button overflow-hidden relative flex items-center justify-center px-3"
   >
     <canvas class="absolute left-0 top-0 w-full h-full opacity-0" @click="ripple" />
     <FeedbackLoading :show="!!isLoading" classes="mr-1 !bg-[#fff]" />

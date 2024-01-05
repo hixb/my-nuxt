@@ -2,6 +2,7 @@
 import { scrollEaseOut } from '~/utils/feat'
 
 const router = useRouter()
+const { $toast } = useNuxtApp()
 
 const { setOpenAside } = useAside()
 const { lessThanMD, width, ScreenSize } = useScreen()
@@ -66,7 +67,7 @@ function sanitizeInput() {
           <SvgIcon icon="search/search" @click="isShowSearchLayer = true" />
         </li>
         <li>
-          <SvgIcon class="relative" icon="archive/frame">
+          <SvgIcon class="relative" icon="archive/frame" @click="$toast.waring('Oops, nothing!')">
             <span
               class="bg-[var(--my-text-base-color)] absolute top-0 right-1.5 z-1 text-[var(--my-bg-base-color)] rounded-xl text-xs py-0.5 px-1"
             >
