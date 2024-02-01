@@ -32,7 +32,7 @@
     "@vueuse/nuxt": "^10.7.2",
     "eslint": "^8.51.0",
     "highlight.js": "^11.9.0",
-    "nuxt": "^3.9.3",
+    "nuxt": "^3.10.0",
     "sass": "^1.70.0",
     "vitest": "^1.2.2",
     "vue-types": "^5.1.1"
