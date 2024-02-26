@@ -29,7 +29,7 @@
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/node": "^20.11.17",
     "@vueuse/core": "^10.7.2",
-    "@vueuse/nuxt": "^10.7.2",
+    "@vueuse/nuxt": "^10.8.0",
     "eslint": "^8.57.0",
     "highlight.js": "^11.9.0",
     "nuxt": "^3.10.3",
