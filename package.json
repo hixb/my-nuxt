@@ -30,7 +30,7 @@
     "@types/node": "^20.11.17",
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
-    "eslint": "^8.51.0",
+    "eslint": "^8.57.0",
     "highlight.js": "^11.9.0",
     "nuxt": "^3.10.3",
     "sass": "^1.71.0",
