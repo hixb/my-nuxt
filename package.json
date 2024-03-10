@@ -27,7 +27,7 @@
     "@nuxt/image": "1.4.0",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.11.25",
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
     "eslint": "^8.57.0",
