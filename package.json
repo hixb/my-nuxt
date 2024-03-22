@@ -28,7 +28,7 @@
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/node": "^20.11.27",
-    "@vueuse/core": "^10.7.2",
+    "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.7.2",
     "eslint": "^8.57.0",
     "highlight.js": "^11.9.0",
